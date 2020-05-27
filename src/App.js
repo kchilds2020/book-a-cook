@@ -10,6 +10,7 @@ function App() {
 
   return (
       <Router> 
+      <div className = 'nav-bar-overlay'>
         <div className = 'nav-bar'>
               <ul>
                 <li>
@@ -20,11 +21,12 @@ function App() {
                 </li>
                 <li>
                   <Link to ="/login">Login</Link>
-                  </li>
+                </li>
                 <li>
                   <Link to ="/register">Register</Link>
                   </li>
               </ul>
+          </div>
         </div>
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
