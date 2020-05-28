@@ -5,6 +5,8 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import JobPostings from './components/JobPostings';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -28,9 +30,12 @@ function App() {
               </ul>
           </div>
         </div>
+        
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
-                <Route path="/home" exact strict component={Home}/>
+                <Route path="/home" exact component={Home} />
+                <Route path="/home/job-postings" exact component={JobPostings}/>
+                <Route path="/home/profile" exact component={Profile}/>
                 <Route path="/login" exact strict component={Login}/>
                 <Route path="/register" exact strict component={Register}/>
             </Switch>

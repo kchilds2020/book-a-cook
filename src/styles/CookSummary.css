@@ -1,0 +1,26 @@
+.cookPrice{
+    color: green;
+}
+.profile{
+    background-color: white;
+    width: 90%;
+    border-radius: 3px;
+    max-width: 1000px;
+    margin: 5px;
+    padding: 20px;
+    border: #ccc 1px solid;
+    /* boxShadow: '2px 2px 4px black' */
+  }
+  
+  .pictureDiv {
+    height: 100px;
+    width: 100px;
+  }
+  .picture {
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .profile > div{
+    padding: 5px;
+  }

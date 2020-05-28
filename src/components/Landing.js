@@ -18,7 +18,7 @@ const container = {
     alignItems: 'center'
 };
 const section = {
-    width: '400px'
+    width: '500px'
 }
 const sectionIMG = {
     width: '100%'
@@ -31,10 +31,17 @@ const btn = {
     margin: '20px 0px',
     border: 'none',
     borderRadius: '8px',
-    backgroundColor: '#ec7d10',
+    backgroundColor: '#ffb9b9',
     cursor: 'pointer',
     textDecoration: 'none',
     fontSize: '16px'
+}
+const title = {
+    letterSpacing: '4px',
+    fontSize: '64px'
+}
+const tagline = {
+    fontStyle: 'italic'
 }
 
 const Landing = () => {
@@ -42,8 +49,8 @@ const Landing = () => {
         <div style = {landingBody}>
             <div style = {container}>
                 <div style = {section}>
-                    <h1>Book a Cook!</h1>
-                    <h2>Hire Professional Chefs to cook for you at home!</h2>
+                    <h1 style = {title}>Book a Cook!</h1>
+                    <h2 style = {tagline}>Hire Professional Chefs to cook for you at home!</h2>
                     <Link to ="/login">
                         <button style={btn}>Login</button>
                     </Link>    

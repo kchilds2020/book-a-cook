@@ -1,0 +1,34 @@
+[{
+    "firstName": "Kevin",
+    "lastName": "Childs",
+    "email": "kchilds2020@gmail.com",
+    "username": "kchilds2020",
+    "password": "password",
+    "price": 50,
+    "hourly": false,
+    "cooksDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, dolore. Ad numquam temporibus exercitationem vitae sit voluptatum ut magnam tenetur quas ipsa. Nam dolores eaque recusandae expedita dignissimos aperiam distinctio soluta corporis sapiente, consequatur nisi similique deserunt natus? Quidem natus necessitatibus ipsam magni iusto explicabo id autem aliquid fugiat perspiciatis.",
+
+},
+{
+    "firstName": "Kevin",
+    "lastName": "Childs",
+    "email": "kchilds2020@gmail.com",
+    "username": "kchilds2020",
+    "password": "password",
+    "price": 50,
+    "hourly": false,
+    "cooksDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, dolore. Ad numquam temporibus exercitationem vitae sit voluptatum ut magnam tenetur quas ipsa. Nam dolores eaque recusandae expedita dignissimos aperiam distinctio soluta corporis sapiente, consequatur nisi similique deserunt natus? Quidem natus necessitatibus ipsam magni iusto explicabo id autem aliquid fugiat perspiciatis.",
+
+},
+{
+    "firstName": "Kevin",
+    "lastName": "Childs",
+    "email": "kchilds2020@gmail.com",
+    "username": "kchilds2020",
+    "password": "password",
+    "price": 50,
+    "hourly": false,
+    "cooksDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, dolore. Ad numquam temporibus exercitationem vitae sit voluptatum ut magnam tenetur quas ipsa. Nam dolores eaque recusandae expedita dignissimos aperiam distinctio soluta corporis sapiente, consequatur nisi similique deserunt natus? Quidem natus necessitatibus ipsam magni iusto explicabo id autem aliquid fugiat perspiciatis.",
+
+}
+]
