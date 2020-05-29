@@ -2,36 +2,18 @@ require('dotenv/config');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const router = require('./apis/gets');
-
+const gets = require('./apis/gets');
+const posts = require('./apis/posts');
+const mongoose =require('mongoose');
 const PORT = process.env.PORT || 5000;
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-var bodyParser = require('body-parser');
-var session = require('express-session');
+let bodyParser = require('body-parser');
+let session = require('express-session');
 
-
-const config = {
-    static: 'build',
-    db: {
-        url: '',
-        type: 'mongo',
-        onError: (err) => {
-            console.log('DB Connection Failed!');
-        },
-        onSuccess: () =>{
-            console.log('DB CONNECTED');
-        }
-    }
-}
-
-const app = express(config);
+const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
 
-
-app.use(cors())
 
 app.use(session({
     secret: 'keyboard cat',
@@ -40,8 +22,14 @@ app.use(session({
     cookie: { secure: false, maxAge: 1000 * 60 * 60 * 2}
 }));
 
-/* app.use(express.static(path.join(__dirname,'build'))); */
+app.use(express.static(path.join(__dirname,'build')));
 
-app.use(router);
+mongoose.connect(process.env.MONGO_DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 
-app.listen(PORT, () => {console.log(`Server started on ${PORT}`);})
+app.use(gets);
+app.use(posts);
+
+app.listen(PORT, () => {console.log(`**SERVER STARTED**  PORT: ${PORT}`);})

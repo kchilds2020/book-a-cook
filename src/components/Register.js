@@ -1,6 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 export const Register = () => {
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+
     const formContainer = {
         display: 'flex',
         flexDirection: 'column',
@@ -44,15 +52,39 @@ export const Register = () => {
 
     }
 
+    const registerUser = (evt) =>{
+        evt.preventDefault();
+        console.log(firstname,lastname,email,username,password);
+        const user = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            username: username,
+            password: password
+
+        }
+        axios.post('/post/register', user)
+            .then(function (response) {
+                if(response.status === '200'){
+                    console.log('FAILURE');
+                }else{
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return(
         <div style = {container}>
-            <form style = {formContainer}>
+            <form style = {formContainer} onSubmit = {registerUser}>
                 <h2>Register</h2>
-                <input name = "firstname" type = "text" placeholder = 'First Name' style = {inputFields} maxLength = '40'/>
-                <input name = "lastname" type = "text" placeholder = 'Last Name' style = {inputFields} maxLength = '40'/>
-                <input name = "email" type = "email" placeholder = 'Email' style = {inputFields} maxLength = '40'/>
-                <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20'/>
-                <input name = "password" type = "password" placeholder = 'Password' style = {inputFields}/>
+                <input name = "firstname" type = "text" placeholder = 'First Name' style = {inputFields} maxLength = '40' onChange={e => setFirstname(e.target.value)}/>
+                <input name = "lastname" type = "text" placeholder = 'Last Name' style = {inputFields} maxLength = '40' onChange={e => setLastname(e.target.value)}/>
+                <input name = "email" type = "email" placeholder = 'Email' style = {inputFields} maxLength = '40' onChange={e => setEmail(e.target.value)}/>
+                <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20' onChange={e => setUsername(e.target.value)}/>
+                <input name = "password" type = "password" placeholder = 'Password' style = {inputFields} onChange={e => setPassword(e.target.value)}/>
                 <button style = {submitButton}>Register</button>
             </form>
         </div>
