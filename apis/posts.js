@@ -17,9 +17,9 @@ router.post('/post/register', (req, res) => {
             password: hash
         })
         .then(results => {
-            console.log(`New ID: ${results.ops[0]._id}`);
-            req.session.userID = results.ops[0]._id;
-            res.redirect('/home');
+            console.log(`New ID: ${results}`);
+            req.session.userID = results._id;
+            res.json(results);
         })
         .catch(error => console.error(error))
         })

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 export const Register = () => {
@@ -63,17 +64,22 @@ export const Register = () => {
             password: password
 
         }
-        axios.post('/post/register', user)
+        return(<Redirect to="/home" />);
+        /* axios.post('/post/register', user)
             .then(function (response) {
                 if(response.status === '200'){
                     console.log('FAILURE');
                 }else{
-                    console.log(response);
+                    //console.log(response);
+                    //window.location.href = '/home';
+                    
+
+                    
                 }
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            }); */
     }
 
     return(
