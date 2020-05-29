@@ -1,15 +1,33 @@
 require('dotenv/config');
 const express = require('express');
 const path = require('path');
-var cors = require('cors');
+const cors = require('cors');
 const router = require('./apis/gets');
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+
+
+const config = {
+    static: 'build',
+    db: {
+        url: '',
+        type: 'mongo',
+        onError: (err) => {
+            console.log('DB Connection Failed!');
+        },
+        onSuccess: () =>{
+            console.log('DB CONNECTED');
+        }
+    }
+}
+
+const app = express(config);
+
 app.use(bodyParser.json());
 
 
@@ -22,7 +40,7 @@ app.use(session({
     cookie: { secure: false, maxAge: 1000 * 60 * 60 * 2}
 }));
 
-app.use(express.static(path.join(__dirname,'build')));
+/* app.use(express.static(path.join(__dirname,'build'))); */
 
 app.use(router);
 
