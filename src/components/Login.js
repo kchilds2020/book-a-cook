@@ -1,4 +1,5 @@
 import React from 'react';
+import UnauthenticatedNavBar from './UnauthenticatedNavBar';
 
 export const Login = () => {
 
@@ -46,14 +47,17 @@ export const Login = () => {
     }
 
     return(
-        <div style = {container}>
-            <form style = {formContainer}>
-                <h2>LOGIN</h2>
-                <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20'/>
-                <input name = "password" type = "password" placeholder = 'Password' style = {inputFields}/>
-                <button style = {submitButton}>Login</button>
-            </form>
-        </div>
+        <>
+            <UnauthenticatedNavBar />
+            <div style = {container}>
+                <form style = {formContainer}>
+                    <h2>LOGIN</h2>
+                    <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20'/>
+                    <input name = "password" type = "password" placeholder = 'Password' style = {inputFields}/>
+                    <button style = {submitButton}>Login</button>
+                </form>
+            </div>
+        </>
     );
 };
 

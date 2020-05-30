@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import SVG from '../images/SVG.svg';
+import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 
 const landingBody ={
     height: '90vh',
@@ -46,20 +47,23 @@ const tagline = {
 
 const Landing = () => {
     return(
-        <div style = {landingBody}>
-            <div style = {container}>
-                <div style = {section}>
-                    <h1 style = {title}>Book a Cook!</h1>
-                    <h2 style = {tagline}>Hire Professional Chefs to cook for you at home!</h2>
-                    <Link to ="/login">
-                        <button style={btn}>Login</button>
-                    </Link>    
-                </div>
-                <div style = {section}>
-                    <img style = {sectionIMG} src={SVG} alt="landing" />
+        <>
+            <UnauthenticatedNavBar />
+            <div style = {landingBody}>
+                <div style = {container}>
+                    <div style = {section}>
+                        <h1 style = {title}>Book a Cook!</h1>
+                        <h2 style = {tagline}>Hire Professional Chefs to cook for you at home!</h2>
+                        <Link to ="/login">
+                            <button style={btn}>Login</button>
+                        </Link>    
+                    </div>
+                    <div style = {section}>
+                        <img style = {sectionIMG} src={SVG} alt="landing" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -1,24 +1,26 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Landing from './components/Landing';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import JobPostings from './components/JobPostings';
 import Profile from './components/Profile';
-import NavBar from './components/NavBar';
-import UnauthenticatedNavBar from './components/UnauthenticatedNavBar';
 
 
-function checkAuthentication () {
-  return true;
+const checkAuthentication = () => {
+  console.log('false');
+  return false;
 }
 
 function App() {
 
   return (
       <Router> 
+
+          {checkAuthentication() === true ? <Redirect to={{pathname: "/home"}}/> : <Redirect to={{pathname: "/"}}/>}
+
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
                 <Route path="/home" exact component={Home} />
