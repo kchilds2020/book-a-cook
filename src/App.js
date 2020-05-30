@@ -7,30 +7,18 @@ import Login from './components/Login';
 import Register from './components/Register';
 import JobPostings from './components/JobPostings';
 import Profile from './components/Profile';
+import NavBar from './components/NavBar';
+import UnauthenticatedNavBar from './components/UnauthenticatedNavBar';
+
+
+function checkAuthentication () {
+  return true;
+}
 
 function App() {
 
   return (
       <Router> 
-      <div className = 'nav-bar-overlay'>
-        <div className = 'nav-bar'>
-              <ul>
-                <li>
-                  <Link to ="/">Landing</Link>
-                </li>
-                <li>
-                  <Link to ="/home">Home</Link>
-                </li>
-                <li>
-                  <Link to ="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to ="/register">Register</Link>
-                  </li>
-              </ul>
-          </div>
-        </div>
-        
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
                 <Route path="/home" exact component={Home} />
