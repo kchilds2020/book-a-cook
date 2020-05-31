@@ -60,14 +60,14 @@ export const Login = () => {
 
         axios.post('/login-user', user)
             .then(function (response) {
-                if(response.status === '200'){
-                    console.log('FAILURE');
-                }else{
-                    console.log(response);
-                    //window.location.href = '/home';
-                    
+                if(response.data === "invalid username"){
+                    console.log('invalid username')
 
-                    
+                }else if(response.data === "invalid password"){
+                    console.log('invalid password')
+                }else{
+                    console.log(response)
+                    //go to home
                 }
             })
             .catch(function (error) {

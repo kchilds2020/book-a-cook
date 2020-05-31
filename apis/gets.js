@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Cook = require('../models/Cook');
 const User = require('../models/User');
-var bcrypt = require('bcrypt');
-
 
 //find all cooks
 router.get('/api/get/cooks', (req,res) => {

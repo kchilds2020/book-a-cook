@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+/* import {Redirect} from 'react-router-dom'; */
 import axios from 'axios';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 
@@ -71,10 +71,6 @@ export const Register = () => {
                     console.log('FAILURE');
                 }else{
                     console.log(response);
-                    //window.location.href = '/home';
-                    
-
-                    
                 }
             })
             .catch(function (error) {

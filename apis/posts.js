@@ -27,22 +27,27 @@ router.post('/post/register', (req, res) => {
 
 router.post('/login-user', async (req,res) => {
     const {username, password} = req.body;
+    console.log(username, password);
+    User.findOne( {username: username} )
+    .then(results => {
+        if(results !== null){
+            bcrypt.compare(password, results.password, function(err, isMatch) {
+                if(isMatch === true){
+                    req.session.userID = results._id
+                    res.json(results)
+                }else{
+                    console.log('invalid password');
+                    res.send('invalid password');
+                }
+            })
+        }else{
+            console.log('invalid username');
+            res.send('invalid username');
+        }
 
-    let user = await User.find( {username: username} ).toArray(); 
-    
-    console.log(user[0]._id);
-    bcrypt.compare(password, user[0].password, function(err, isMatch) {
-        if (err) {
-            throw err
-        } else if (!isMatch) {
-            res.status('404');
-        } else {
-            console.log(user[0]._id)
-            req.session.userID = user[0]._id
-            console.log(req.session.userID);
-            res.json(user);
-        } 
-    })          
+    })
+    .catch(err => console.log(err)) 
+         
 })
 
 module.exports = router;

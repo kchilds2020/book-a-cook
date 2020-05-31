@@ -1,26 +1,27 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import PIC from '../images/pic.jpeg';
 import '../styles/CookSummary.css'
+import Cook from './Cook'
+import axios from 'axios';
+
 function Cooks() {
+    const [cooksList, setCooksList] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/get/cooks')
+        .then(response => {
+            let cookArray = [];
+            response.data.forEach(element => {
+                cookArray.push(<Cook  firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription}/>);
+            });
+            setCooksList(cookArray);
+        })
+        .catch(err => console.log(err))
+    }, [])
+    
     return (
         <>
-            <div className="profile">
-                    <div className="pictureDiv">
-                        <img src={PIC} className = "picture" alt='profile pic'/>
-                    </div>
-                    <div className = "cookName">
-                        <h2>Kevin Childs</h2>
-                    </div>
-                    <div className = "positionTitle">
-                        <h3>Lorem ipsum dolor sit amet.</h3>
-                    </div>
-                    <div className = "cookPrice">
-                        <h4>$50 an hour</h4>
-                    </div>
-                    <div className = "cookDescription">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa optio animi laboriosam quaerat dolorum laborum nobis vitae alias blanditiis suscipit.</p>
-                    </div>
-            </div>
+           {cooksList}
         </>
     )
 }
