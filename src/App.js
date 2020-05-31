@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Landing from './components/Landing';
@@ -7,19 +7,14 @@ import Login from './components/Login';
 import Register from './components/Register';
 import JobPostings from './components/JobPostings';
 import Profile from './components/Profile';
+import Auth from './components/Auth'
 
-
-const checkAuthentication = () => {
-  console.log('false');
-  return false;
-}
 
 function App() {
 
   return (
       <Router> 
-
-          {checkAuthentication() === true ? <Redirect to={{pathname: "/home"}}/> : <Redirect to={{pathname: "/"}}/>}
+        <Auth />  
 
             <Switch>
                 <Route path="/" exact strict component={Landing}/>

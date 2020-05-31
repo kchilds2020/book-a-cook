@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar';
+import axios from 'axios'
 
 export const Login = () => {
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const formContainer = {
         display: 'flex',
@@ -46,14 +50,39 @@ export const Login = () => {
 
     }
 
+    const loginUser = (evt) => {
+        evt.preventDefault();
+        const user = {
+            username: username,
+            password: password
+
+        }
+
+        axios.post('/login-user', user)
+            .then(function (response) {
+                if(response.status === '200'){
+                    console.log('FAILURE');
+                }else{
+                    console.log(response);
+                    //window.location.href = '/home';
+                    
+
+                    
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return(
         <>
             <UnauthenticatedNavBar />
             <div style = {container}>
-                <form style = {formContainer}>
+                <form style = {formContainer} onSubmit = {loginUser}>
                     <h2>LOGIN</h2>
-                    <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20'/>
-                    <input name = "password" type = "password" placeholder = 'Password' style = {inputFields}/>
+                    <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20' onChange={e => setUsername(e.target.value)}/>
+                    <input name = "password" type = "password" placeholder = 'Password' style = {inputFields} onChange={e => setPassword(e.target.value)}/>
                     <button style = {submitButton}>Login</button>
                 </form>
             </div>

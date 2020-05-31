@@ -65,13 +65,12 @@ export const Register = () => {
             password: password
 
         }
-        return(<Redirect to="/home" />);
-        /* axios.post('/post/register', user)
+        axios.post('/post/register', user)
             .then(function (response) {
                 if(response.status === '200'){
                     console.log('FAILURE');
                 }else{
-                    //console.log(response);
+                    console.log(response);
                     //window.location.href = '/home';
                     
 
@@ -80,7 +79,7 @@ export const Register = () => {
             })
             .catch(function (error) {
                 console.log(error);
-            }); */
+            });
     }
 
     return(
