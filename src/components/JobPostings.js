@@ -5,7 +5,7 @@ function JobPostings() {
     return (
         <div>
             <NavBar />
-            <div className = "container">
+            <div>
                 JobPostings
             </div>
 

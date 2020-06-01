@@ -5,7 +5,7 @@ function Profile() {
     return (
         <div>
             <NavBar />
-            <div className = "container">
+            <div>
                 Profile
             </div>
 

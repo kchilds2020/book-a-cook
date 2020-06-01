@@ -1,0 +1,41 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    background-color: #f4f4f4;
+    border-radius: 6px
+}
+
+.inputFields{
+    font-family: Raleway, Helvetica, sans-serif;
+    font-size: 18px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 6px;
+    border: none;
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.submitButton{
+    background-color: rgb(73, 123, 189);
+    color:white;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    margin-top: 15px
+}
+
+.container{
+    height: 70vh;
+    display: flex;
+    align-items: center
+
+}

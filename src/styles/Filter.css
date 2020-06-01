@@ -1,6 +1,7 @@
 
 .profileFilter{
-    margin-top: 5px;
+    margin: 5px;
+    margin-bottom: 0px;
     width: 90%;
     max-width: 1000px;
     background-color: white;

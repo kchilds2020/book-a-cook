@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-/* import {Redirect} from 'react-router-dom'; */
 import axios from 'axios';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar'
+import "../styles/Register.css"
 
 export const Register = ({setAuthentication}) => {
     const [firstname, setFirstname] = useState("");
@@ -10,47 +10,35 @@ export const Register = ({setAuthentication}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const checkValidation = (user) => {
 
-    const formContainer = {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        width: '90%',
-        maxWidth: '500px',
-        padding: '20px',
-        margin: 'auto',
-        backgroundColor: '#f4f4f4',
-        borderRadius: '6px'
-    }
+        // check for non letters in firstname and last name
 
-    const inputFields = {
-        fontFamily: 'Raleway, Helvetica, sans-serif',
-        fontSize: '18px',
-        width: '100%',
-        maxWidth: '500px',
-        borderRadius: '6px',
-        border: 'none',
-        padding: '10px',
-        margin: 'auto',
-        marginTop: '10px',
-    }
+        if(!user.firstname.match(/^[0-9a-zA-Z]+$/)){
+            alert('First Name must only have alphanumeric characters');
+            setFirstname('');
+            return false;
+        }
 
-    const submitButton = {
-        backgroundColor: 'rgb(73, 123, 189)',
-        color:'white',
-        cursor: 'pointer',
-        borderRadius: '8px',
-        WebkitAppearance: 'none',
-        padding: '10px',
-        border: 'none',
-        fontSize: '18px',
-        marginTop: '15px'
-    }
+        if(!user.lastname.match(/^[0-9a-zA-Z]+$/)){
+            alert('Last Name must only have alphanumeric characters');
+            setLastname('');
+            return false;
+        }
 
-    const container = {
-        height: '70vh',
-        display: 'flex',
-        alignItems: 'center'
+        if(!user.username.match(/^[0-9a-zA-Z]+$/)){
+            alert('Username must only have alphanumeric characters');
+            setUsername('');
+            return false;
+        }
+
+        //check if username or password exists
+        
+
+        //check if Password has upper character/special character/ > 7
+        if(user.password.length < 8){
+            alert('Password must be atleast 8 characters');
+        }
 
     }
 
@@ -65,32 +53,34 @@ export const Register = ({setAuthentication}) => {
             password: password
 
         }
-        axios.post('/post/register', user)
-            .then(function (response) {
-                if(response.status === '200'){
-                    console.log('FAILURE');
-                }else{
-                    console.log(response);
-                    setAuthentication(true)
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if(checkValidation(user)){
+            axios.post('/post/register', user)
+                .then(function (response) {
+                    if(response.status === '200'){
+                        console.log('FAILURE');
+                    }else{
+                        console.log(response);
+                        setAuthentication(true)
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 
     return(
         <>
             <UnauthenticatedNavBar />
-            <div style = {container}>
-                <form style = {formContainer} onSubmit = {registerUser}>
+            <div className = "container">
+                <form className = "form-container" onSubmit = {registerUser}>
                     <h2>Register</h2>
-                    <input name = "firstname" type = "text" placeholder = 'First Name' style = {inputFields} maxLength = '40' onChange={e => setFirstname(e.target.value)}/>
-                    <input name = "lastname" type = "text" placeholder = 'Last Name' style = {inputFields} maxLength = '40' onChange={e => setLastname(e.target.value)}/>
-                    <input name = "email" type = "email" placeholder = 'Email' style = {inputFields} maxLength = '40' onChange={e => setEmail(e.target.value)}/>
-                    <input name = "username" type = "text" placeholder = 'Username' style = {inputFields} maxLength = '20' onChange={e => setUsername(e.target.value)}/>
-                    <input name = "password" type = "password" placeholder = 'Password' style = {inputFields} onChange={e => setPassword(e.target.value)}/>
-                    <button style = {submitButton}>Register</button>
+                    <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
+                    <input name = "lastname" type = "text" placeholder = 'Last Name' className = "inputFields" maxLength = '40' value = {lastname} onChange={e => setLastname(e.target.value)} required/>
+                    <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>
+                    <input name = "username" type = "text" placeholder = 'Username' className = "inputFields" maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)} required/>
+                    <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/>
+                    <button className = "submitButton">Register</button>
                 </form>
             </div>
         </>
