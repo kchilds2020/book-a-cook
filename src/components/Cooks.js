@@ -1,27 +1,37 @@
 import React, {useState, useEffect} from 'react'
-import PIC from '../images/pic.jpeg';
 import '../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
 
+
 function Cooks() {
-    const [cooksList, setCooksList] = useState([]);
+    const [cooksArray, setCooksArray] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [err, setError] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhose:5000/api/get/cooks')
+        let mounted = true;
+        axios.get('api/get/cooks')
         .then(response => {
-            let cookArray = [];
-            response.data.forEach(element => {
-                cookArray.push(<Cook  firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription}/>);
-            });
-            setCooksList(cookArray);
+            if(mounted){
+                setLoading(false)
+                setCooksArray(response.data)
+                setError('');
+            }
         })
-        .catch(err => console.log(err))
-    }, [])
+        .catch(error => {
+            setLoading(false)
+            setCooksArray([])
+            setError('Something went wrong!');
+        })
+        return () => mounted = false;
+  
+    },[])
     
     return (
         <>
-           {cooksList}
+           {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription}/>)}
+           {err ? err : null}
         </>
     )
 }

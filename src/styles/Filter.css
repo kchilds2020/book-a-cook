@@ -83,3 +83,14 @@
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;} 
 
+  .filter-btn{
+    padding: 7px 14px;
+    margin: 14px;
+    float: right;
+    border: none;
+    background-color: rgb(104, 163, 211);
+    border-radius: 4px;
+    box-shadow: 0px 0px 1px #333;
+    cursor: pointer;
+  }
+

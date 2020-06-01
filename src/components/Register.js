@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 
-export const Register = () => {
+export const Register = ({setAuthentication}) => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
@@ -71,6 +71,7 @@ export const Register = () => {
                     console.log('FAILURE');
                 }else{
                     console.log(response);
+                    setAuthentication(true)
                 }
             })
             .catch(function (error) {

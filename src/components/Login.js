@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar';
 import axios from 'axios'
 
-export const Login = () => {
+export const Login = ({setAuthentication}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -67,6 +67,7 @@ export const Login = () => {
                     console.log('invalid password')
                 }else{
                     console.log(response)
+                    setAuthentication(true);
                     //go to home
                 }
             })

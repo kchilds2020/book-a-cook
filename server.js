@@ -11,8 +11,13 @@ let session = require('express-session');
 
 const app = express();
 
+
+
+
 app.use(bodyParser.json());
 app.use(cors());
+
+
 
 
 app.use(session({
@@ -29,7 +34,6 @@ mongoose.connect(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
-
 app.use(gets);
 app.use(posts);
 
