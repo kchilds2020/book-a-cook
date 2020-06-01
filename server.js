@@ -23,6 +23,7 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname,'build')));
+app.use(express.static(path.join(__dirname,'public')));
 
 mongoose.connect(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,

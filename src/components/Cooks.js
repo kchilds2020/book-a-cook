@@ -8,7 +8,7 @@ function Cooks() {
     const [cooksList, setCooksList] = useState([]);
 
     useEffect(() => {
-        axios.get('/api/get/cooks')
+        axios.get('http://localhose:5000/api/get/cooks')
         .then(response => {
             let cookArray = [];
             response.data.forEach(element => {
