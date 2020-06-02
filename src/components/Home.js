@@ -7,7 +7,18 @@ import '../styles/Home.css'
 import '../App.css'
 
 
+function showPosition(position){
+    console.log(`Latitude: ${position.coords.latitude}`);
+    console.log(`Longitude: ${position.coords.longitude}`);
+}
+
 const Home = () => {
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+       console.log("Geolocation is not supported by this browser.");
+    }
 
     return(
         <div>
