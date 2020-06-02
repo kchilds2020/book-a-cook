@@ -30,7 +30,7 @@ function Cooks() {
     
     return (
         <>
-           {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription}/>)}
+           {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription} latitude={element.latitude} longitude={element.longitude}/>)}
            {err ? err : null}
         </>
     )
