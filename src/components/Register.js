@@ -10,7 +10,7 @@ export const Register = ({setAuthentication}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const checkValidation = (user) => {
+    const checkValidation = async (user) => {
 
         // check for non letters in firstname and last name
 
@@ -32,19 +32,30 @@ export const Register = ({setAuthentication}) => {
             return false;
         }
 
-        //check if username or password exists
+        //check if username or email exists
+        let response = await axios.get(`/api/get/username/${user.username}`);
+            if(response.data !== null){
+                alert('Username already exists in the system. Please choose another username');
+                return false;
+            }
+
         
+            response = await axios.get(`/api/get/email/${user.email}`);
+            if(response.data !== null){
+                alert('Email already exists in the system. Please choose another email');
+                return false;
+            }
 
         //check if Password has upper character/special character/ > 7
         if(user.password.length < 8){
             alert('Password must be atleast 8 characters');
         }
 
+        return true;
     }
 
     const registerUser = (evt) =>{
         evt.preventDefault();
-        console.log(firstname,lastname,email,username,password);
         const user = {
             firstname: firstname,
             lastname: lastname,
@@ -53,7 +64,8 @@ export const Register = ({setAuthentication}) => {
             password: password
 
         }
-        if(checkValidation(user)){
+
+        if(checkValidation(user) === true){
             axios.post('/post/register', user)
                 .then(function (response) {
                     if(response.status === '200'){

@@ -10,6 +10,26 @@ router.get('/api/get/cooks', (req,res) => {
     .catch(err => console.log(err))
 })
 
+//get user with username
+router.get('/api/get/username/:username', (req,res) => {
+    console.log(req.params.username)
+    User.findOne({username: req.params.username})
+    .then(cooks => {
+        console.log(cooks)
+        res.json(cooks)})
+    .catch(err => console.log(err))
+})
+//get user with email
+router.get('/api/get/email/:email', (req,res) => {
+    console.log(req.params.email)
+    User.findOne({email: req.params.email})
+    .then(cooks => {
+        console.log(cooks)
+        res.json(cooks)})
+    .catch(err => console.log(err))
+})
+
+
 //find user login
 
 router.get('/get-session', (req,res) => {
