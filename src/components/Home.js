@@ -1,6 +1,4 @@
 import React from 'react';
-import Filter from './Filter'
-import Cooks from './Cooks'
 import NavBar from './NavBar'
 import '../styles/Home.css'
 
@@ -12,11 +10,7 @@ const Home = () => {
     return(
         <div>
             <NavBar />
-            <div className = "home-container">
-                <Filter />
-                <Cooks />
-
-            </div>
+            HOME
         </div>
     );
 };

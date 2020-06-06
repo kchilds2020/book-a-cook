@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React/* , {useState} */ from 'react'
 import PIC from '../images/silhouette.png';
 import '../styles/CookSummary.css';
-import Geocode from "react-geocode"
-import keys from "./keys"
+/* import Geocode from "react-geocode" */
+//import keys from "./keys"
 
 function Cook({firstname, lastname, specialty, price, description, latitude, longitude}) {
     /* const [city, setCity] = useState('');

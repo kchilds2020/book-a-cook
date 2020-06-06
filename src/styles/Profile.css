@@ -1,0 +1,28 @@
+
+.profile-container{
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.profile-picture{
+    padding: 10px;
+    background-color: white;
+    width: 300px;
+}
+
+.profile-picture img{
+    width: 100%;
+}
+
+
+.profile-about{
+    width: 600px;
+}
+
+.submitButton{
+    width: 100%;
+}
+

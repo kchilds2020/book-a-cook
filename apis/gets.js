@@ -40,6 +40,16 @@ router.get('/api/get/username/:username', (req,res) => {
         res.json(cooks)})
     .catch(err => console.log(err))
 })
+//get user with id
+router.get('/api/get/userid/:id', (req,res) => {
+    console.log(req.params.id)
+    User.findOne({_id: req.params.id})
+    .then(user => {
+        console.log(user)
+        res.json(user)})
+    .catch(err => console.log(err))
+})
+
 //get user with email
 router.get('/api/get/email/:email', (req,res) => {
     console.log(req.params.email)
@@ -80,6 +90,8 @@ router.get('/image/:filename', (req,res) => {
  
      })
  })
+
+
 
 
 

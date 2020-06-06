@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react'
 import '../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
+import NavBar from './NavBar';
+import Filter from './Filter';
+import '../styles/Cooks.css'
 
 
 function Cooks() {
@@ -30,8 +33,12 @@ function Cooks() {
     
     return (
         <>
-           {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription} latitude={element.latitude} longitude={element.longitude}/>)}
-           {err ? err : null}
+            <NavBar />
+            <div className="cooks-container">
+                <Filter />  
+                {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.specialty} price={element.price} description={element.cooksDescription} latitude={element.latitude} longitude={element.longitude}/>)}
+                {err ? err : null}
+            </div>
         </>
     )
 }

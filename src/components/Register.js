@@ -3,7 +3,7 @@ import axios from 'axios';
 import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 import "../styles/Register.css"
 
-export const Register = ({setAuthentication}) => {
+export const Register = ({setAuthentication, setIdentification}) => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
@@ -72,6 +72,7 @@ export const Register = ({setAuthentication}) => {
                         console.log('FAILURE');
                     }else{
                         console.log(response);
+                        setIdentification(response.data._id);
                         setAuthentication(true)
                     }
                 })

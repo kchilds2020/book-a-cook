@@ -4,7 +4,7 @@ import axios from 'axios'
 import '../styles/Login.css'
 
 
-export const Login = ({setAuthentication}) => {
+export const Login = ({setAuthentication, setIdentification}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -30,6 +30,7 @@ export const Login = ({setAuthentication}) => {
                     
                 }else{
                     console.log(response)
+                    setIdentification(response.data._id);
                     setAuthentication(true);
                     //go to home
                 }
