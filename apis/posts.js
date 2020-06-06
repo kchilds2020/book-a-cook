@@ -3,7 +3,17 @@ const router = express.Router();
 const User = require('../models/User');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+const storage = require('./storage');
+const multer = require('multer');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
 
+const upload = multer({storage});
+
+
+router.post('/upload', upload.single('file'), (req, res) => {
+    res.json({file: req.file});
+});
 
 router.post('/post/register', (req, res) => {
 
