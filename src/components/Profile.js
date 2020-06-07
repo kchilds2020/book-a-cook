@@ -9,6 +9,7 @@ function Profile({identification}) {
     const [lastname, setLastname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [picture, setPicture] = useState('');
 
     console.log('IDENTIFICATION', identification);
 
@@ -21,13 +22,24 @@ function Profile({identification}) {
                 setLastname(response.data.lastName);
                 setEmail(response.data.email);
                 setUsername(response.data.username);
+                setPicture(response.data.picture);
             }
         })
         .catch(error => {
             console.log('Something went wrong!');
         })
+
+        /* axios.get(`/image/${picture}`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log('Something went wrong!');
+        }) */
+
+
         return () => mounted = false;
-    }, [identification])
+    }, [identification/* , picture */])
 
 
     return (
@@ -35,7 +47,7 @@ function Profile({identification}) {
             <NavBar />
             <div className = "profile-container">
                     <div className = "profile-picture">
-                        <img src = {silhouette} alt="profile-img"/>
+                        <img src = {`image/${picture}`} alt="profile-img"/>
                         {/* image from database goes here */}
                         <form>
                             <input type="file"></input>
