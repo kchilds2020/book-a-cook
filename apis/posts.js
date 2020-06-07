@@ -11,11 +11,11 @@ const upload = multer({storage});
 
 
 router.post('/update-user', upload.single('file'), (req, res) => {
-    console.log(req.body, req.file);
+    console.log(req.body, req.file.filename);
     User.updateOne({username: req.body.username}, {
         $set: {
             firstName: req.body.firstname,
-            lastName: req.body.lastName,
+            lastName: req.body.lastname,
             username: req.body.username,
             email: req.body.email,
             picture: req.file.filename
@@ -23,6 +23,7 @@ router.post('/update-user', upload.single('file'), (req, res) => {
     })
     .then(results =>{
         console.log(results);
+        res.json(results)
     })
     /* res.json({file: req.file}); */
     //req.file.filename

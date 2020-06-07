@@ -11,7 +11,7 @@ useEffect(() => {
     .then(response => {
         if(response.data !== 'undefined'){
             console.log('AUTHENTICATION',response.data);
-            setIdentification(response);
+            setIdentification(response.data);
             setAuthentication(true);
 
         }
