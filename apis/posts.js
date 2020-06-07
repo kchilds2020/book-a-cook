@@ -5,14 +5,27 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const storage = require('./storage');
 const multer = require('multer');
-const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
+
 
 const upload = multer({storage});
 
 
-router.post('/upload', upload.single('file'), (req, res) => {
-    res.json({file: req.file});
+router.post('/update-user', upload.single('file'), (req, res) => {
+    console.log(req.body, req.file);
+    User.updateOne({username: req.body.username}, {
+        $set: {
+            firstName: req.body.firstname,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            email: req.body.email,
+            picture: req.file.filename
+        }
+    })
+    .then(results =>{
+        console.log(results);
+    })
+    /* res.json({file: req.file}); */
+    //req.file.filename
 });
 
 router.post('/post/register', (req, res) => {

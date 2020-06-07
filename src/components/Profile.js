@@ -41,6 +41,17 @@ function Profile({identification}) {
         return () => mounted = false;
     }, [identification/* , picture */])
 
+    const handleSubmit = (event) =>{
+        event.preventDefault();
+        const data = new FormData(event.target);
+        
+        axios.post('/update-user', data)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(err => console.log(err))
+    }
+
 
     return (
         <div>
@@ -49,17 +60,19 @@ function Profile({identification}) {
                     <div className = "profile-picture">
                         <img src = {`image/${picture}`} alt="profile-img"/>
                         {/* image from database goes here */}
-                        <form>
-                            <input type="file"></input>
+                        <form action="/upload" method="post" /* enctype="multipart/form-data" */>
+                            <input type="file" name="file" id="file"></input>
+                            <input type="submit" value="Submit"/>
                         </form>
                     </div>
                 <div className = "profile-about">
-                    <form>
+                    <form onSubmit={handleSubmit} /* encType="multipart/form-data" */>
                             <input name = "firstname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {firstname} required/>
                             <input name = "lastname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {lastname} required/>
-                            <input name = "email" type = "text" className = "inputFields" maxLength = '40' defaultValue = {username} required/>
-                            <input name = "firstname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {email} required/>
-                            <button className = "submitButton">Update</button>
+                            <input name = "username" type = "text" className = "inputFields" maxLength = '40' defaultValue = {username} required/>
+                            <input name = "email" type = "text" className = "inputFields" maxLength = '40' defaultValue = {email} required/>
+                            <input type="file" name="file" id="file"></input>
+                            <input type="submit" value="Update"/>
                     </form>
                 </div>
 
