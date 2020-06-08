@@ -53,22 +53,33 @@ function Profile({identification}) {
         <div>
             <NavBar />
             <div className = "profile-container">
-                    <div className = "profile-picture">
-                        <img src = {silhouette} alt="profile-img"/>
-                    </div>
-                <div className = "profile-about">
-                    <form onSubmit={handleSubmit} >
-                            <input name = "firstname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {firstname} required/>
-                            <input name = "lastname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {lastname} required/>
-                            <input name = "username" type = "text" className = "inputFields" maxLength = '40' defaultValue = {username} required/>
-                            <input name = "email" type = "text" className = "inputFields" maxLength = '40' defaultValue = {email} required/>
-                            <input type="file" name="file" id="file"></input>
-                            <input type="submit" value="Update"/>
-                    </form>
+                <div className = "user-info">
+                    <h2>User Information</h2>
+                        <form onSubmit={handleSubmit} >
+                            <div className = "user-description">
+                                <div className = "profile-picture">
+                                    <img src = {silhouette} alt="profile-img"/>
+                                    <input type="file" />
+                                </div>
+                                <div className = "profile-about">
+                                    <input name = "firstname" type = "text" className = "inputFields user-input" maxLength = '40' defaultValue = {firstname} onChange = {ev => setFirstname(ev.target.value)} required/>
+                                    <input name = "lastname" type = "text" className = "inputFields user-input" maxLength = '40' defaultValue = {lastname} onChange = {ev => setLastname(ev.target.value)} required/>
+                                    <input name = "username" type = "text" className = "inputFields user-input" maxLength = '40' defaultValue = {username} onChange = {ev => setUsername(ev.target.value)} required/>
+                                    <input name = "email" type = "text" className = "inputFields user-input" maxLength = '40' defaultValue = {email} onChange = {ev => setEmail(ev.target.value)} required/>  
+                                    <div className = "cook-toggle">
+                                        <span className ="toggle-text">Are you a Cook?  </span>
+                                        <label className="switch">
+                                            <input type="checkbox" />
+                                            <span className="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" value="Update" className = "user-update-btn"/>
+                        </form>
+                    
                 </div>
-
             </div>
-
         </div>
     )
 }
