@@ -23,10 +23,10 @@ router.get('/api/get/username/:username', (req,res) => {
 })
 //get user with id
 router.get('/api/get/userid/:id', (req,res) => {
-    console.log(req.params.id)
+    /* console.log(req.params.id) */
     User.findOne({_id: req.params.id})
     .then(user => {
-        console.log(user)
+        /* console.log(user) */
         res.json(user)})
     .catch(err => console.log(err))
 })

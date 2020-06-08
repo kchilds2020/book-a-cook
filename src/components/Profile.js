@@ -9,7 +9,7 @@ function Profile({identification}) {
     const [lastname, setLastname] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [picture, setPicture] = useState('');
+    /* const [picture, setPicture] = useState(''); */
 
     console.log('IDENTIFICATION', identification);
 
@@ -22,48 +22,30 @@ function Profile({identification}) {
                 setLastname(response.data.lastName);
                 setEmail(response.data.email);
                 setUsername(response.data.username);
-                setPicture(response.data.picture);
+/*                 setPicture(response.data.picture); */
             }
         })
         .catch(error => {
             console.log('Something went wrong!');
         })
 
-        /* axios.get(`/image/${picture}`)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-            console.log('Something went wrong!');
-        }) */
-
 
         return () => mounted = false;
-    }, [identification/* , picture */])
+    }, [identification])
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(event.target)
-        /* const data = new FormData(event.target);
+        const data = {
+            firstname: firstname,
+            lastname: lastname,
+            username: username,
+            email: email
+        }
         
         axios.post('/update-user', data)
         .then(response => {
             console.log(response.data)
         })
-        .catch(err => console.log(err)) */
-    }
-
-    const fileSelectedHandler = (event) => {
-        setPicture(event.target.files[0])
-    }
-
-    const fileUploadHandler = () => {
-        const fd = new FormData();
-        console.log(picture,picture.name);
-        fd.append('image', picture, picture.name)
-
-        axios.post('/upload-image', fd)
-        .then(response => console.log(response))
         .catch(err => console.log(err))
     }
 
@@ -72,20 +54,17 @@ function Profile({identification}) {
             <NavBar />
             <div className = "profile-container">
                     <div className = "profile-picture">
-                        <img src = {`image/${picture}`} alt="profile-img"/>
-                        {/* image from database goes here */}
-                            <input type="file" name="file" id="file" onChange={fileSelectedHandler}></input>
-                            <button onClick={fileUploadHandler}>Upload</button>
+                        <img src = {silhouette} alt="profile-img"/>
                     </div>
                 <div className = "profile-about">
-                    {/* <form onSubmit={handleSubmit} >
+                    <form onSubmit={handleSubmit} >
                             <input name = "firstname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {firstname} required/>
                             <input name = "lastname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {lastname} required/>
                             <input name = "username" type = "text" className = "inputFields" maxLength = '40' defaultValue = {username} required/>
                             <input name = "email" type = "text" className = "inputFields" maxLength = '40' defaultValue = {email} required/>
                             <input type="file" name="file" id="file"></input>
                             <input type="submit" value="Update"/>
-                    </form> */}
+                    </form>
                 </div>
 
             </div>
