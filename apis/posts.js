@@ -13,6 +13,11 @@ router.post('/update-user', (req, res) => {
             lastName: req.body.lastname,
             username: req.body.username,
             email: req.body.email,
+            cook: req.body.cooked,
+            cookSpecialty: req.body.cookSpecialty,
+            cookDescription: req.body.cookDescription,
+            cookPrice: req.body.cookPrice
+
         }
     })
     .then(results =>{

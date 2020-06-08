@@ -5,7 +5,12 @@ const User = new mongoose.Schema({
     lastName: {type: String, trim: true, default: ''},
     email: {type: String, trim: true, default: ''},
     username: {type: String, trim: true, default: ''},
-    password: {type: String, trim: true, default: ''}
+    password: {type: String, trim: true, default: ''},
+    cook: [Boolean],
+    cookDescription: {type: String, trim: true, default: ''},
+    cookSpecialty: {type: String, trim: true, default: ''},
+    cookPrice: {type: String, trim: true, default: ''},
+
 },
 {
     collection: 'users'

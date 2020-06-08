@@ -8,11 +8,21 @@
     justify-content: space-evenly;
 }
 .user-info{
+    width: 100%;
     background-color: white;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+.profile-form{
+    width: 90%;
+}
+
+.profile-form h2{
+    text-align: center;
+}
+
 
 .profile-picture{
     padding: 10px;
@@ -28,24 +38,50 @@
 
 
 .profile-about{
+    height: 400px;
     padding: 10px;
-    width: 600px;
+    /* width: 600px; */
+    width: 100%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     
 }
 
-.user-info form{
-    padding:10px;
-    
+.cook-about{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+.cook-information{
+    visibility: hidden;
+    height: 0px;
+}
+
+.cook-input, .user-input{
+    font-family: Raleway, Helvetica, sans-serif;
+    font-size: 18px;
+    width: 100%;
+    border-radius: 6px;
+    border: #ddd 1px solid;
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+/* .cook-input input, .cook-input textarea, .cook-input label{
+    float: right;
+} */
+
+
+
 .user-description{
-    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    width: 100%;
 }
 
 .submitButton{
