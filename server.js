@@ -8,9 +8,6 @@ const mongoose =require('mongoose');
 const PORT = process.env.PORT || 5000;
 let bodyParser = require('body-parser');
 let session = require('express-session');
-const multer = require('multer');
-const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
 
 const app = express();
 

@@ -43,15 +43,29 @@ function Profile({identification}) {
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        const data = new FormData(event.target);
+        console.log(event.target)
+        /* const data = new FormData(event.target);
         
         axios.post('/update-user', data)
         .then(response => {
             console.log(response.data)
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err)) */
     }
 
+    const fileSelectedHandler = (event) => {
+        setPicture(event.target.files[0])
+    }
+
+    const fileUploadHandler = () => {
+        const fd = new FormData();
+        console.log(picture,picture.name);
+        fd.append('image', picture, picture.name)
+
+        axios.post('/upload-image', fd)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -60,20 +74,18 @@ function Profile({identification}) {
                     <div className = "profile-picture">
                         <img src = {`image/${picture}`} alt="profile-img"/>
                         {/* image from database goes here */}
-                        <form action="/upload" method="post" /* enctype="multipart/form-data" */>
-                            <input type="file" name="file" id="file"></input>
-                            <input type="submit" value="Submit"/>
-                        </form>
+                            <input type="file" name="file" id="file" onChange={fileSelectedHandler}></input>
+                            <button onClick={fileUploadHandler}>Upload</button>
                     </div>
                 <div className = "profile-about">
-                    <form onSubmit={handleSubmit} /* encType="multipart/form-data" */>
+                    {/* <form onSubmit={handleSubmit} >
                             <input name = "firstname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {firstname} required/>
                             <input name = "lastname" type = "text" className = "inputFields" maxLength = '40' defaultValue = {lastname} required/>
                             <input name = "username" type = "text" className = "inputFields" maxLength = '40' defaultValue = {username} required/>
                             <input name = "email" type = "text" className = "inputFields" maxLength = '40' defaultValue = {email} required/>
                             <input type="file" name="file" id="file"></input>
                             <input type="submit" value="Update"/>
-                    </form>
+                    </form> */}
                 </div>
 
             </div>

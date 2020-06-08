@@ -3,30 +3,20 @@ const router = express.Router();
 const User = require('../models/User');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-const storage = require('./storage');
-const multer = require('multer');
 
-
-const upload = multer({storage});
-
-
-router.post('/update-user', upload.single('file'), (req, res) => {
-    console.log(req.body, req.file.filename);
+router.post('/update-user', (req, res) => {
     User.updateOne({username: req.body.username}, {
         $set: {
             firstName: req.body.firstname,
             lastName: req.body.lastname,
             username: req.body.username,
             email: req.body.email,
-            picture: req.file.filename
         }
     })
     .then(results =>{
         console.log(results);
         res.json(results)
     })
-    /* res.json({file: req.file}); */
-    //req.file.filename
 });
 
 router.post('/post/register', (req, res) => {
