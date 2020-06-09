@@ -35,8 +35,10 @@ function JobPostings() {
         <div>
             <NavBar />
             <div className = "jp-container">
-                {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} date={element.date} userPosted={element.username} />)}
-                {err ? err : null}
+                <div className = "posts-container">
+                    {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} />)}
+                    {err ? err : null}
+                </div>
                 <form>
                     <label htmlFor = "event-summary">Event Summary</label>
                     <input type="text" name = "event" id = "event-summary" className = "jp-inputs" placeholder = "Event Summary"/>

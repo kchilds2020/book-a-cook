@@ -1,0 +1,39 @@
+.post-card{
+    background-color: white;
+    width: 100%;
+    padding: 10px 0px;
+    border-bottom: #ccc 1px solid;
+}
+
+.post-summary{
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(42, 105, 201);
+    padding: 5px;
+}
+
+.post-description{
+    font-size: 18px;
+    color: #333;
+    padding: 5px;
+}
+.post-people{
+    font-size: 18px;
+    color: #333;
+    padding: 5px;
+}
+.post-location{
+    font-size: 18px;
+    color: #333;
+    padding: 5px;
+}
+.post-date{
+    font-size: 18px;
+    color: #333;
+    padding: 5px;
+}
+.post-username{
+    font-size: 18px;
+    color: #333;
+    padding: 5px;
+}
