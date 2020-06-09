@@ -13,7 +13,7 @@ function NavBar() {
                   <Link to ="/cooks">Cooks</Link>
                 </li> 
                 <li>
-                  <Link to ="/home/job-postings">Job Postings</Link>
+                  <Link to ="/job-postings">Job Postings</Link>
                 </li> 
                 <li>
                   <Link to ="/profile">Profile</Link>

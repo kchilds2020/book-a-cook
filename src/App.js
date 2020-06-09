@@ -23,7 +23,7 @@ function App() {
                 <Route path="/" exact strict component={Landing}/>
                 <Route path="/home" exact component={Home} />
                 <Route path="/cooks" exact component={Cooks} />
-                <Route path="/home/job-postings" exact component={JobPostings}/>
+                <Route path="/job-postings" exact component={JobPostings}/>
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
                   path="/profile"  

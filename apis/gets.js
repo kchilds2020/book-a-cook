@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const Cook = require('../models/Cook');
+const JobPost = require('../models/JobPost');
 const User = require('../models/User');
 
 
+
+//find all job posts
+router.get('/api/get/jobs', (req,res) => {
+    JobPost.find()
+    .then(posts => {
+        console.log(posts);
+        res.json(posts)
+    })
+    .catch(err => console.log(err))
+})
 
 //find all cooks
 router.get('/api/get/cooks', (req,res) => {
