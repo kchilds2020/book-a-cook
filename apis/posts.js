@@ -5,7 +5,7 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 router.post('/update-user', (req, res) => {
-    console.log(req.body);
+    console.log('BOOLEAN COOK',req.body.cook);
 
     User.updateOne({username: req.body.username}, {
         $set: {
@@ -13,7 +13,7 @@ router.post('/update-user', (req, res) => {
             lastName: req.body.lastname,
             username: req.body.username,
             email: req.body.email,
-            cook: req.body.cooked,
+            cook: req.body.cook,
             cookSpecialty: req.body.cookSpecialty,
             cookDescription: req.body.cookDescription,
             cookPrice: req.body.cookPrice

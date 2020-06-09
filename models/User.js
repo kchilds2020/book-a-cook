@@ -6,7 +6,7 @@ const User = new mongoose.Schema({
     email: {type: String, trim: true, default: ''},
     username: {type: String, trim: true, default: ''},
     password: {type: String, trim: true, default: ''},
-    cook: [Boolean],
+    cook: {type: Boolean, default: false}, 
     cookDescription: {type: String, trim: true, default: ''},
     cookSpecialty: {type: String, trim: true, default: ''},
     cookPrice: {type: String, trim: true, default: ''},

@@ -12,11 +12,23 @@ function Profile({identification}) {
     const [cookSpecialty, setCookSpecialty] = useState('');
     const [cookDescription, setCookDescription] = useState('');
     const [cookPrice, setCookPrice] = useState('');
-    const [checked, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(false);
 
     /* const [picture, setPicture] = useState(''); */
 
     console.log('IDENTIFICATION', identification);
+
+    const checkToggle = () => {
+        if(document.getElementById('cook-checkbox').checked){
+            setToggle(true);
+            document.getElementById('cook-info').style.visibility = 'visible';
+            document.getElementById('cook-info').style.height = 'auto';
+        }else{
+            setToggle(false);
+            document.getElementById('cook-info').style.visibility = 'hidden';
+            document.getElementById('cook-info').style.height = '0px';
+        }
+    }
 
     useEffect( () => {
         let mounted = true;
@@ -27,11 +39,14 @@ function Profile({identification}) {
                 setLastname(response.data.lastName);
                 setEmail(response.data.email);
                 setUsername(response.data.username);
-                setToggle(response.data.cook[0]);
+                /* setToggle(response.data.cook); */
                 setCookSpecialty(response.data.cookSpecialty);
                 setCookDescription(response.data.cookDescription);
                 setCookPrice(response.data.cookPrice);
                
+                /* console.log(toggle); */
+                response.data.cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
+                checkToggle();
             }
         })
         .catch(error => {
@@ -41,7 +56,7 @@ function Profile({identification}) {
         
 
         return () => mounted = false;
-    }, [identification, checked])
+    }, [identification])
 
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -50,7 +65,7 @@ function Profile({identification}) {
             lastname: lastname,
             username: username,
             email: email,
-            cook: checked,
+            cook: toggle,
             cookSpecialty: cookSpecialty,
             cookDescription: cookDescription,
             cookPrice: cookPrice
@@ -63,17 +78,7 @@ function Profile({identification}) {
         .catch(err => console.log(err))
     }
 
-    const checkToggle = () => {
-        if(!checked){
-            setToggle(true);
-            document.getElementById('cook-info').style.visibility = 'visible';
-            document.getElementById('cook-info').style.height = 'auto';
-        }else{
-            setToggle(false);
-            document.getElementById('cook-info').style.visibility = 'hidden';
-            document.getElementById('cook-info').style.height = '0px';
-        }
-    }
+    
 
     return (
         <div>
@@ -88,10 +93,14 @@ function Profile({identification}) {
                                     <input type="file" />
                                 </div>
                                 <div className = "profile-about">
-                                    <input name = "firstname" type = "text" className = "user-input" maxLength = '40' defaultValue = {firstname} onChange = {ev => setFirstname(ev.target.value)} required/>
-                                    <input name = "lastname" type = "text" className = "user-input" maxLength = '40' defaultValue = {lastname} onChange = {ev => setLastname(ev.target.value)} required/>
-                                    <input name = "username" type = "text" className = "user-input" maxLength = '40' defaultValue = {username} onChange = {ev => setUsername(ev.target.value)} required/>
-                                    <input name = "email" type = "text" className = "user-input" maxLength = '40' defaultValue = {email} onChange = {ev => setEmail(ev.target.value)} required/>  
+                                    <label htmlFor="firstname">First Name</label>
+                                    <input name = "firstname" id = "firstname" type = "text" className = "user-input" maxLength = '40' defaultValue = {firstname} onChange = {ev => setFirstname(ev.target.value)} required/>
+                                    <label htmlFor="lastname">Last Name</label>
+                                    <input name = "lastname" id = "lastname" type = "text" className = "user-input" maxLength = '40' defaultValue = {lastname} onChange = {ev => setLastname(ev.target.value)} required/>
+                                    <label htmlFor="username">Username</label>
+                                    <input name = "username" id = "username" type = "text" className = "user-input" maxLength = '40' defaultValue = {username} onChange = {ev => setUsername(ev.target.value)} required/>
+                                    <label htmlFor="email">Email</label>
+                                    <input name = "email" id = "email" type = "text" className = "user-input" maxLength = '40' defaultValue = {email} onChange = {ev => setEmail(ev.target.value)} required/>  
                                     <div className = "cook-toggle">
                                         <span className ="toggle-text">Are you a Cook?  </span>
                                         <label className="switch">
@@ -105,9 +114,12 @@ function Profile({identification}) {
                             <div className = "cook-information" id="cook-info">
                             <h2>Cook Information</h2>
                                 <div className = "cook-about">
-                                    <input name = "cookSpecialty" type = "text" placeholder = "Specialty" className = "cook-input" maxLength = '40' defaultValue = {cookSpecialty} onChange = {ev => setCookSpecialty(ev.target.value)} required/> 
-                                    <textarea name = "cookDescription" type = "text" placeholder = "Description" className = "cook-input" maxLength = '40' defaultValue = {cookDescription} onChange = {ev => setCookDescription(ev.target.value)} required/>
-                                    <input name = "cookPrice" type = "text" placeholder = "Price" className = "cook-input" maxLength = '40' defaultValue = {cookPrice} onChange = {ev => setCookPrice(ev.target.value)} required/>
+                                    <label htmlFor="specialty">Specialty</label>
+                                    <input name = "cookSpecialty" id = "specialty" type = "text" placeholder = "Specialty" className = "cook-input" maxLength = '40' defaultValue = {cookSpecialty} onChange = {ev => setCookSpecialty(ev.target.value)} /> 
+                                    <label htmlFor="description">Description</label>
+                                    <textarea name = "cookDescription" id = "description" type = "text" placeholder = "Description" className = "cook-input" maxLength = '40' defaultValue = {cookDescription} onChange = {ev => setCookDescription(ev.target.value)}/>
+                                    <label htmlFor="price">Price per hour</label>
+                                    <input name = "cookPrice" id = "price" type = "text" placeholder = "Price" className = "cook-input" maxLength = '40' defaultValue = {cookPrice} onChange = {ev => setCookPrice(ev.target.value)} />
                                 </div>
                                 
                             </div>

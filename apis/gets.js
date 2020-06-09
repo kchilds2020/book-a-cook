@@ -7,7 +7,7 @@ const User = require('../models/User');
 
 //find all cooks
 router.get('/api/get/cooks', (req,res) => {
-    Cook.find()
+    User.find({cook: true})
     .then(cooks => res.json(cooks))
     .catch(err => console.log(err))
 })
