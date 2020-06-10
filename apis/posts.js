@@ -1,8 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const JobPost = require('../models/JobPost');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+
+
+
+router.post('/post/create-post', (req, res) => {
+        JobPost.create({
+            summary: req.body.summary,
+            description: req.body.description,
+            peopleAmount: req.body.peopleAmount,
+            location: req.body.location,
+            date: req.body.date,
+            username: req.body.username
+        })
+        .then(results => {
+            console.log(`New POST: ${results}`);
+            res.json(results);
+        })
+        .catch(error => console.error(error))
+});
+
 
 router.post('/update-user', (req, res) => {
     console.log('BOOLEAN COOK',req.body.cook);

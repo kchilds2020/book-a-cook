@@ -6,6 +6,7 @@ const JobPost = new mongoose.Schema({
     peopleAmount: {type: String, trim: true, default: ''},
     location: {type: String, trim: true, default: ''},
     date: {type:Date, default: ''},
+    username: {type: String, trim: true, default: ''}
 },
 {
     collection: 'job-posts'
