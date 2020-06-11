@@ -15,6 +15,7 @@ function JobPostings() {
     const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
     const [peopleAmount, setPeopleAmount] = useState('');
+    const [visibility, setVisibility] = useState('hidden');
 
     useEffect(() => {
         let mounted = true;
@@ -23,7 +24,8 @@ function JobPostings() {
             console.log(response.data);
             if(mounted){
                 setLoading(false)
-                setPostsArray(response.data)
+                let sorted = response.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
+                setPostsArray(sorted)
                 setError('');
             }
         })
@@ -36,6 +38,12 @@ function JobPostings() {
         return () => mounted = false;
   
     },[])
+
+    useEffect(() => {
+        let postForm = document.getElementById('job-post-form');
+        postForm.style.visibility = visibility;
+  
+    },[visibility])
     const handleSubmit = (event) => {
         event.preventDefault();
         //get username
@@ -58,17 +66,35 @@ function JobPostings() {
         temp.push(post)
         setPostsArray(temp);
         console.log(date);
+        toggleForm()
+    }
+
+    const toggleForm = () => {
+        visibility === 'visible' ? setVisibility('hidden') : setVisibility('visible')
+    }
+
+    const cancelPost = () => {
+        console.log('clicked')
+        setSummary('')
+        setDescription('')
+        setDate('')
+        setPeopleAmount('')
+        setLocation('')
+        toggleForm()
     }
 
     return (
         <div>
             <NavBar />
             <div className = "jp-container">
+                <div className = "jp-header">
+                    <button className = "toggle-btn" onClick={toggleForm}>Create Post!</button>
+                </div>
                 <div className = "posts-container">
                     {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} />)}
                     {err ? err : null}
                 </div>
-                <form onSubmit = {handleSubmit}>
+                <form onSubmit = {handleSubmit} id = "job-post-form">
                     <label htmlFor = "event-summary">Event Summary</label>
                     <input type="text" name = "event" id = "event-summary" className = "jp-inputs" placeholder = "Event Summary" onChange={event => setSummary(event.target.value)}/>
                     <label htmlFor = "event-description">Event Description</label>
@@ -79,7 +105,10 @@ function JobPostings() {
                     <input type="text" name = "event-location" id = "event-location" className = "jp-inputs" placeholder = "Event Location" onChange={event => setLocation(event.target.value)}/>
                     <label htmlFor = "event-date">Date of Event</label>
                     <input type="date" name = "event-date" id = "event-date" className = "jp-inputs" placeholder = "Date" onChange={event => setDate(event.target.value)}/>
-                    <input type="submit" value = "Post Job!" />
+                    <div className = "btns">
+                        <input type="submit" value = "Create Post!" className="create-post-btn"/>
+                        <button type="reset" className = "cancel-post-btn" onClick = {cancelPost}>Cancel Post</button>
+                    </div>
                 </form>
             </div>
 

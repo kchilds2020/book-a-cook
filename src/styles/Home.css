@@ -4,4 +4,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: white
+}
+
+.profile-info{
+ width: 100%;
+}
+
+.profile-job-posts{
+    width: 100%;
 }

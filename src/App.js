@@ -21,7 +21,9 @@ function App() {
 
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
-                <Route path="/home" exact component={Home} />
+                <Route 
+                  path="/home"  
+                  render={(props) => <Home {...props} identification = {identification}/>}/>
                 <Route path="/cooks" exact component={Cooks} />
                 <Route path="/job-postings" exact component={JobPostings}/>
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
