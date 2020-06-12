@@ -31,7 +31,6 @@ export const Login = ({setAuthentication, setIdentification}) => {
                 }else{
                     console.log(response)
                     setIdentification(response.data._id);
-                    setAuthentication(true);
                     //go to home
                 }
             })

@@ -19,7 +19,13 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
         setMonth(mnth)
     }, [eventDate])
 
-    
+    const apply = () => {
+        let btn = document.getElementById("jp-btn")
+        btn.innerText = "Applied!"
+        btn.style.backgroundColor="green"
+        btn.style.pointerEvents="none"
+        alert(`Thank you for your interest! We sent your information to ${userPosted}`);
+    }
     
 
     return (
@@ -31,7 +37,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
                     <div className = "post-date">{month} {day}, {year}</div>
                 </div>
                 <div className = "post-description">{description}</div>
-                <button>Apply!</button>
+                <button onClick={apply} id="jp-btn">Apply!</button>
                 <div className = "post-username">Created by: {userPosted}</div>
             </div>
     )

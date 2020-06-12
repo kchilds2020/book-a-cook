@@ -4,17 +4,8 @@ import '../styles/Profile.css'
 import silhouette from '../images/silhouette.png'
 import axios from 'axios'
 
-function Profile({identification}) {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [cookSpecialty, setCookSpecialty] = useState('');
-    const [cookDescription, setCookDescription] = useState('');
-    const [cookPrice, setCookPrice] = useState('');
+function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook}) {
     const [toggle, setToggle] = useState(false);
-
-    /* const [picture, setPicture] = useState(''); */
 
     console.log('IDENTIFICATION', identification);
 
@@ -31,32 +22,10 @@ function Profile({identification}) {
     }
 
     useEffect( () => {
-        let mounted = true;
-        axios.get(`/api/get/userid/${identification}`)
-        .then(response => {
-            if(mounted){
-                setFirstname(response.data.firstName);
-                setLastname(response.data.lastName);
-                setEmail(response.data.email);
-                setUsername(response.data.username);
-                /* setToggle(response.data.cook); */
-                setCookSpecialty(response.data.cookSpecialty);
-                setCookDescription(response.data.cookDescription);
-                setCookPrice(response.data.cookPrice);
-               
-                /* console.log(toggle); */
-                response.data.cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
-                checkToggle();
-            }
-        })
-        .catch(error => {
-            console.log('Something went wrong!');
-        })
-
-        
-
-        return () => mounted = false;
-    }, [identification])
+        console.log('COOK',cook);
+        cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
+        checkToggle();
+    }, [cook])
 
     const handleSubmit = (event) =>{
         event.preventDefault();

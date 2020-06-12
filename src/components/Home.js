@@ -7,26 +7,8 @@ import axios from 'axios';
 
 
 
-const Home = ({identification}) => {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
+const Home = ({identification, firstname, lastname, email, username}) => {
     const [myPosts, setMyPosts] = useState('');
-
-
-   useEffect(() => {
-       if(identification !== ''){
-            axios.get(`/api/get/userid/${identification}`)
-            .then(response => {
-                console.log('HOME REQUEST',response.data)
-                setFirstname(response.data.firstName)
-                setLastname(response.data.lastName)
-                setEmail(response.data.email)
-                setUsername(response.data.username)
-            })
-        }
-    },[identification])
 
     useEffect(() => {
         if(username !== ''){

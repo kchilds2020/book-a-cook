@@ -73,7 +73,6 @@ export const Register = ({setAuthentication, setIdentification}) => {
                     }else{
                         console.log(response);
                         setIdentification(response.data._id);
-                        setAuthentication(true)
                     }
                 })
                 .catch(function (error) {

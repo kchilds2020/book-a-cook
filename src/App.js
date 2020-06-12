@@ -14,22 +14,30 @@ import Cooks from './components/Cooks'
 function App() {
   const [authenticated, setAuthentication] = useState(false);
   const [identification, setIdentification] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [cookSpecialty, setCookSpecialty] = useState('');
+  const [cookDescription, setCookDescription] = useState('');
+  const [cookPrice, setCookPrice] = useState('');
+  const [cook, setCook] = useState('');
 
   return (
       <Router> 
-        <Auth authenticated = {authenticated} setAuthentication={setAuthentication} setIdentification={setIdentification}/>  
+        <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook}/>  
 
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
                 <Route 
                   path="/home"  
-                  render={(props) => <Home {...props} identification = {identification}/>}/>
+                  render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email}/>}/>
                 <Route path="/cooks" exact component={Cooks} />
                 <Route path="/job-postings" exact component={JobPostings}/>
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
                   path="/profile"  
-                  render={(props) => <Profile {...props} identification = {identification}/>}/>
+                  render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook}/>}/>
 
                 <Route 
                   path="/login"  
