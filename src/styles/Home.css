@@ -47,6 +47,13 @@
     text-align: center;
 }
 
+.cook-name{
+    text-align: right;
+    font-weight: 400;
+    border-top:  #ddd 1px solid; 
+    color: rgb(39, 54, 39);
+}
+
 .jobs-applied-container{
     width: 100%;
     max-width: 800px;
@@ -57,4 +64,17 @@
 }
 .post-num{
     color: green;
+    
+}
+
+.cook-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.cook-name-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
 }

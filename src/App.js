@@ -9,6 +9,7 @@ import JobPostings from './components/JobPostings';
 import Profile from './components/Profile';
 import Auth from './components/Auth'
 import Cooks from './components/Cooks'
+import UserProfile from './components/UserProfile'
 
 
 function App() {
@@ -31,12 +32,15 @@ function App() {
                 <Route path="/" exact strict component={Landing}/>
                 <Route 
                   path="/home"  
-                  render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email}/>}/>
+                  render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} />}/>
                 <Route path="/cooks" exact component={Cooks} />
                 {/* <Route path="/job-postings" exact component={JobPostings}/> */}
                 <Route 
                   path="/job-postings"  
                   render={(props) => <JobPostings {...props} username={username}/>}/>
+                <Route 
+                  path="/user/profile"  
+                  render={(props) => <UserProfile {...props}/>}/>
 
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
