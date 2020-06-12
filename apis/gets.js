@@ -4,6 +4,16 @@ const JobPost = require('../models/JobPost');
 const User = require('../models/User');
 
 
+//find posts that you created
+router.get('/api/get/my-jobs/:username', (req,res) => {
+    JobPost.find({username: req.params.username})
+    .then(posts => {
+        console.log(posts);
+        res.json(posts)
+    })
+    .catch(err => console.log(err))
+})
+
 
 //find all job posts
 router.get('/api/get/jobs', (req,res) => {
