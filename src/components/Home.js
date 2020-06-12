@@ -41,7 +41,7 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                                 {element.summary}
                             </div>
                             <div className ="applications">
-                                0 chefs applied
+                            <span className="post-num">{element.applications.length}</span> chefs applied
                             </div>
                         </h4>) : <h4>You have no job posts!</h4>}
                     </div>

@@ -33,7 +33,11 @@ function App() {
                   path="/home"  
                   render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email}/>}/>
                 <Route path="/cooks" exact component={Cooks} />
-                <Route path="/job-postings" exact component={JobPostings}/>
+                {/* <Route path="/job-postings" exact component={JobPostings}/> */}
+                <Route 
+                  path="/job-postings"  
+                  render={(props) => <JobPostings {...props} username={username}/>}/>
+
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
                   path="/profile"  

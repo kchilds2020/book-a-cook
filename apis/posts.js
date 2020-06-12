@@ -23,6 +23,23 @@ router.post('/post/create-post', (req, res) => {
         .catch(error => console.error(error))
 });
 
+router.post('/api/post/apply/job-post', (req, res) => {
+    console.log(req.body.username, req.body.uniqueID)
+    JobPost.updateOne({_id: req.body.uniqueID},{
+        $push: {
+            applications: req.body.username,
+        }
+        
+    })
+    .then(results => {
+        console.log(`New Application: ${results}`);
+        res.json(results);
+    })
+    .catch(error => console.error(error)) 
+});
+
+
+
 
 router.post('/update-user', (req, res) => {
     console.log('BOOLEAN COOK',req.body.cook);

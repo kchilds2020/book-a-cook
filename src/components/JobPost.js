@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
  import '../styles/JobPost.css' 
+import axios from 'axios';
 
-function JobPost({summary, description, peopleAmount, location, eventDate, userPosted}) {
+function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, username}) {
 
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
@@ -19,12 +20,23 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
         setMonth(mnth)
     }, [eventDate])
 
-    const apply = () => {
-        let btn = document.getElementById("jp-btn")
-        btn.innerText = "Applied!"
-        btn.style.backgroundColor="green"
-        btn.style.pointerEvents="none"
-        alert(`Thank you for your interest! We sent your information to ${userPosted}`);
+    const apply = (event) => {
+        const data = {
+            username: username,
+            uniqueID: uniqueID
+        }
+        let btn = event.target
+        axios.post(`api/post/apply/job-post`, data)
+        .then(response => {
+            console.log(response)
+            btn.innerText = "Applied!"
+            btn.style.backgroundColor="green"
+            btn.style.pointerEvents="none"
+        })
+        .catch(err => console.log(err))
+
+
+        
     }
     
 

@@ -4,7 +4,7 @@ import '../styles/JobPostings.css'
 import axios from 'axios'
 import JobPost from './JobPost'
 
-function JobPostings() {
+function JobPostings({username}) {
     const [postsArray, setPostsArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
@@ -54,7 +54,7 @@ function JobPostings() {
             location: location,
             peopleAmount: peopleAmount,
             date: date,
-            username: "kchilds"
+            username: username
         }
 
         axios.post('/post/create-post', post)
@@ -91,7 +91,7 @@ function JobPostings() {
                     <button className = "toggle-btn" onClick={toggleForm}>Create Post!</button>
                 </div>
                 <div className = "posts-container">
-                    {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} />)}
+                    {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={username}/>)}
                     {err ? err : null}
                 </div>
                 <form onSubmit = {handleSubmit} id = "job-post-form">
