@@ -44,18 +44,27 @@ const Home = ({identification}) => {
             <NavBar />
             <div className="home-container">
                 <div className = "greeting"><h2>Hello {firstname}!</h2></div>
-                <div className="profile-info">
+                {/* <div className="profile-info">
                     profile info
-                </div>
-                <div>
+                </div> */}
+                <div className = "job-post-container">
                     <div className="job-post-header">
-                        <h3>You have {myPosts.length} posted Jobs.</h3>
+                        <h3>You have <span className="post-num">{myPosts.length}</span> posted Jobs.</h3>
                     </div>
                     <div className="profile-job-posts">
-                        {myPosts.length > 0 ? myPosts.map((element,index) => <h4 key = {index}>{element.summary}</h4>) : <h4>You have no job posts!</h4>}
+                        {myPosts.length > 0 ? myPosts.map((element,index) => 
+                        
+                        <h4 key = {index} className="sum-container">
+                            <div className ="summary">
+                                {element.summary}
+                            </div>
+                            <div className ="applications">
+                                0 chefs applied
+                            </div>
+                        </h4>) : <h4>You have no job posts!</h4>}
                     </div>
                 </div>
-                <div>
+                <div className = "jobs-applied-container">
                     <div className="jobs-applied-header">
                         <h3>You have 0 jobs applied and 0 jobs approved.</h3>
                     </div>
