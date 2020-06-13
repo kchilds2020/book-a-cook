@@ -44,8 +44,8 @@
     margin-top: 20px;
     border-radius: 8px;
 }
-
-.jobs-applied-header{
+ 
+.events-header{
     width: 100%;
     text-align: center;
     
@@ -61,7 +61,7 @@
     color: rgb(39, 54, 39);
 }
 
-.jobs-applied-container{
+.events-container{
     width: 100%;
     max-width: 600px;
     border: #ddd 1px solid;

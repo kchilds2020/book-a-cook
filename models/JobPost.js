@@ -7,7 +7,8 @@ const JobPost = new mongoose.Schema({
     location: {type: String, trim: true, default: ''},
     date: {type:Date, default: ''},
     username: {type: String, trim: true, default: ''},
-    applications: {type: Array, default: []}
+    applications: {type: Array, default: []},
+    cook: {type: String, trim: true, default: 'pending'},
 },
 {
     collection: 'job-posts'

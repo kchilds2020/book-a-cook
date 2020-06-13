@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const Home = ({identification, firstname, lastname, email, username}) => {
     const [myPosts, setMyPosts] = useState('');
+    const [events, setEvents] = useState('');
 
     useEffect(() => {
         if(username !== ''){
@@ -18,6 +19,13 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                  console.log('MY POSTS',response.data)
                  setMyPosts(response.data);
              })
+             //get working events
+             axios.get(`/api/get/working-events/${username}`)
+             .then(response => {
+                 console.log('WORKING EVENTS',response.data)
+                 setEvents(response.data);
+             })
+             
          }
      },[username])
 
@@ -62,9 +70,17 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                         </h4>) : <h4>You have no job posts!</h4>}
                     </div>
                 </div>
-                <div className = "jobs-applied-container">
-                    <div className="jobs-applied-header">
-                        <h3>You have 0 upcoming events.</h3>
+                <div className = "events-container">
+                    <div className="events-header">
+                        <h3>You are working <span className="post-num">{events.length}</span> upcoming events.</h3>
+                        {events.length > 0 ? events.map((element, index) => 
+                        <div key = {index}>
+                            <h2>{element.summary}</h2>
+                            <h3>{element.description}</h3>
+                            <h4>{element.location}</h4>
+                            <h5>{element.date}</h5>
+                        </div>
+                        ) : <div>You have no job posts</div>}
                     </div>
                 </div>
 

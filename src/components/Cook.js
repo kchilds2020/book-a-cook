@@ -1,10 +1,11 @@
 import React/* , {useState} */ from 'react'
 import PIC from '../images/silhouette.png';
 import '../styles/CookSummary.css';
+import {Link} from 'react-router-dom'
 /* import Geocode from "react-geocode" */
 //import keys from "./keys"
 
-function Cook({firstname, lastname, specialty, price, description, latitude, longitude}) {
+function Cook({firstname, lastname, specialty, price, description, latitude, longitude, username}) {
     /* const [city, setCity] = useState('');
     const [state, updateState] = useState(''); */
 
@@ -45,6 +46,9 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                     </div>
                     <div className = "cookDescription">
                         <p>{description}</p>
+                    </div>
+                    <div>
+                    <Link to ={`/user/profile?user=${username}`} className="contact-btn" >Contact</Link>
                     </div>
             </div>
         </>

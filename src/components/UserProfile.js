@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import silhouette from '../images/silhouette.png'
 import '../styles/UserProfile.css'
+import JobForm from './JobForm';
 
-function UserProfile() {
+function UserProfile({userSessionName}) {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -12,6 +13,12 @@ function UserProfile() {
     const [cookDescription, setCookDescription] = useState('');
     const [cookPrice, setCookPrice] = useState('');
     const [cook, setCook] = useState('');
+
+    const [summary, setSummary] = useState('');
+    const [description, setDescription] = useState('');
+    const [location, setLocation] = useState('');
+    const [date, setDate] = useState('');
+    const [peopleAmount, setPeopleAmount] = useState('');
 
     useEffect(() =>{
         //get user from url
@@ -36,6 +43,34 @@ function UserProfile() {
 
     },[username])
 
+    const handleBook = (event) => {
+        let form = document.getElementById('book-form')
+        form.style.visibility = form.style.visibility === 'visible' ? 'hidden' : 'visible'
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const data = {
+            summary: summary,
+            description: description,
+            location: location,
+            date: date,
+            username: userSessionName,
+            peopleAmount: peopleAmount,
+            cook: username
+        }
+        axios.post('/post/create-post', data)
+        .then(response => console.log(response.data))
+        .catch(err => console.log(err))
+
+        document.getElementById('book-form').style.visibility = 'hidden'
+        console.log('submitted')
+    }
+    const cancelPost = (event) => {
+        console.log('cancelled')
+        document.getElementById('book-form').style.visibility = 'hidden'
+    }
+
     return (
         <div className="user-profile-container">
             <h2>USER INFO</h2>
@@ -47,7 +82,7 @@ function UserProfile() {
                     <div className="full-name">{firstname} {lastname}</div>
                     <div className="email">{email}</div>
                     <div className="phone">(###) ###-####</div>
-                    { cook ? <button className="book-btn">BOOK</button> : console.log('not a cook')}
+                    { cook ? <button className="book-btn" onClick={handleBook}>BOOK</button> : console.log('not a cook')}
                 </div>
             </div>
             <h2>COOK INFO</h2>
@@ -63,6 +98,9 @@ function UserProfile() {
             <h2>PHOTOS</h2>
             <div className="photo-gallery">
 
+            </div>
+            <div id="book-form">
+                <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
             </div>
         </div>
     )

@@ -9,53 +9,59 @@ export const Register = ({setAuthentication, setIdentification}) => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [validation, setValidation] = useState(true);
 
     const checkValidation = async (user) => {
 
         // check for non letters in firstname and last name
 
+        console.log(!user.firstname.match(/^[0-9a-zA-Z]+$/));
         if(!user.firstname.match(/^[0-9a-zA-Z]+$/)){
             alert('First Name must only have alphanumeric characters');
             setFirstname('');
             return false;
         }
-
+        console.log(!user.lastname.match(/^[0-9a-zA-Z]+$/));
         if(!user.lastname.match(/^[0-9a-zA-Z]+$/)){
             alert('Last Name must only have alphanumeric characters');
             setLastname('');
             return false;
         }
-
+        console.log(!user.username.match(/^[0-9a-zA-Z]+$/));
         if(!user.username.match(/^[0-9a-zA-Z]+$/)){
             alert('Username must only have alphanumeric characters');
             setUsername('');
             return false;
         }
-
+        
         //check if username or email exists
         let response = await axios.get(`/api/get/username/${user.username}`);
+            console.log(response.data !== null);
             if(response.data !== null){
                 alert('Username already exists in the system. Please choose another username');
                 return false;
             }
 
-        
+            
             response = await axios.get(`/api/get/email/${user.email}`);
+            console.log(response.data !== null);
             if(response.data !== null){
                 alert('Email already exists in the system. Please choose another email');
                 return false;
             }
-
+        console.log(user.password.length < 8);
         //check if Password has upper character/special character/ > 7
         if(user.password.length < 8){
             alert('Password must be atleast 8 characters');
+            return false;
         }
 
         return true;
     }
 
-    const registerUser = (evt) =>{
+    const registerUser = async (evt) =>{
         evt.preventDefault();
+        console.log('register user');
         const user = {
             firstname: firstname,
             lastname: lastname,
@@ -64,8 +70,9 @@ export const Register = ({setAuthentication, setIdentification}) => {
             password: password
 
         }
-
-        if(checkValidation(user) === true){
+        let response = await checkValidation(user)
+        if(response === true){
+            console.log('post started')
             axios.post('/post/register', user)
                 .then(function (response) {
                     if(response.status === '200'){

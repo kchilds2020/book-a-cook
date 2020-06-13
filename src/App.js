@@ -40,7 +40,7 @@ function App() {
                   render={(props) => <JobPostings {...props} username={username}/>}/>
                 <Route 
                   path="/user/profile"  
-                  render={(props) => <UserProfile {...props}/>}/>
+                  render={(props) => <UserProfile {...props} userSessionName={username}/>}/>
 
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 

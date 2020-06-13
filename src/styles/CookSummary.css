@@ -24,3 +24,17 @@
   .profile > div{
     padding: 5px;
   }
+  .cookDescription p{
+    margin-bottom: 10px;
+  }
+
+  .contact-btn{
+    text-decoration: none;
+    padding: 5px;
+    background-color: rgb(110, 174, 216);
+    color: black;
+    border-radius: 6px;
+    font-weight: 400;
+    box-shadow: 1px 1px 4px #333;
+    
+  }

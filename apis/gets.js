@@ -14,10 +14,20 @@ router.get('/api/get/my-jobs/:username', (req,res) => {
     .catch(err => console.log(err))
 })
 
+//find posts that you created
+router.get('/api/get/working-events/:username', (req,res) => {
+    JobPost.find({cook: req.params.username})
+    .then(posts => {
+        console.log(posts);
+        res.json(posts)
+    })
+    .catch(err => console.log(err))
+})
+
 
 //find all job posts
 router.get('/api/get/jobs', (req,res) => {
-    JobPost.find()
+    JobPost.find({cook: 'pending'})
     .then(posts => {
         console.log(posts);
         res.json(posts)
@@ -34,10 +44,10 @@ router.get('/api/get/cooks', (req,res) => {
 
 //get user with username
 router.get('/api/get/username/:username', (req,res) => {
-    console.log(req.params.username)
+    console.log('username request', req.params.username)
     User.findOne({username: req.params.username})
     .then(cooks => {
-        console.log(cooks)
+        console.log('username response',cooks)
         res.json(cooks)})
     .catch(err => console.log(err))
 })
@@ -53,10 +63,10 @@ router.get('/api/get/userid/:id', (req,res) => {
 
 //get user with email
 router.get('/api/get/email/:email', (req,res) => {
-    console.log(req.params.email)
+    console.log('email request',req.params.email)
     User.findOne({email: req.params.email})
     .then(cooks => {
-        console.log(cooks)
+        console.log('email response', cooks)
         res.json(cooks)})
     .catch(err => console.log(err))
 })

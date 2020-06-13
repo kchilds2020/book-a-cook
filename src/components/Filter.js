@@ -6,7 +6,6 @@ function Filter() {
     return (
             <div className = "profileFilter">
                     <span className = "filterTitle">Cooks Near You</span>
-                    <button className = "filter-btn" >Filter</button>
 
                 </div>
     )
