@@ -21,14 +21,25 @@ const Home = ({identification, firstname, lastname, email, username}) => {
          }
      },[username])
 
+     const showCount = (event) => {
+        let list = document.getElementById(`list-${event.target.id}`)
+        if(list !== null){
+            list.style.visibility = list.style.visibility === 'visible' ? 'hidden' : 'visible'
+            list.style.height = list.style.visibility === 'visible' ? 'auto' : '0px'
+        }
+     }
+
     return(
         <div>
             <NavBar />
+            <div className = "greeting"><h2>Hello {firstname}!</h2></div>
             <div className="home-container">
-                <div className = "greeting"><h2>Hello {firstname}!</h2></div>
+                
                 {/* <div className="profile-info">
                     profile info
                 </div> */}
+
+
                 <div className = "job-post-container">
                     <div className="job-post-header">
                         <h3>You have <span className="post-num">{myPosts.length}</span> posted Jobs.</h3>
@@ -36,15 +47,15 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                     <div className="profile-job-posts">
                         {myPosts.length > 0 ? myPosts.map((element,index) => 
                         
-                        <h4 key = {index} className="sum-container">
+                        <h4 key = {index} className="sum-container" onClick={showCount} id={`${index}`}>
                             <div className ="summary">
                                 {element.summary}
                             </div>
                             <div className ="applications">
-                                <div className ="count-applied">
+                                <button className ="count-applied" onClick={showCount} id={`${index}`}>
                                     <span className="post-num">{element.applications.length}</span> applied
-                                </div>
-                                <ul className="cook-list">
+                                </button>
+                                <ul className="cook-list" id={`list-${index}`}>
                                     {element.applications.map((cook,index) => <li key ={index} className="cook-name"><Link to ={`/user/profile?user=${cook}`} className="links" >{cook}</Link></li>)}
                                 </ul>
                             </div>
@@ -53,7 +64,7 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                 </div>
                 <div className = "jobs-applied-container">
                     <div className="jobs-applied-header">
-                        <h3>You have 0 jobs applied and 0 jobs approved.</h3>
+                        <h3>You have 0 upcoming events.</h3>
                     </div>
                 </div>
 

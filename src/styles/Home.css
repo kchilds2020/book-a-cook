@@ -1,7 +1,12 @@
 .greeting{
+    margin-top:20px;
     width: 100%;
     padding: 10px;
     text-align: center;
+    background-color: white;
+    border: #ddd 1px solid;
+    box-shadow: 0px 0px 8px #aaa;
+
 }
 
 .home-container{
@@ -9,7 +14,7 @@
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .profile-info{
@@ -26,16 +31,18 @@
     flex-wrap: wrap;
     justify-content: space-between;
     border-bottom: #ddd 1px solid;
-    margin-bottom: 5px;
 }
 
 .job-post-container{
     width: 100%;
-    max-width: 800px;
+    max-width: 400px;
     border: #ddd 1px solid;
     box-shadow: 0px 0px 8px #aaa;
     padding: 10px;
+    padding-bottom: 0px;
     background-color: white;
+    margin-top: 20px;
+    border-radius: 8px;
 }
 
 .jobs-applied-header{
@@ -56,11 +63,13 @@
 
 .jobs-applied-container{
     width: 100%;
-    max-width: 800px;
+    max-width: 600px;
     border: #ddd 1px solid;
     box-shadow: 0px 0px 8px #aaa;
     padding: 10px;
     margin-top: 20px;
+    background-color: white;  
+    border-radius: 8px;  
 }
 .post-num{
     color: green;
@@ -70,6 +79,8 @@
 .cook-list{
     display: flex;
     flex-direction: column;
+    visibility: hidden;
+    height: 0px;
 }
 
 .cook-name-btn{
@@ -85,9 +96,15 @@
     text-align: right;
 }
 .count-applied{
-    border-bottom: #ddd 1px solid;
     padding: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 .applications, .summary{
     padding: 20px;
+}
+
+.sum-container{
+    cursor: pointer;
 }

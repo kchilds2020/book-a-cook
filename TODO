@@ -1,5 +1,4 @@
-when you click apply button, should notify user who created job post
-display amount of users applied to home page
-css to home page
-dynamically add username when creating job posts( it is hardcoded as kchilds )
+clicking "Book" allows user to pick date and payment
+once cook gets booked, displays on dashboard
+if not cook, filter information given
 upload picture from profile page.

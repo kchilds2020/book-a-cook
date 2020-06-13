@@ -86,8 +86,8 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                                     <label htmlFor="specialty">Specialty</label>
                                     <input name = "cookSpecialty" id = "specialty" type = "text" placeholder = "Specialty" className = "cook-input" maxLength = '40' defaultValue = {cookSpecialty} onChange = {ev => setCookSpecialty(ev.target.value)} /> 
                                     <label htmlFor="description">Description</label>
-                                    <textarea name = "cookDescription" id = "description" type = "text" placeholder = "Description" className = "cook-input" maxLength = '40' defaultValue = {cookDescription} onChange = {ev => setCookDescription(ev.target.value)}/>
-                                    <label htmlFor="price">Price per hour</label>
+                                    <textarea name = "cookDescription" id = "description" type = "text" placeholder = "Description" className = "cook-input" defaultValue = {cookDescription} onChange = {ev => setCookDescription(ev.target.value)}/>
+                                    <label htmlFor="price">Price</label>
                                     <input name = "cookPrice" id = "price" type = "text" placeholder = "Price" className = "cook-input" maxLength = '40' defaultValue = {cookPrice} onChange = {ev => setCookPrice(ev.target.value)} />
                                 </div>
                                 

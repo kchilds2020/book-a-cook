@@ -41,7 +41,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                         <h3>{city}, {state}</h3>
                     </div> */}
                     <div className = "cookPrice">
-                        <h4>${price} an hour</h4>
+                        <h4>${price}</h4>
                     </div>
                     <div className = "cookDescription">
                         <p>{description}</p>
