@@ -41,10 +41,12 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                                 {element.summary}
                             </div>
                             <div className ="applications">
-                            <span className="post-num">{element.applications.length}</span> applied
-                            <ul className="cook-list">
-                                {element.applications.map((cook,index) => <li key ={index} className="cook-name"><Link to ={`/user/profile?user=${cook}`} >{cook}</Link></li>)}
-                            </ul>
+                                <div className ="count-applied">
+                                    <span className="post-num">{element.applications.length}</span> applied
+                                </div>
+                                <ul className="cook-list">
+                                    {element.applications.map((cook,index) => <li key ={index} className="cook-name"><Link to ={`/user/profile?user=${cook}`} className="links" >{cook}</Link></li>)}
+                                </ul>
                             </div>
                         </h4>) : <h4>You have no job posts!</h4>}
                     </div>

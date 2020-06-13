@@ -1,19 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 
 function Auth({authenticated,setAuthentication, setIdentification, setFirstname, setLastname, setUsername, setEmail, identification, setCookDescription, setCook, setCookSpecialty, setCookPrice}) {
 
-const [urlAttempted, setUrlAttempted] = useState('/home');
-
 useEffect(() => {
-    if(window.location.pathname === '/login' || window.location.pathname === '/register'){
-        setUrlAttempted('/home');
-    }
-    else{
-        setUrlAttempted(window.location.pathname);
-    }
     axios.get('/get-session')
     .then(response => {
         if(response.data !== 'undefined'){
@@ -44,7 +36,7 @@ useEffect(() => {
 
 return(
     
-    authenticated === true ? <Redirect to={{pathname: `${urlAttempted}`}}/> : <Redirect to={{pathname: "/"}}/>
+    authenticated === true ? <Redirect to={{pathname: `/home`}}/> : <Redirect to={{pathname: "/"}}/>
 );
 
 }
