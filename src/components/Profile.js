@@ -6,6 +6,9 @@ import axios from 'axios'
 
 function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook}) {
     const [toggle, setToggle] = useState(false);
+    const [file, setFile] = useState('');
+    const [filename, setFilename] = useState('Choose File');
+    const [uploadedFile,setUploadedFile] = useState({});
 
     console.log('IDENTIFICATION', identification);
 
@@ -27,8 +30,30 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         checkToggle();
     }, [cook])
 
-    const handleSubmit = (event) =>{
+    const handleSubmit = async (event) =>{
         event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try{
+            const res = await axios.post('/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            const {fileName, filePath} = res.data;
+            setUploadedFile({ fileName, filePath});
+            console.log(fileName,uploadedFile);
+        }catch(err){
+            if(err.response.status === 500){
+                console.log('There was a problem with the server')
+            }else{
+                console.log(err.response.data.msg)
+            }
+        }
+
+
         const data = {
             firstname: firstname,
             lastname: lastname,
@@ -47,6 +72,13 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         .catch(err => console.log(err))
     }
 
+    const handleImgChange = (event) => {
+        setFile(event.target.files[0]);
+        setFilename(event.target.files[0].name);
+        console.log(file);
+        console.log(filename);
+    }
+
     
 
     return (
@@ -55,11 +87,11 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             <div className = "profile-container">
                 <div className = "user-info">
                         <form  className = "profile-form" onSubmit={handleSubmit} >
-                            <h2>User Information</h2>
+                            <h2>{/* User Information */}{filename}</h2>
                             <div className = "user-description">
                                 <div className = "profile-picture">
-                                    <img src = {silhouette} alt="profile-img"/>
-                                    <input type="file" />
+                                    <img src = {silhouette} alt="profile-img" id="profile-img"/>
+                                    <input type="file" onChange= {handleImgChange}/>
                                 </div>
                                 <div className = "profile-about">
                                     <label htmlFor="firstname">First Name</label>

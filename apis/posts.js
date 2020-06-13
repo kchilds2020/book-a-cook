@@ -7,6 +7,24 @@ const saltRounds = 10;
 
 
 
+router.post('/upload', (req,res) => {
+    if(req.files === null){
+        return res.status(400).json({msg: 'no file uploaded'});
+    }
+
+    /* const file = req.files.file; */
+    console.log(req.files.file);
+
+    /* file.mv(`${__dirname}/public/uploads/${file.name}`, err=> {
+        if(err){
+            console.log(err);
+            return res.status(500).send(err);
+        }
+
+        res.json({fileName: file.name, filePath: `/uploads/${file.name}`});
+    }); */
+});
+
 router.post('/post/create-post', (req, res) => {
         JobPost.create({
             summary: req.body.summary,
