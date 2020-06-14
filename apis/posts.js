@@ -19,7 +19,6 @@ router.post('/upload', (req,res) => {
     form.on('file', function(name, file){
         console.log("uploaded file" + file.name);
     })
-    
 
 });
 
@@ -61,6 +60,8 @@ router.post('/api/post/apply/job-post', (req, res) => {
 router.post('/update-user', (req, res) => {
     console.log('BOOLEAN COOK',req.body.cook);
 
+
+
     User.updateOne({username: req.body.username}, {
         $set: {
             firstName: req.body.firstname,
@@ -70,7 +71,7 @@ router.post('/update-user', (req, res) => {
             cook: req.body.cook,
             cookSpecialty: req.body.cookSpecialty,
             cookDescription: req.body.cookDescription,
-            cookPrice: req.body.cookPrice
+            cookPrice: req.body.cookPrice,
 
         }
     })
