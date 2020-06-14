@@ -2,27 +2,25 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const JobPost = require('../models/JobPost');
+const formidable = require('formidable');
+let fs = require('fs');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
 
 router.post('/upload', (req,res) => {
-    if(req.files === null){
-        return res.status(400).json({msg: 'no file uploaded'});
-    }
+    const form = new formidable.IncomingForm({uploadDir: __dirname});
+    form.parse(req);
 
-    /* const file = req.files.file; */
-    console.log(req.files.file);
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/../public/uploads/' + file.name
+    })
+    form.on('file', function(name, file){
+        console.log("uploaded file" + file.name);
+    })
+    
 
-    /* file.mv(`${__dirname}/public/uploads/${file.name}`, err=> {
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-
-        res.json({fileName: file.name, filePath: `/uploads/${file.name}`});
-    }); */
 });
 
 router.post('/post/create-post', (req, res) => {

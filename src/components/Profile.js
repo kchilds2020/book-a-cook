@@ -86,12 +86,12 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             <NavBar />
             <div className = "profile-container">
                 <div className = "user-info">
-                        <form  className = "profile-form" onSubmit={handleSubmit} >
+                        <form  className = "profile-form" onSubmit={handleSubmit} formEncType="multipart/form-data">
                             <h2>{/* User Information */}{filename}</h2>
                             <div className = "user-description">
                                 <div className = "profile-picture">
                                     <img src = {silhouette} alt="profile-img" id="profile-img"/>
-                                    <input type="file" onChange= {handleImgChange}/>
+                                    <input type="file" onChange= {handleImgChange} />
                                 </div>
                                 <div className = "profile-about">
                                     <label htmlFor="firstname">First Name</label>
