@@ -130,6 +130,31 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                                 </div>
                                 
                             </div>
+                            <div className = "photos-container" id="cook-info">
+                            <h2>Photos</h2>
+                                <div className = "images">
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food0.jpg`} alt="profile-img" id="photo-0"/>
+                                    </div>
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food1.jpg`} alt="profile-img" id="photo-1"/>
+                                    </div>
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food2.jpg`} alt="profile-img" id="photo-2"/>
+                                    </div>
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food3.jpg`} alt="profile-img" id="photo-3"/>
+                                    </div>
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food4.jpg`} alt="profile-img" id="photo-4"/>
+                                    </div>
+                                    <div className = "photo">
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food5.jpg`} alt="profile-img" id="photo-5"/>
+                                    </div>
+                        
+                                </div>
+                                
+                            </div>
                             <input type="submit" value="Update" className = "user-update-btn"/>
                         </form>
                     

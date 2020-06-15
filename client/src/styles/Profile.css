@@ -197,3 +197,27 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .images{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+  }
+
+  .photo{
+      width: 250px;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      border: black 1px solid;
+      border-radius: 8px;
+      background-color: black;
+      box-shadow: #aaa 0px 0px 8px;
+  }
+
+  .photo img{
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+  }

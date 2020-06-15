@@ -11,7 +11,7 @@ const User = new mongoose.Schema({
     cookSpecialty: {type: String, trim: true, default: ''},
     cookPrice: {type: String, trim: true, default: ''},
     picture: {type: String, default: ''},
-    contentType: {type: String, trim: true, default: 'image/png'}
+    photos: {type: Array, default: ['']}
 
 },
 {
