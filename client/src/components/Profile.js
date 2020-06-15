@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import NavBar from './NavBar'
 import '../styles/Profile.css'
 import silhouette from '../images/silhouette.png'
@@ -9,6 +9,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
 
+    const fileInput = useRef();
     console.log('IDENTIFICATION', identification);
 
     const checkToggle = () => {
@@ -37,11 +38,10 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         formData.append('file', file)
         formData.append('username',username)
 
-        axios.post('/upload-img', formData)
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(err => console.log(err))
+        let imgResponse = await axios.post('/upload-img', formData)
+        console.log(imgResponse.data)
+        setPicture(imgResponse.data.fileName)
+
 
         const data = {
             firstname: firstname,
@@ -51,7 +51,8 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             cook: toggle,
             cookSpecialty: cookSpecialty,
             cookDescription: cookDescription,
-            cookPrice: cookPrice
+            cookPrice: cookPrice,
+            picture: imgResponse.data.fileName
         }
 
         
@@ -91,11 +92,12 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             <div className = "profile-container">
                 <div className = "user-info">
                         <form  className = "profile-form" onSubmit={handleSubmit} formEncType="multipart/form-data">
-                            <h2>{/* User Information */}{filename}</h2>
+                            <h2>User Information</h2>
                             <div className = "user-description">
                                 <div className = "profile-picture">
                                     <img src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img"/>
-                                    <input type="file" onChange= {handleImgChange} />
+                                    <button className="update-img-btn" onClick={() => fileInput.current.click()}>Change</button>
+                                    <input ref={fileInput}type="file" onChange= {handleImgChange} style={{display: 'none'}} />
                                 </div>
                                 <div className = "profile-about">
                                     <label htmlFor="firstname">First Name</label>

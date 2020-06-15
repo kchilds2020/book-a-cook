@@ -25,6 +25,7 @@
 
 .user-picture img{
     height: 90%;
+    max-height: 200px;
     border-radius: 15px;
 }
 

@@ -19,13 +19,13 @@ router.post('/upload-img', (req,res) => {
 
     const file = req.files.file;
 
-    file.mv(`${__dirname}/uploads/${req.body.username}-profile${path.extname(file.name)}`, err=> {
+    file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
         if(err){
             console.log(err);
             return res.status(500).send(err);
         }
 
-        res.json({fileName: `${req.body.username}-profile${path.extname(file.name)}`, filePath: `/../public/uploads/${req.body.username}-profile${path.extname(file.name)}`});
+        res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});
     });
 });
 
@@ -65,8 +65,7 @@ router.post('/api/post/apply/job-post', (req, res) => {
 
 
 router.post('/update-user', (req, res) => {
-    console.log('BOOLEAN COOK',req.body.cook);
-
+    console.log('BODY',req.body);
     User.updateOne({username: req.body.username}, {
         $set: {
             firstName: req.body.firstname,
@@ -77,7 +76,7 @@ router.post('/update-user', (req, res) => {
             cookSpecialty: req.body.cookSpecialty,
             cookDescription: req.body.cookDescription,
             cookPrice: req.body.cookPrice,
-
+            picture: req.body.picture
         }
     })
     .then(results =>{

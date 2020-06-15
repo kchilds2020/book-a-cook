@@ -13,6 +13,7 @@ function UserProfile({userSessionName}) {
     const [cookDescription, setCookDescription] = useState('');
     const [cookPrice, setCookPrice] = useState('');
     const [cook, setCook] = useState('');
+    const [picture, setPicture] = useState('');
 
     const [summary, setSummary] = useState('');
     const [description, setDescription] = useState('');
@@ -37,6 +38,7 @@ function UserProfile({userSessionName}) {
             setCookDescription(response.data.cookDescription)
             setCookPrice(response.data.cookPrice)
             setCook(response.data.cook)
+            setPicture(response.data.picture)
 
         })
         .catch(err => console.log(err))
@@ -76,7 +78,7 @@ function UserProfile({userSessionName}) {
             <h2>USER INFO</h2>
             <div className="user-information">
                 <div className="user-picture">
-                    <img src={silhouette} alt="cook"/>
+                    <img src={picture === '' ? silhouette : `/api/get/image/${picture}`} alt="cook"/>
                 </div>
                 <div className="user-details">
                     <div className="full-name">{firstname} {lastname}</div>

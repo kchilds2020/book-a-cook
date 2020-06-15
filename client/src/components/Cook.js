@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 /* import Geocode from "react-geocode" */
 //import keys from "./keys"
 
-function Cook({firstname, lastname, specialty, price, description, latitude, longitude, username}) {
+function Cook({firstname, lastname, specialty, price, description, latitude, longitude, username, picture}) {
     /* const [city, setCity] = useState('');
     const [state, updateState] = useState(''); */
 
@@ -30,7 +30,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
         <>
             <div className="profile">
                     <div className="pictureDiv">
-                        <img src={PIC} className = "picture" alt='profile pic'/>
+                        <img src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
                     </div>
                     <div className = "cookName">
                         <h2>{firstname} {lastname}</h2>

@@ -4,7 +4,7 @@ import '../styles/JobForm.css'
 function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLocation, setSummary, cancelPost}) {
     return (
         <div>
-            <form class = "form-job" onSubmit = {handleSubmit}>
+            <form className = "form-job" onSubmit = {handleSubmit}>
                     <label htmlFor = "event-summary">Event Summary</label>
                     <input type="text" name = "event" id = "event-summary" className = "jp-inputs" placeholder = "Event Summary" onChange={event => setSummary(event.target.value)}/>
                     <label htmlFor = "event-description">Event Description</label>
