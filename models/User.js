@@ -10,7 +10,7 @@ const User = new mongoose.Schema({
     cookDescription: {type: String, trim: true, default: ''},
     cookSpecialty: {type: String, trim: true, default: ''},
     cookPrice: {type: String, trim: true, default: ''},
-    picture: {type: Buffer, default: ''},
+    picture: {type: String, default: ''},
     contentType: {type: String, trim: true, default: 'image/png'}
 
 },

@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 
-function Auth({authenticated,setAuthentication, setIdentification, setFirstname, setLastname, setUsername, setEmail, identification, setCookDescription, setCook, setCookSpecialty, setCookPrice}) {
+function Auth({authenticated,setAuthentication, setIdentification, setFirstname, setLastname, setUsername, setEmail, identification, setCookDescription, setCook, setCookSpecialty, setCookPrice, setPicture}) {
 
 useEffect(() => {
     axios.get('/get-session')
@@ -27,11 +27,12 @@ useEffect(() => {
             setCook(response.data.cook)
             setCookSpecialty(response.data.cookSpecialty)
             setCookPrice(response.data.cookPrice)
+            setPicture(response.data.picture)
         })
         .catch(err => console.log(err))
     }
 
-}, [setAuthentication, setIdentification, identification, setFirstname, setLastname, setUsername, setEmail, setCook, setCookDescription, setCookPrice, setCookSpecialty])
+}, [setAuthentication, setIdentification, identification, setFirstname, setLastname, setUsername, setEmail, setCook, setCookDescription, setCookPrice, setCookSpecialty, setPicture])
 
 
 return(

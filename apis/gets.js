@@ -2,9 +2,14 @@ const express = require('express');
 const router = express.Router();
 const JobPost = require('../models/JobPost');
 const User = require('../models/User');
+const path = require('path');
 
+//sendfile
+router.get('/api/get/image/:filename', (req,res) => {
+    res.sendFile(path.join(__dirname+'/uploads/', req.params.filename));
+});
 
-//find posts that you created
+//find posts that you create
 router.get('/api/get/my-jobs/:username', (req,res) => {
     JobPost.find({username: req.params.username})
     .then(posts => {

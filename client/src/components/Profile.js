@@ -4,11 +4,10 @@ import '../styles/Profile.css'
 import silhouette from '../images/silhouette.png'
 import axios from 'axios'
 
-function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook}) {
+function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture}) {
     const [toggle, setToggle] = useState(false);
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
-    const [uploadedFile,setUploadedFile] = useState({});
 
     console.log('IDENTIFICATION', identification);
 
@@ -25,13 +24,24 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     }
 
     useEffect( () => {
+        console.log('PICTURE', picture);
         console.log('COOK',cook);
         cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
         checkToggle();
-    }, [cook])
+    }, [cook, picture])
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', file)
+        formData.append('username',username)
+
+        axios.post('/upload-img', formData)
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(err => console.log(err))
 
         const data = {
             firstname: firstname,
@@ -43,6 +53,8 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             cookDescription: cookDescription,
             cookPrice: cookPrice
         }
+
+        
         
         axios.post('/update-user', data)
         .then(response => {
@@ -52,8 +64,21 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     }
 
     const handleImgChange = (event) => {
+        console.log(event.target);
         setFile(event.target.files[0]);
         setFilename(event.target.files[0].name);
+        const imgTag = document.getElementById('profile-img');
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            imgTag.src = reader.result;
+          }, false);
+
+        if(event.target.files[0]){
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
         console.log(file);
         console.log(filename);
     }
@@ -69,7 +94,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             <h2>{/* User Information */}{filename}</h2>
                             <div className = "user-description">
                                 <div className = "profile-picture">
-                                    <img src = {file === '' ? silhouette : file} alt="profile-img" id="profile-img"/>
+                                    <img src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img"/>
                                     <input type="file" onChange= {handleImgChange} />
                                 </div>
                                 <div className = "profile-about">

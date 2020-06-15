@@ -3,23 +3,30 @@ const router = express.Router();
 const User = require('../models/User');
 const JobPost = require('../models/JobPost');
 const formidable = require('formidable');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 let fs = require('fs');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
+router.use(fileUpload());
+router.post('/upload-img', (req,res) => {    
+    console.log("USERNAME",req.body.username);
+    if(req.files === null){
+        return res.status(400).json({msg: 'no file uploaded'});
+    }
 
-router.post('/upload', (req,res) => {
-    const form = new formidable.IncomingForm({uploadDir: __dirname});
-    form.parse(req);
+    const file = req.files.file;
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/../public/uploads/' + file.name
-    })
-    form.on('file', function(name, file){
-        console.log("uploaded file" + file.name);
-    })
+    file.mv(`${__dirname}/uploads/${req.body.username}-profile${path.extname(file.name)}`, err=> {
+        if(err){
+            console.log(err);
+            return res.status(500).send(err);
+        }
 
+        res.json({fileName: `${req.body.username}-profile${path.extname(file.name)}`, filePath: `/../public/uploads/${req.body.username}-profile${path.extname(file.name)}`});
+    });
 });
 
 router.post('/post/create-post', (req, res) => {
@@ -59,8 +66,6 @@ router.post('/api/post/apply/job-post', (req, res) => {
 
 router.post('/update-user', (req, res) => {
     console.log('BOOLEAN COOK',req.body.cook);
-
-
 
     User.updateOne({username: req.body.username}, {
         $set: {

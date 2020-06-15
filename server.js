@@ -27,8 +27,8 @@ app.use(session({
     cookie: { secure: false, maxAge: 1000 * 60 * 60 * 2}
 }));
 
-app.use(express.static(path.join(__dirname,'build')));
-app.use(express.static(path.join(__dirname,'public')));
+/* app.use(express.static(path.join(__dirname,'build')));
+app.use(express.static(path.join(__dirname,'public'))); */
 
 mongoose.connect(process.env.MONGO_DB_URI, {
     useNewUrlParser: true,
