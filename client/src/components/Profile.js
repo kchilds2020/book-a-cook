@@ -8,8 +8,18 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const [toggle, setToggle] = useState(false);
     const [file, setFile] = useState('');
     const [filename, setFilename] = useState('Choose File');
+    const [photos,setPhotos] = useState('');
 
     const fileInput = useRef();
+
+    //all 6 photo inputs
+    const photoInput0 = useRef();
+    const photoInput1 = useRef();
+    const photoInput2 = useRef();
+    const photoInput3 = useRef();
+    const photoInput4 = useRef();
+    const photoInput5 = useRef();
+
     console.log('IDENTIFICATION', identification);
 
     const checkToggle = () => {
@@ -84,6 +94,24 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         console.log(filename);
     }
 
+    const handlePhotoChange = (event) => {
+        console.log(event.target);
+        //set photos to specific location in array
+        /* setFile(event.target.files[0]);
+        setFilename(event.target.files[0].name); */
+        const imgTag = event.target;
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            imgTag.src = reader.result;
+          }, false);
+
+        if(imgTag.files[0]){
+            reader.readAsDataURL(imgTag.files[0]);
+        }
+
+    }
     
 
     return (
@@ -134,22 +162,28 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             <h2>Photos</h2>
                                 <div className = "images">
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food0.jpg`} alt="profile-img" id="photo-0"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food0.jpg`} alt="profile-img" id="photo-0" onClick={() => photoInput0.current.click()}/>
+                                        <input ref = {photoInput0} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food1.jpg`} alt="profile-img" id="photo-1"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food1.jpg`} alt="profile-img" id="photo-1" onClick={() => photoInput1.current.click()}/>
+                                        <input ref = {photoInput1} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food2.jpg`} alt="profile-img" id="photo-2"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food2.jpg`} alt="profile-img" id="photo-2" onClick={() => photoInput2.current.click()}/>
+                                        <input ref = {photoInput2} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food3.jpg`} alt="profile-img" id="photo-3"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food3.jpg`} alt="profile-img" id="photo-3" onClick={() => photoInput3.current.click()}/>
+                                        <input ref = {photoInput3} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food4.jpg`} alt="profile-img" id="photo-4"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food4.jpg`} alt="profile-img" id="photo-4" onClick={() => photoInput4.current.click()}/>
+                                        <input ref = {photoInput4} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                                     <div className = "photo">
-                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food5.jpg`} alt="profile-img" id="photo-5"/>
+                                        <img src = {picture === '' ? silhouette : `/api/get/image/kchilds-food5.jpg`} alt="profile-img" id="photo-5" onClick={() => photoInput5.current.click()}/>
+                                        <input ref = {photoInput5} type="file" onChange = {handlePhotoChange} style={{display: 'none'}} />
                                     </div>
                         
                                 </div>
