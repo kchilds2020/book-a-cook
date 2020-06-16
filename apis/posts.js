@@ -13,11 +13,13 @@ const saltRounds = 10;
 router.use(fileUpload());
 router.post('/upload-img', (req,res) => {    
     console.log("USERNAME",req.body.username);
+    console.log(req.files);
     if(req.files === null){
         return res.status(400).json({msg: 'no file uploaded'});
     }
 
-    const file = req.files.file;
+    console.log('req.files.file',req.files.file);
+     const file = req.files.file;
 
     file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
         if(err){
@@ -26,7 +28,7 @@ router.post('/upload-img', (req,res) => {
         }
 
         res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});
-    });
+    }); 
 });
 
 router.post('/post/create-post', (req, res) => {
@@ -76,7 +78,8 @@ router.post('/update-user', (req, res) => {
             cookSpecialty: req.body.cookSpecialty,
             cookDescription: req.body.cookDescription,
             cookPrice: req.body.cookPrice,
-            picture: req.body.picture
+            picture: req.body.picture,
+            photos: req.body.photos
         }
     })
     .then(results =>{

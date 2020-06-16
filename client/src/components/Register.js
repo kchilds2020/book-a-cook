@@ -9,7 +9,6 @@ export const Register = ({setAuthentication, setIdentification}) => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [validation, setValidation] = useState(true);
 
     const checkValidation = async (user) => {
 
