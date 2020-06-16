@@ -3,6 +3,7 @@ import axios from 'axios'
 import silhouette from '../images/silhouette.png'
 import '../styles/UserProfile.css'
 import JobForm from './JobForm';
+import Photo from './Photo'
 
 function UserProfile({userSessionName}) {
     const [firstname, setFirstname] = useState('');
@@ -20,6 +21,7 @@ function UserProfile({userSessionName}) {
     const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
     const [peopleAmount, setPeopleAmount] = useState('');
+    const [photos,setPhotos] = useState([]);
 
     useEffect(() =>{
         //get user from url
@@ -39,6 +41,7 @@ function UserProfile({userSessionName}) {
             setCookPrice(response.data.cookPrice)
             setCook(response.data.cook)
             setPicture(response.data.picture)
+            setPhotos(response.data.photos)
 
         })
         .catch(err => console.log(err))
@@ -75,7 +78,7 @@ function UserProfile({userSessionName}) {
 
     return (
         <div className="user-profile-container">
-            <h2>USER INFO</h2>
+            <div className="title-header">USER INFO</div>
             <div className="user-information">
                 <div className="user-picture">
                     <img src={picture === '' ? silhouette : `/api/get/image/${picture}`} alt="cook"/>
@@ -87,7 +90,7 @@ function UserProfile({userSessionName}) {
                     { cook ? <button className="book-btn" onClick={handleBook}>BOOK</button> : console.log('not a cook')}
                 </div>
             </div>
-            <h2>COOK INFO</h2>
+            <div className="title-header">COOK INFO</div>
             <div className="user-information">
                 {cook ? 
                         <div className="cook-details">
@@ -97,9 +100,10 @@ function UserProfile({userSessionName}) {
                         </div> : <h2>user is not a cook</h2>
                 }
             </div>
-            <h2>PHOTOS</h2>
+            
+            <div className="title-header">PHOTOS</div>
             <div className="photo-gallery">
-
+                {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
             </div>
             <div id="book-form">
                 <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>

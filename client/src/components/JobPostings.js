@@ -89,7 +89,7 @@ function JobPostings({username}) {
 
     return (
         <div>
-            <NavBar />
+            <NavBar active={'job-postings-item'}/>
             <div className = "jp-container">
                 <div className = "jp-header">
                     <button className = "toggle-btn" onClick={toggleForm}>Create Post!</button>

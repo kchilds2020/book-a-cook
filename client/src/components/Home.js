@@ -4,6 +4,7 @@ import '../styles/Home.css'
 import {Link} from 'react-router-dom'
 import '../App.css'
 import axios from 'axios';
+import Event from './Event'
 
 
 
@@ -39,7 +40,7 @@ const Home = ({identification, firstname, lastname, email, username}) => {
 
     return(
         <div>
-            <NavBar />
+            <NavBar active={'home-item'}/>
             <div className = "greeting"><h2>Hello {firstname}!</h2></div>
             <div className="home-container">
                 
@@ -72,16 +73,9 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                 </div>
                 <div className = "events-container">
                     <div className="events-header">
-                        <h3>You are working <span className="post-num">{events.length}</span> upcoming events.</h3>
-                        {events.length > 0 ? events.map((element, index) => 
-                        <div key = {index}>
-                            <h2>{element.summary}</h2>
-                            <h3>{element.description}</h3>
-                            <h4>{element.location}</h4>
-                            <h5>{element.date}</h5>
-                        </div>
-                        ) : <div>You have no job posts</div>}
+                        <h3>You have <span className="post-num">{events.length}</span> upcoming events.</h3>
                     </div>
+                    {events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date}/>) : <></>}
                 </div>
 
             </div>

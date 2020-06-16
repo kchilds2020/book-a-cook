@@ -5,7 +5,7 @@
     text-align: center;
     background-color: white;
     border: #ddd 1px solid;
-    box-shadow: 0px 0px 8px #aaa;
+    box-shadow: 0px 0px 8px #ddd;
 
 }
 
@@ -21,10 +21,6 @@
  width: 100%;
 }
 
-.profile-job-posts{
-    width: 100%;
-}
-
 .sum-container{
     width: 100%;
     display: flex;
@@ -36,13 +32,8 @@
 .job-post-container{
     width: 100%;
     max-width: 400px;
-    border: #ddd 1px solid;
-    box-shadow: 0px 0px 8px #aaa;
-    padding: 10px;
-    padding-bottom: 0px;
-    background-color: white;
     margin-top: 20px;
-    border-radius: 8px;
+
 }
  
 .events-header{
@@ -51,8 +42,19 @@
     
 }
 
-.job-post-header{
+.job-post-header, .events-header{
+    padding: 20px;
+}
+
+.job-post-header, .profile-job-posts, .events-header{
+    width: 100%;
     text-align: center;
+    background-color: white;
+    border: #ddd 1px solid;
+    box-shadow: 0px 0px 8px #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+
 }
 
 .cook-name{
@@ -64,11 +66,7 @@
 .events-container{
     width: 100%;
     max-width: 600px;
-    border: #ddd 1px solid;
-    box-shadow: 0px 0px 8px #aaa;
-    padding: 10px;
     margin-top: 20px;
-    background-color: white;  
     border-radius: 8px;  
 }
 .post-num{

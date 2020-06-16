@@ -15,7 +15,8 @@ html, body{
   position: sticky;
   top: 0;
   background: linear-gradient(0.25turn, #a63f3f, #72cf72, #3ca2f6);
-  height: 72px;
+  height: 75px;
+  box-shadow: 0px 1px 6px #333;
 }
 
 .nav-bar{
@@ -64,3 +65,9 @@ li a{
   margin: auto;
 }
 
+.active{
+  background-color: #f4f4f4;
+  box-shadow: 0px 2px 4px #333;
+  box-shadow: 0px -2px 4px #333;
+  text-transform: uppercase;
+}

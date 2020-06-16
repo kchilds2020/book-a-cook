@@ -14,6 +14,7 @@
     border: #ddd 1px solid;
     box-shadow: 0px 0px 8px #ddd;
     justify-content: space-evenly;
+    border-radius: 16px;
 }
 
 .user-picture{
@@ -83,5 +84,11 @@
     transform: translate(-50%,-50%);
 
     visibility: hidden;
+}
+
+.title-header{
+    /* background-color: white; */
+    font-size: 24px;
+    text-align: center;
 }
 

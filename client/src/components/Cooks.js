@@ -33,7 +33,7 @@ function Cooks() {
     
     return (
         <>
-            <NavBar />
+            <NavBar active={'cooks-item'}/>
             <div className="cooks-container">
                 <Filter />  
                 {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.cookSpecialty} price={element.cookPrice} description={element.cookDescription} latitude={element.latitude} longitude={element.longitude} username={element.username} picture={element.picture}/>)}
