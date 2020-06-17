@@ -5,6 +5,7 @@ import '../App.css'
 import axios from 'axios';
 import Event from './Event'
 import HomeJobPost from './HomeJobPost'
+import MenuItem from './MenuItem';
 
 
 
@@ -53,7 +54,7 @@ const Home = ({identification, firstname, lastname, email, username}) => {
                     
                     {events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date}/>) : <></>}
                 </div>
-
+                <MenuItem />
             </div>
         </div>
     );

@@ -4,12 +4,19 @@ import '../styles/Profile.css'
 import silhouette from '../images/silhouette.png'
 import axios from 'axios'
 import Photo from './Photo'
+import Menu from './Menu'
 
 function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos}) {
     const [toggle, setToggle] = useState(false);
     const [files, setFiles] = useState([]);
+    //menu
+    const [menuDescription, setMenuDescription] = useState('');
+    const [menuTitle, setMenuTitle] = useState(''); 
+    const [menuPrice, setMenuPrice] = useState('');
+    const [menuPicture, setMenuPicture] = useState(''); 
 
     const fileInput = useRef();
+    const menuFileInput = useRef();
 
     console.log('IDENTIFICATION', identification);
 
@@ -81,6 +88,35 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
     }
     
+    const handleMenuFileChange = (event) => {
+        //store file and filename
+        let fileArray = files;
+        fileArray.push(event.target.files[0])
+        setMenuPicture(`${username}-${event.target.files[0].name}`);
+        setFiles(fileArray);
+
+        //display progile img
+        const imgTag = document.getElementById('create-menu-photo');
+        const reader = new FileReader();
+        reader.addEventListener("load", () => imgTag.src = reader.result, false);
+        if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
+    }
+
+    const createItem = (event) =>  {
+        event.preventDefault();
+        const data = {
+            username: username,
+            title: menuTitle,
+            description: menuDescription,
+            price: menuPrice,
+            picture: menuPicture
+
+        }
+
+        axios.post('/post/add-menu-item', data)
+        .then(response => console.log(response.data))
+        .catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -135,9 +171,35 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                                 </div>
                                 
                             </div>
+                            <h2>Menu</h2>
+                            <div className ="menu-container">
+                                <Menu username={username}/>
+                                <div className="menu-item-container">
+                                    <div className="menu-photo">
+                                        <img src={`/api/get/image/add-photo.png`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}}/>
+                                        <input ref={menuFileInput} onChange= {handleMenuFileChange} type="file" style={{display: 'none'}}/>
+                                    </div>
+                                    <div className = "menu-item-details">
+                                        <div className = "menu-item-title">
+                                            <input type="text" id="menu-title" placeholder="Title" onChange = {ev => setMenuTitle(ev.target.value)}/>
+                                        </div>
+                                        <div className = "menu-item-description">
+                                            <input type="text" id="menu-description" placeholder = "Description" onChange = {ev => setMenuDescription(ev.target.value)}/>
+                                        </div>
+                                        <div className = "menu-item-price">
+                                            <input type="text" id ="menu-price" placeholder="Price" onChange = {ev => setMenuPrice(ev.target.value)}/>
+                                        </div>
+                                        <button className="menu-item-btn" onClick={createItem}>
+                                            Create Item    
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                             <div className="update-btn-container">
                                 <input type="submit" value="Update" className = "user-update-btn"/>
                             </div>
+                            
                         </form>
                     
                 </div>

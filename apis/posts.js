@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const JobPost = require('../models/JobPost');
+const Menu = require('../models/Menu');
 const formidable = require('formidable');
 const fileUpload = require('express-fileupload');
 const path = require('path');
@@ -29,6 +30,24 @@ router.post('/upload-img', (req,res) => {
 
         res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});
     }); 
+});
+
+router.post('/post/add-menu-item', (req, res) => {
+    Menu.create({
+        title: req.body.title,
+        rating: req.body.rating,
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
+        username: req.body.username,
+        description: req.body.description,
+        price: req.body.price,
+        picture: req.body.picture
+    })
+    .then(results => {
+        console.log(`New MENU ITEM: ${results}`);
+        res.json(results);
+    })
+    .catch(error => console.error(error))
 });
 
 router.post('/post/create-post', (req, res) => {

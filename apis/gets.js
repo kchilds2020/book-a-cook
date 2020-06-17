@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const JobPost = require('../models/JobPost');
 const User = require('../models/User');
+const Menu = require('../models/Menu');
 const path = require('path');
 
 //sendfile
@@ -15,6 +16,16 @@ router.get('/api/get/my-jobs/:username', (req,res) => {
     .then(posts => {
         console.log(posts);
         res.json(posts)
+    })
+    .catch(err => console.log(err))
+})
+
+//find menu items
+router.get('/api/get/menu-items/:username', (req,res) => {
+    Menu.find({username: req.params.username})
+    .then(items => {
+        console.log(items);
+        res.json(items)
     })
     .catch(err => console.log(err))
 })
