@@ -67,65 +67,18 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         .catch(err => console.log(err))
     }
 
-    const handleImgChange = (event) => {
-        console.log(event.target);
+    const handleProfileChange = (event) => {
+        //store file and filename
         let fileArray = files;
-        let tempPhotos = photos;
-        let tempPic = picture;
         fileArray.push(event.target.files[0])
         setFiles(fileArray);
-        let idVal = '';
+        setPicture(`${username}-${event.target.files[0].name}`)
 
-        switch (event.target.id) {
-        case 'profile-file':
-            idVal='profile-img'
-            tempPic=`${username}-${event.target.files[0].name}`;
-            setPicture(tempPic)
-            break;
-        case 'fi-0':
-            idVal='photo-0'
-            tempPhotos[0] = `${username}-${event.target.files[0].name}`;
-            break
-        case 'fi-1':
-            idVal='photo-1'
-            tempPhotos[1] = `${username}-${event.target.files[0].name}`;
-            break
-        case 'fi-2':
-            idVal='photo-2'
-            tempPhotos[2] = `${username}-${event.target.files[0].name}`;
-            break
-        case 'fi-3':
-            idVal='photo-3'
-            tempPhotos[3] = `${username}-${event.target.files[0].name}`;
-            break
-        case 'fi-4':
-            idVal='photo-4'
-            tempPhotos[4] = `${username}-${event.target.files[0].name}`;
-            break
-        case 'fi-5':
-            idVal='photo-5'
-            tempPhotos[5] = `${username}-${event.target.files[0].name}`;
-            break
-        default:
-            idVal = ''
-        }
-
-        setPhotos(tempPhotos);
-
-        const imgTag = document.getElementById(idVal);
+        //display progile img
+        const imgTag = document.getElementById('profile-img');
         const reader = new FileReader();
-
-        reader.addEventListener("load", function () {
-            // convert image file to base64 string
-            imgTag.src = reader.result;
-          }, false);
-
-        if(event.target.files[0]){
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        console.log(files);
-        /* console.log(filename); */
+        reader.addEventListener("load", () => imgTag.src = reader.result, false);
+        if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
     }
     
 
@@ -140,7 +93,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                                 <div className = "profile-picture">
                                     <img src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img"/>
                                     <button className="update-img-btn" onClick={() => fileInput.current.click()}>Change</button>
-                                    <input ref={fileInput}type="file" onChange= {handleImgChange} style={{display: 'none'}} id="profile-file"/>
+                                    <input ref={fileInput}type="file" onChange= {handleProfileChange} style={{display: 'none'}} id="profile-file"/>
                                 </div>
                                 <div className = "profile-about">
                                     <label htmlFor="firstname">First Name</label>
@@ -176,11 +129,15 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             <div className = "photos-container" id="cook-info">
                             <h2>Photos</h2>
                                 <div className = "images">
-                                    {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={true} itemNum = {index} handleImgChange={handleImgChange} photo={element}/>)}
+                                    {photos.map((element,index) => <Photo key={index} input={true} itemNum = {index} photo={element} files={files} photos={photos} setFiles={setFiles} setPhotos={setPhotos} username={username}/>)}
+                                    
+                                    <Photo input={true} itemNum = {photos.length} photo={'add-photo.png'} files={files} photos={photos} setFiles={setFiles} setPhotos={setPhotos} username={username}/>
                                 </div>
                                 
                             </div>
-                            <input type="submit" value="Update" className = "user-update-btn"/>
+                            <div className="update-btn-container">
+                                <input type="submit" value="Update" className = "user-update-btn"/>
+                            </div>
                         </form>
                     
                 </div>

@@ -2,9 +2,34 @@ import React, {useRef} from 'react'
 import silhouette from '../images/silhouette.png'
 import '../styles/Photo.css'
 
-function Photo({input, itemNum, handleImgChange, photo,}) {
+function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username}) {
     const photoInput = useRef();
 
+    const handleImgChange = (event) => {
+        console.log(event.target);
+        let fileArray = files;
+        let tempPhotos = photos;
+        fileArray.push(event.target.files[0])
+        setFiles(fileArray);
+        let idVal = `photo-${itemNum}`;
+        tempPhotos[itemNum] = `${username}-${event.target.files[0].name}`
+        setPhotos(tempPhotos);
+
+        const imgTag = document.getElementById(idVal);
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            imgTag.src = reader.result;
+          }, false);
+
+        if(event.target.files[0]){
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        console.log(files);
+        /* console.log(filename); */
+    }
     
 
     return (
