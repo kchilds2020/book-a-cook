@@ -1,0 +1,62 @@
+.sum-container, .count-applied{
+    font-size: 20px;
+}
+
+.summary, .applications{
+    padding: 20px 20px;
+}
+.summary, .count-applied{
+    text-transform: uppercase;
+}
+
+.sum-container{
+    cursor: pointer;
+}
+
+
+.links{
+    padding: 10px;
+    color: rgb(13, 73, 151);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.count-applied{
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cook-list{
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
+    height: 0px;
+    width: 100%;
+}
+
+.cook-name{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cook-name-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.book-user-btn{
+    margin: 10px;
+    padding: 5px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px #333;
+    background-color: rgb(79, 165, 105);
+    cursor: pointer;
+}

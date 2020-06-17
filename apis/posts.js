@@ -63,6 +63,21 @@ router.post('/api/post/apply/job-post', (req, res) => {
     .catch(error => console.error(error)) 
 });
 
+router.post('/api/post/confirm-cook', (req, res) => {
+    console.log(req.body.cook, req.body.postID)
+    JobPost.updateOne({_id: req.body.postID},{
+        $set: {
+            cook: req.body.cook,
+        }
+        
+    })
+    .then(results => {
+        console.log(`application updated: ${results}`);
+        res.json(results);
+    })
+    .catch(error => console.error(error)) 
+});
+
 
 
 

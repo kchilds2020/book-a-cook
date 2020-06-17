@@ -17,17 +17,24 @@
     border-radius: 16px;
 }
 
+.user-information{
+    justify-content: space-around;
+}
+
 .user-picture{
     width: 300px;
     height: 300px;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .user-picture img{
-    height: 90%;
-    max-height: 200px;
+    height: 250px;
+    width: 250px;
     border-radius: 15px;
+    background-color: black;
+    object-fit: contain;
 }
 
 .user-details{
@@ -90,5 +97,6 @@
     /* background-color: white; */
     font-size: 24px;
     text-align: center;
+    margin: 10px;
 }
 

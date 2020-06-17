@@ -26,13 +26,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border-bottom: #ddd 1px solid;
+    border-bottom: rgb(221, 221, 221) 1px solid;
 }
 
 .job-post-container{
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin-top: 20px;
+    padding: 20px;
 
 }
  
@@ -42,9 +43,6 @@
     
 }
 
-.job-post-header, .events-header{
-    padding: 20px;
-}
 
 .job-post-header, .profile-job-posts, .events-header{
     width: 100%;
@@ -55,6 +53,12 @@
     border-radius: 8px;
     margin-top: 10px;
 
+}
+
+.job-post-header, .events-header{
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
 .cook-name{
@@ -68,41 +72,15 @@
     max-width: 600px;
     margin-top: 20px;
     border-radius: 8px;  
+    padding: 20px;
 }
 .post-num{
-    color: green;
+    color: rgb(53, 255, 53);
     
 }
 
-.cook-list{
-    display: flex;
-    flex-direction: column;
-    visibility: hidden;
-    height: 0px;
+.num-applied{
+    color: green;
 }
 
-.cook-name-btn{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
 
-.links{
-    padding: 10px;
-    color: rgb(13, 73, 151);
-    text-align: right;
-}
-.count-applied{
-    padding: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-.applications, .summary{
-    padding: 20px;
-}
-
-.sum-container{
-    cursor: pointer;
-}
