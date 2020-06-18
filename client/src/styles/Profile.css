@@ -236,3 +236,8 @@
     object-fit: contain;
   }
 
+.menu-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

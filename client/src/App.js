@@ -25,10 +25,11 @@ function App() {
   const [cook, setCook] = useState('');
   const [picture, setPicture] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
 
   return (
       <Router> 
-        <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos}/>  
+        <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos} username={username} setMenuItems={setMenuItems}/>  
 
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
@@ -47,7 +48,7 @@ function App() {
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
                   path="/profile"  
-                  render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos}/>}/>
+                  render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
 
                 <Route 
                   path="/login"  

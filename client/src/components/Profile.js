@@ -6,7 +6,7 @@ import axios from 'axios'
 import Photo from './Photo'
 import Menu from './Menu'
 
-function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos}) {
+function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
     const [toggle, setToggle] = useState(false);
     const [files, setFiles] = useState([]);
     //menu
@@ -18,7 +18,11 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const fileInput = useRef();
     const menuFileInput = useRef();
 
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+
     console.log('IDENTIFICATION', identification);
+    console.log('MENU ITEMS', menuItems);
 
     const checkToggle = () => {
         if(document.getElementById('cook-checkbox').checked){
@@ -38,6 +42,10 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
         checkToggle();
     }, [cook, picture])
+
+    useEffect( () => {
+
+    }, [menuItems])
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
@@ -104,6 +112,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
 
     const createItem = (event) =>  {
         event.preventDefault();
+        let items = menuItems;
         const data = {
             username: username,
             title: menuTitle,
@@ -114,8 +123,13 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         }
 
         axios.post('/post/add-menu-item', data)
-        .then(response => console.log(response.data))
+        .then(response => {
+            console.log(response.data)
+            items.push(data)
+            setMenuItems(items)
+        })
         .catch(err => console.log(err))
+        forceUpdate();
     }
 
     return (
@@ -173,7 +187,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             </div>
                             <h2>Menu</h2>
                             <div className ="menu-container">
-                                <Menu username={username}/>
+                                <Menu username={username} menuItems={menuItems}/>
                                 <div className="menu-item-container">
                                     <div className="menu-photo">
                                         <img src={`/api/get/image/add-photo.png`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}}/>
