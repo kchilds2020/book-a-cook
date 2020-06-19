@@ -5,7 +5,7 @@ function MenuItem({title, description, price, username, picture}) {
     return (
         <div className="menu-item-container">
             <div className="menu-photo">
-                <img src={`/api/get/image/${picture}`} />
+                <img src={`/api/get/image/${picture}`} alt =" " />
             </div>
             <div className = "menu-item-details">
                 <div className = "menu-item-title">

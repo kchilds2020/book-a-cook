@@ -32,22 +32,25 @@ router.post('/upload-img', (req,res) => {
     }); 
 });
 
-router.post('/post/add-menu-item', (req, res) => {
-    Menu.create({
-        title: req.body.title,
-        rating: req.body.rating,
-        longitude: req.body.longitude,
-        latitude: req.body.latitude,
-        username: req.body.username,
-        description: req.body.description,
-        price: req.body.price,
-        picture: req.body.picture
+router.post('/post/add-menu-items', (req, res) => {
+
+    req.body.map(element =>{
+        Menu.create({
+            title: element.title,
+            rating: element.rating,
+            longitude: element.longitude,
+            latitude: element.latitude,
+            username: element.username,
+            description: element.description,
+            price: element.price,
+            picture: element.picture
+        })
+        .then(results => {
+            console.log(`New MENU ITEM: ${results}`);
+            res.json(results);
+        })
+        .catch(error => console.error(error))
     })
-    .then(results => {
-        console.log(`New MENU ITEM: ${results}`);
-        res.json(results);
-    })
-    .catch(error => console.error(error))
 });
 
 router.post('/post/create-post', (req, res) => {
