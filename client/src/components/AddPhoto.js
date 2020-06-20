@@ -21,9 +21,17 @@ function AddPhoto({photos, files, setPhotos, setFiles, username}) {
 
         setCount(count + 1)
     }
+
+    const deletePhoto = (itemID) => {
+        let tempPhotos = photos;
+        tempPhotos.splice(itemID, 1)
+        setPhotos(tempPhotos);
+        setCount(count + 1 )
+
+    }
     return (
         <>
-            {photos.map((element,index) => <Photo key={index} input={true} itemNum = {index} photo={element} files={files} photos={photos} setFiles={setFiles} setPhotos={setPhotos} username={username}/>)}
+            {photos.map((element,index) => <Photo key={index} input={true} itemNum = {index} photo={element} files={files} photos={photos} setFiles={setFiles} setPhotos={setPhotos} username={username} editable={true} deletePhoto={deletePhoto}/>)}
             <img src={'/api/get/image/add-photo.png'} alt="createItem" style={{width: "250px", height: "250px", cursor:"pointer"}} id="add-photo-btn" onClick={() => photoInput.current.click()}/>
             <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${photos.length}`}/>
         </>

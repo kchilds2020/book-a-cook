@@ -3,7 +3,6 @@ import NavBar from './NavBar'
 import '../styles/Profile.css'
 import silhouette from '../images/silhouette.png'
 import axios from 'axios'
-import Photo from './Photo'
 import AddPhoto from './AddPhoto'
 import CreateMenuItem from './CreateMenuItem'
 
@@ -11,6 +10,8 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const [toggle, setToggle] = useState(false);
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])
+    const [itemsToBeDeleted, setItemsToBeDeleted] = useState([])
+    
 
     //menu
     const fileInput = useRef();
@@ -80,7 +81,14 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         .catch(err => console.log(err))
 
         //update menu item info
-        let response = await axios.post('/post/add-menu-items', tempMenuItems)
+        axios.post('/post/add-menu-items', tempMenuItems)
+
+        //delete items if needed
+        if(itemsToBeDeleted.length > 0 ){
+
+            itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))
+        }
+
     }
 
     const handleProfileChange = (event) => {
@@ -153,7 +161,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             </div>
                             <div className="profile-header-title">Menu Items</div>
                             <div className ="menu-container">
-                                <CreateMenuItem username = {username} setMenuItems = {setMenuItems} uploadImage={uploadImage} menuItems = {menuItems} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems}/>
+                                <CreateMenuItem username = {username} setMenuItems = {setMenuItems} uploadImage={uploadImage} menuItems = {menuItems} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
                             </div>
                             <div className="update-btn-container">
                                 <input type="submit" value="Update" className = "user-update-btn"/>

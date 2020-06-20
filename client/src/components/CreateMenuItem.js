@@ -1,8 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
-import axios from 'axios'
 import Menu from './Menu'
 
-function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, uploadImage, tempMenuItems, setTempMenuItems}) {
+function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, uploadImage, tempMenuItems, setTempMenuItems, itemsToBeDeleted, setItemsToBeDeleted}) {
 
     const [menuDescription, setMenuDescription] = useState('');
     const [menuTitle, setMenuTitle] = useState(''); 
@@ -14,7 +13,7 @@ function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, upl
 
     useEffect(() => {
         console.log('CREATEITEMMENU',menuItems)
-    },[count])
+    },[count, menuItems])
 
     const handleMenuFileChange = (event) => {
         //store file and filename
@@ -53,11 +52,25 @@ function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, upl
         console.log('createItem', menuItems)
     }
 
+    const deleteMenuItem = async (dbID,itemID ) =>{
+
+        
+        let deletedItems = itemsToBeDeleted;
+        deletedItems.push(dbID)
+        setItemsToBeDeleted(deletedItems)  
+        console.log(itemID)
+        let items = menuItems;
+        console.log(items)
+        items.splice(itemID,1);
+        setMenuItems(items)
+        setCount(count + 1)
+    }
+
     
 
     return (
         <>
-            <Menu username={username} menuItems={menuItems} editable={true}/>
+            <Menu username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} deleteMenuItem={deleteMenuItem}/>
             <div className="menu-item-container">
                 <div className="menu-photo">
                     <img src={`/api/get/image/add-photo.png`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt=""/>

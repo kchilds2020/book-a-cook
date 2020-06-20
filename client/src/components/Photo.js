@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import silhouette from '../images/silhouette.png'
 import '../styles/Photo.css'
 
-function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username}) {
+function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto}) {
     const photoInput = useRef();
 
     const handleImgChange = (event) => {
@@ -30,10 +30,16 @@ function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, usern
         console.log(files);
         /* console.log(filename); */
     }
+
+    const deleteItem = (event) => {
+        event.preventDefault();
+        deletePhoto(itemNum)
+    }
     
 
     return (
         <div className = "photo">
+            {editable === true ? <button className="delete-mi-btn" onClick={deleteItem}>x</button> : <></>}
             {input === true ? <img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/> : <img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
             {input === true ? <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${itemNum}`}/> : <></>}
         </div>

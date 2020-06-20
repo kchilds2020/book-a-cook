@@ -7,8 +7,10 @@ function Applications({cook, postID, listKey,hired}) {
     const [fullname,setFullname] = useState('');
 
     useEffect(() => {
+        let mounted = true;
         axios.get(`/api/get/username/${cook}`)
-        .then(response => setFullname(`${response.data.firstName} ${response.data.lastName}`))
+        .then(response => mounted ? setFullname(`${response.data.firstName} ${response.data.lastName}`) : console.log('not mounted'))
+        return () => mounted = false;
     }, [cook])
 
     useEffect(() => {

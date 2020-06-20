@@ -32,6 +32,28 @@ router.post('/upload-img', (req,res) => {
     }); 
 });
 
+router.post('/api/post/remove-item/:id', (req,res) => {
+    Menu.deleteOne({_id: req.params.id})
+    .then(response => res.json(response))
+    .catch(error => console.error(error))
+})
+
+
+router.post('/api/post/remove-photo', (req, res) => {
+    console.log('UPDATE PHOTOS',req.body.username, req.body.photos)
+    User.updateOne({username: req.body.username},{
+        $set: {
+            photos: req.body.photos,
+        }
+        
+    })
+    .then(results => {
+        console.log(`application updated: ${results}`);
+        res.json(results);
+    })
+    .catch(error => console.error(error)) 
+});
+
 router.post('/post/add-menu-items', (req, res) => {
 
     req.body.map(element =>{
