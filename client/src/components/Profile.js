@@ -15,10 +15,6 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
 
     //menu
     const fileInput = useRef();
-    
-
-    console.log('IDENTIFICATION', identification);
-    console.log('MENU ITEMS', menuItems);
 
     const checkToggle = () => { 
         if(document.getElementById('cook-checkbox').checked){
@@ -33,15 +29,9 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     }
 
     useEffect( () => {
-        console.log('PICTURE', picture);
-        console.log('COOK',cook);
         cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
         checkToggle();
     }, [cook, picture])
-
-    useEffect( () => {
-        console.log('MENU ITEMS CHANGED FROM PROFILE.js', menuItems)
-    }, [menuItems])
 
     const uploadImage = () => {
         //upload all files to backend
@@ -60,7 +50,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         uploadImage()
         console.log(photos);
 
-        const data = {
+        const userData = {
             firstname: firstname,
             lastname: lastname,
             username: username,
@@ -74,20 +64,14 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         }
         
         //update user info
-        axios.post('/update-user', data)
-        .then(response => {
-            console.log(response.data)
-        })
+        axios.post('/update-user', userData)
         .catch(err => console.log(err))
 
         //update menu item info
         axios.post('/post/add-menu-items', tempMenuItems)
 
         //delete items if needed
-        if(itemsToBeDeleted.length > 0 ){
-
-            itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))
-        }
+        if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
 
     }
 
@@ -116,8 +100,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             <div className="profile-header-title">User Information</div>
                             <div className = "user-description">
                                 <div className = "profile-picture">
-                                    <img src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img"/>
-                                    <button className="update-img-btn" onClick={() => fileInput.current.click()}>Change</button>
+                                    <img src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
                                     <input ref={fileInput}type="file" onChange= {handleProfileChange} style={{display: 'none'}} id="profile-file"/>
                                 </div>
                                 <div className = "profile-about">
@@ -140,7 +123,6 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             </div>
                             <div className="profile-header-title">Cook Information</div>
                             <div className = "cook-information" id="cook-info">
-                            
                                 <div className = "cook-about">
                                     <label htmlFor="specialty">Specialty</label>
                                     <input name = "cookSpecialty" id = "specialty" type = "text" placeholder = "Specialty" className = "cook-input" maxLength = '40' defaultValue = {cookSpecialty} onChange = {ev => setCookSpecialty(ev.target.value)} /> 

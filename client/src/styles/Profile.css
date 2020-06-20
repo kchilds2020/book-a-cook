@@ -2,7 +2,6 @@
 .profile-container{
     width: 90%;
     max-width: 1000px;
-    padding: 20px;
     margin: auto;
     margin-bottom: 100px;
     display: flex;
@@ -36,10 +35,15 @@
 }
 
 .profile-picture{
-    width: 200px;
+    width: 250px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-self: center;
+    object-fit: contain;
+    background-color: black;
+    border-radius: 8px;
 }
 .update-img-btn{
     border: none;
@@ -53,9 +57,11 @@
 }
 
 .profile-picture img{
-    width: 200px;
+    border-radius: 8px;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
-    border-radius: 8px 8px 0px 0px;
+    cursor: pointer;
 }
 
 
@@ -126,18 +132,19 @@
 
 .user-update-btn{
     position: fixed;
-    bottom: 20px;
-    left: 50% - 75px;
-    width: 150px;
+    z-index: 20;
+    bottom: 0px;
+    width: 100%;
+    max-width: 900px;
     height: 50px;
     border: none;
     background-color: rgb(115, 165, 212);
     font-size: 18px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     cursor: pointer;
     margin: auto;
     margin-top: 10px;
-    box-shadow: #333 2px 2px 4px;
+    box-shadow: #333 0px -1px 4px;
 }
 
 
