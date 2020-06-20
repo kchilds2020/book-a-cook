@@ -1,0 +1,36 @@
+.confirm-container{
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    max-width: 300px;
+    z-index: 100;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%,-50%);
+      -moz-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+      -o-transform: translate(-50%,-50%);
+      transform: translate(-50%,-50%);
+      box-shadow: 0px 0px 8px #333;
+      border-radius: 8px;
+      /* visibility: hidden; */
+  }
+  .confirm-message{
+    padding: 10px;
+  }
+  
+  .confirm-container button{
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(134, 184, 212);
+    border: none;
+    box-shadow: 2px 2px 4px #333;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .confirm-btns{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }

@@ -1,9 +1,12 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
+import Confirm from '../Confirm'
 
 function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto}) {
     const photoInput = useRef();
+
+    const [visible, setVisibility] = useState(false);
 
     const handleImgChange = (event) => {
         console.log(event.target);
@@ -31,17 +34,28 @@ function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, usern
         /* console.log(filename); */
     }
 
-    const deleteItem = (event) => {
+    const confirmDeletion = (event) => {
         event.preventDefault();
+        setVisibility(true)
+    }
+
+    const cancelItem = (event) => {
+        event.preventDefault();
+        setVisibility(false)
+    }
+
+    const deleteItem = () => {
         deletePhoto(itemNum)
+        setVisibility(false)
     }
     
 
     return (
         <div className = "photo">
-            {editable === true ? <button className="delete-mi-btn" onClick={deleteItem}>x</button> : <></>}
+            {editable === true ? <button className="delete-mi-btn" onClick={confirmDeletion}>x</button> : <></>}
             {input === true ? <img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/> : <img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
             {input === true ? <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${itemNum}`}/> : <></>}
+            {visible === true ? <Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /> : <></>}
         </div>
     )
 }

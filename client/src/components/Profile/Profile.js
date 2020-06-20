@@ -11,10 +11,13 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])
     const [itemsToBeDeleted, setItemsToBeDeleted] = useState([])
-    
+
+    const change = useRef(false);
 
     //menu
     const fileInput = useRef();
+
+   
 
     const checkToggle = () => { 
         if(document.getElementById('cook-checkbox').checked){
@@ -27,6 +30,18 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
             document.getElementById('cook-info').style.height = '0px';
         }
     }
+
+    useEffect(()=>{
+        let updateButton = document.getElementById('profile-update-btn')
+    if (change.current){
+        updateButton.style.backgroundColor="rgb(115, 165, 212)"
+        updateButton.style.cursor="pointer"
+        updateButton.style.pointerEvents = "all"
+    }
+    else
+        change.current = true;
+        
+    }, [firstname, lastname, username, email, photos,cookSpecialty, cookPrice, cookDescription, menuItems, picture])
 
     useEffect( () => {
         cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
@@ -146,7 +161,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                                 <Menu username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
                             </div>
                             <div className="update-btn-container">
-                                <input type="submit" value="Update" className = "user-update-btn"/>
+                                <input type="submit" value="Update" className = "user-update-btn" id = "profile-update-btn"/>
                             </div>
                             
                         </form>
