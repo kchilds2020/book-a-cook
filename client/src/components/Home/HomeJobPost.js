@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/HomeJobPost.css'
+import '../../styles/HomeJobPost.css'
 import Applications from './Applications';
 
 function HomeJobPost({summary, applications, postID, listID, cook}) {

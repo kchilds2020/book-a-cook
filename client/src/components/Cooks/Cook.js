@@ -1,6 +1,6 @@
 import React/* , {useState} */ from 'react'
-import PIC from '../images/silhouette.png';
-import '../styles/CookSummary.css';
+import PIC from '../../images/silhouette.png';
+import '../../styles/CookSummary.css';
 import {Link} from 'react-router-dom'
 /* import Geocode from "react-geocode" */
 //import keys from "./keys"

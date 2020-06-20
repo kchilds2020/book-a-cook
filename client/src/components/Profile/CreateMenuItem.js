@@ -1,19 +1,14 @@
-import React, {useState, useRef, useEffect} from 'react'
-import Menu from './Menu'
+import React, {useState, useRef} from 'react'
 
-function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, uploadImage, tempMenuItems, setTempMenuItems, itemsToBeDeleted, setItemsToBeDeleted}) {
+function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}) {
 
     const [menuDescription, setMenuDescription] = useState('');
     const [menuTitle, setMenuTitle] = useState(''); 
     const [menuPrice, setMenuPrice] = useState('');
     const [menuPicture, setMenuPicture] = useState(''); 
-    const [count, setCount] = useState(0);
+    
 
     const menuFileInput = useRef();
-
-    useEffect(() => {
-        console.log('CREATEITEMMENU',menuItems)
-    },[count, menuItems])
 
     const handleMenuFileChange = (event) => {
         //store file and filename
@@ -29,10 +24,8 @@ function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, upl
         if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
     }
 
-    const createItem = async (event) =>  {
+    const createItem = (event) =>  {
         event.preventDefault();
-        let tItems = tempMenuItems;
-        let mItems = menuItems;
         const data = {
             username: username,
             title: menuTitle,
@@ -41,36 +34,14 @@ function CreateMenuItem({username, files, setFiles, setMenuItems, menuItems, upl
             picture: menuPicture
 
         }
-
-        
-        tItems.push(data)
-        mItems.push(data)
         uploadImage()
-        setMenuItems(mItems)
-        setTempMenuItems(tItems)
-        setCount(count + 1);
-        console.log('createItem', menuItems)
-    }
-
-    const deleteMenuItem = async (dbID,itemID ) =>{
-
-        
-        let deletedItems = itemsToBeDeleted;
-        deletedItems.push(dbID)
-        setItemsToBeDeleted(deletedItems)  
-        console.log(itemID)
-        let items = menuItems;
-        console.log(items)
-        items.splice(itemID,1);
-        setMenuItems(items)
-        setCount(count + 1)
+        createMenuItem(data)
     }
 
     
 
     return (
         <>
-            <Menu username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} deleteMenuItem={deleteMenuItem}/>
             <div className="menu-item-container">
                 <div className="menu-photo">
                     <img src={`/api/get/image/add-photo.png`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt=""/>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import silhouette from '../images/silhouette.png'
-import '../styles/UserProfile.css'
-import JobForm from './JobForm';
+import silhouette from '../../images/silhouette.png'
+import '../../styles/UserProfile.css'
+import JobForm from '../JobForm';
 import Photo from './Photo';
-import NavBar from './NavBar'
+import NavBar from '../NavBar'
 
 function UserProfile({userSessionName}) {
     const [firstname, setFirstname] = useState('');

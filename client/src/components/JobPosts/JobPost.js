@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
- import '../styles/JobPost.css' 
+ import '../../styles/JobPost.css' 
 import axios from 'axios';
 
 function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, username}) {

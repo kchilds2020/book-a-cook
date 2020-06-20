@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import '../styles/Event.css'
+import '../../styles/Event.css'
 function Event({summary, description, location, date}) {
     const [month, setMonth] = useState();
     const [day, setDay] = useState();

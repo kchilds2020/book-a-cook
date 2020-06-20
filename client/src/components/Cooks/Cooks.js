@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import '../styles/CookSummary.css'
+import '../../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
-import NavBar from './NavBar';
+import NavBar from '../NavBar';
 import Filter from './Filter';
-import '../styles/Cooks.css'
+import '../../styles/Cooks.css'
 
 
 function Cooks() {

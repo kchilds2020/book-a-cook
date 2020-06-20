@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Landing from './components/Landing';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Login from './components/Login';
 import Register from './components/Register';
-import JobPostings from './components/JobPostings';
-import Profile from './components/Profile';
+import JobPostings from './components/JobPosts/JobPostings';
+import Profile from './components/Profile/Profile';
 import Auth from './components/Auth'
-import Cooks from './components/Cooks'
-import UserProfile from './components/UserProfile'
+import Cooks from './components/Cooks/Cooks'
+import UserProfile from './components/UserProfile/UserProfile'
 
 
 function App() {

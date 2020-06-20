@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
-import silhouette from '../images/silhouette.png'
-import '../styles/Photo.css'
+import silhouette from '../../images/silhouette.png'
+import '../../styles/Photo.css'
 
 function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto}) {
     const photoInput = useRef();

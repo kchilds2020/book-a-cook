@@ -1,12 +1,12 @@
 import React, {useRef, useEffect, useState} from 'react'
 import Photo from './Photo'
-function AddPhoto({photos, files, setPhotos, setFiles, username}) {
+function Photos({photos, files, setPhotos, setFiles, username}) {
     const[count,setCount] = useState(0);
     const photoInput = useRef();
 
     useEffect(() => {
-        console.log('PHOTOS UPDATED');
-    },[count])
+        console.log('PHOTO CHANGE', photos);
+    },[count, photos])
 
     const handleImgChange = (event) => {
         //update files
@@ -38,4 +38,4 @@ function AddPhoto({photos, files, setPhotos, setFiles, username}) {
     )
 }
 
-export default AddPhoto
+export default Photos

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import NavBar from './NavBar'
-import '../styles/JobPostings.css'
+import NavBar from '../NavBar'
+import '../../styles/JobPostings.css'
 import axios from 'axios'
 import JobPost from './JobPost'
-import JobForm from './JobForm'
+import JobForm from '../JobForm'
 
 function JobPostings({username}) {
     const [postsArray, setPostsArray] = useState([]);

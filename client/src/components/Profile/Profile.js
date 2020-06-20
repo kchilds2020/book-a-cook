@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useRef} from 'react'
-import NavBar from './NavBar'
-import '../styles/Profile.css'
-import silhouette from '../images/silhouette.png'
+import NavBar from '../NavBar'
+import '../../styles/Profile.css'
+import silhouette from '../../images/silhouette.png'
 import axios from 'axios'
-import AddPhoto from './AddPhoto'
-import CreateMenuItem from './CreateMenuItem'
+import Photos from './Photos'
+import Menu from './Menu'
 
 function Profile({identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
     const [toggle, setToggle] = useState(false);
@@ -137,13 +137,13 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
                             <div className = "photos-container" id="cook-info">
                             
                                 <div className = "images">
-                                    <AddPhoto photos={photos} files={files} setPhotos={setPhotos} setFiles={setFiles} username={username}/>
+                                    <Photos photos={photos} files={files} setPhotos={setPhotos} setFiles={setFiles} username={username}/>
                                 </div>
                                 
                             </div>
                             <div className="profile-header-title">Menu Items</div>
                             <div className ="menu-container">
-                                <CreateMenuItem username = {username} setMenuItems = {setMenuItems} uploadImage={uploadImage} menuItems = {menuItems} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
+                                <Menu username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
                             </div>
                             <div className="update-btn-container">
                                 <input type="submit" value="Update" className = "user-update-btn"/>
