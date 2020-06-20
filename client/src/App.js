@@ -35,7 +35,7 @@ function App() {
                 <Route path="/" exact strict component={Landing}/>
                 <Route 
                   path="/home"  
-                  render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} />}/>
+                  render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
                 <Route path="/cooks" exact component={Cooks} />
                 {/* <Route path="/job-postings" exact component={JobPostings}/> */}
                 <Route 
