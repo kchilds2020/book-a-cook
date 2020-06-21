@@ -7,6 +7,7 @@ function NavBar({active}) {
   const cooksID = "cooks-item"
   const jobPostingsID = "job-postings-item"
   const profileID = "profile-item"
+  const menuID = "menu-page"
 
   console.log(active)
     return (
@@ -15,6 +16,9 @@ function NavBar({active}) {
               <ul>
                  <li className={active === homeID ? `${homeID} active` : `${homeID}`}>
                   <Link to ="/home">Home</Link>
+                </li> 
+                <li className={active === menuID ? `${menuID} active` : `${menuID}`}>
+                  <Link to ="/menu">Menu</Link>
                 </li> 
                 <li className={active === cooksID ? `${cooksID} active` : `${cooksID}`}>
                   <Link to ="/cooks">Cooks</Link>

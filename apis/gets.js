@@ -58,6 +58,14 @@ router.get('/api/get/cooks', (req,res) => {
     .catch(err => console.log(err))
 })
 
+//find all acttive menu items
+router.get('/api/get/menu', (req,res) => {
+    Menu.find()
+    .then(food => res.json(food))
+    .catch(err => console.log(err))
+})
+
+
 //get user with username
 router.get('/api/get/username/:username', (req,res) => {
     console.log('username request', req.params.username)

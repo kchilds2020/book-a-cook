@@ -10,7 +10,12 @@ import Profile from './components/Profile/Profile';
 import Auth from './components/Auth'
 import Cooks from './components/Cooks/Cooks'
 import UserProfile from './components/UserProfile/UserProfile'
+import Menu from './components/Menu/Menu'
+import {loadStripe} from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
 
+
+const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
 function App() {
   const [authenticated, setAuthentication] = useState(false);
@@ -28,6 +33,7 @@ function App() {
   const [menuItems, setMenuItems] = useState([]);
 
   return (
+    <Elements stripe={stripePromise}>
       <Router> 
         <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos} username={username} setMenuItems={setMenuItems}/>  
 
@@ -44,6 +50,9 @@ function App() {
                 <Route 
                   path="/user/profile"  
                   render={(props) => <UserProfile {...props} userSessionName={username}/>}/>
+                  <Route 
+                  path="/menu"  
+                  render={(props) => <Menu {...props} />}/>
 
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
@@ -58,6 +67,7 @@ function App() {
                   render={(props) => <Register {...props} setAuthentication={setAuthentication} setIdentification={setIdentification}/>}/>
             </Switch>
         </Router>
+        </Elements>
 
   );
 }

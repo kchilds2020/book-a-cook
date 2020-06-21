@@ -9,7 +9,8 @@ const Menu = new mongoose.Schema({
     description: {type: String, trim: true, default: ''},
     price: {type: String, trim: true, default: ''},
     picture: {type: String, default: ''},
-    available: {type: Boolean, default: false}
+    available: {type: Boolean, default: false},
+    orders: {type: Array, default: []}
 },
 {
     collection: 'menu'
