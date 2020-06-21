@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import '../../styles/MenuItem.css'
 import Order from './Order';
 
-function MenuItem({title, description, price, username, picture, editable=false, itemNum, menuItems, setMenuItems, dbID, deleteMenuItem}) {
+function MenuItem({title, description, price, username, picture, editable=false, itemNum, menuItems, setMenuItems, dbID, deleteMenuItem, firstname, lastname, email}) {
 
     const [visible, setVisibility] = useState(false);
-
+    console.log('MENUITEM', firstname, lastname, email)
     const orderItem = (event) =>{
         event.preventDefault();
         console.log('order!')
@@ -29,7 +29,7 @@ function MenuItem({title, description, price, username, picture, editable=false,
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>
                 <button className="menu-item-btn" onClick={orderItem}>Order!</button>    
             </div>
-            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture}/> : <></>}
+            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} firstname={firstname} lastname={lastname} email={email} dbID = {dbID}/> : <></>}
         </div>
     )
 }

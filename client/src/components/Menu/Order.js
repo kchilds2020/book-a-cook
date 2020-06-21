@@ -6,19 +6,31 @@ import {
   useStripe,
   useElements
 } from '@stripe/react-stripe-js';
+import axios from 'axios';
 
-function Order({cancel, price, title, picture}) {
+function Order({cancel, price, title, picture, firstname, lastname, email, dbID}) {
     const stripe = useStripe();
     const elements = useElements();
     const total = (parseInt(price) + 5 + (parseInt(price) * .08)).toFixed(2)
+    console.log('ORDER', firstname, lastname, email)
 
     const payItem = async (event) => {
         event.preventDefault()
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-            type: 'card',
-            card: elements.getElement(CardElement),
+        const clientSecretResponse = await axios.get(`/secret/item/${dbID}`);
+        console.log('CLIENT SECRET RESPONSE', clientSecretResponse)
+        const clientSecret = clientSecretResponse.data.client_secret
+        console.log('CLIENT SECRET',clientSecret);
+        const paymentResponse = await stripe.confirmCardPayment(`${clientSecret}`,{
+            payment_method: {
+                type: 'card',
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: `${firstname} ${lastname}`, 
+                    email: email
+                }
+            }
           });
-        console.log('paid!', paymentMethod, error)
+        console.log('paid!' , paymentResponse )
     }
     const cardElementOptions = {
         style:{
@@ -44,7 +56,7 @@ function Order({cancel, price, title, picture}) {
             <div className="card-element-container" id = "card-info">
                 <CardElement options={cardElementOptions}/>
             </div>
-            <div className="order-total">Total after Tax and Fees: ${total}</div>
+            <div className="order-total">Total: ${total}</div>
             <div className="order-btns">
                 <button className ="order-btn" onClick={payItem} disabled={!stripe}>Order</button>
                 <button className ="cancel-btn" onClick={cancel} disabled={!stripe}>Cancel</button>

@@ -4,12 +4,12 @@ import axios from 'axios'
 import NavBar from '../NavBar'
 
 
-function Menu() {
+function Menu({firstname, lastname, email}) {
 
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
-
+    console.log('MENU', firstname, lastname, email)
     useEffect(() => {
         let mounted = true;
         axios.get('api/get/menu')
@@ -34,7 +34,7 @@ function Menu() {
         <>
             <NavBar active={'menu-page'}/>
             <div className="menu-page-container">
-                {loading ? 'LOADING...' : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} editable={false} itemNum={index} dbID={element._id}/>)}
+                {loading ? 'LOADING...' : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} editable={false} itemNum={index} dbID={element._id} firstname={firstname} lastname={lastname} email={email}/>)}
                 {err ? err : null}
             </div>
         </> 

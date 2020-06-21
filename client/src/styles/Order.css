@@ -3,7 +3,7 @@
     padding: 20px;
     position: fixed;
     width: 90%;
-    max-width: 500px;
+    max-width: 400px;
     z-index: 100;
       top: 50%;
       left: 50%;
@@ -52,8 +52,8 @@
 }
 
 .order-photo{
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   background-color: black;
   display: flex;
   justify-content: center;
@@ -63,8 +63,8 @@
 }
 
 .order-photo img{
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
 }

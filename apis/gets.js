@@ -4,6 +4,7 @@ const JobPost = require('../models/JobPost');
 const User = require('../models/User');
 const Menu = require('../models/Menu');
 const path = require('path');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {apiVersion: ''});
 
 //sendfile
 router.get('/api/get/image/:filename', (req,res) => {
@@ -102,6 +103,18 @@ router.get('/get-session', (req,res) => {
     res.send(`${req.session.userID}`);
 })
 
+router.get('/secret/item/:id', async (req, res) => {
+    const item = await Menu.findOne({_id: req.params.id})
+    console.log('ITEM RESPONSE', item.price)
+    const intent = await stripe.paymentIntents.create({
+        amount: (item.price * 100) + 500 + ((item.price * 100)*.08),
+        currency: 'usd',
+        // Verify your integration in this guide by including this parameter
+        metadata: {integration_check: 'accept_a_payment'},
+    });
+    console.log(intent.client_secret)
+    res.json({client_secret: intent.client_secret});
+  });
 
 
 

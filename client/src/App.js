@@ -52,7 +52,7 @@ function App() {
                   render={(props) => <UserProfile {...props} userSessionName={username}/>}/>
                   <Route 
                   path="/menu"  
-                  render={(props) => <Menu {...props} />}/>
+                  render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email}/>}/>
 
                 {/* <Route path="/home/profile" exact component={Profile}/> */}
                 <Route 
