@@ -37,14 +37,14 @@
 
 }
  
-.events-header{
+.events-header, .my-orders-header{
     width: 100%;
     text-align: center;
     
 }
 
 
-.job-post-header, .profile-job-posts, .events-header{
+.job-post-header, .profile-job-posts, .events-header, .my-orders-header{
     width: 100%;
     text-align: center;
     background-color: white;
@@ -55,7 +55,7 @@
 
 }
 
-.job-post-header, .events-header{
+.job-post-header, .events-header, .my-orders-header{
     padding: 20px;
     background-color: #333;
     color: white;
@@ -67,7 +67,7 @@
     color: rgb(39, 54, 39);
 }
 
-.events-container{
+.events-container, .my-orders-container{
     width: 100%;
     max-width: 600px;
     margin-top: 20px;

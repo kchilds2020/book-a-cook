@@ -1,3 +1,7 @@
+.events-container{
+    border: #aaa 1px solid
+}
+
 .event-container{
     width: 100%;
     text-align: center;
@@ -7,7 +11,7 @@
     border-radius: 8px;
     margin-top: 10px;
 }
-
+ 
 .event-summary, .event-location, .event-date, .event-description{
     padding: 5px 20px;
     font-size: 20px;

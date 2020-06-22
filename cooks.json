@@ -1,16 +1,20 @@
 [{
-    "summary": "Example Summary",
-    "description": "Example Description",
-    "peopleAmount": "123",
-    "location": "Arlington, Texas",
-    "date": "January 28th",
-    "username": "kchilds"
+    "menuItemID": "5eea304e6a2730255c360ed6",
+    "menuItemTitle": "Pizza",
+    "qty": "2",
+    "picture": "kchilds-kchilds-food3.jpg",
+    "address": "3617 Prather Ct",
+    "date": "As soon as possible",
+    "chefUsername": "kchilds",
+    "customerUsername": "nshad51"
 },
 {
-    "summary": "Example Summary",
-    "description": "Example Description",
-    "peopleAmount": "123",
-    "location": "Arlington, Texas",
-    "date": "January 28th",
-    "username": "kchilds"
+    "menuItemID": "5eea304e6a2730255c360ed6",
+    "menuItemTitle": "Pizza",
+    "qty": "2",
+    "picture": "kchilds-kchilds-food3.jpg",
+    "address": "3617 Prather Ct",
+    "date": "As soon as possible",
+    "chefUsername": "kchilds",
+    "customerUsername": "nshad51"
 }]

@@ -3,6 +3,7 @@ const router = express.Router();
 const JobPost = require('../models/JobPost');
 const User = require('../models/User');
 const Menu = require('../models/Menu');
+const Orders = require('../models/Orders')
 const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {apiVersion: ''});
 
@@ -27,6 +28,16 @@ router.get('/api/get/menu-items/:username', (req,res) => {
     .then(items => {
         console.log(items);
         res.json(items)
+    })
+    .catch(err => console.log(err))
+})
+
+//find orders that you need to be completed
+router.get('/api/get/active-orders/:username', (req,res) => {
+    Orders.find({chefUsername: req.params.username, completed: false})
+    .then(orders => {
+        console.log(orders);
+        res.json(orders)
     })
     .catch(err => console.log(err))
 })
