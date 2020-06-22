@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import UnauthenticatedNavBar from './UnauthenticatedNavBar';
 import axios from 'axios'
 import '../styles/Login.css'
 
@@ -31,6 +30,7 @@ export const Login = ({setAuthentication, setIdentification}) => {
                 }else{
                     console.log(response)
                     setIdentification(response.data._id);
+                    setAuthentication(true);
                     //go to home
                 }
             })
@@ -41,7 +41,6 @@ export const Login = ({setAuthentication, setIdentification}) => {
 
     return(
         <>
-            <UnauthenticatedNavBar />
             <div className = 'container'>
                 <form className = 'form-container' onSubmit = {loginUser}>
                     <h2>LOGIN</h2>

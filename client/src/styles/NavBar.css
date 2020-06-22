@@ -25,7 +25,7 @@
     float: right;
   }
   
-  li a{
+  li a, li button{
     display: block;
     color: #333;
     text-align: center;
@@ -37,4 +37,19 @@
     box-shadow: 0px 2px 4px #333;
     box-shadow: 0px -2px 4px #333;
     text-transform: uppercase;
+  }
+
+  .logout-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: rgb(153, 26, 26);
+    cursor: pointer;
+  }
+
+
+  @media only screen and (max-width: 700px) {
+    .logout-btn {
+      background-color: lightblue;
+    }
   }

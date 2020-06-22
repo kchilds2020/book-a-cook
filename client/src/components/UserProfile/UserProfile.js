@@ -6,7 +6,7 @@ import JobForm from '../JobForm';
 import Photo from './Photo';
 import NavBar from '../NavBar'
 
-function UserProfile({userSessionName}) {
+function UserProfile({userSessionName, profileCook}) {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -79,7 +79,6 @@ function UserProfile({userSessionName}) {
 
     return (
         <>
-            <NavBar />
             <div className="user-profile-container">
                 <div className="title-header">USER INFO</div>
                 <div className="user-information">

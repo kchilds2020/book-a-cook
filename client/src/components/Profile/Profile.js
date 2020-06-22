@@ -108,7 +108,6 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
 
     return (
         <div>
-            <NavBar active={'profile-item'}/>
             <div className = "profile-container">
                 <div className = "user-info">
                         <form  className = "profile-form" onSubmit={handleSubmit} formEncType="multipart/form-data">

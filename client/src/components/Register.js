@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 import "../styles/Register.css"
 
 export const Register = ({setAuthentication, setIdentification}) => {
@@ -89,7 +88,6 @@ export const Register = ({setAuthentication, setIdentification}) => {
 
     return(
         <>
-            <UnauthenticatedNavBar />
             <div className = "container">
                 <form className = "form-container" onSubmit = {registerUser}>
                     <h2>Register</h2>

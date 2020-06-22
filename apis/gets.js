@@ -103,6 +103,10 @@ router.get('/get-session', (req,res) => {
     res.send(`${req.session.userID}`);
 })
 
+router.get('/logout', (req,res) => {
+    req.session.destroy();
+})
+
 router.get('/secret/item/:id/:qty', async (req, res) => {
     const item = await Menu.findOne({_id: req.params.id})
     console.log('ITEM RESPONSE', item.price)

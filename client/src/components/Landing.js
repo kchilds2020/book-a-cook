@@ -1,13 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import SVG from '../images/SVG.svg';
-import UnauthenticatedNavBar from './UnauthenticatedNavBar'
 import '../styles/Landing.css'
 
 const Landing = () => {
     return(
         <>
-            <UnauthenticatedNavBar />
             <div className = "landing-body">
                 <div className = "landing-container">
                     <div className = "landing-section">

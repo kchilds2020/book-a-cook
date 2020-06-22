@@ -5,7 +5,7 @@ import axios from 'axios'
 import JobPost from './JobPost'
 import JobForm from '../JobForm'
 
-function JobPostings({username}) {
+function JobPostings({username, cook}) {
     const [postsArray, setPostsArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
@@ -89,11 +89,10 @@ function JobPostings({username}) {
 
     return (
         <div>
-            <NavBar active={'job-postings-item'}/>
             <div className = "jp-container">
-                <div className = "jp-header">
+                {/* <div className = "jp-header">
                     <button className = "toggle-btn" onClick={toggleForm}>Create Post!</button>
-                </div>
+                </div> */}
                 <div className = "posts-container">
                     {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={username} cancelPost = {cancelPost}/>)}
                     {err ? err : null}

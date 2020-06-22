@@ -5,7 +5,7 @@ import NavBar from '../NavBar'
 import '../../styles/Menu.css'
 
 
-function Menu({firstname, lastname, email}) {
+function Menu({firstname, lastname, email, cook}) {
 
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,7 +33,6 @@ function Menu({firstname, lastname, email}) {
 
     return (
         <>
-            <NavBar active={'menu-page'}/>
             <div className="menu-page-container">
                 {loading ? 'LOADING...' : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} editable={false} itemNum={index} dbID={element._id} firstname={firstname} lastname={lastname} email={email}/>)}
                 {err ? err : null}

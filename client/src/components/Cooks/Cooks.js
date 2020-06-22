@@ -7,7 +7,7 @@ import Filter from './Filter';
 import '../../styles/Cooks.css'
 
 
-function Cooks() {
+function Cooks({cook}) {
     const [cooksArray, setCooksArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
@@ -33,7 +33,6 @@ function Cooks() {
     
     return (
         <>
-            <NavBar active={'cooks-item'}/>
             <div className="cooks-container">
                 <Filter />  
                 {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.cookSpecialty} price={element.cookPrice} description={element.cookDescription} latitude={element.latitude} longitude={element.longitude} username={element.username} picture={element.picture}/>)}

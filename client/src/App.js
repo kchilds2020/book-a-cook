@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import Auth from './components/Auth'
 import Cooks from './components/Cooks/Cooks'
 import UserProfile from './components/UserProfile/UserProfile'
+import NavBar from './components/NavBar'
 import Menu from './components/Menu/Menu'
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
@@ -36,25 +37,25 @@ function App() {
     <Elements stripe={stripePromise}>
       <Router> 
         <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos} username={username} setMenuItems={setMenuItems}/>  
-
+        <NavBar authenticated={authenticated} setAuthentication={setAuthentication} cook={cook} setIdentification={setIdentification}/>
             <Switch>
                 <Route path="/" exact strict component={Landing}/>
                 <Route 
                   path="/home"  
                   render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
                 <Route path="/cooks" exact component={Cooks} />
-                {/* <Route path="/job-postings" exact component={JobPostings}/> */}
+                <Route 
+                  path="/cooks"  
+                  render={(props) => <Cooks {...props} cook = {cook}/>}/>
                 <Route 
                   path="/job-postings"  
-                  render={(props) => <JobPostings {...props} username={username}/>}/>
+                  render={(props) => <JobPostings {...props} username={username} cook = {cook}/>}/>
                 <Route 
                   path="/user/profile"  
-                  render={(props) => <UserProfile {...props} userSessionName={username}/>}/>
+                  render={(props) => <UserProfile {...props} userSessionName={username} cook ={cook}/>}/>
                   <Route 
                   path="/menu"  
-                  render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email}/>}/>
-
-                {/* <Route path="/home/profile" exact component={Profile}/> */}
+                  render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
                 <Route 
                   path="/profile"  
                   render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
