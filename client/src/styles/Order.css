@@ -3,7 +3,7 @@
     padding: 20px;
     position: fixed;
     width: 90%;
-    max-width: 400px;
+    max-width: 300px;
     z-index: 100;
       top: 50%;
       left: 50%;
@@ -18,15 +18,20 @@
 
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-evenly;
 }
 
-.card-element-container, .order-container input{
+.card-element-container, .order-container input, .card-element-exp, .card-element-cvc{
   border: #ddd 1px solid;
   border-radius: 8px;
   padding: 5px;
-  margin: 5px;
+  margin: 5px 0px;
   font-size: 16px;
+}
+
+.card-element-exp, .card-element-cvc{
+  width: 100%;
+  margin: 5px 0px;
 }
 
 .order-btns{
@@ -34,15 +39,37 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.order-btn, .cancel-btn{
+.order-btn {
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
   background-color: rgb(116, 175, 209);
-  width: 100px;
-  height: 35px;
+  width: 100%;
+  height: 45px;
   padding: 5px;
   border: none;
-  border-radius: 8px;
-  box-shadow: 2px 2px 4px #333;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 0px -3px 2px #ddd;
   cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.cancel-btn{
+  z-index: 100;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 20;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    box-shadow: #333 2px 2px 4px;
+    background-color: rgb(212, 35, 35);
+    color: white;
+    cursor: pointer;
 }
 
 .order-total{
@@ -52,7 +79,7 @@
 }
 
 .order-photo{
-  width: 150px;
+  width: 100%;
   height: 150px;
   background-color: black;
   display: flex;
@@ -63,8 +90,37 @@
 }
 
 .order-photo img{
-  width: 150px;
+  width: 100%;
   height: 150px;
   object-fit: cover;
   border-radius: 8px;
+}
+
+.card-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 5px 0px;
+}
+.detail-sec {
+  width: 40%;
+}
+
+.billing-header{
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  border-bottom: #ddd 1px solid;
+  padding: 5px;
+  margin: 10px 0px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.small-input{
+  width: 80px;
+}
+
+#total-price{
+  margin-bottom: 30px;
 }

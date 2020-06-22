@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import MenuItem from './MenuItem'
 import axios from 'axios'
 import NavBar from '../NavBar'
+import '../../styles/Menu.css'
 
 
 function Menu({firstname, lastname, email}) {

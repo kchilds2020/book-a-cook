@@ -103,11 +103,11 @@ router.get('/get-session', (req,res) => {
     res.send(`${req.session.userID}`);
 })
 
-router.get('/secret/item/:id', async (req, res) => {
+router.get('/secret/item/:id/:qty', async (req, res) => {
     const item = await Menu.findOne({_id: req.params.id})
     console.log('ITEM RESPONSE', item.price)
     const intent = await stripe.paymentIntents.create({
-        amount: (item.price * 100) + 500 + ((item.price * 100)*.08),
+        amount: ((item.price * 100) + 500 + ((item.price * 100) * .08)) * req.params.qty,
         currency: 'usd',
         // Verify your integration in this guide by including this parameter
         metadata: {integration_check: 'accept_a_payment'},
