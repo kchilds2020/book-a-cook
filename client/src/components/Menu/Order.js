@@ -11,9 +11,13 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-function Order({cancel, price, title, picture, email, dbID}) {
+function Order({cancel, price, title, picture, email, dbID, customer}) {
     const [qty, setQty] = useState(1)
     const [cardName, setCardName] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zip, setZip] = useState('');
 
     const stripe = useStripe();
     const elements = useElements();
@@ -35,7 +39,28 @@ function Order({cancel, price, title, picture, email, dbID}) {
                 }
             }
           });
-          paymentResponse.error ? alert(`Error! ${paymentResponse.error.message}`) : console.log('paid!', paymentResponse)
+          if(paymentResponse.error){
+              alert(`Error! ${paymentResponse.error.message}`) 
+          }else{
+            
+            //create order
+            let orderData = {
+                menuItemID: dbID,
+                menuItemTitle: title,
+                qty: qty,
+                picture: picture,
+                address: `${street}, ${city}, ${state}, ${zip}`,
+                chefUsername: 'kchilds',
+                customerUsername: customer,
+            }
+            try{
+                let response = axios.post('/api/post/create-order', orderData)
+                console.log('paid!', paymentResponse, response)
+            }
+            catch (error){
+                alert(`Try catch error: ${error}`)
+            }
+        }
     }
 
     return (
@@ -47,11 +72,11 @@ function Order({cancel, price, title, picture, email, dbID}) {
             
             <NumberInput qty={qty} setQty={setQty}/>
             <div className="billing-header">Drop Off Address</div>
-            <input type="text" id="card-name-input" placeholder="Street" required/>
+            <input type="text" id="card-name-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
             <div className="card-details">
-                <input className="small-input" type="text" id="card-name-input" placeholder="City" required/>
-                <input className="small-input" type="text" id="card-name-input" placeholder="State" required/>
-                <input className="small-input" type="text" id="card-name-input" placeholder="Zip" required/>
+                <input className="small-input" type="text" id="card-name-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
+                <input className="small-input" type="text" id="card-name-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
+                <input className="small-input" type="text" id="card-name-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
             </div>
             <div className="billing-header">Billing Information</div>
             <input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)}/>

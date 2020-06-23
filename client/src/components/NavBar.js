@@ -1,14 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import '../styles/NavBar.css'
 import axios from 'axios'
 
-function NavBar({ active, cook, setAuthentication, authenticated, setIdentification}) {
-  const homeID = "home-item"
-  const cooksID = "cooks-item"
-  const jobPostingsID = "job-postings-item"
-  const profileID = "profile-item"
-  const menuID = "menu-page"
+function NavBar({ cook, setAuthentication, authenticated, setIdentification}) {
+
+  const [active, setActive] = useState('/home');
+
+  const homeID = "/home"
+  const cooksID = "/cooks"
+  const jobPostingsID = "/job-postings"
+  const profileID = "/profile"
+  const menuID = "/menu"
   const logout = "logout-link"
 
   const handleLogout = async (event) => {
@@ -19,18 +22,21 @@ function NavBar({ active, cook, setAuthentication, authenticated, setIdentificat
     console.log('logout event')
   }
 
-  console.log(active)
+  console.log('PATHNAME',window.location.pathname)
     return (
         <div className = 'nav-bar-overlay'>
           { authenticated ? 
                 <div className = 'nav-bar' id = "authenticated-nav-bar">
                     <ul>
-                      <li className={active === homeID ? `${homeID} active` : `${homeID}`}><Link to ="/home">Home</Link></li> 
-                      {cook ? <></> : <li className={active === menuID ? `${menuID} active` : `${menuID}`}><Link to ="/menu">Menu</Link></li> }
-                      {cook ? <></> : <li className={active === cooksID ? `${cooksID} active` : `${cooksID}`}><Link to ="/cooks">Cooks</Link></li>}
-                      {cook ? <li className={active === jobPostingsID ? `${jobPostingsID} active` : `${jobPostingsID}`}><Link to ="/job-postings">Job Postings</Link></li> : <></>}
+                      <li className={active === homeID ? `${homeID} active` : `${homeID}`}><Link to ="/home" onClick={e => setActive(homeID)}>Home</Link></li> 
+                      {/* {cook ? <></> : <li className={active === menuID ? `${menuID} active` : `${menuID}`}><Link to ="/menu">Menu</Link></li> } */}
+                      <li className={active === menuID ? `${menuID} active` : `${menuID}`}><Link to ="/menu" onClick={e => setActive(menuID)}>Menu</Link></li>
+                      {/* {cook ? <></> : <li className={active === cooksID ? `${cooksID} active` : `${cooksID}`}><Link to ="/cooks">Cooks</Link></li>} */}
+                      <li className={active === cooksID ? `${cooksID} active` : `${cooksID}`}><Link to ="/cooks" onClick={e => setActive(cooksID)}>Cooks</Link></li>
+                      {/* {cook ? <li className={active === jobPostingsID ? `${jobPostingsID} active` : `${jobPostingsID}`}><Link to ="/job-postings">Job Postings</Link></li> : <></>} */}
+                      <li className={active === jobPostingsID ? `${jobPostingsID} active` : `${jobPostingsID}`}><Link to ="/job-postings" onClick={e => setActive(jobPostingsID)}>Job Postings</Link></li>
                       <li className={active === profileID ? `${profileID} active` : `${profileID}`}>
-                        <Link to ="/profile">Profile</Link>
+                        <Link to ="/profile" onClick={e => setActive(profileID)}>Profile</Link>
                       </li> 
                       <li className="logout-link">
                         <button className="logout-btn" onClick={handleLogout}>Logout</button>

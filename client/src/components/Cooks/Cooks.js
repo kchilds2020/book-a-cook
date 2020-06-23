@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import '../../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
-import NavBar from '../NavBar';
 import Filter from './Filter';
 import '../../styles/Cooks.css'
+import Spinner from 'react-bootstrap/Spinner';
 
 
 function Cooks({cook}) {
@@ -35,7 +35,7 @@ function Cooks({cook}) {
         <>
             <div className="cooks-container">
                 <Filter />  
-                {loading ? 'LOADING...' : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.cookSpecialty} price={element.cookPrice} description={element.cookDescription} latitude={element.latitude} longitude={element.longitude} username={element.username} picture={element.picture}/>)}
+                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.cookSpecialty} price={element.cookPrice} description={element.cookDescription} latitude={element.latitude} longitude={element.longitude} username={element.username} picture={element.picture}/>)}
                 {err ? err : null}
             </div>
         </>

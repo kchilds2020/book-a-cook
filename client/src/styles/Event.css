@@ -1,5 +1,5 @@
 .events-container{
-    border: #aaa 1px solid
+    position: relative;
 }
 
 .event-container{

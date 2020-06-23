@@ -7,13 +7,17 @@ function JobPosts({username}) {
     const [myPosts, setMyPosts] = useState('');
 
     useEffect(() => {
+        let mounted = true
         if(username !== ''){
              //get all posts
              axios.get(`/api/get/my-jobs/${username}`)
              .then(response => {
-                 console.log('MY POSTS',response.data)
-                 setMyPosts(response.data);
+                 if(mounted){
+                    console.log('MY POSTS',response.data)
+                    setMyPosts(response.data);
+                }
              })
+             return () => mounted = false
          }
      },[username])
 

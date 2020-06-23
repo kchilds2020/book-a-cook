@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import MenuItem from './MenuItem'
 import axios from 'axios'
-import NavBar from '../NavBar'
 import '../../styles/Menu.css'
+import Spinner from 'react-bootstrap/Spinner'
 
 
 function Menu({firstname, lastname, email, cook}) {
@@ -34,7 +34,7 @@ function Menu({firstname, lastname, email, cook}) {
     return (
         <>
             <div className="menu-page-container">
-                {loading ? 'LOADING...' : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} editable={false} itemNum={index} dbID={element._id} firstname={firstname} lastname={lastname} email={email}/>)}
+                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} editable={false} itemNum={index} dbID={element._id} firstname={firstname} lastname={lastname} email={email}/>)}
                 {err ? err : null}
             </div>
         </> 

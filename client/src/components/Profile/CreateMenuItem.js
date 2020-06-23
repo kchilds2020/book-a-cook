@@ -2,10 +2,11 @@ import React, {useState, useRef} from 'react'
 
 function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}) {
 
+
     const [menuDescription, setMenuDescription] = useState('');
     const [menuTitle, setMenuTitle] = useState(''); 
     const [menuPrice, setMenuPrice] = useState('');
-    const [menuPicture, setMenuPicture] = useState(''); 
+    const [menuPicture, setMenuPicture] = useState('add-photo.png'); 
     
 
     const menuFileInput = useRef();
@@ -34,8 +35,15 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}
             picture: menuPicture
 
         }
+        console.log('CREATE MENU ITEM DATA', data)
         uploadImage()
         createMenuItem(data)
+
+        setMenuPicture('add-photo.png')
+        setMenuPrice('')
+        setMenuTitle('')
+        setMenuDescription('')
+
     }
 
     
@@ -44,18 +52,18 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}
         <>
             <div className="menu-item-container">
                 <div className="menu-photo">
-                    <img src={`/api/get/image/add-photo.png`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt=""/>
+                    <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`/api/get/image/${menuPicture}`}/>
                     <input ref={menuFileInput} onChange= {handleMenuFileChange} type="file" style={{display: 'none'}}/>
                 </div>
                 <div className = "menu-item-details">
                     <div className = "menu-item-title">
-                        <input type="text" id="create-menu-title" placeholder="Title" onChange = {ev => setMenuTitle(ev.target.value)}/>
+                        <input className ="user-input" type="text" id="create-menu-title" placeholder="Title" value = {menuTitle} onChange = {ev => setMenuTitle(ev.target.value)}/>
                     </div>
                     <div className = "menu-item-description">
-                        <input type="text" id="create-menu-description" placeholder = "Description" onChange = {ev => setMenuDescription(ev.target.value)}/>
+                        <input className ="user-input" type="text" id="create-menu-description" placeholder = "Description" value = {menuDescription} onChange = {ev => setMenuDescription(ev.target.value)}/>
                     </div>
                     <div className = "menu-item-price">
-                        <input type="text" id ="create-menu-price" placeholder="Price" onChange = {ev => setMenuPrice(ev.target.value)}/>
+                        <input className ="user-input" type="text" id ="create-menu-price" placeholder="Price" value = {menuPrice} onChange = {ev => setMenuPrice(ev.target.value)}/>
                     </div>
                     <button className="menu-item-btn" onClick={createItem}>
                         Create Item    

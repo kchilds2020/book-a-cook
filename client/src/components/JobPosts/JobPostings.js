@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import NavBar from '../NavBar'
 import '../../styles/JobPostings.css'
 import axios from 'axios'
 import JobPost from './JobPost'
 import JobForm from '../JobForm'
+import Spinner from 'react-bootstrap/Spinner';
 
 function JobPostings({username, cook}) {
     const [postsArray, setPostsArray] = useState([]);
@@ -90,11 +90,8 @@ function JobPostings({username, cook}) {
     return (
         <div>
             <div className = "jp-container">
-                {/* <div className = "jp-header">
-                    <button className = "toggle-btn" onClick={toggleForm}>Create Post!</button>
-                </div> */}
                 <div className = "posts-container">
-                    {loading ? 'LOADING...' : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={username} cancelPost = {cancelPost}/>)}
+                    {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div>: postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={username} cancelPost = {cancelPost}/>)}
                     {err ? err : null}
                 </div>
                 <div id = "job-post-form">

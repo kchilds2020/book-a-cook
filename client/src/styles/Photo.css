@@ -5,7 +5,8 @@
     height: 250px;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    margin: 10px;
     border: black 1px solid;
     border-radius: 8px;
     background-color: black;

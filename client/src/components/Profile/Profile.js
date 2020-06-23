@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef} from 'react'
-import NavBar from '../NavBar'
 import '../../styles/Profile.css'
 import silhouette from '../../images/silhouette.png'
 import axios from 'axios'
@@ -11,6 +10,7 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])
     const [itemsToBeDeleted, setItemsToBeDeleted] = useState([])
+    const [updated, setUpdated] = useState(true)
 
     const change = useRef(false);
 
@@ -37,11 +37,16 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
         updateButton.style.backgroundColor="rgb(115, 165, 212)"
         updateButton.style.cursor="pointer"
         updateButton.style.pointerEvents = "all"
+        setUpdated(false)
     }
-    else
+    else{
+        updateButton.style.backgroundColor="rgb(158, 158, 158)"
+        updateButton.style.cursor="none"
+        updateButton.style.pointerEvents = "none"
         change.current = true;
+    }
         
-    }, [firstname, lastname, username, email, photos,cookSpecialty, cookPrice, cookDescription, menuItems, picture])
+    }, [firstname, lastname, username, email, photos,cookSpecialty, cookPrice, cookDescription, menuItems, picture, files, setMenuItems, updated])
 
     useEffect( () => {
         cook ? document.getElementById('cook-checkbox').checked = true : document.getElementById('cook-checkbox').checked = false
@@ -87,6 +92,12 @@ function Profile({identification, firstname, lastname, username, email, cookSpec
 
         //delete items if needed
         if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
+
+        change.current = false
+        setUpdated(true)
+        alert('Profile Updated')
+
+
 
     }
 

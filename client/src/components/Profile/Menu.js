@@ -1,13 +1,23 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
-function Menu({username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage}) {
+function Menu({ username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage}) {
     const [count, setCount] = useState(0);
+
+    const change = useRef(false);
 
     useEffect(() => {
         console.log('MENU CHANGE',menuItems)
+        let updateButton = document.getElementById('profile-update-btn')
+        if (change.current){
+            updateButton.style.backgroundColor="rgb(115, 165, 212)"
+            updateButton.style.cursor="pointer"
+            updateButton.style.pointerEvents = "all"
+        }
+        else
+            change.current = true;
     },[count, menuItems])
 
     const createMenuItem = (data) =>  {

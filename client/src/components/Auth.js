@@ -32,9 +32,17 @@ useEffect(() => {
         })
         .catch(err => console.log(err))
 
-        axios.get(`/api/get/menu-items/${username}`)
-        .then(response => setMenuItems(response.data))
-        .catch(err => console.log(err))
+        const getMenuItems = async () => {
+            try{
+            const response = await axios.get(`/api/get/menu-items/${username}`)
+            setMenuItems(response.data)
+            }catch(error){
+                console.log(error)
+            }
+        }
+        getMenuItems()
+        
+        
     }
 
 }, [setAuthentication, setIdentification, identification, setFirstname, setLastname, setUsername, setEmail, setCook, setCookDescription, setCookPrice, setCookSpecialty, setPicture, setPhotos, setMenuItems, username])

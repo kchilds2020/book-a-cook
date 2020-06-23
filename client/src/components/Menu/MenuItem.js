@@ -29,7 +29,7 @@ function MenuItem({title, description, price, username, picture, editable=false,
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>
                 <button className="menu-item-btn" onClick={orderItem}>Order!</button>    
             </div>
-            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} firstname={firstname} lastname={lastname} email={email} dbID = {dbID}/> : <></>}
+            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} firstname={firstname} lastname={lastname} email={email} dbID = {dbID} customer={username}/> : <></>}
         </div>
     )
 }

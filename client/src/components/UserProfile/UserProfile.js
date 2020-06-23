@@ -4,7 +4,6 @@ import silhouette from '../../images/silhouette.png'
 import '../../styles/UserProfile.css'
 import JobForm from '../JobForm';
 import Photo from './Photo';
-import NavBar from '../NavBar'
 
 function UserProfile({userSessionName, profileCook}) {
     const [firstname, setFirstname] = useState('');

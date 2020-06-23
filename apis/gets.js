@@ -9,7 +9,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {apiVersion: ''}
 
 //sendfile
 router.get('/api/get/image/:filename', (req,res) => {
-    res.sendFile(path.join(__dirname+'/uploads/', req.params.filename));
+    try{
+     res.sendFile(path.join(__dirname+'/uploads/', req.params.filename));
+    }
+    catch(error){
+        console.log('IMAGE ERROR', error)
+    }
 });
 
 //find posts that you create

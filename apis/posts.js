@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const JobPost = require('../models/JobPost');
 const Menu = require('../models/Menu');
+const Orders = require('../models/Orders')
 const formidable = require('formidable');
 const fileUpload = require('express-fileupload');
 const path = require('path');
@@ -74,6 +75,37 @@ router.post('/post/add-menu-items', (req, res) => {
         .catch(error => console.error(error))
     })
 });
+
+router.post('/api/post/create-order', (req, res) => {
+        Orders.create({
+            menuItemID: req.body.menuItemID,
+            menuItemTitle: req.body.menuItemTitle,
+            qty: req.body.qty,
+            picture: req.body.picture,
+            address: req.body.address,
+            chefUsername: req.body.chefUsername,
+            customerUsername: req.body.customerUsername,
+        })
+        .then(results => {
+            console.log(`New ORDER: ${results}`);
+            res.json(results);
+        })
+        .catch(error => console.error(error))
+})
+
+router.post('/api/post/complete-order', (req, res) => {
+    Orders.updateOne({_id: req.body.orderID},{
+        $set: {
+            completed: true
+        }
+
+    })
+    .then(results => {
+        console.log(`ORDER COMPLETED: ${results}`);
+        res.json(results);
+    })
+    .catch(error => console.error(error))
+})
 
 router.post('/post/create-post', (req, res) => {
         JobPost.create({
