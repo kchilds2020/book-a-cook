@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 
 
-function Auth({authenticated,setAuthentication, setIdentification, setFirstname, setLastname, setUsername, setEmail, identification, setCookDescription, setCook, setCookSpecialty, setCookPrice, setPicture, setPhotos, setMenuItems, username}) {
+function Auth({path, authenticated,setAuthentication, setIdentification, setFirstname, setLastname, setUsername, setEmail, identification, setCookDescription, setCook, setCookSpecialty, setCookPrice, setPicture, setPhotos, setMenuItems, username}) {
+
+
 
 useEffect(() => {
     axios.get('/get-session')
@@ -49,8 +51,8 @@ useEffect(() => {
 
 
 return(
-    
-    authenticated === true ? <Redirect to={{pathname: `/home`}}/> : <Redirect to={{pathname: "/"}}/>
+    <></>
+    /* authenticated === true ? <Redirect to={{pathname: `${path}`}}/> : <Redirect to={{pathname: "/"}}/> */
 );
 
 }

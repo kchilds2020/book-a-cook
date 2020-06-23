@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import '../styles/Login.css'
+import { useHistory, useLocation} from 'react-router-dom'
 
 
 export const Login = ({setAuthentication, setIdentification}) => {
 
+    let history = useHistory();
+    let location = useLocation();
+    let { from } = location.state || { from: { pathname: "/" } };
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -28,10 +32,10 @@ export const Login = ({setAuthentication, setIdentification}) => {
                     alert('Invalid password')
                     
                 }else{
-                    console.log(response)
                     setIdentification(response.data._id);
                     setAuthentication(true);
                     //go to home
+                    history.replace(from)
                 }
             })
             .catch(function (error) {
