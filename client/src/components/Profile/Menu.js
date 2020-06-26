@@ -3,7 +3,7 @@ import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
-function Menu({ username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage}) {
+function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage}) {
     const [count, setCount] = useState(0);
 
     const change = useRef(false);
@@ -49,7 +49,7 @@ function Menu({ username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToB
     return (
         <>
             {menuItems.length > 0 ? menuItems.map((element,index) => <MenuItem key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} menuItems={menuItems} setMenuItems={setMenuItems} dbID={element._id} deleteMenuItem={deleteMenuItem}/>) : <>No Menu Items</>}
-            <CreateMenuItem username={username} files={files} setFiles = {setFiles} uploadImage={uploadImage} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted = {setItemsToBeDeleted} createMenuItem={createMenuItem}/>
+            <CreateMenuItem identification={identification} username={username} files={files} setFiles = {setFiles} uploadImage={uploadImage} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted = {setItemsToBeDeleted} createMenuItem={createMenuItem}/>
         </> 
     )
 }

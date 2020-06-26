@@ -1,29 +1,24 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import {Redirect, Route} from 'react-router-dom'
 import axios from 'axios'
 
 
+
 function PrivateRoute({children,path,authenticated, setAuthentication, ...rest}) {
 
-useEffect(() => {
-    let mounted = true
-    console.log('1',mounted,authenticated)
-    axios.get('/check-session')
-    .then(response => {
-        console.log('2',mounted,authenticated)
-        if(mounted){
-            setAuthentication(response.data)
-        }
-    })
-    .then(res =>{
-        mounted = false
-    })
-    .catch(err => {
-        mounted = false
-    })
+    
+        useEffect(() => {
+            let mounted = true
 
-    return () => mounted
-}, [setAuthentication, authenticated])
+            axios.get('/get-session')
+            .then(res=> {
+                if(mounted){
+                    res.data.userInfo !== null ? setAuthentication(true) : setAuthentication(false)
+                }
+            })
+
+            return () => mounted = false
+        }, [setAuthentication, authenticated])
 
 
 console.log('authenticated', authenticated)

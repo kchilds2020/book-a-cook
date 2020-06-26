@@ -5,7 +5,7 @@ import axios from 'axios'
 import Photos from './Photos'
 import Menu from './Menu'
 
-function Profile({firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
+function Profile({setIdentification, identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
     const [toggle, setToggle] = useState(false);
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])
@@ -35,23 +35,20 @@ function Profile({firstname, lastname, username, email, cookSpecialty, cookDescr
         axios.get(`/get-session`)
                 .then(idRes => {
                     console.log(idRes)
-                    setUsername(idRes.data.username)
-                    setFirstname(idRes.data.firstName)
-                    setLastname(idRes.data.lastName)
-                    setEmail(idRes.data.email)
-                    setCookDescription(idRes.data.cookDescription)
-                    setCookPrice(idRes.data.cookPrice)
-                    setCookSpecialty(idRes.data.cookSpecialty)
-                    setCook(idRes.data.cook)
-                    setPicture(idRes.data.picture)
-                    setPhotos(idRes.data.photos)
+                    setIdentification(idRes.data.userInfo.identification)
+                    setUsername(idRes.data.userInfo.username)
+                    setFirstname(idRes.data.userInfo.firstName)
+                    setLastname(idRes.data.userInfo.lastName)
+                    setEmail(idRes.data.userInfo.email)
+                    setCookDescription(idRes.data.userInfo.cookDescription)
+                    setCookPrice(idRes.data.userInfo.cookPrice)
+                    setCookSpecialty(idRes.data.userInfo.cookSpecialty)
+                    setCook(idRes.data.userInfo.cook)
+                    setPicture(idRes.data.userInfo.picture)
+                    setPhotos(idRes.data.userInfo.photos)
+                    setMenuItems(idRes.data.menuInfo);
                 })
-
-        axios.get(`/api/get/menu-items/${username}`)
-        .then(res => {
-            setMenuItems(res.data);
-        })
-    },[username,setCook, setCookDescription, setCookPrice, setCookSpecialty, setEmail,setFirstname, setLastname, setMenuItems,setPhotos, setPicture, setUsername])
+    },[username,setCook, setCookDescription, setCookPrice, setCookSpecialty, setEmail,setFirstname, setLastname, setMenuItems,setPhotos, setPicture, setUsername, setIdentification])
 
     useEffect(()=>{
         let updateButton = document.getElementById('profile-update-btn')
@@ -190,7 +187,7 @@ function Profile({firstname, lastname, username, email, cookSpecialty, cookDescr
                             </div>
                             <div className="profile-header-title">Menu Items</div>
                             <div className ="menu-container">
-                                <Menu username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
+                                <Menu identification = {identification} username={username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
                             </div>
                             <div className="update-btn-container">
                                 <input type="submit" value="Update" className = "user-update-btn" id = "profile-update-btn"/>

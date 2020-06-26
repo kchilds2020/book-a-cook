@@ -13,15 +13,10 @@ const Home = ({identification, firstname, username, cook, setFirstname, setUsern
         axios.get(`/get-session`)
                 .then(idRes => {
                     console.log(idRes)
-                    setFirstname(idRes.data.firstName)
-                    setUsername(idRes.data.username)
-                    setCook(idRes.data.cook)
+                    setFirstname(idRes.data.userInfo.firstName)
+                    setUsername(idRes.data.userInfo.username)
+                    setCook(idRes.data.userInfo.cook)
                 })
-
-                /* axios.get(`/api/get/menu-items/${username}`)
-                .then(menuItemsRes => {
-                    setMenuItems(menuItemsRes.data)
-                }) */
     }, [setFirstname, setCook,setUsername])
 
     console.log('COOK', cook)

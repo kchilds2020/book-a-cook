@@ -119,7 +119,8 @@ router.get('/get-session', async (req,res) => {
     /* res.send(`${req.session.userID}`); */
     console.log('req.session.userID', req.session.userID)
     let userInfo = await User.findOne({_id: req.session.userID})
-    res.json(userInfo)
+    let menuInfo = await Menu.find({userID: req.session.userID})
+    res.json({userInfo,menuInfo})
 
     
 })

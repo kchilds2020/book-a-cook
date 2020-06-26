@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react'
 
-function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}) {
+function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem, identification}) {
 
 
     const [menuDescription, setMenuDescription] = useState('');
@@ -28,11 +28,12 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}
     const createItem = (event) =>  {
         event.preventDefault();
         const data = {
+            userID: identification,
             username: username,
             title: menuTitle,
             description: menuDescription,
             price: menuPrice,
-            picture: menuPicture
+            picture: menuPicture,
 
         }
         console.log('CREATE MENU ITEM DATA', data)
@@ -50,8 +51,8 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}
 
     return (
         <>
-            <div className="menu-item-container">
-                <div className="menu-photo">
+            <div className="create-menu-item-container">
+                <div className="create-menu-photo">
                     <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`${menuPicture}`}/>
                     <input ref={menuFileInput} onChange= {handleMenuFileChange} type="file" style={{display: 'none'}}/>
                 </div>

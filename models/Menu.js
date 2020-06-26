@@ -6,6 +6,7 @@ const Menu = new mongoose.Schema({
     longitude: {type: String, trim: true, default: ''},
     latitude: {type: String, trim: true, default: ''},
     username: {type: String, trim: true, default: ''},
+    userID: {type: String, trim: true, default: ''},
     description: {type: String, trim: true, default: ''},
     price: {type: String, trim: true, default: ''},
     picture: {type: String, default: ''},

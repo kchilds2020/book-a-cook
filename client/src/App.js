@@ -20,7 +20,7 @@ import {CookiesProvider} from 'react-cookie'
 const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
 function App() {
-  const [authenticated, setAuthentication] = useState(true);
+  const [authenticated, setAuthentication] = useState(false);
   const [identification, setIdentification] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -33,7 +33,6 @@ function App() {
   const [picture, setPicture] = useState('');
   const [photos, setPhotos] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
-
 
   return (
     <CookiesProvider>
@@ -69,7 +68,7 @@ function App() {
                 <PrivateRoute path="/profile" authenticated = {authenticated} setAuthentication={setAuthentication} >
                 <Route 
                   path="/profile"  
-                  render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
+                  render={(props) => <Profile {...props} setIdentification={setIdentification} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
                 </PrivateRoute>
 
 
