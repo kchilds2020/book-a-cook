@@ -115,8 +115,18 @@ router.get('/api/get/email/:email', (req,res) => {
 
 //find user login
 
-router.get('/get-session', (req,res) => {
-    res.send(`${req.session.userID}`);
+router.get('/get-session', async (req,res) => {
+    /* res.send(`${req.session.userID}`); */
+    console.log('req.session.userID', req.session.userID)
+    let userInfo = await User.findOne({_id: req.session.userID})
+    res.json(userInfo)
+
+    
+})
+
+router.get('/check-session', (req,res) => {
+    console.log(!req.session.userID)
+   !req.session.userID ? res.send(false) : res.send(true)
 })
 
 router.get('/logout', (req,res) => {

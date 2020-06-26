@@ -52,7 +52,7 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem}
         <>
             <div className="menu-item-container">
                 <div className="menu-photo">
-                    <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`/api/get/image/${menuPicture}`}/>
+                    <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`${menuPicture}`}/>
                     <input ref={menuFileInput} onChange= {handleMenuFileChange} type="file" style={{display: 'none'}}/>
                 </div>
                 <div className = "menu-item-details">

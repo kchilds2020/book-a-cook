@@ -7,21 +7,20 @@ import Login from './components/Login';
 import Register from './components/Register';
 import JobPostings from './components/JobPosts/JobPostings';
 import Profile from './components/Profile/Profile';
-import Auth from './components/Auth'
 import Cooks from './components/Cooks/Cooks'
 import UserProfile from './components/UserProfile/UserProfile'
-import NavBar from './components/NavBar'
 import Menu from './components/Menu/Menu'
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import BootstrapNav from './components/BootstrapNav';
 import PrivateRoute from './components/PrivateRoute'
+import {CookiesProvider} from 'react-cookie'
 
 
 const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
 function App() {
-  const [authenticated, setAuthentication] = useState(false);
+  const [authenticated, setAuthentication] = useState(true);
   const [identification, setIdentification] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -35,21 +34,23 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
 
+
   return (
+    <CookiesProvider>
     <Elements stripe={stripePromise}>
-      <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos} username={username} setMenuItems={setMenuItems}/>
-      <Router> 
-          
-{/*         <NavBar authenticated={authenticated} setAuthentication={setAuthentication} cook={cook} setIdentification={setIdentification}/>
- */}            
-        {/* <div className = 'nav-bar-overlay'><BootstrapNav /></div> */}
+{/*       <Auth authenticated = {authenticated} identification = {identification} setAuthentication={setAuthentication} setIdentification={setIdentification} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} setCook={setCook} setPicture={setPicture} setPhotos={setPhotos} username={username} setMenuItems={setMenuItems}/>
+ */}      <Router> 
         <BootstrapNav />
               <Switch>
                 <Route path="/" exact strict component={Landing}/>
-                <PrivateRoute path="/home">
+
+
+                <PrivateRoute path="/home" authenticated = {authenticated} setAuthentication={setAuthentication} >
                   <Route 
-                    render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
+                    render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} cook={cook}  setUsername={setUsername} setFirstname={setFirstname} setCook={setCook}/> }/>
                 </PrivateRoute>
+
+
                 <Route path="/cooks" exact component={Cooks} />
                 <Route 
                   path="/cooks"  
@@ -63,11 +64,15 @@ function App() {
                   <Route 
                   path="/menu"  
                   render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
-                <PrivateRoute path="/profile">
+
+
+                <PrivateRoute path="/profile" authenticated = {authenticated} setAuthentication={setAuthentication} >
                 <Route 
                   path="/profile"  
                   render={(props) => <Profile {...props} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
                 </PrivateRoute>
+
+
                 <Route 
                   path="/login"  
                   render={(props) => <Login {...props} setAuthentication={setAuthentication} setIdentification={setIdentification} />}/>
@@ -77,6 +82,7 @@ function App() {
             </Switch>
         </Router>
         </Elements>
+        </CookiesProvider>
 
   );
 }

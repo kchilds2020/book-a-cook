@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../styles/Home.css'
 import '../../App.css'
 import JobPosts from './JobPosts'
 import Events from './Events'
 import MyOrders from './MyOrders'
+import axios from 'axios'
 
 
+const Home = ({identification, firstname, username, cook, setFirstname, setUsername, setCook}) => {
 
-const Home = ({identification, firstname, lastname, email, username, cook}) => {
+    useEffect(() => {
+        axios.get(`/get-session`)
+                .then(idRes => {
+                    console.log(idRes)
+                    setFirstname(idRes.data.firstName)
+                    setUsername(idRes.data.username)
+                    setCook(idRes.data.cook)
+                })
 
-    
+                /* axios.get(`/api/get/menu-items/${username}`)
+                .then(menuItemsRes => {
+                    setMenuItems(menuItemsRes.data)
+                }) */
+    }, [setFirstname, setCook,setUsername])
 
     console.log('COOK', cook)
     return(
