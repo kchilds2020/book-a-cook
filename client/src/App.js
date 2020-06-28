@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Landing from './components/Landing';
@@ -33,6 +33,13 @@ function App() {
   const [picture, setPicture] = useState('');
   const [photos, setPhotos] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    let user = localStorage.getItem("user");
+    setIdentification(user)
+    console.log('USER', user)
+    if(user !== null){ setAuthentication(true)}
+  }, [])
 
   return (
     <CookiesProvider>

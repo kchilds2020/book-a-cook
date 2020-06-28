@@ -1,31 +1,25 @@
-import React, { useEffect } from 'react'
-import {Redirect, Route} from 'react-router-dom'
+import React, {useEffect} from 'react'
+import {Redirect, Route, useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 
 
 function PrivateRoute({children,path,authenticated, setAuthentication, ...rest}) {
 
-    
-        useEffect(() => {
-            let mounted = true
-
-            axios.get('/get-session')
-            .then(res=> {
-                if(mounted){
-                    res.data.userInfo !== null ? setAuthentication(true) : setAuthentication(false)
-                }
-            })
-
-            return () => mounted = false
-        }, [setAuthentication, authenticated])
-
-
-console.log('authenticated', authenticated)
-
+    let history = useHistory()
+    useEffect(() => {
+        axios.get(`/get-session`)
+                .then(idRes => {
+                    console.log('PRIVATE ROUTE',idRes)
+                    if(idRes.data.userInfo === null){
+                        localStorage.removeItem('user')
+                        history.push('/login')
+                    }
+                })
+    }, [])
 
 return(
-        <Route {...rest} render={({ location }) => authenticated ? ( children ) : ( <Redirect to={{ pathname: "/login", state: { from: location }}}/>)}/>
+        <Route {...rest} render={({ location }) => localStorage.getItem('user') !== null ? ( children ) : ( <Redirect to={{ pathname: "/login", state: { from: location }}}/>)}/>
 );
 
 }

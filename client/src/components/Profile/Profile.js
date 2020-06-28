@@ -4,6 +4,7 @@ import silhouette from '../../images/silhouette.png'
 import axios from 'axios'
 import Photos from './Photos'
 import Menu from './Menu'
+import {useHistory} from 'react-router-dom'
 
 function Profile({setIdentification, identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
     const [toggle, setToggle] = useState(false);
@@ -16,6 +17,8 @@ function Profile({setIdentification, identification, firstname, lastname, userna
 
     //menu
     const fileInput = useRef();
+
+    let history = useHistory();
 
    
 
@@ -35,20 +38,22 @@ function Profile({setIdentification, identification, firstname, lastname, userna
         axios.get(`/get-session`)
                 .then(idRes => {
                     console.log(idRes)
-                    setIdentification(idRes.data.userInfo.identification)
-                    setUsername(idRes.data.userInfo.username)
-                    setFirstname(idRes.data.userInfo.firstName)
-                    setLastname(idRes.data.userInfo.lastName)
-                    setEmail(idRes.data.userInfo.email)
-                    setCookDescription(idRes.data.userInfo.cookDescription)
-                    setCookPrice(idRes.data.userInfo.cookPrice)
-                    setCookSpecialty(idRes.data.userInfo.cookSpecialty)
-                    setCook(idRes.data.userInfo.cook)
-                    setPicture(idRes.data.userInfo.picture)
-                    setPhotos(idRes.data.userInfo.photos)
-                    setMenuItems(idRes.data.menuInfo);
+                    if(idRes.data.userInfo !== null){
+                        setIdentification(idRes.data.userInfo.identification)
+                        setUsername(idRes.data.userInfo.username)
+                        setFirstname(idRes.data.userInfo.firstName)
+                        setLastname(idRes.data.userInfo.lastName)
+                        setEmail(idRes.data.userInfo.email)
+                        setCookDescription(idRes.data.userInfo.cookDescription)
+                        setCookPrice(idRes.data.userInfo.cookPrice)
+                        setCookSpecialty(idRes.data.userInfo.cookSpecialty)
+                        setCook(idRes.data.userInfo.cook)
+                        setPicture(idRes.data.userInfo.picture)
+                        setPhotos(idRes.data.userInfo.photos)
+                        setMenuItems(idRes.data.menuInfo);
+                    }
                 })
-    },[username,setCook, setCookDescription, setCookPrice, setCookSpecialty, setEmail,setFirstname, setLastname, setMenuItems,setPhotos, setPicture, setUsername, setIdentification])
+    },[username,setCook, setCookDescription, setCookPrice, setCookSpecialty, setEmail,setFirstname, setLastname, setMenuItems,setPhotos, setPicture, setUsername, setIdentification, history])
 
     useEffect(()=>{
         let updateButton = document.getElementById('profile-update-btn')

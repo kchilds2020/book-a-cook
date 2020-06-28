@@ -34,6 +34,7 @@ export const Login = ({setAuthentication, setIdentification}) => {
                 }else{
                     setIdentification(response.data._id);
                     setAuthentication(true);
+                    localStorage.setItem('user', response.data._id)
                     //go to home
                     history.replace(from)
                 }

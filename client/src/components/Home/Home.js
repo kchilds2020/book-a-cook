@@ -5,19 +5,24 @@ import JobPosts from './JobPosts'
 import Events from './Events'
 import MyOrders from './MyOrders'
 import axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 
 const Home = ({identification, firstname, username, cook, setFirstname, setUsername, setCook}) => {
+
+    let history = useHistory()
 
     useEffect(() => {
         axios.get(`/get-session`)
                 .then(idRes => {
                     console.log(idRes)
-                    setFirstname(idRes.data.userInfo.firstName)
-                    setUsername(idRes.data.userInfo.username)
-                    setCook(idRes.data.userInfo.cook)
+                    if(idRes.data.userInfo !== null){
+                        setFirstname(idRes.data.userInfo.firstName)
+                        setUsername(idRes.data.userInfo.username)
+                        setCook(idRes.data.userInfo.cook)
+                    }
                 })
-    }, [setFirstname, setCook,setUsername])
+    }, [setFirstname, setCook,setUsername, history])
 
     console.log('COOK', cook)
     return(
