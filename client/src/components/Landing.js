@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
 import SVG from '../images/SVG.svg';
 import '../styles/Landing.css'
+import {UserContext} from './UserContext'
 
 const Landing = () => {
+
+    const value = useContext(UserContext)
+    console.log('USER CONTEXT: ', value)
     return(
         <>
             <div className = "landing-body">

@@ -1,5 +1,6 @@
-add menu items
-add payment
+add useContext instead of drilling
+add ability to contact event creator
+fix preview loading if token expired
+fix update for profile
 if not cook, filter information given
 add icons
-add responsive design and nav bar

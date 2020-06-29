@@ -15,7 +15,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import BootstrapNav from './components/BootstrapNav';
 import PrivateRoute from './components/PrivateRoute'
 import {CookiesProvider} from 'react-cookie'
-
+import axios from 'axios'
 
 const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
@@ -34,12 +34,7 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
 
-  useEffect(() => {
-    let user = localStorage.getItem("user");
-    setIdentification(user)
-    console.log('USER', user)
-    if(user !== null){ setAuthentication(true)}
-  }, [])
+
 
   return (
     <CookiesProvider>
@@ -48,43 +43,40 @@ function App() {
  */}      <Router> 
         <BootstrapNav />
               <Switch>
-                <Route path="/" exact strict component={Landing}/>
-
-
-                <PrivateRoute path="/home" authenticated = {authenticated} setAuthentication={setAuthentication} >
+              
+              
+              <PrivateRoute path="/home" authenticated = {authenticated} setAuthentication={setAuthentication} >     
+                    <Route render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} cook={cook} setUsername={setUsername} setFirstname={setFirstname} setCook={setCook}/> }/>
+                  </PrivateRoute>
+                  <PrivateRoute path="/profile" authenticated = {authenticated} setAuthentication={setAuthentication} >
+                      <Route render={(props) => <Profile {...props} setIdentification={setIdentification} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
+                  </PrivateRoute>
+                    <Route path="/" exact strict component={Landing}/>
                   <Route 
-                    render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} cook={cook}  setUsername={setUsername} setFirstname={setFirstname} setCook={setCook}/> }/>
-                </PrivateRoute>
-
-
-                <Route path="/cooks" exact component={Cooks} />
-                <Route 
-                  path="/cooks"  
-                  render={(props) => <Cooks {...props} cook = {cook}/>}/>
-                <Route 
-                  path="/job-postings"  
-                  render={(props) => <JobPostings {...props} username={username} cook = {cook}/>}/>
-                <Route 
-                  path="/user/profile"  
-                  render={(props) => <UserProfile {...props} userSessionName={username} cook ={cook}/>}/>
+                    path="/cooks"  
+                    render={(props) => <Cooks {...props} cook = {cook}/>}/>
                   <Route 
-                  path="/menu"  
-                  render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
+                    path="/job-postings"  
+                    render={(props) => <JobPostings {...props} username={username} cook = {cook}/>}/>
+                  <Route 
+                    path="/user/profile"  
+                    render={(props) => <UserProfile {...props} userSessionName={username} cook ={cook}/>}/>
+                    <Route 
+                    path="/menu"  
+                    render={(props) => <Menu {...props} firstname = {firstname} lastname = {lastname} email = {email} cook={cook}/>}/>
+                  
+                    <Route 
+                    path="/login"  
+                    render={(props) => <Login {...props} setAuthentication={setAuthentication} setIdentification={setIdentification} />}/>
+                  <Route 
+                    path="/register"  
+                    render={(props) => <Register {...props} setAuthentication={setAuthentication} setIdentification={setIdentification}/>}/>
 
 
-                <PrivateRoute path="/profile" authenticated = {authenticated} setAuthentication={setAuthentication} >
-                <Route 
-                  path="/profile"  
-                  render={(props) => <Profile {...props} setIdentification={setIdentification} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
-                </PrivateRoute>
 
 
-                <Route 
-                  path="/login"  
-                  render={(props) => <Login {...props} setAuthentication={setAuthentication} setIdentification={setIdentification} />}/>
-                <Route 
-                  path="/register"  
-                  render={(props) => <Register {...props} setAuthentication={setAuthentication} setIdentification={setIdentification}/>}/>
+                  
+                
             </Switch>
         </Router>
         </Elements>
