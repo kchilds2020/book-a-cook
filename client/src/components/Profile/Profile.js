@@ -1,12 +1,16 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useEffect, useState, useRef, useContext} from 'react'
 import '../../styles/Profile.css'
 import silhouette from '../../images/silhouette.png'
 import axios from 'axios'
 import Photos from './Photos'
 import Menu from './Menu'
 import {useHistory} from 'react-router-dom'
+import {UserContext} from '../UserContext'
 
 function Profile({setIdentification, identification, firstname, lastname, username, email, cookSpecialty, cookDescription, cookPrice, setFirstname, setLastname, setUsername, setEmail, setCookDescription, setCookPrice, setCookSpecialty, cook, setCook, picture, setPicture, photos, setPhotos, menuItems, setMenuItems}) {
+    let {user, menu} = useContext(UserContext)
+    console.log('PROFILE USER CONTEXT', user, menu)
+    
     const [toggle, setToggle] = useState(false);
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])

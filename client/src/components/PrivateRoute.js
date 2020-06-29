@@ -4,7 +4,7 @@ import axios from 'axios'
 import {UserContext} from './UserContext'
 
 
-function PrivateRoute({children, path, authenticated, setAuthentication, ...rest}) {
+function PrivateRoute({children, path, ...rest}) {
     let history = useHistory()
 
     const [user, setUser] = useState(null);
@@ -16,24 +16,24 @@ function PrivateRoute({children, path, authenticated, setAuthentication, ...rest
         
         axios.get(`/get-session`)
           .then(idRes => {
-            if(mounted){
+            
                 console.log('PrivateRoute.js info',idRes)
-                if(!idRes.userInfo){
+                if(!idRes.data.userInfo){
                     console.log('Push')
                     localStorage.removeItem('user')
                     history.push('/login')
                 }
-                setUser(idRes.data.userInfo)
-                setMenu(idRes.data.menuInfo)
-            }            
+                if(mounted){
+                    setUser(idRes.data.userInfo)
+                    setMenu(idRes.data.menuInfo)
+                }            
           })
 
           return () => mounted = false
-      },[])
-      {/* <UserContext.Provider value = {{user, menu}}> */}
+      },[history])
 
 
-    return <Route {...rest} render={({ location }) => localStorage.getItem('user') !== null ? (children) : ( <Redirect to={{ pathname: "/login", state: { from: location }}}/>)}/>
+    return <UserContext.Provider value = {{user, menu}}><Route {...rest} render={({ location }) => localStorage.getItem('user') !== null ? (children) : ( <Redirect to={{ pathname: "/login", state: { from: location }}}/>)}/></UserContext.Provider>
 
 }
 

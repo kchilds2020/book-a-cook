@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Landing from './components/Landing';
@@ -15,7 +15,6 @@ import {Elements} from '@stripe/react-stripe-js';
 import BootstrapNav from './components/BootstrapNav';
 import PrivateRoute from './components/PrivateRoute'
 import {CookiesProvider} from 'react-cookie'
-import axios from 'axios'
 
 const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
@@ -45,13 +44,15 @@ function App() {
               <Switch>
               
               
-              <PrivateRoute path="/home" authenticated = {authenticated} setAuthentication={setAuthentication} >     
-                    <Route render={(props) => <Home {...props} identification = {identification} username={username} firstname = {firstname} cook={cook} setUsername={setUsername} setFirstname={setFirstname} setCook={setCook}/> }/>
+                  <PrivateRoute path="/home" >     
+                    <Route exact strict component={Home}/>
                   </PrivateRoute>
+
                   <PrivateRoute path="/profile" authenticated = {authenticated} setAuthentication={setAuthentication} >
                       <Route render={(props) => <Profile {...props} setIdentification={setIdentification} identification = {identification} username={username} firstname = {firstname} lastname = {lastname} email = {email} cookSpecialty={cookSpecialty} cookDescription={cookDescription} cookPrice={cookPrice} setFirstname={setFirstname} setLastname={setLastname} setUsername={setUsername} setEmail={setEmail} setCookDescription={setCookDescription} setCookSpecialty={setCookSpecialty} setCookPrice={setCookPrice} cook={cook} setCook={setCook} picture={picture} setPicture = {setPicture} photos={photos} setPhotos={setPhotos} menuItems={menuItems} setMenuItems={setMenuItems}/>}/>
                   </PrivateRoute>
-                    <Route path="/" exact strict component={Landing}/>
+
+                  <Route path="/" exact strict component={Landing}/>
                   <Route 
                     path="/cooks"  
                     render={(props) => <Cooks {...props} cook = {cook}/>}/>
