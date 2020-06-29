@@ -5,7 +5,7 @@ import '../../styles/UserProfile.css'
 import JobForm from '../JobForm';
 import Photo from './Photo';
 
-function UserProfile({userSessionName, profileCook}) {
+function UserProfile() {
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
@@ -60,7 +60,7 @@ function UserProfile({userSessionName, profileCook}) {
             description: description,
             location: location,
             date: date,
-            username: userSessionName,
+            username:'',
             peopleAmount: peopleAmount,
             cook: username
         }

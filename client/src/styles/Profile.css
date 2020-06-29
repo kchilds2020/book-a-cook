@@ -84,11 +84,6 @@
     padding: 10px;
 }
 
-.cook-information{
-    visibility: hidden;
-    height: 0px;
-}
-
 .cook-input, .user-input{
     font-family: Raleway, Helvetica, sans-serif;
     font-size: 18px;

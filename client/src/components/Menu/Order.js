@@ -11,7 +11,7 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-function Order({cancel, price, title, picture, email, dbID, customer}) {
+function Order({cancel, price, title, picture, dbID, customer}) {
     const [qty, setQty] = useState(1)
     const [cardName, setCardName] = useState('');
     const [street, setStreet] = useState('');
@@ -34,8 +34,7 @@ function Order({cancel, price, title, picture, email, dbID, customer}) {
                 type: 'card',
                 card: elements.getElement(CardNumberElement),
                 billing_details: {
-                    name: `${cardName}`, 
-                    email: email
+                    name: `${cardName}` 
                 }
             }
           });

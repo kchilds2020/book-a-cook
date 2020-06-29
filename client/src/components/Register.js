@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import "../styles/Register.css"
 
-export const Register = ({setAuthentication, setIdentification}) => {
+export const Register = () => {
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
@@ -77,7 +77,6 @@ export const Register = ({setAuthentication, setIdentification}) => {
                         console.log('FAILURE');
                     }else{
                         console.log(response);
-                        setIdentification(response.data._id);
                     }
                 })
                 .catch(function (error) {

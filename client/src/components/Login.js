@@ -4,7 +4,7 @@ import '../styles/Login.css'
 import { useHistory, useLocation} from 'react-router-dom'
 
 
-export const Login = ({setAuthentication, setIdentification}) => {
+export const Login = () => {
 
     let history = useHistory();
     let location = useLocation();
@@ -32,8 +32,6 @@ export const Login = ({setAuthentication, setIdentification}) => {
                     alert('Invalid password')
                     
                 }else{
-                    setIdentification(response.data._id);
-                    setAuthentication(true);
                     localStorage.setItem('user', response.data._id)
                     //go to home
                     history.replace(from)

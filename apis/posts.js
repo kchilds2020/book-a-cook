@@ -64,6 +64,7 @@ router.post('/post/add-menu-items', (req, res) => {
             longitude: element.longitude,
             latitude: element.latitude,
             username: element.username,
+            userID: element.userID,
             description: element.description,
             price: element.price,
             picture: element.picture

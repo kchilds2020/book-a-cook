@@ -5,7 +5,7 @@ import JobPost from './JobPost'
 import JobForm from '../JobForm'
 import Spinner from 'react-bootstrap/Spinner';
 
-function JobPostings({username, cook}) {
+function JobPostings() {
     const [postsArray, setPostsArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
@@ -58,7 +58,7 @@ function JobPostings({username, cook}) {
             location: location,
             peopleAmount: peopleAmount,
             date: date,
-            username: username
+            username: ''
         }
 
         axios.post('/post/create-post', post)
@@ -91,7 +91,7 @@ function JobPostings({username, cook}) {
         <div>
             <div className = "jp-container">
                 <div className = "posts-container">
-                    {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div>: postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={username} cancelPost = {cancelPost}/>)}
+                    {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div>: postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={'username'} cancelPost = {cancelPost}/>)}
                     {err ? err : null}
                 </div>
                 <div id = "job-post-form">

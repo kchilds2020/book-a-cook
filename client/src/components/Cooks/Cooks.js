@@ -7,7 +7,7 @@ import '../../styles/Cooks.css'
 import Spinner from 'react-bootstrap/Spinner';
 
 
-function Cooks({cook}) {
+function Cooks() {
     const [cooksArray, setCooksArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
