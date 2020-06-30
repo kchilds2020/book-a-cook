@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import silhouette from '../../images/silhouette.png'
 import '../../styles/UserProfile.css'
 import JobForm from '../JobForm';
 import Photo from './Photo';
+import {UserContext} from '../UserContext'
+
 
 function UserProfile() {
+
+    let {user, menu} = useContext(UserContext)
+    console.log('USERPROFILE USER CONTEXT', user, menu)
+
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');

@@ -1,8 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
  import '../../styles/JobPost.css' 
 import axios from 'axios';
+import {useHistory} from 'react-router-dom'
+import {UserContext} from '../UserContext'
+import Button from 'react-bootstrap/Button'
 
-function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, username}) {
+function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID}) {
+
+
+    let {user, menu} = useContext(UserContext)
+    console.log('JOB POST', user, menu)
+
+    let history = useHistory()
 
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
@@ -21,20 +30,24 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
     }, [eventDate])
 
     const apply = (event) => {
-        const data = {
-            username: username,
-            uniqueID: uniqueID
-        }
-        let btn = event.target
-        axios.post(`api/post/apply/job-post`, data)
-        .then(response => {
-            console.log(response)
-            btn.innerText = "Applied!"
-            btn.style.backgroundColor="green"
-            btn.style.pointerEvents="none"
-        })
-        .catch(err => console.log(err))
-
+        if(user === null){
+            alert('You must login to apply for jobs')
+            history.push('/login')
+        }else{
+            const data = {
+                username: user.username,
+                uniqueID: uniqueID
+            }
+            let btn = event.target
+            axios.post(`api/post/apply/job-post`, data)
+            .then(response => {
+                console.log(response)
+                btn.innerText = "Applied!"
+                btn.style.backgroundColor="green"
+                btn.style.pointerEvents="none"
+            })
+            .catch(err => console.log(err))
+        }   
 
         
     }
@@ -49,7 +62,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
                     <div className = "post-date">{month} {day}, {year}</div>
                 </div>
                 <div className = "post-description">{description}</div>
-                <button onClick={apply} id="jp-btn">Apply!</button>
+                <Button variant="primary" onClick={apply} id="jp-btn">Apply!</Button>
                 <div className = "post-username">Created by: {userPosted}</div>
             </div>
     )

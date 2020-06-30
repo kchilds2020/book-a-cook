@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import MenuItem from './MenuItem'
 import axios from 'axios'
 import '../../styles/Menu.css'
 import Spinner from 'react-bootstrap/Spinner'
+import {UserContext} from '../UserContext'
 
 
 function Menu() {
+    let {user, menu} = useContext(UserContext)
+    console.log('MENU USER CONTEXT', user, menu)
 
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);

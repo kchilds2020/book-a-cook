@@ -1,11 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import '../../styles/JobPostings.css'
 import axios from 'axios'
 import JobPost from './JobPost'
 import JobForm from '../JobForm'
 import Spinner from 'react-bootstrap/Spinner';
+import {UserContext} from '../UserContext'
 
 function JobPostings() {
+    let {user, menu} = useContext(UserContext)
+    console.log('JOB POSTINGS USER CONTEXT', user, menu)
+
+
     const [postsArray, setPostsArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
@@ -58,7 +63,7 @@ function JobPostings() {
             location: location,
             peopleAmount: peopleAmount,
             date: date,
-            username: ''
+            username: user.username
         }
 
         axios.post('/post/create-post', post)
@@ -88,18 +93,20 @@ function JobPostings() {
     }
 
     return (
-        <div>
-            <div className = "jp-container">
-                <div className = "posts-container">
-                    {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div>: postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} username={'username'} cancelPost = {cancelPost}/>)}
-                    {err ? err : null}
+            <div>
+                <div className = "jp-container">
+                    <div className = "posts-container">
+                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} cancelPost = {cancelPost}/>)}
+                        {err ? err : null}        
+                    </div>
+                    <div id = "job-post-form">
+                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
+                    </div>
                 </div>
-                <div id = "job-post-form">
-                    <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
-                </div>
+
             </div>
 
-        </div>
+
     )
 }
 

@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import '../../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
 import Filter from './Filter';
 import '../../styles/Cooks.css'
 import Spinner from 'react-bootstrap/Spinner';
+import {UserContext} from '../UserContext'
 
 
 function Cooks() {
+    
+    let {user, menu} = useContext(UserContext)
+    console.log('COOKS USER CONTEXT', user, menu)
+
     const [cooksArray, setCooksArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');

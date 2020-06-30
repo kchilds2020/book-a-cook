@@ -4,7 +4,6 @@ import silhouette from '../../images/silhouette.png'
 import axios from 'axios'
 import Photos from './Photos'
 import Menu from './Menu'
-import {useHistory} from 'react-router-dom'
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 
