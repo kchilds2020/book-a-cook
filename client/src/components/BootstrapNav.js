@@ -46,7 +46,7 @@ function BootstrapNav() {
                             <>
                                 <Nav.Link className={active === '/profile' ? "active" : ""} href ="/profile">
                                     {user.firstName} {user.lastName}
-                                    <img src={user === null ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px'}}  />
+                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px'}}  />
                                     
                                 </Nav.Link>
                                 <Nav.Link className={active === '/home' ? "active" : ""} href ="/home">Home</Nav.Link>

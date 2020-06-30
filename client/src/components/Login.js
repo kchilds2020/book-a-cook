@@ -49,6 +49,7 @@ export const Login = () => {
                     <h2>LOGIN</h2>
                     <input className = 'inputFields' name = "username" type = "text" placeholder = 'Username'  maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)}/>
                     <input className = 'inputFields' name = "password" type = "password" placeholder = 'Password' value = {password} onChange={e => setPassword(e.target.value)}/>
+                    <a href="/register">Dont have an account? Register</a>
                     <button className = 'submitButton'>Login</button>
                 </form>
             </div>

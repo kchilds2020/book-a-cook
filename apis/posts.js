@@ -80,8 +80,9 @@ router.post('/post/add-menu-items', (req, res) => {
     })
 });
 
-router.post('/api/post/create-order', (req, res) => {
-        Orders.create({
+router.post('/api/post/create-order', async (req, res) => {
+        const item = await Menu.findOne({_id: req.body.menuItemID})
+        const orderRes = await Orders.create({
             menuItemID: req.body.menuItemID,
             menuItemTitle: req.body.menuItemTitle,
             qty: req.body.qty,
@@ -90,11 +91,16 @@ router.post('/api/post/create-order', (req, res) => {
             chefUsername: req.body.chefUsername,
             customerUsername: req.body.customerUsername,
         })
-        .then(results => {
-            console.log(`New ORDER: ${results}`);
-            res.json(results);
+        console.log('AMOUNT: ', parseFloat(item.price) * parseInt(req.body.qty))
+        const cookRes = await User.updateOne({username: req.body.chefUsername},{
+            $inc: {
+                account: parseFloat(item.price) * req.body.qty,
+                totalEarned: parseFloat(item.price) * req.body.qty
+            }
         })
-        .catch(error => console.error(error))
+        console.log('cookRes', cookRes)
+        res.json({orderRes, cookRes})
+
 })
 
 router.post('/api/post/complete-order', (req, res) => {

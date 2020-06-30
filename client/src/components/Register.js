@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import "../styles/Register.css"
+import {useHistory} from 'react-router-dom'
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -9,8 +10,11 @@ export const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    let history = useHistory()
+
     const checkValidation = async (user) => {
 
+    
         // check for non letters in firstname and last name
 
         console.log(!user.firstname.match(/^[0-9a-zA-Z]+$/));
@@ -77,6 +81,7 @@ export const Register = () => {
                         console.log('FAILURE');
                     }else{
                         console.log(response);
+                        history.push('/home')
                     }
                 })
                 .catch(function (error) {

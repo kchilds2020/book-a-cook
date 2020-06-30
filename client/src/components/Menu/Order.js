@@ -56,7 +56,7 @@ function Order({cancel, price, title, picture, dbID, customer}) {
                 let response = axios.post('/api/post/create-order', orderData)
                 alert('Order has been placed!')
                 console.log('paid!', paymentResponse, response)
-                window.location.href='/home'
+                /* window.location.href='/home' */
             }
             catch (error){
                 alert(`Try catch error: ${error}`)

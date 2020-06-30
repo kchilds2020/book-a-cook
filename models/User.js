@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { Double, Decimal128 } = require('mongodb');
 
 const User = new mongoose.Schema({
     firstName: {type: String, trim: true, default: ''},
@@ -12,6 +13,8 @@ const User = new mongoose.Schema({
     cookPrice: {type: String, trim: true, default: ''},
     picture: {type: String, default: ''},
     photos: {type: Array, default: []},
+    account: {type: Number, default: 0},
+    totalEarned: {type: Number, default: 0}
 
 },
 {
