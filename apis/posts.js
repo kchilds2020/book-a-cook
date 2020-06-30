@@ -35,7 +35,10 @@ router.post('/upload-img', (req,res) => {
 
 router.post('/api/post/remove-item/:id', (req,res) => {
     Menu.deleteOne({_id: req.params.id})
-    .then(response => res.json(response))
+    .then(response => {
+        console.log('REMOVE ITEM RESPONSE', response)
+        res.json(response)
+    })
     .catch(error => console.error(error))
 })
 

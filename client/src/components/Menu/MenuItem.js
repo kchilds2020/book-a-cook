@@ -1,18 +1,22 @@
 import React, {useState} from 'react'
 import '../../styles/MenuItem.css'
 import Order from './Order';
+import Button from 'react-bootstrap/Button'
+import Popup from "reactjs-popup";
 
-function MenuItem({title, description, price, username, picture, itemNum, dbID}) {
+function MenuItem({title, description, price, username, picture, itemNum, dbID, shadow, setShadow}) {
 
     const [visible, setVisibility] = useState(false);
     const orderItem = (event) =>{
         event.preventDefault();
         console.log('order!')
         setVisibility(true);
+        setShadow(true)
     }
     const cancelItem = (event) => {
         event.preventDefault();
         setVisibility(false)
+        setShadow(false)
     }
 
     return (
@@ -26,9 +30,9 @@ function MenuItem({title, description, price, username, picture, itemNum, dbID})
                 <div className = "menu-item-description" id = {`menu-item-description-${itemNum}`}> {description} </div>
                 <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div>
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>
-                <button className="menu-item-btn" onClick={orderItem}>Order!</button>    
+                <Button style={{margin: '10px'}} onClick={orderItem}>Order!</Button>    
             </div>
-            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} customer={username}/> : <></>}
+                {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} customer={username}/> : <></>}
         </div>
     )
 }

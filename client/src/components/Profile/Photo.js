@@ -3,12 +3,13 @@ import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
 import Confirm from '../Confirm'
 
-function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto}) {
+function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto, setModified}) {
     const photoInput = useRef();
 
     const [visible, setVisibility] = useState(false);
 
     const handleImgChange = (event) => {
+        setModified(true)
         console.log(event.target);
         let fileArray = files;
         let tempPhotos = photos;

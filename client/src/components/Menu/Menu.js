@@ -13,6 +13,7 @@ function Menu() {
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
+    const [shadow, setShadow] = useState(false);
     useEffect(() => {
         let mounted = true;
         axios.get('api/get/menu')
@@ -36,9 +37,10 @@ function Menu() {
     return (
         <>
             <div className="menu-page-container">
-                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} dbID={element._id}/>)}
+                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} dbID={element._id} setShadow={setShadow} shadow={shadow}/>)}
                 {err ? err : null}
             </div>
+            {shadow ? <div className="shadow">Test</div> : <></>}
         </> 
     )
 }

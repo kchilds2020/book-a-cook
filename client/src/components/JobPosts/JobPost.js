@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 
-function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID}) {
+function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, applications}) {
 
 
     let {user, menu} = useContext(UserContext)
@@ -16,6 +16,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
     const [year, setYear] = useState();
+    const [applied,setApplied] = useState(false);
 
     useEffect(() => {
         let date = new Date(eventDate.slice(0,10));
@@ -27,7 +28,16 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
         setYear(yr)
         setDay(d)
         setMonth(mnth)
-    }, [eventDate])
+
+        if(applications.length > 0 && user !== null){
+            applications.forEach((element) => {
+                if(element === user.username){
+                    setApplied(true)
+                }
+            })
+        }
+
+    }, [eventDate, user])
 
     const apply = (event) => {
         if(user === null){
@@ -62,7 +72,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
                     <div className = "post-date">{month} {day}, {year}</div>
                 </div>
                 <div className = "post-description">{description}</div>
-                <Button variant="primary" onClick={apply} id="jp-btn">Apply!</Button>
+                {applied ? <Button variant="success" id="jp-btn">Applied!</Button> : <Button variant="primary" onClick={apply} id="jp-btn">Apply!</Button>}
                 <div className = "post-username">Created by: {userPosted}</div>
             </div>
     )

@@ -3,24 +3,13 @@ import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
-function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage}) {
+function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage, setModified}) {
     const [count, setCount] = useState(0);
 
     const change = useRef(false);
 
-    useEffect(() => {
-        console.log('MENU CHANGE',menuItems)
-        let updateButton = document.getElementById('profile-update-btn')
-        if (change.current){
-            updateButton.style.backgroundColor="rgb(115, 165, 212)"
-            updateButton.style.cursor="pointer"
-            updateButton.style.pointerEvents = "all"
-        }
-        else
-            change.current = true;
-    },[count, menuItems])
-
     const createMenuItem = (data) =>  {
+        
         let tItems = tempMenuItems;
         let mItems = menuItems;
         tItems.push(data)
@@ -30,11 +19,11 @@ function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDele
         setTempMenuItems(tItems)
         setCount(count + 1);
         console.log('createItem', menuItems)
+        setModified(true)
     }
 
     const deleteMenuItem = async (dbID,itemID ) =>{
-
-        
+        console.log(dbID,itemID)
         let deletedItems = itemsToBeDeleted;
         deletedItems.push(dbID)
         setItemsToBeDeleted(deletedItems)  
@@ -44,6 +33,7 @@ function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDele
         items.splice(itemID,1);
         setMenuItems(items)
         setCount(count + 1)
+        setModified(true)
     }
 
     return (

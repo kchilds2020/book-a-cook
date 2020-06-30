@@ -6,7 +6,7 @@ function MenuItem({title, description, price, picture, itemNum, dbID, deleteMenu
 
     const [visible, setVisibility] = useState(false);
 
-    console.log(`MENU ITEM ${itemNum}`, title, description, price, picture, itemNum, dbID)
+    /* console.log(`MENU ITEM ${itemNum}`, title, description, price, picture, itemNum, dbID) */
 
     const deleteItem = async (event) =>{
         event.preventDefault();

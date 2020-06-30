@@ -140,14 +140,10 @@
     max-width: 900px;
     height: 50px;
     border: none;
-    background-color: rgb(158, 158, 158);
-    font-size: 18px;
     /* border-radius: 4px; */
     /* cursor: pointer; */
-    pointer-events: none;
     margin: auto;
     margin-top: 10px;
-    box-shadow: #333 0px -1px 4px;
 }
 
 

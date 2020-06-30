@@ -1,7 +1,8 @@
 import React/* , {useState} */ from 'react'
 import PIC from '../../images/silhouette.png';
 import '../../styles/CookSummary.css';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button'
 /* import Geocode from "react-geocode" */
 //import keys from "./keys"
 
@@ -48,7 +49,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                         <p>{description}</p>
                     </div>
                     <div>
-                    <Link to ={`/user/profile?user=${username}`} className="contact-btn" >Contact</Link>
+                    <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`}>Contact</Button>
                     </div>
             </div>
         </>

@@ -34,7 +34,7 @@ function Events({username}) {
             <div className="events-header">
                 <h3>You have <span className="post-num">{events.length}</span> upcoming events.</h3>
             </div>
-            {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date}/>) : <></>}
+            {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date} username={element.username}/>) : <></>}
                 {err ? err : null}
         
         </div>

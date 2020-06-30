@@ -96,7 +96,7 @@ function JobPostings() {
             <div>
                 <div className = "jp-container">
                     <div className = "posts-container">
-                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} cancelPost = {cancelPost}/>)}
+                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} cancelPost = {cancelPost}/>)}
                         {err ? err : null}        
                     </div>
                     <div id = "job-post-form">

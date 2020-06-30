@@ -19,6 +19,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-stripe-checkout": "^2.6.3",
+    "reactjs-popup": "^1.5.0",
     "request": "^2.88.2",
     "use-async-effect": "^2.2.2"
   },

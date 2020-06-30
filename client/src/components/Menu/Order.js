@@ -54,7 +54,9 @@ function Order({cancel, price, title, picture, dbID, customer}) {
             }
             try{
                 let response = axios.post('/api/post/create-order', orderData)
+                alert('Order has been placed!')
                 console.log('paid!', paymentResponse, response)
+                window.location.href='/home'
             }
             catch (error){
                 alert(`Try catch error: ${error}`)
@@ -63,19 +65,21 @@ function Order({cancel, price, title, picture, dbID, customer}) {
     }
 
     return (
+        
         <div className="order-container">
+
             <div className="order-photo">
                 <img src={`/api/get/image/${picture}`} alt =" " />
-            </div>
+            </div>  
             <div className="order-total">{title}</div>
             
             <NumberInput qty={qty} setQty={setQty}/>
             <div className="billing-header">Drop Off Address</div>
-            <input type="text" id="card-name-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
+            <input type="text" id="street-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
             <div className="card-details">
-                <input className="small-input" type="text" id="card-name-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
-                <input className="small-input" type="text" id="card-name-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
-                <input className="small-input" type="text" id="card-name-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
+                <input className="small-input" type="text" id="fity-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
+                <input className="small-input" type="text" id="state-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
+                <input className="small-input" type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
             </div>
             <div className="billing-header">Billing Information</div>
             <input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)}/>

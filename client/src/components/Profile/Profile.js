@@ -11,7 +11,7 @@ function Profile() {
     let {user, menu} = useContext(UserContext)
     console.log('PROFILE USER CONTEXT', user, menu)
 
-    
+    const [modified, setModified] = useState(false);
     const [files, setFiles] = useState([]);
     const [tempMenuItems, setTempMenuItems] = useState([])
     const [itemsToBeDeleted, setItemsToBeDeleted] = useState([])
@@ -29,8 +29,6 @@ function Profile() {
     const [identification, setIdentification] = useState('')
     const [menuItems, setMenuItems] = useState([])
 
-    const change = useRef(false);
-
     //menu
     const fileInput = useRef();
 
@@ -47,12 +45,18 @@ function Profile() {
             setPicture(user.picture)
             setPhotos(user.photos)
             setIdentification(user._id) 
+            setModified(false)
         }
 
         if(menu !== null){
             setMenuItems(menu)
         }
     },[user, menu])
+
+    //check modification
+    useEffect(() => {
+        setModified(true)
+    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification])
 
 
 
@@ -95,7 +99,7 @@ function Profile() {
         //delete items if needed
         if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
 
-        change.current = false
+        setModified(false)
         alert('Profile Updated')
 
 
@@ -163,7 +167,7 @@ function Profile() {
                             <div className="profile-header-title">Photos</div>
                             <div className = "photos-container" id="cook-info">
                                 <div className = "images">
-                                    <Photos photos={photos} files={files}  setPhotos={setPhotos}  setFiles={setFiles} username={user.username}/>
+                                    <Photos photos={photos} files={files}  setPhotos={setPhotos}  setFiles={setFiles} username={user.username} setModified={setModified}/>
                                 </div>
                                 
                             </div>
@@ -171,12 +175,13 @@ function Profile() {
                             <>
                                 <div className="profile-header-title">Menu Items</div>
                                 <div className ="menu-container">
-                                    <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted}/>
+                                    <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} uploadImage={uploadImage} files={files} setFiles = {setFiles} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted} setModified={setModified}/>
                                 </div>
                             </>)
                             :<></>}
                             <div className="update-btn-container">
-                                <input type="submit" value="Update" className = "user-update-btn" id = "profile-update-btn"/>
+                                {/* <input type="submit" value="Update" className = "user-update-btn" id = "profile-update-btn"/> */}
+                                {!modified ? <Button className="user-update-btn" id = "profile-update-btn" variant = 'secondary' block disabled>Update</Button> : <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>}
                             </div>
                             
                         </form>

@@ -44,7 +44,9 @@ function App() {
     <CookiesProvider>
       <Elements stripe={stripePromise}>
         <Router> 
-          <BootstrapNav user={user}/>
+          <UserContext.Provider value={{user, menu}}>
+            <BootstrapNav/>
+          </UserContext.Provider> 
             <Switch>
               
               
