@@ -6,6 +6,10 @@
     margin: auto;
 }
 
+.popup-content{
+    width: 90%;
+    max-width: 600px;
+}
 /* .post-card button{
     padding: 5px 10px;
     border: none;

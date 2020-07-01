@@ -6,6 +6,7 @@ import Events from './Events'
 import MyOrders from './MyOrders'
 import {UserContext} from '../UserContext'
 import Account from './Account'
+import CustomerOrders from './CustomerOrders'
 
 
 
@@ -19,8 +20,10 @@ const Home = () => {
         <div>
             <div className = "greeting"><h2>Hello {user.firstName}!</h2></div>
             <div className="home-container">
-            {user.cook ? <Account user={user}/> : <></>}
-            {user.cook ? <MyOrders username={user.username}/> : <></>}
+            <>
+            {user.cook ? <MyOrders username={user.username} user={user}/> : <></>}
+            </>
+            {user.cook ? <></> : <CustomerOrders username={user.username}/>}
             {user.cook ? <></> : <JobPosts username={user.username}/>}
             {user.cook ? <Events username={user.username}/> : <></>}
             

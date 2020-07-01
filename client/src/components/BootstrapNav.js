@@ -38,7 +38,6 @@ function BootstrapNav() {
                             <>
                                 
                                 <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>
-                                <Nav.Link className={active === '/job-postings' ? "active" : ""} href ="/job-postings">Apply for Jobs</Nav.Link>
                                 <Nav.Link className={active === '/menu' ? "active" : ""} href = "/menu">Menu</Nav.Link>
                                 {/* <Nav.Link className={active === '/login' ? "active" : ""} href ="/login">Login</Nav.Link> */}
                                 <Button variant="outline-primary" onClick={login} style={{margin: "0px 20px"}}>Login</Button>
@@ -46,12 +45,12 @@ function BootstrapNav() {
                             <>
                                 <Nav.Link className={active === '/profile' ? "active" : ""} href ="/profile">
                                     {user.firstName} {user.lastName}
-                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px'}}  />
+                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px', objectFit: 'cover'}}  />
                                     
                                 </Nav.Link>
                                 <Nav.Link className={active === '/home' ? "active" : ""} href ="/home">Home</Nav.Link>
                                 <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>
-                                <Nav.Link className={active === '/job-postings' ? "active" : ""} href ="/job-postings">Apply for Jobs</Nav.Link>
+                                {user.cook ? <Nav.Link className={active === '/job-postings' ? "active" : ""} href ="/job-postings">Apply for Jobs</Nav.Link> : <></>}
                                 <Nav.Link className={active === '/menu' ? "active" : ""} href="/menu">Menu</Nav.Link>
                                 <NavDropdown.Divider />
                                 <Button variant="outline-danger" onClick={logout} style={{margin: "0px 20px"}}>Logout</Button>

@@ -23,10 +23,11 @@ function HomeJobPost({summary, applications, postID, listID, cook}) {
                         {cook === 'pending' ? <><span className="num-applied">{applications.length}</span> applied</> : <><span className="num-applied">{cook}</span> Hired!</> }
                     </button>
                 </div>
+                <ul className="cook-list" id={`list-${listID}`}>
+                    {applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook}/>)}
+                </ul>
             </div>
-            <ul className="cook-list" id={`list-${listID}`}>
-    {applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook}/>)}
-            </ul>
+            
         </>
     )
 }

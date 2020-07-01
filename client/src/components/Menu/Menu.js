@@ -37,11 +37,11 @@ function Menu() {
     return (
         <>
             <div className="menu-page-container">
-                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} dbID={element._id} setShadow={setShadow} shadow={shadow}/>)}
+                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} chefUsername={element.username} itemNum={index} dbID={element._id} setShadow={setShadow} shadow={shadow} username={user !== null ? user.username : ''}/>)}
                 {err ? err : null}
             </div>
             {shadow ? <div className="shadow">Test</div> : <></>}
-        </> 
+        </>
     )
 }
 

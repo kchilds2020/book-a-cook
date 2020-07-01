@@ -17,8 +17,8 @@ function Account({user}) {
             </thead>
             <tbody>
                 <tr>
-                    <td><h3 style ={{color: 'green'}}>${(Math.round(user.account * 100) / 100).toFixed(2)}</h3></td>
-                    <td><h3 style ={{color: 'green'}}>${(Math.round(user.totalEarned * 100) / 100).toFixed(2)}</h3></td>
+                    <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.account * 100) / 100).toFixed(2)}</h3></td>
+                    <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.totalEarned * 100) / 100).toFixed(2)}</h3></td>
 
                 </tr>
             </tbody>     

@@ -164,6 +164,23 @@ router.post('/api/post/confirm-cook', (req, res) => {
     .catch(error => console.error(error)) 
 });
 
+router.post('/api/post/reject-cook', async (req, res) => {
+    console.log(req.body.username, req.body.postID)
+    let response = await JobPost.findOne({_id: req.body.postID})
+    console.log(response)
+    const index = response.applications.indexOf(`${req.body.username}`)
+    let temp = response.applications
+    temp.splice(index, 1)
+
+    let update = await JobPost.updateOne({_id: req.body.postID},{
+        $set: {
+            applications: temp
+        }
+    })
+
+    console.log(update)
+});
+
 
 
 

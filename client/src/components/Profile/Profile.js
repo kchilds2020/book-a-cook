@@ -111,13 +111,15 @@ function Profile() {
         let fileArray = files;
         fileArray.push(event.target.files[0])
         setFiles(fileArray);
-        //FIX NEXT setPicture(`${user.username}-${event.target.files[0].name}`)
+        setPicture(`${user.username}-${event.target.files[0].name}`)
 
         //display progile img
         const imgTag = document.getElementById('profile-img');
         const reader = new FileReader();
         reader.addEventListener("load", () => imgTag.src = reader.result, false);
         if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
+        //add ability to update
+        setModified(true)
     }
 
     return (

@@ -4,8 +4,9 @@ import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import MyOrderItem from './MyOrderItem'
 import Table from 'react-bootstrap/Table'
+import Account from './Account'
 
-function MyOrders({username}) {
+function MyOrders({username, user}) {
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
     const [orders,setOrders] = useState([])
@@ -35,6 +36,7 @@ function MyOrders({username}) {
 
     return (
         <div className = "my-orders-container">
+            <Account user={user}/>
             <div className="my-orders-header">
                 <h3>You have <span className="post-num">{orders.length}</span> active orders.</h3>
             </div>

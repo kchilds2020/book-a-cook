@@ -19,7 +19,7 @@
     padding: 10px;
   }
   
-  .confirm-container button{
+ /*  .confirm-container button{
     padding: 10px;
     margin: 10px;
     background-color: rgb(134, 184, 212);
@@ -27,7 +27,7 @@
     box-shadow: 2px 2px 4px #333;
     border-radius: 8px;
     cursor: pointer;
-  }
+  } */
   
   .confirm-btns{
     display: flex;

@@ -1,13 +1,14 @@
 import React from 'react'
 import '../styles/Confirm.css'
+import Button from 'react-bootstrap/Button'
 
 function Confirm({message, confirm, cancel }) {
     return (
         <div className="confirm-container">
                 <div className="confirm-message">{message}</div>
                 <div className="confirm-btns">
-                    <button onClick={confirm}>Confirm</button>
-                    <button onClick={cancel}>Cancel</button>
+                    <Button variant="success" onClick={confirm}>Confirm</Button>
+                    <Button variant="danger" onClick={cancel}>Cancel</Button>
                 </div>
             </div>
     )

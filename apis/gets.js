@@ -47,6 +47,16 @@ router.get('/api/get/active-orders/:username', (req,res) => {
     .catch(err => console.log(err))
 })
 
+//find status of orders that you have purchased
+router.get('/api/get/customer-orders/:username', (req,res) => {
+    Orders.find({customerUsername: req.params.username, completed: false})
+    .then(orders => {
+        console.log(orders);
+        res.json(orders)
+    })
+    .catch(err => console.log(err))
+})
+
 //find posts that you created
 router.get('/api/get/working-events/:username', (req,res) => {
     JobPost.find({cook: req.params.username})

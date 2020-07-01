@@ -11,7 +11,7 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-function Order({cancel, price, title, picture, dbID, customer}) {
+function Order({cancel, price, title, picture, dbID, username, chefUsername}) {
     const [qty, setQty] = useState(1)
     const [cardName, setCardName] = useState('');
     const [street, setStreet] = useState('');
@@ -49,8 +49,8 @@ function Order({cancel, price, title, picture, dbID, customer}) {
                 qty: qty,
                 picture: picture,
                 address: `${street}, ${city}, ${state}, ${zip}`,
-                chefUsername: 'kchilds',
-                customerUsername: customer,
+                chefUsername: chefUsername,
+                customerUsername: username === '' ? cardName : username,
             }
             try{
                 let response = axios.post('/api/post/create-order', orderData)
