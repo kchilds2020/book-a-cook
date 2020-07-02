@@ -9,6 +9,7 @@ const mongoose =require('mongoose');
 const PORT = process.env.PORT || 5000;
 let bodyParser = require('body-parser');
 let session = require('express-session');
+var MemoryStore = require('memorystore')(session)
 
 const app = express();
 
@@ -25,7 +26,10 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 2}
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 2},
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    })
 }));
 
  app.use(express.static(path.join(__dirname,'client/build')));
