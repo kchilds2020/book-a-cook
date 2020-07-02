@@ -16,7 +16,7 @@ const Home = () => {
     console.log('HOME USER CONTEXT', user, menu)
 
     return(
-        user !== null ?
+        user ?
         <div>
             <div className = "greeting"><h2>Hello {user.firstName}!</h2></div>
             <div className="home-container">

@@ -143,7 +143,7 @@ function Profile() {
     };
 
     return (
-        user !== null ?
+        user ?
         <div>
             <div className = "profile-container">
                 <div className = "user-info">

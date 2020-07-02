@@ -29,7 +29,7 @@ function UserProfile() {
     const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
     const [peopleAmount, setPeopleAmount] = useState('');
-    const [photos,setPhotos] = useState([]);
+    const [photos,setPhotos] = useState('');
 
     useEffect(() =>{
         //get user from url
@@ -86,7 +86,8 @@ function UserProfile() {
     }
 
     return (
-        <>
+
+        username !== '' ?
             <div className="user-profile-container">
                 <div className="user-information">
                     <div className="user-picture">
@@ -98,7 +99,7 @@ function UserProfile() {
                             <div className="email">{email}</div>
                             <div className="phone">{number}</div>
                         </div>
-                        { user !== null ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
+                        { !user ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
                     </div>
                 </div>
                 
@@ -114,17 +115,17 @@ function UserProfile() {
                     </div>
                 </>
                 : <></>} 
-                {photos.length > 0 ?
+                {!photos ?
+                <></> :
                 <>
                 <div className="photo-gallery">
                     {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
                 </div>
                 <div id="book-form">
                     <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
-                </div></> : <></>
+                </div></>
                 }
-            </div>
-        </>
+            </div> : <></>
     )
 }
 

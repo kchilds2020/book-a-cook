@@ -34,7 +34,7 @@ function BootstrapNav() {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                     <Nav className="justify-content-end">
-                        {user === null ? 
+                        {!user ? 
                             <>
                                 
                                 <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>

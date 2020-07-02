@@ -6,30 +6,36 @@ const directory = path.join(__dirname, '../');
 
 //go to home page
 
-router.get('/home', (req,res,next) => {
-    res.sendFile(directory + 'build/index.html', function (err) {
+
+
+/* router.get('/home', (req,res,next) => {
+    res.sendFile(directory + 'client/build/index.html', function (err) {
         if (err) { next(err) } else { console.log('Sent:', directory + 'index.html') }
     })
 })
-router.get('/home/profile', (req,res,next) => {
-    res.sendFile(directory + 'build/index.html', function (err) {
+router.get('/profile', (req,res,next) => {
+    res.sendFile(directory + 'client/build/index.html', function (err) {
         if (err) { next(err) } else { console.log('Sent:', directory + 'index.html') }
     })
 })
-router.get('/home/job-postings', (req,res,next) => {
-    res.sendFile(directory + 'build/index.html', function (err) {
+router.get('/job-postings', (req,res,next) => {
+    res.sendFile(directory + 'client/build/index.html', function (err) {
         if (err) { next(err) } else { console.log('Sent:', directory + 'index.html') }
     })
 })
 router.get('/login', (req,res,next) => {
-    res.sendFile(directory + 'build/index.html', function (err) {
+    res.sendFile(directory + 'client/build/index.html', function (err) {
         if (err) { next(err) } else { console.log('Sent:', directory + 'index.html') }
     })
 })
 router.get('/register', (req,res,next) => {
-    res.sendFile(directory + 'build/index.html', function (err) {
+    res.sendFile(directory + 'client/build/index.html', function (err) {
         if (err) { next(err) } else { console.log('Sent:', directory + 'index.html') }
     })
-})
+}) */
+
+router.get('*', (req,res,next) =>{
+    res.sendFile(directory+'/client/build/index.html');
+});
 
 module.exports = router;

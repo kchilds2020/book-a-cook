@@ -29,7 +29,11 @@ function App() {
   useEffect(() => {
     let mounted = true
     
-    axios.get(`/get-session`)
+    axios.get(`/get-session`,{
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
       .then(idRes => {
         console.log('App.js info',idRes)
         if(mounted){
