@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "cd client&&npm install&&npm run start",
-    "build": "cd client&&npm install&&npm run build",
+    "build": "cd client&&npm install&&npm run build&&cd ..&&node server.js",
     "test": "cd client&&npm install&&npm run test",
     "eject": "cd client&&npm install&&npm run eject",
     "dev": "concurrently \"nodemon server.js\" \"cd client&&npm start\""
