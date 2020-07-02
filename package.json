@@ -23,10 +23,10 @@
     "stripe": "^8.64.0"
   },
   "scripts": {
-    "start": "cd client&&npm run start",
-    "build": "cd client&&npm run build",
-    "test": "cd client&&npm run test",
-    "eject": "cd client&&npm run eject",
+    "start": "cd client&&npm install&&npm run start",
+    "build": "cd client&&npm install&&npm run build",
+    "test": "cd client&&npm install&&npm run test",
+    "eject": "cd client&&npm install&&npm run eject",
     "dev": "concurrently \"nodemon server.js\" \"cd client&&npm start\""
   },
   "eslintConfig": {
