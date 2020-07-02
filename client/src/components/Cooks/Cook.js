@@ -25,16 +25,18 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
         error => {
             console.error(error);
         }
-    )
+    ) 
      */
     return (
         <>
             <div className="profile">
-                    <div className="pictureDiv">
-                        <img src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
-                    </div>
-                    <div className = "cookName">
-                        <h2>{firstname} {lastname}</h2>
+                    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+                        <div className="pictureDiv">
+                            <img src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
+                        </div>
+                        <div className = "cookName">
+                            <h2>{firstname} {lastname}</h2>
+                        </div>
                     </div>
                     <div className = "positionTitle">
                         <h3>{specialty}</h3>

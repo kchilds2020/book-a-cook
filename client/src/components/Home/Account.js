@@ -4,8 +4,9 @@ import Table from 'react-bootstrap/Table'
 
 function Account({user}) {
     return (
-        <div className="account-container">
-           <div className="account-header">
+
+    <>
+           <div className="header">
                 <h3>Account Amount</h3>
             </div>
         <Table striped bordered hover>
@@ -23,8 +24,7 @@ function Account({user}) {
                 </tr>
             </tbody>     
         </Table>
-
-        </div>
+    </>
     )
 }
 

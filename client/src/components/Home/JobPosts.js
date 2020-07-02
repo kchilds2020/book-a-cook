@@ -67,9 +67,9 @@ function JobPosts({username}) {
      }
 
     return (
-        <div className = "job-post-container" >
-            <div className="job-post-header">
-                <h3>You have <span className="post-num">{myPosts.length}</span> posted Jobs.</h3>
+        <div className = "home-sec-container" >
+            <div className="header">
+                <h3><span className="post-num">{myPosts.length}</span> posted Jobs.</h3>
             </div>
             <div className="profile-job-posts">
                 {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook}/>) : <></>}

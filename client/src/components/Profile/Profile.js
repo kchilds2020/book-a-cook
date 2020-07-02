@@ -28,6 +28,7 @@ function Profile() {
     const [photos, setPhotos] = useState([])
     const [identification, setIdentification] = useState('')
     const [menuItems, setMenuItems] = useState([])
+    const [number, setNumber] = useState('');
 
     //menu
     const fileInput = useRef();
@@ -46,6 +47,7 @@ function Profile() {
             setPhotos(user.photos)
             setIdentification(user._id) 
             setModified(false)
+            setNumber(user.number)
         }
 
         if(menu !== null){
@@ -56,7 +58,7 @@ function Profile() {
     //check modification
     useEffect(() => {
         setModified(true)
-    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification])
+    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number])
 
 
 
@@ -74,36 +76,37 @@ function Profile() {
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
-        uploadImage()
-        console.log(photos);
-        const userData = {
-            firstname: firstName,
-            lastname: lastName,
-            username: username,
-            email: email,
-            cook: cook,
-            cookSpecialty: cookSpecialty,
-            cookDescription: cookDescription,
-            cookPrice: cookPrice,
-            picture: picture,
-            photos: photos
+        let checks = formatPhoneNumber(number)
+        if(checks === true){
+            uploadImage()
+            console.log(photos);
+            const userData = {
+                firstname: firstName,
+                lastname: lastName,
+                username: username,
+                email: email,
+                cook: cook,
+                cookSpecialty: cookSpecialty,
+                cookDescription: cookDescription,
+                cookPrice: cookPrice,
+                picture: picture,
+                photos: photos,
+                number: number
+            }
+
+            //update user info
+            axios.post('/update-user', userData)
+            .catch(err => console.log(err))
+
+            //update menu item info
+            axios.post('/post/add-menu-items', tempMenuItems)
+
+            //delete items if needed
+            if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
+
+            setModified(false)
+            alert('Profile Updated')
         }
-
-        //update user info
-        axios.post('/update-user', userData)
-        .catch(err => console.log(err))
-
-        //update menu item info
-        axios.post('/post/add-menu-items', tempMenuItems)
-
-        //delete items if needed
-        if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
-
-        setModified(false)
-        alert('Profile Updated')
-
-
-
     }
 
     const handleProfileChange = (event) => {
@@ -121,6 +124,23 @@ function Profile() {
         //add ability to update
         setModified(true)
     }
+
+    let formatPhoneNumber = (str) => {
+        //Filter only numbers from the input
+        let cleaned = ('' + str).replace(/\D/g, '');
+        
+        //Check if the input is of correct length
+        let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+      
+        if (match) {
+          setNumber('(' + match[1] + ') ' + match[2] + '-' + match[3])
+          return true
+        }
+        else{
+            alert('Invalid Phone Number')
+            return false
+        }
+    };
 
     return (
         user !== null ?
@@ -142,7 +162,9 @@ function Profile() {
                                     <label htmlFor="username">Username</label>
                                     <input name = "username" id = "username" type = "text" className = "user-input" maxLength = '40' defaultValue = {username} onChange = {e => setUsername(e.target.value)} required/>
                                     <label htmlFor="email">Email</label>
-                                    <input name = "email" id = "email" type = "text" className = "user-input" maxLength = '40' defaultValue = {email} onChange = {e => setEmail(e.target.value)} required/>  
+                                    <input name = "email" id = "email" type = "text" className = "user-input" maxLength = '40' defaultValue = {email} onChange = {e => setEmail(e.target.value)} required/>
+                                    <label htmlFor="number">Phone Number</label>
+                                    <input name = "number" id = "number" type = "tel" className = "user-input" maxLength = '15' defaultValue = {number} onChange = {e => setNumber(e.target.value)} required/>  
                                     <div className = "cook-toggle">
                                         <span className ="toggle-text">Are you a Cook?  </span>
                                         {cook ? <Button variant="success" onClick={e => setCook(false)}>Yes</Button> : <Button variant="secondary" onClick={e => setCook(true)}>No</Button>}

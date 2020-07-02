@@ -22,9 +22,9 @@ function CustomerOrders({username}) {
      },[username])
 
     return (
-        <div className = "job-post-container" >
-            <div className="job-post-header">
-                <h3>You have <span className="post-num">{orders.length}</span> Open Orders.</h3>
+        <div className = "home-sec-container" >
+            <div className="header">
+                <h3><span className="post-num">{orders.length}</span> Open Orders.</h3>
             </div>
             <div className="profile-job-posts">
                 <Table striped bordered hover>

@@ -3,6 +3,11 @@
     width: 90%;
     max-width: 900px;
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px #333;
 }
 
 .user-information, .photo-gallery{
@@ -11,14 +16,13 @@
     display: flex;
     flex-wrap: wrap;
     background-color: white;
-    border: #ddd 1px solid;
-    box-shadow: 0px 0px 8px #ddd;
     justify-content: space-evenly;
-    border-radius: 16px;
+    border-radius: 4px;
 }
 
 .user-information{
-    justify-content: space-around;
+    justify-content: space-evenly;
+    padding: 0px 20px
 }
 
 .user-picture{
@@ -32,36 +36,37 @@
 .user-picture img{
     height: 250px;
     width: 250px;
-    border-radius: 15px;
+    border-radius: 4px;
     background-color: black;
     object-fit: contain;
 }
 
 .user-details{
     width: 300px;
-    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    text-align: left;
+    align-items: center;
 }
 .full-name{
     font-size: 24px;
     font-weight: 800;
+    text-transform: uppercase;
+    padding: 10px;
 }
 .email, .phone{
     font-size: 24px;
     font-weight: 400;
+    text-align: center;
 }
 
 .cook-specialty, .cook-description, .cook-price{
     font-size: 18px;
-    padding: 20px;
+    padding: 20px 0px;
 }
 
 .cook-details{
     width: 100%;
-    padding: 0px 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -74,7 +79,6 @@
     width: 100px;
     height: 40px;
     border-radius: 8px;
-    box-shadow: 1px 1px 4px #888;
     font-weight: 800;
     cursor: pointer;
 }

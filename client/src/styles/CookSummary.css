@@ -11,19 +11,25 @@
     border: #ccc 1px solid;
     /* boxShadow: '2px 2px 4px black' */
   }
+
+  .cookName{
+    padding: 10px 0px;
+    margin-left: 10px;
+    text-align: center;
+  }
   
   .pictureDiv {
-    height: 100px;
-    width: 100px;
+    height:60px;
+    width: 60px;
+    background-color: black;
   }
   .picture {
-    height: 100%;
-    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    object-fit: cover;
   }
 
-  .profile > div{
-    padding: 5px;
-  }
   .cookDescription p{
     margin-bottom: 10px;
   }

@@ -29,7 +29,7 @@ function Event({summary, description, location, date, username}) {
                 <div className="event-location"><b>Location:</b> {location}</div>
                 <div className="event-date"><b>When:</b> {month} {day}, {year}</div>
                 <div className="event-description"><b>About:</b> {description}</div>
-                <Button variant='info' onClick={ () => window.location.href=`/user/profile?user=${username}`} style={{margin: "10px"}}>Contact</Button>
+                <Button variant='info' onClick={ () => window.location.href=`/user/profile?user=${username}`} style={{margin: "10px"}}>Contact Event Creator</Button>
             </div>
         </div>
     )

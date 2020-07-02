@@ -93,7 +93,6 @@
     padding: 10px;
     margin: auto;
     /* margin-top: 10px; */
-    margin-bottom: 10px;
 }
 
 #create-menu-title, #create-menu-description, #create-menu-price{
@@ -115,7 +114,7 @@
     justify-content: space-evenly;
     width: 100%;
     background-color: white;
-    box-shadow: 0px 4px 8px #ddd;
+    box-shadow: 0px 0px 4px #333;
     border-radius: 0px 0px 8px 8px;
 }
 
@@ -125,6 +124,7 @@
 
 .user-input{
     border: #ddd 1px solid;
+    padding: 2px 10px;
 }
 
 .update-btn-container{

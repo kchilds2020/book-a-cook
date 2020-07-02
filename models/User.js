@@ -14,7 +14,8 @@ const User = new mongoose.Schema({
     picture: {type: String, default: ''},
     photos: {type: Array, default: []},
     account: {type: Number, default: 0},
-    totalEarned: {type: Number, default: 0}
+    totalEarned: {type: Number, default: 0},
+    number: {type: String, default: 'Number Not Available'}
 
 },
 {

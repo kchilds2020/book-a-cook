@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import "../styles/Register.css"
 import {useHistory} from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -100,7 +101,7 @@ export const Register = () => {
                     <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>
                     <input name = "username" type = "text" placeholder = 'Username' className = "inputFields" maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)} required/>
                     <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/>
-                    <button className = "submitButton">Register</button>
+                    <Button type="submit" variant="primary" block>Register</Button>
                 </form>
             </div>
         </>

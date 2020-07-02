@@ -3,6 +3,7 @@ import '../../styles/MenuItem.css'
 import Order from './Order';
 import Button from 'react-bootstrap/Button'
 import Popup from "reactjs-popup";
+import StarRatings from 'react-star-ratings';
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, username}) {
 
@@ -27,7 +28,13 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
             </div>
             <div className = "menu-item-details">
                 <div className = "menu-item-title" id = {`menu-item-title-${itemNum}`}>{title}</div>
-                <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>{'5 stars'}</div>
+                <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>
+                <StarRatings
+                    rating={5}
+                    starDimension="20px"
+                    starRatedColor="gold"
+                />
+                </div>
                 <div className = "menu-item-description" id = {`menu-item-description-${itemNum}`}> {description} </div>
                 <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div>
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>

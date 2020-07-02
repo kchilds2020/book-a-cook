@@ -197,7 +197,8 @@ router.post('/update-user', (req, res) => {
             cookDescription: req.body.cookDescription,
             cookPrice: req.body.cookPrice,
             picture: req.body.picture,
-            photos: req.body.photos
+            photos: req.body.photos,
+            number: req.body.number
         }
     })
     .then(results =>{

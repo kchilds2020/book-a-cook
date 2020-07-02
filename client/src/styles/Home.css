@@ -1,11 +1,14 @@
 .greeting{
-    margin-top:20px;
-    width: 100%;
+    
+    width: 90%;
+    max-width: 1160px;
     padding: 10px;
     text-align: center;
-    background-color: white;
-    border: #ddd 1px solid;
-    box-shadow: 0px 0px 8px #ddd;
+    background-color: #fff;
+    box-shadow: 0px 0px 4px #212529;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 4px;
 
 }
 .home-spinner{
@@ -38,40 +41,21 @@
     flex-wrap: wrap;
     justify-content: space-between;
     border-bottom: rgb(221, 221, 221) 1px solid;
-}
-
-.job-post-container{
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-    padding: 20px;
-
-}
- 
-.events-header, .my-orders-header{
-    width: 100%;
-    text-align: center;
-    
-}
-.my-orders-header h3, .events-header h3, .job-post-header h3{
-    margin-bottom: 0;
-}
-
-
-.job-post-header, .profile-job-posts, .events-header, .my-orders-header{
-    width: 100%;
-    text-align: center;
     background-color: white;
-    box-shadow: 0px 0px 8px #ddd;
-    border-radius: 8px;
-    margin-top: 10px;
-
 }
 
-.job-post-header, .events-header, .my-orders-header{
-    padding: 10px;
-    background-color: #212529;
+.header{
+    width: 100%;
+    text-align: center;
+    background-color: #007bff;
     color: white;
+    border-radius: 4px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.header h3{
+    margin-bottom: 0px;
 }
 
 .cook-name{
@@ -80,7 +64,7 @@
     color: rgb(39, 54, 39);
 }
 
-.events-container, .my-orders-container{
+.home-sec-container{
     width: 100%;
     max-width: 600px;
     margin-top: 20px;
@@ -88,6 +72,13 @@
     padding: 20px;
     min-height: 300px;
 }
+
+.home-sec-container table{
+    margin-top: 10px;
+    background-color: white;    
+    text-align: center;
+}
+
 .post-num{
     color: rgb(53, 255, 53);
     
@@ -101,3 +92,9 @@
     margin-bottom: 0;
 }
 
+
+
+.profile-job-posts{
+    border-radius: 4px;
+    margin: 10px 0px;
+}

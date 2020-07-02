@@ -5,6 +5,7 @@ import '../../styles/UserProfile.css'
 import JobForm from '../JobForm';
 import Photo from './Photo';
 import {UserContext} from '../UserContext'
+import Button from 'react-bootstrap/Button'
 
 
 function UserProfile() {
@@ -16,6 +17,7 @@ function UserProfile() {
     const [lastname, setLastname] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [number, setNumber] = useState('');
     const [cookSpecialty, setCookSpecialty] = useState('');
     const [cookDescription, setCookDescription] = useState('');
     const [cookPrice, setCookPrice] = useState('');
@@ -48,6 +50,7 @@ function UserProfile() {
             setCook(response.data.cook)
             setPicture(response.data.picture)
             setPhotos(response.data.photos)
+            setNumber(response.data.number)
 
         })
         .catch(err => console.log(err))
@@ -85,36 +88,41 @@ function UserProfile() {
     return (
         <>
             <div className="user-profile-container">
-                <div className="title-header">USER INFO</div>
                 <div className="user-information">
                     <div className="user-picture">
                         <img src={picture === '' ? silhouette : `/api/get/image/${picture}`} alt="cook"/>
                     </div>
                     <div className="user-details">
                         <div className="full-name">{firstname} {lastname}</div>
-                        <div className="email">{email}</div>
-                        <div className="phone">(###) ###-####</div>
-                        { cook ? <button className="book-btn" onClick={handleBook}>BOOK</button> : console.log('not a cook')}
+                        <div style={{marginBottom: '20px'}}>
+                            <div className="email">{email}</div>
+                            <div className="phone">{number}</div>
+                        </div>
+                        { user !== null ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
                     </div>
                 </div>
-                <div className="title-header">COOK INFO</div>
-                <div className="user-information">
-                    {cook ? 
-                            <div className="cook-details">
-                                <div className="cook-specialty"><b>Specialization:</b> {cookSpecialty}</div>
-                                <div className="cook-description"><b>Description:</b> {cookDescription}</div>
-                                <div className="cook-price"><b>Price:</b> ${cookPrice}</div>
-                            </div> : <h2>user is not a cook</h2>
-                    }
-                </div>
                 
-                <div className="title-header">PHOTOS</div>
+                {cook ? 
+                <>
+                    <div className="user-information">
+                                <div className="cook-details">
+                                    <div className="cook-specialty"><b>Specialization:</b> {cookSpecialty}</div>
+                                    <div className="cook-description"><b>Description:</b> {cookDescription}</div>
+                                    <div className="cook-price"><b>Price:</b> ${cookPrice}</div>
+                                </div> 
+                        
+                    </div>
+                </>
+                : <></>} 
+                {photos.length > 0 ?
+                <>
                 <div className="photo-gallery">
                     {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
                 </div>
                 <div id="book-form">
                     <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
-                </div>
+                </div></> : <></>
+                }
             </div>
         </>
     )

@@ -35,10 +35,10 @@ function MyOrders({username, user}) {
      },[username])
 
     return (
-        <div className = "my-orders-container">
+        <div className = "home-sec-container">
             <Account user={user}/>
-            <div className="my-orders-header">
-                <h3>You have <span className="post-num">{orders.length}</span> active orders.</h3>
+            <div className="header">
+                <h3><span className="post-num">{orders.length}</span> Active Orders</h3>
             </div>
     {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : 
         <Table striped bordered hover>

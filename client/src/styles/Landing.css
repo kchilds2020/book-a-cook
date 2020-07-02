@@ -27,16 +27,19 @@
     margin: 20px 0px;
     border: none;
     border-radius: 8px;
-    background-color: #ffb9b9;
+    background-color: #1d63a5;
     cursor: pointer;
     text-decoration: none;
     font-size: 16px;
+    color: white;
 }
 .landing-title{
     letter-spacing: 4px;
-    font-size: 64px
+    font-size: 64px;
+    color: white;
 }
 
 .landing-tagline{
-    font-style: italic
+    font-style: italic;
+    color: white;
 }
