@@ -5,9 +5,10 @@ import axios from 'axios'
 
 function MyOrderItem({orderNum, title, quantity, address, complete, orderID}) {
     const [delivered, setDelivered] = useState(complete)
-    const city = "Arlington"
-    const state = "Texas"
-    const street = "3617 Prather Ct"
+    const addressTokenized = address.split(',')
+    const city = addressTokenized[1]
+    const state = addressTokenized[2]
+    const street = addressTokenized[0]
     const streetFormatted = street.replace(" ", "+")
     const handleClick = async (event) => {
         event.preventDefault();
