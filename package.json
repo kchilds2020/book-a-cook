@@ -27,8 +27,6 @@
     "prod": "node server.js",
     "start": "node server.js",
     "build": "cd client&&npm install&&cd ..",
-    "test": "cd client&&npm install&&npm run test",
-    "eject": "cd client&&npm install&&npm run eject",
     "dev": "concurrently \"nodemon server.js\" \"cd client&&npm start\""
   },
   "eslintConfig": {
