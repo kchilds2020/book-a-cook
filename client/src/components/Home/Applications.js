@@ -19,14 +19,14 @@ function Applications({cook, postID, listKey,hired}) {
         return () => mounted = false;
     }, [cook])
 
-    useEffect(() => {
+/*     useEffect(() => {
         console.log(hired, cook)
         if(hired === cook){
             document.getElementById(`app-${listKey}`).style.backgroundColor="#d7eee1"
             document.getElementById(`btn-${listKey}`).innerText="Hired!"
             document.getElementById(`btn-${listKey}`).style.pointerEvents="none"
         }
-    }, [hired, cook, listKey])
+    }, [hired, cook, listKey]) */
 
     const cancelItem = (event) => {
         event.preventDefault();

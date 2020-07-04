@@ -29,7 +29,7 @@ function MyOrderItem({orderNum, title, quantity, address, complete, orderID}) {
                     <td>{quantity} {title}{quantity > 1 ? "s" : ""}</td>
                     <td><a href={`https://www.google.com/maps/place/${streetFormatted}+${city}+${state}`} target="_blank" rel="noopener noreferrer">{street} {city} {state}</a></td>
                     <td>
-                        {delivered ? <Button variant="primary" >Delivered</Button> : <Button variant="secondary" onClick={handleClick}>Incomplete</Button>}
+                        {delivered ? <Button variant="info" >Pending</Button> : <Button variant="secondary" onClick={handleClick}>Incomplete</Button>}
                     </td>
                 </tr>
     )

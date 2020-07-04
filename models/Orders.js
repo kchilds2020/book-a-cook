@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 
 const Orders = new mongoose.Schema({
     menuItemID: {type: String, trim: true, default: ''},
+    createdDate: {type:Date, default: ''},
+    deliveredDate: {type:Date, default: ''},
     menuItemTitle: {type: String, trim: true, default: ''},
     qty: {type: String, trim: true, default: ''},
     picture: {type: String, trim: true, default: ''},

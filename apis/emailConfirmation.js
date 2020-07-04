@@ -40,7 +40,7 @@ router.post('/api/post/create-order', async (req, res) => {
           console.log('EMAIL: ', req.body.user)
           let info = await transporter.sendMail({
             from: '"Look for Cooks" <lookforcooks@gmail.com>', // sender address
-            to: `${req.body.user.email}`, // list of receivers
+            to: `${req.body.customerEmail}`, // list of receivers
             subject: "Order has been Placed ✔", // Subject line
             html: ` <html>
                         <head>

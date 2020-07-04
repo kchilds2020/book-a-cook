@@ -20,6 +20,7 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zip, setZip] = useState('');
+    const [email, setEmail] = useState('');
 
     let history = useHistory();
 
@@ -55,6 +56,7 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
                 address: `${street}, ${city}, ${state}, ${zip}`,
                 chefUsername: chefUsername,
                 customerUsername: user.username === '' ? cardName : user.username,
+                customerEmail: user ? user.email : email,
                 user: user
             }
             try{
@@ -90,6 +92,7 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
                     <input className="small-input" type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
                 </div>
                 <div className="billing-header">Billing Information</div>
+                {!user ? <input type="email" id="email-input" placeholder="Email for Notifications" onChange = {e => setEmail(e.target.value)} required/> : <></>}
                 <input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
                 <div className="card-element-container" >
                     <CardElement />

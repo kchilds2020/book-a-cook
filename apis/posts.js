@@ -81,20 +81,6 @@ router.post('/post/add-menu-items', (req, res) => {
     })
 });
 
-router.post('/api/post/complete-order', (req, res) => {
-    Orders.updateOne({_id: req.body.orderID},{
-        $set: {
-            completed: true
-        }
-
-    })
-    .then(results => {
-        console.log(`ORDER COMPLETED: ${results}`);
-        res.json(results);
-    })
-    .catch(error => console.error(error))
-})
-
 router.post('/post/create-post', (req, res) => {
         JobPost.create({
             summary: req.body.summary,
