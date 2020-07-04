@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../../styles/Order.css'
 import NumberInput from './NumberInput'
+import {useHistory} from 'react-router-dom'
 
 import {
   CardNumberElement,
@@ -19,6 +20,8 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zip, setZip] = useState('');
+
+    let history = useHistory();
 
     const stripe = useStripe();
     const elements = useElements();
@@ -56,9 +59,11 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
             }
             try{
                 let response = axios.post('/api/post/create-order', orderData)
-                alert('Order has been placed!')
+                
                 console.log('paid!', paymentResponse, response)
                 /* window.location.href='/home' */
+                alert('Order has been placed!')
+                history.push('/home')
             }
             catch (error){
                 alert(`Try catch error: ${error}`)

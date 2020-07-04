@@ -30,7 +30,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
     return (
         <>
             <div className="profile">
-                    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                         <div className="pictureDiv">
                             <img src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
                         </div>
@@ -38,20 +38,22 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                             <h2>{firstname} {lastname}</h2>
                         </div>
                     </div>
-                    <div className = "positionTitle">
-                        <h3>{specialty}</h3>
-                    </div>
-                 {/*    <div className = "positionTitle">
-                        <h3>{city}, {state}</h3>
-                    </div> */}
-                    <div className = "cookPrice">
-                        <h4>${price}</h4>
-                    </div>
-                    <div className = "cookDescription">
-                        <p>{description}</p>
-                    </div>
                     <div>
-                    <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`}>Contact</Button>
+                        <div className = "positionTitle">
+                            <h3>{specialty}</h3>
+                        </div>
+                    {/*    <div className = "positionTitle">
+                            <h3>{city}, {state}</h3>
+                        </div> */}
+                        <div className = "cookPrice">
+                            <h4>${price}</h4>
+                        </div>
+                        <div className = "cookDescription">
+                            <p>{description}</p>
+                        </div>
+                        <div style={{padding: '10px 0px'}}>
+                        <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`}>Contact</Button>
+                        </div>
                     </div>
             </div>
         </>
