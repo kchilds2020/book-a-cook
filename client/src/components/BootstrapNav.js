@@ -30,7 +30,7 @@ function BootstrapNav() {
     return (
         <div className = 'nav-bar-overlay'>
             <Navbar collapseOnSelect bg="dark" variant="dark" expand="xl">
-                <Navbar.Brand href="/">Book A Cook</Navbar.Brand>
+                <Navbar.Brand href="/">Look for Cooks</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                     <Nav className="justify-content-end">

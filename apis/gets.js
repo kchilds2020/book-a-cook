@@ -19,6 +19,7 @@ router.get('/api/get/image/:filename', (req,res) => {
 
 //find posts that you create
 router.get('/api/get/my-jobs/:username', (req,res) => {
+    let today = new Date()
     JobPost.find({username: req.params.username})
     .then(posts => {
         console.log(posts);
@@ -59,7 +60,7 @@ router.get('/api/get/customer-orders/:username', (req,res) => {
 
 //find posts that you created
 router.get('/api/get/working-events/:username', (req,res) => {
-    JobPost.find({cook: req.params.username})
+    JobPost.find({cook: req.params.username, "date" : { $gte : new Date()}})
     .then(posts => {
         console.log(posts);
         res.json(posts)

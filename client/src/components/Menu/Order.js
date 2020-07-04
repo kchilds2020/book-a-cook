@@ -7,11 +7,12 @@ import {
   CardExpiryElement,
   CardCvcElement,
   useStripe,
-  useElements
+  useElements,
+  CardElement
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-function Order({cancel, price, title, picture, dbID, username, chefUsername}) {
+function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
     const [qty, setQty] = useState(1)
     const [cardName, setCardName] = useState('');
     const [street, setStreet] = useState('');
@@ -32,7 +33,7 @@ function Order({cancel, price, title, picture, dbID, username, chefUsername}) {
         const paymentResponse = await stripe.confirmCardPayment(`${clientSecret}`,{
             payment_method: {
                 type: 'card',
-                card: elements.getElement(CardNumberElement),
+                card: elements.getElement(CardElement),
                 billing_details: {
                     name: `${cardName}` 
                 }
@@ -50,7 +51,8 @@ function Order({cancel, price, title, picture, dbID, username, chefUsername}) {
                 picture: picture,
                 address: `${street}, ${city}, ${state}, ${zip}`,
                 chefUsername: chefUsername,
-                customerUsername: username === '' ? cardName : username,
+                customerUsername: user.username === '' ? cardName : user.username,
+                user: user
             }
             try{
                 let response = axios.post('/api/post/create-order', orderData)
@@ -73,39 +75,44 @@ function Order({cancel, price, title, picture, dbID, username, chefUsername}) {
             </div>  
             <div className="order-total">{title}</div>
             
-            <NumberInput qty={qty} setQty={setQty}/>
-            <div className="billing-header">Drop Off Address</div>
-            <input type="text" id="street-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
-            <div className="card-details">
-                <input className="small-input" type="text" id="fity-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
-                <input className="small-input" type="text" id="state-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
-                <input className="small-input" type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
-            </div>
-            <div className="billing-header">Billing Information</div>
-            <input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)}/>
-            <>
-                <div className="card-element-container" >
-                    <CardNumberElement/>
-                </div>
+            <form onSubmit={payItem}>
+                <NumberInput qty={qty} setQty={setQty}/>
+                <div className="billing-header">Drop Off Address</div>
+                <input type="text" id="street-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
                 <div className="card-details">
-                    <div className="detail-sec">
-                        <div className="card-element-exp" >
-                            <CardExpiryElement id="cardexpiry"/>
-                        </div>
-                    </div>
-                    <div className="detail-sec">
-                        <div className="card-element-cvc" >
-                            <CardCvcElement id="cardcvc"/>
-                        </div>
-                    </div>
+                    <input className="small-input" type="text" id="fity-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
+                    <input className="small-input" type="text" id="state-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
+                    <input className="small-input" type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
                 </div>
-            </>
-        
-            <div className="order-total" id="total-price">Total: ${total}</div>
-            <div className="order-btns">
-                <button className ="order-btn" onClick={payItem} disabled={!stripe}>Order</button>
-                <button className ="cancel-btn" onClick={cancel} disabled={!stripe}>x</button>
-            </div>
+                <div className="billing-header">Billing Information</div>
+                <input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
+                <div className="card-element-container" >
+                    <CardElement />
+                </div>
+                {/* <>
+                    <div className="card-element-container" >
+                        <CardNumberElement/>
+                    </div>
+                    <div className="card-details">
+                        <div className="detail-sec">
+                            <div className="card-element-exp" >
+                                <CardExpiryElement id="cardexpiry"/>
+                            </div>
+                        </div>
+                        <div className="detail-sec">
+                            <div className="card-element-cvc" >
+                                <CardCvcElement id="cardcvc"/>
+                            </div>
+                        </div>
+                    </div>
+                </> */}
+            
+                <div className="order-total" id="total-price">Total: ${total}</div>
+                <div className="order-btns">
+                    <button type = "submit" className ="order-btn" disabled={!stripe}>Order</button>
+                    <button type = "button" className ="cancel-btn" onClick={cancel} disabled={!stripe}>x</button>
+                </div>
+            </form>
         </div>
     )
 }

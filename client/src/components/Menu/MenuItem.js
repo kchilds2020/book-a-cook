@@ -5,10 +5,10 @@ import Button from 'react-bootstrap/Button'
 import Popup from "reactjs-popup";
 import StarRatings from 'react-star-ratings';
 
-function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, username}) {
+function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, user}) {
 
     const [visible, setVisibility] = useState(false);
-    console.log('USERNAME',username)
+    console.log('USERNAME',user)
     const orderItem = (event) =>{
         event.preventDefault();
         console.log('order!')
@@ -40,7 +40,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>
                 <Button style={{margin: '10px'}} onClick={orderItem}>Order!</Button>    
             </div>
-                {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} username={username}/> : <></>}
+                {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/> : <></>}
         </div>
     )
 }

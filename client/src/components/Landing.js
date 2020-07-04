@@ -13,7 +13,7 @@ const Landing = () => {
             <div className = "landing-body">
                 <div className = "landing-container">
                     <div className = "landing-section">
-                        <h1 className = "landing-title">Book a Cook!</h1>
+                        <h1 className = "landing-title">Look for Cooks</h1>
                         <h2 className = "landing-tagline">Chef made food delivered to your door!</h2>
                         <Link to ="/login">
                             <button className="landing-btn">Login</button>

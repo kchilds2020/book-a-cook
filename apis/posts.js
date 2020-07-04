@@ -10,6 +10,7 @@ const path = require('path');
 let fs = require('fs');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+const nodemailer = require("nodemailer");
 
 
 router.use(fileUpload());
@@ -79,29 +80,6 @@ router.post('/post/add-menu-items', (req, res) => {
         .catch(error => console.error(error))
     })
 });
-
-router.post('/api/post/create-order', async (req, res) => {
-        const item = await Menu.findOne({_id: req.body.menuItemID})
-        const orderRes = await Orders.create({
-            menuItemID: req.body.menuItemID,
-            menuItemTitle: req.body.menuItemTitle,
-            qty: req.body.qty,
-            picture: req.body.picture,
-            address: req.body.address,
-            chefUsername: req.body.chefUsername,
-            customerUsername: req.body.customerUsername,
-        })
-        console.log('AMOUNT: ', parseFloat(item.price) * parseInt(req.body.qty))
-        const cookRes = await User.updateOne({username: req.body.chefUsername},{
-            $inc: {
-                account: parseFloat(item.price) * req.body.qty,
-                totalEarned: parseFloat(item.price) * req.body.qty
-            }
-        })
-        console.log('cookRes', cookRes)
-        res.json({orderRes, cookRes})
-
-})
 
 router.post('/api/post/complete-order', (req, res) => {
     Orders.updateOne({_id: req.body.orderID},{

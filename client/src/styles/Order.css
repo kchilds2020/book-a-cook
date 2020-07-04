@@ -28,6 +28,10 @@
   font-size: 16px;
 }
 
+.card-element-container{
+  padding: 10px 5px; 
+}
+
 .card-element-exp, .card-element-cvc{
   width: 100%;
   margin: 5px 0px;
