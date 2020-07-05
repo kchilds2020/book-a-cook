@@ -4,9 +4,6 @@ import NumberInput from './NumberInput'
 import {useHistory} from 'react-router-dom'
 
 import {
-  CardNumberElement,
-  CardExpiryElement,
-  CardCvcElement,
   useStripe,
   useElements,
   CardElement
@@ -46,10 +43,11 @@ function Order({cancel, price, title, picture, dbID, user, chefUsername}) {
           if(paymentResponse.error){
               alert(`Error! ${paymentResponse.error.message}`) 
           }else{
-            
+
             //create order
             let orderData = {
                 menuItemID: dbID,
+                createdDate: Date.now(),
                 menuItemTitle: title,
                 qty: qty,
                 picture: picture,

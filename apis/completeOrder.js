@@ -82,7 +82,8 @@ router.post('/api/post/complete-order', async(req, res) => {
 
       let updateOrder = await Orders.updateOne({_id: req.body.orderID},{
         $set: {
-            completed: true
+            completed: true,
+            deliveredDate: Date.now()
         }
 
     })

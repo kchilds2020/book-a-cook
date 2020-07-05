@@ -1,9 +1,8 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import Photo from './Photo'
 function Photos({photos, files, setPhotos, setFiles, username, setModified}) {
     const[count,setCount] = useState(0);
     const photoInput = useRef();
-    const change = useRef(false);
 
     const handleImgChange = (event) => {
         //update files

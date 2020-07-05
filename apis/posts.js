@@ -34,6 +34,27 @@ router.post('/upload-img', (req,res) => {
     }); 
 });
 
+//update order pending
+router.post('/api/post/update-pending-order', async (req,res) => {
+    let updateOrder = await Orders.updateOne({_id: req.body.orderID}, {
+        $set: {
+            pending: false
+        }
+    })
+
+    let orderItem = await Orders.findOne({_id: req.body.orderID})
+    console.log('AMOUNT: ', orderItem.price)
+    const cookRes = await User.updateOne({username: orderItem.chefUsername},{
+        $inc: {
+            account: orderItem.price,
+            totalEarned: orderItem.price
+        }
+    })
+
+    res.json({updateOrder, cookRes})
+
+})
+
 router.post('/api/post/remove-item/:id', (req,res) => {
     Menu.deleteOne({_id: req.params.id})
     .then(response => {

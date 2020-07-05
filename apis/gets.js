@@ -39,18 +39,30 @@ router.get('/api/get/menu-items/:username', (req,res) => {
 })
 
 //find orders that you need to be completed
-router.get('/api/get/active-orders/:username', (req,res) => {
-    Orders.find({chefUsername: req.params.username, completed: false})
-    .then(orders => {
-        console.log(orders);
-        res.json(orders)
+router.get('/api/get/active-orders/:username', async (req,res) => {
+    let orderItems = await Orders.find({chefUsername: req.params.username, pending: true})
+
+    orderItems.map( async(element) => {
+        console.log(element.deliveredDate - element.createdDate)
+        if((element.deliveredDate - element.createdDate) > 3600000){
+            let updateItem = await Orders.updateOne({_id: element._id},{
+                $set:{
+                    pending: false,
+                }
+            })
+        }
     })
-    .catch(err => console.log(err))
+    
+    let filteredItems = orderItems.filter(element =>  (element.deliveredDate - element.createdDate) < 3600000)
+
+    res.json(filteredItems)
+
+    
 })
 
 //find status of orders that you have purchased
 router.get('/api/get/customer-orders/:username', (req,res) => {
-    Orders.find({customerUsername: req.params.username, completed: false})
+    Orders.find({customerUsername: req.params.username, pending: true})
     .then(orders => {
         console.log(orders);
         res.json(orders)

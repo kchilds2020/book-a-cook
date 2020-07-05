@@ -10,21 +10,17 @@ require('dotenv/config');
 
 router.post('/api/post/create-order', async (req, res) => {
         const item = await Menu.findOne({_id: req.body.menuItemID})
+        const itemPrice = parseFloat(item.price) * parseInt(req.body.qty)
         const orderRes = await Orders.create({
             menuItemID: req.body.menuItemID,
             menuItemTitle: req.body.menuItemTitle,
+            createdDate: req.body.createdDate,
             qty: req.body.qty,
             picture: req.body.picture,
             address: req.body.address,
             chefUsername: req.body.chefUsername,
             customerUsername: req.body.customerUsername,
-        })
-        console.log('AMOUNT: ', parseFloat(item.price) * parseInt(req.body.qty))
-        const cookRes = await User.updateOne({username: req.body.chefUsername},{
-            $inc: {
-                account: parseFloat(item.price) * req.body.qty,
-                totalEarned: parseFloat(item.price) * req.body.qty
-            }
+            price: itemPrice
         })
 
         const cookInfo = await User.findOne({username: req.body.chefUsername})
@@ -164,7 +160,7 @@ router.post('/api/post/create-order', async (req, res) => {
 
 
 
-        res.json({orderRes, cookRes})
+        res.json({orderRes})
 
 })
 

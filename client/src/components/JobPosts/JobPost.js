@@ -37,7 +37,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
             })
         }
 
-    }, [eventDate, user])
+    }, [eventDate, user, applications])
 
     const apply = (event) => {
         if(user === null){

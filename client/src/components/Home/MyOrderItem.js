@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 
-function MyOrderItem({orderNum, title, quantity, address, complete, orderID}) {
-    const [delivered, setDelivered] = useState(complete)
+function MyOrderItem({orderNum, title, quantity, address, completed, orderID}) {
+    const [delivered, setDelivered] = useState(completed)
     const addressTokenized = address.split(',')
     const city = addressTokenized[1]
     const state = addressTokenized[2]

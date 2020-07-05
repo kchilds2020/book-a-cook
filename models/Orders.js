@@ -11,7 +11,9 @@ const Orders = new mongoose.Schema({
     date: {type: String, trim: true, default: ''},
     chefUsername: {type: String, trim: true, default: ''},
     customerUsername: {type: String, default: ''},
-    completed: {type: Boolean, default: false}
+    completed: {type: Boolean, default: false},
+    pending: {type: Boolean, default: true},
+    price: {type: Number, default: 0},
 },
 {
     collection: 'orders'

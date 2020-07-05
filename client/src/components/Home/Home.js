@@ -5,7 +5,6 @@ import JobPosts from './JobPosts'
 import Events from './Events'
 import MyOrders from './MyOrders'
 import {UserContext} from '../UserContext'
-import Account from './Account'
 import CustomerOrders from './CustomerOrders'
 
 

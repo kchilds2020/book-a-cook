@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-import Image from 'react-bootstrap/Image'
 import silhouette from '../images/silhouette.png'
 import '../styles/NavBar.css'
 import axios from 'axios'
@@ -45,7 +44,7 @@ function BootstrapNav() {
                             <>
                                 <Nav.Link className={active === '/profile' ? "active" : ""} href ="/profile">
                                     {user.firstName} {user.lastName}
-                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px', objectFit: 'cover'}}  />
+                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px', objectFit: 'cover'}} alt = "profile img" />
                                     
                                 </Nav.Link>
                                 <Nav.Link className={active === '/home' ? "active" : ""} href ="/home">Home</Nav.Link>

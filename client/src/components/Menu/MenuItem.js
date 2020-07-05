@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import '../../styles/MenuItem.css'
 import Order from './Order';
 import Button from 'react-bootstrap/Button'
-import Popup from "reactjs-popup";
 import StarRatings from 'react-star-ratings';
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, user}) {

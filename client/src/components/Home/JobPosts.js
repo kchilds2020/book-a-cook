@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import HomeJobPost from './HomeJobPost'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
-import Popup from 'reactjs-popup'
 import JobForm from '../JobForm'
 
 function JobPosts({username}) {

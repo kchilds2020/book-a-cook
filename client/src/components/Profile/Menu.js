@@ -1,12 +1,10 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, {useState} from 'react'
 import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
 function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage, setModified}) {
     const [count, setCount] = useState(0);
-
-    const change = useRef(false);
 
     const createMenuItem = (data) =>  {
         

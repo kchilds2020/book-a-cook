@@ -50,7 +50,7 @@ function MyOrders({username, user}) {
                 </tr>
             </thead>
             <tbody>
-                {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id}/>) : <></>} 
+                {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
             </tbody>     
         </Table>}
                 {err ? err : null}

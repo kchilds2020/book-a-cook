@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
+import CustomerOrder from './CustomerOrder'
 
 function CustomerOrders({username}) {
 
@@ -22,6 +22,8 @@ function CustomerOrders({username}) {
          }
      },[username])
 
+     
+
     return (
         <div className = "home-sec-container" >
             <div className="header">
@@ -37,13 +39,9 @@ function CustomerOrders({username}) {
                         </tr>
                     </thead>
                     <tbody>
+                        
                         {orders.length > 0 ? orders.map((element, index) => 
-                        <tr key = {index}>
-                            <td>{element.menuItemTitle}</td>
-                            <td>{element.qty}</td>
-                            <td><Button>Confirm Delivery</Button></td>
-                        </tr>
-                        ) : <></>} 
+                        <CustomerOrder key = {index} pending={element.pending} completed = {element.completed} title={element.menuItemTitle} qty={element.qty} orderID = {element._id}/>) : <></>} 
                     </tbody>     
                 </Table>
             </div>
