@@ -51,7 +51,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                             <p>{description}</p>
                         </div>
                         <div style={{padding: '10px 0px'}}>
-                        <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`}>Contact</Button>
+                        <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`} block>Contact</Button>
                         </div>
                     </div>
             </div>

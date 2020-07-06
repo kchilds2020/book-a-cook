@@ -99,7 +99,7 @@ function UserProfile() {
                             <div className="email">{email}</div>
                             <div className="phone">{number}</div>
                         </div>
-                        { user ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
+                        { user && cook ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
                     </div>
                 </div>
                 
