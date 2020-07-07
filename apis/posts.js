@@ -55,6 +55,22 @@ router.post('/api/post/update-pending-order', async (req,res) => {
 
 })
 
+router.post('/api/post/add-review', async (req,res) => {
+    let orderItem = await Orders.findOne({_id: req.body.orderID})
+    console.log(orderItem)
+    let updateReviews = await User.updateOne({username: orderItem.chefUsername}, {
+        $push: {
+            reviews: {
+                rating: req.body.ratingValue,
+                description: req.body.ratingDescription
+            }
+        }
+    })
+
+    res.json({updateReviews})
+
+})
+
 router.post('/api/post/remove-item/:id', (req,res) => {
     Menu.deleteOne({_id: req.params.id})
     .then(response => {

@@ -55,6 +55,44 @@
     box-shadow: 0px 0px 4px #212529;
 }
 
+.review-form{
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    max-width: 400px;
+    z-index: 300;
+    top: 50%;
+    left: 50%;
+      -webkit-transform: translate(-50%,calc(-50% - .5px));
+      -moz-transform: translate(-50%,calc(-50% - .5px));
+      -ms-transform: translate(-50%,calc(-50% - .5px));
+      -o-transform: translate(-50%,calc(-50% - .5px));
+      transform: translate(-50%,calc(-50% - .5px));
+      box-shadow: 0px 0px 8px #333;
+      border-radius: 8px;
+      /* visibility: hidden; */
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+}
+
+.cancel-review-btn{
+    z-index: 100;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 20;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    box-shadow: #333 2px 2px 4px;
+    background-color: rgb(212, 35, 35);
+    color: white;
+    cursor: pointer;
+}
+
 .header h3{
     margin-bottom: 0px;
 }

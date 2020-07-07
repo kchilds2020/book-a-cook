@@ -62,7 +62,7 @@ router.get('/api/get/active-orders/:username', async (req,res) => {
 
 //find status of orders that you have purchased
 router.get('/api/get/customer-orders/:username', (req,res) => {
-    Orders.find({customerUsername: req.params.username, pending: true})
+    Orders.find({customerUsername: req.params.username})
     .then(orders => {
         console.log(orders);
         res.json(orders)

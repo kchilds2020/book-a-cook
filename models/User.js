@@ -15,7 +15,8 @@ const User = new mongoose.Schema({
     photos: {type: Array, default: []},
     account: {type: Number, default: 0},
     totalEarned: {type: Number, default: 0},
-    number: {type: String, default: 'Number Not Available'}
+    number: {type: String, default: 'Number Not Available'},
+    reviews: {type: Array, default: []}
 
 },
 {

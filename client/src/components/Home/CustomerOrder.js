@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import '../../styles/Home.css'
 
-function CustomerOrder({title, qty, pending, completed, orderID}) {
+function CustomerOrder({title, qty, pending, completed, orderID, writeReviewClicked}) {
     const [isPending, setPending] = useState(pending)
+
 
 
     const confirmDelivery = async(event) => {
@@ -16,12 +18,19 @@ function CustomerOrder({title, qty, pending, completed, orderID}) {
             console.log(error)
         }
      }
+
+     
+
     return (
+        <>
         <tr>
             <td>{title}</td>
             <td>{qty}</td>
-            <td>{!completed ? <>On Its Way!</> : <> {isPending ? <Button onClick={confirmDelivery}>Confirm Delivery</Button> : <Button variant="success">Delivered</Button>}</>}</td>
+            <td>{!completed ? <>On Its Way!</> : <> {isPending ? <Button onClick={confirmDelivery}>Confirm Delivery</Button> : <Button variant="success" onClick={writeReviewClicked} id = {`${orderID}`}>Write a Review</Button>}</>}</td>
         </tr>
+        
+       
+        </>
     )
 }
 

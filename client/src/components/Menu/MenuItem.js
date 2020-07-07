@@ -1,12 +1,29 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../../styles/MenuItem.css'
 import Order from './Order';
 import Button from 'react-bootstrap/Button'
 import StarRatings from 'react-star-ratings';
+import axios from 'axios'
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, user}) {
 
     const [visible, setVisibility] = useState(false);
+    const [reviewAvg, setReviewAvg] = useState(0)
+
+    useEffect(() => {
+        axios.get(`/api/get/username/${chefUsername}`)
+        .then(response => {
+            let reviewArray = response.data.reviews
+            console.log(response.data.reviews)
+            let sum = 0;
+            for(let i = 0; i < reviewArray.length; i++){
+                sum += parseFloat(reviewArray[i].rating)
+            }
+            console.log('REVIEW AVG: ', sum/reviewArray.length)
+            setReviewAvg(sum/reviewArray.length)
+        })
+    }, [])
+
     console.log('USERNAME',user)
     const orderItem = (event) =>{
         event.preventDefault();
@@ -29,7 +46,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 <div className = "menu-item-title" id = {`menu-item-title-${itemNum}`}>{title}</div>
                 <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>
                 <StarRatings
-                    rating={5}
+                    rating={reviewAvg}
                     starDimension="20px"
                     starRatedColor="gold"
                 />
