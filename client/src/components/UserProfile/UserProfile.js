@@ -6,6 +6,7 @@ import JobForm from '../JobForm';
 import Photo from './Photo';
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
+import Review from './Review'
 
 
 function UserProfile() {
@@ -30,6 +31,10 @@ function UserProfile() {
     const [date, setDate] = useState('');
     const [peopleAmount, setPeopleAmount] = useState('');
     const [photos,setPhotos] = useState('');
+    const [reviews,setReviews] = useState('');
+    const [reviewVisibility,setReviewVisibility] = useState(false);
+    const [ratingValue, setRatingValue] = useState(5)
+    const [ratingDescription, setRatingDescription] = useState('')
 
     useEffect(() =>{
         //get user from url
@@ -51,6 +56,8 @@ function UserProfile() {
             setPicture(response.data.picture)
             setPhotos(response.data.photos)
             setNumber(response.data.number)
+            setReviews(response.data.reviews)
+            console.log('REVIEWS: ', response.data.reviews)
 
         })
         .catch(err => console.log(err))
@@ -85,6 +92,33 @@ function UserProfile() {
         document.getElementById('book-form').style.visibility = 'hidden'
     }
 
+    const submitReview = async (event) => {
+        event.preventDefault()
+        const reviewData = {
+            chef: username,
+            ratingValue: ratingValue,
+            ratingDescription: ratingDescription,
+            username: user.username
+        }
+        try{
+            let writeReview = await axios.post('/api/post/add-review', reviewData)
+            console.log(writeReview)
+        }catch(error){
+            console.log(error)
+        }
+
+
+
+        setReviewVisibility(false)
+     }
+
+     const cancelReview = async(event) => {
+        event.preventDefault()
+        setRatingValue(5)
+        setRatingDescription('')
+        setReviewVisibility(false)
+    }
+
     return (
 
         username !== '' ?
@@ -99,7 +133,10 @@ function UserProfile() {
                             <div className="email">{email}</div>
                             <div className="phone">{number}</div>
                         </div>
-                        { user && cook ? <Button variant="primary" onClick={handleBook} block>Request to Hire</Button> : <></>}
+                        { user && cook ? <div style={{width: '100%'}}>
+                                    <Button variant="primary" onClick={handleBook} block>Request to Hire</Button>
+                                    <Button variant="info" onClick={() => setReviewVisibility(true)} block>Write a Review</Button>
+                                    </div> : <></>}
                     </div>
                 </div>
                 
@@ -125,6 +162,22 @@ function UserProfile() {
                     <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
                 </div></>
                 }
+                
+                { reviews ?
+                    <div className = "reviews-container">
+                        {reviews.map((element, index) => <Review key={index} rating = {element.rating} description = {element.description} username={element.username}/>)}
+                    </div> : <></>
+                }
+
+                {reviewVisibility ? 
+                    <form className = "review-form">
+                        <label htmlFor="star-rating">Rating</label>
+                        <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
+                        <label htmlFor="rating-description" style={{marginTop: '10px'}}>Describe Experience</label>
+                        <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description"></textarea>
+                        <Button onClick={submitReview} style={{marginTop: '10px'}}>Submit</Button>
+                        <Button onClick={cancelReview} className="cancel-review-btn">x</Button>
+                    </form> : <></> }
             </div> : <></>
     )
 }

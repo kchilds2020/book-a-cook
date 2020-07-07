@@ -56,13 +56,13 @@ router.post('/api/post/update-pending-order', async (req,res) => {
 })
 
 router.post('/api/post/add-review', async (req,res) => {
-    let orderItem = await Orders.findOne({_id: req.body.orderID})
-    console.log(orderItem)
-    let updateReviews = await User.updateOne({username: orderItem.chefUsername}, {
+
+    let updateReviews = await User.updateOne({username: req.body.chef}, {
         $push: {
             reviews: {
                 rating: req.body.ratingValue,
-                description: req.body.ratingDescription
+                description: req.body.ratingDescription,
+                username: req.body.username
             }
         }
     })

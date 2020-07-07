@@ -72,25 +72,17 @@ function CustomerOrders({username}) {
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Qty</th>
+                            <th>Chef</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         
                         {orders.length > 0 ? orders.map((element, index) => 
-                        <CustomerOrder key = {index} pending={element.pending} completed = {element.completed} title={element.menuItemTitle} qty={element.qty} orderID = {element._id} writeReviewClicked={writeReviewClicked}/>) : <></>} 
+                        <CustomerOrder key = {index} pending={element.pending} completed = {element.completed} title={element.menuItemTitle} qty={element.qty} orderID = {element._id} writeReviewClicked={writeReviewClicked} chef={element.chefUsername}/>) : <></>} 
                     </tbody>     
                 </Table>
-                {reviewVisibility ? 
-                    <form className = "review-form">
-                        <label htmlFor="star-rating">Rating</label>
-                        <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
-                        <label htmlFor="rating-description" style={{marginTop: '10px'}}>Describe Experience</label>
-                        <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description"></textarea>
-                        <Button onClick={submitReview} style={{marginTop: '10px'}}>Submit</Button>
-                        <Button onClick={cancelReview} className="cancel-review-btn">x</Button>
-                    </form> : <></> }
+                
             </div>
         </div>
     )

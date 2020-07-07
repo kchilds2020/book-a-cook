@@ -103,4 +103,15 @@
     text-align: center;
     margin: 10px;
 }
+.reviews-container{
+    padding: 20px
+}
 
+.review-container{
+    padding: 5px;
+    border-bottom: #ccc 1px solid;
+}
+
+.review-customer{
+    font-weight: bold;
+}

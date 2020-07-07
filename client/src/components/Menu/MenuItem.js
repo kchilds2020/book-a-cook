@@ -22,7 +22,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
             console.log('REVIEW AVG: ', sum/reviewArray.length)
             setReviewAvg(sum/reviewArray.length)
         })
-    }, [])
+    }, [chefUsername])
 
     console.log('USERNAME',user)
     const orderItem = (event) =>{
