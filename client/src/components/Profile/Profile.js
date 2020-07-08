@@ -55,12 +55,12 @@ function Profile() {
         if(menu !== null){
             setMenuItems(menu)
         }
-    },[user, menu, count])
+    },[user, menu])
 
     //check modification
     useEffect(() => {
         setModified(true)
-    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number, photos, count])
+    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number])
 
 
 
@@ -108,8 +108,9 @@ function Profile() {
             //delete items if needed
             if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
 
-            setModified(false)
+            
             alert('Profile Updated')
+            setModified(false)
         }
     }
 

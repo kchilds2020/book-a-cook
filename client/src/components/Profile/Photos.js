@@ -12,29 +12,35 @@ function Photos({photos, files, setPhotos, setFiles, username, setModified, uplo
 
     const handleImgChange = async(event) => {
         //update files
-        let fileArray = files;
-        fileArray.push(event.target.files[0])
-        setFiles(fileArray);
+        if(event.target.files[0].size < 1000000){
+            console.log('FILESIZE', event.target.files[0])
+            let fileArray = files;
+            fileArray.push(event.target.files[0])
+            setFiles(fileArray);
 
 
-        let formData = new FormData();
-        formData.append('file', event.target.files[0])
-        formData.append('username',username)
-        let imgResponse = await axios.post('/upload-img', formData)
-        console.log('IMAGE RESPONSE',imgResponse)
-
-       
-
-        //update photos
-        let tempPhotos = photos;
-        tempPhotos.push(`${imgResponse.data.fileName}`)
-        setPhotos(tempPhotos);
+            let formData = new FormData();
+            formData.append('file', event.target.files[0])
+            formData.append('username',username)
+            let imgResponse = await axios.post('/upload-img', formData)
+            console.log('IMAGE RESPONSE',imgResponse)
 
         
 
-        setModified(true)
-        console.log('photos', photos)
-        setCount(count + 1 )
+            //update photos
+            let tempPhotos = photos;
+            tempPhotos.push(`${imgResponse.data.fileName}`)
+            setPhotos(tempPhotos);
+
+            
+
+            
+            console.log('photos', photos)
+            setCount(count + 1 )
+            setModified(true)
+        }else{
+            alert('Image size too large! please ensure photo is less than 1MB')
+        }
         
     }
 
