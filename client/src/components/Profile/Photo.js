@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
 import Confirm from '../Confirm'
+import Img from 'react-fix-image-orientation'
 
 function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto, setModified, uploadImage}) {
     const photoInput = useRef();
@@ -54,7 +55,7 @@ function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, usern
     return (
         <div className = "photo">
             {editable === true ? <button className="delete-mi-btn" onClick={confirmDeletion}>x</button> : <></>}
-            {input === true ? <img src = {!photo ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/> : <img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
+            {input === true ? <Img src = {!photo ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/> : <Img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
             {input === true ? <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${itemNum}`}/> : <></>}
             {visible === true ? <Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /> : <></>}
         </div>

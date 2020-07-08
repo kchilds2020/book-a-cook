@@ -14,15 +14,18 @@ const nodemailer = require("nodemailer");
 
 
 router.use(fileUpload());
-router.post('/upload-img', (req,res) => {    
+router.post('/upload-img', async(req,res) => {    
     console.log("USERNAME",req.body.username);
     console.log(req.files);
+
     if(req.files === null){
         return res.status(400).json({msg: 'no file uploaded'});
     }
 
+
     console.log('req.files.file',req.files.file);
      const file = req.files.file;
+
 
     file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
         if(err){
