@@ -3,7 +3,7 @@ import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
 import Confirm from '../Confirm'
 
-function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto, setModified}) {
+function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, username, editable=false, dbID, deletePhoto, setModified, uploadImage}) {
     const photoInput = useRef();
 
     const [visible, setVisibility] = useState(false);
@@ -18,6 +18,8 @@ function Photo({input, itemNum, photo, files, photos, setFiles, setPhotos, usern
         let idVal = `photo-${itemNum}`;
         tempPhotos[itemNum] = `${username}-${event.target.files[0].name}`
         setPhotos(tempPhotos);
+
+        uploadImage()
 
         const imgTag = document.getElementById(idVal);
         const reader = new FileReader();

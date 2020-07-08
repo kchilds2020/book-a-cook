@@ -191,7 +191,7 @@ function Profile() {
                             <div className="profile-header-title">Photos</div>
                             <div className = "photos-container" id="cook-info">
                                 <div className = "images">
-                                    <Photos photos={photos} files={files}  setPhotos={setPhotos}  setFiles={setFiles} username={user.username} setModified={setModified}/>
+                                    <Photos photos={photos} files={files}  setPhotos={setPhotos}  setFiles={setFiles} username={user.username} setModified={setModified} uploadImage={uploadImage}/>
                                 </div>
                                 
                             </div>
