@@ -30,6 +30,8 @@ function Profile() {
     const [menuItems, setMenuItems] = useState([])
     const [number, setNumber] = useState('');
 
+    const [count, setCount] = useState(0);
+
     //menu
     const fileInput = useRef();
 
@@ -53,12 +55,12 @@ function Profile() {
         if(menu !== null){
             setMenuItems(menu)
         }
-    },[user, menu])
+    },[user, menu, count])
 
     //check modification
     useEffect(() => {
         setModified(true)
-    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number, photos])
+    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number, photos, count])
 
 
 
@@ -73,7 +75,7 @@ function Profile() {
             console.log(imgResponse.data)
         })
 
-        
+        setCount(count + 1)     
     }
 
     const handleSubmit = async (event) =>{

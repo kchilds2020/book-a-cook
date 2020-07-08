@@ -10,7 +10,7 @@ export const Register = () => {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [number, setNumber] = useState("");
     let history = useHistory()
 
     const checkValidation = async (user) => {
@@ -59,8 +59,30 @@ export const Register = () => {
             return false;
         }
 
+        let checks = formatPhoneNumber(number)
+        if(checks !== true){
+            return false;
+        }
+
         return true;
     }
+
+    let formatPhoneNumber = (str) => {
+        //Filter only numbers from the input
+        let cleaned = ('' + str).replace(/\D/g, '');
+        
+        //Check if the input is of correct length
+        let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+      
+        if (match) {
+          setNumber('(' + match[1] + ') ' + match[2] + '-' + match[3])
+          return true
+        }
+        else{
+            alert('Invalid Phone Number')
+            return false
+        }
+    };
 
     const registerUser = async (evt) =>{
         evt.preventDefault();
@@ -70,9 +92,11 @@ export const Register = () => {
             lastname: lastname,
             email: email,
             username: username,
-            password: password
+            password: password,
+            number: number
 
         }
+        
         let response = await checkValidation(user)
         if(response === true){
             console.log('post started')
@@ -99,6 +123,7 @@ export const Register = () => {
                     <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
                     <input name = "lastname" type = "text" placeholder = 'Last Name' className = "inputFields" maxLength = '40' value = {lastname} onChange={e => setLastname(e.target.value)} required/>
                     <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>
+                    <input name = "number" type = "tel" placeholder = 'Phone Number' className = "inputFields" maxLength = '15' value = {number} onChange = {e => setNumber(e.target.value)} required/>            
                     <input name = "username" type = "text" placeholder = 'Username' className = "inputFields" maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)} required/>
                     <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/>
                     <Button type="submit" variant="primary" block>Register</Button>
