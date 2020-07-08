@@ -58,7 +58,7 @@ function Profile() {
     //check modification
     useEffect(() => {
         setModified(true)
-    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number])
+    },[firstName, lastName, email, username, cook, cookDescription, cookSpecialty, cookPrice, picture, identification, number, photos])
 
 
 
@@ -72,6 +72,8 @@ function Profile() {
             let imgResponse = await axios.post('/upload-img', formData)
             console.log(imgResponse.data)
         })
+
+        
     }
 
     const handleSubmit = async (event) =>{
