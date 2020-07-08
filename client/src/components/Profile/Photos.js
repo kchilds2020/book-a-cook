@@ -27,7 +27,7 @@ function Photos({photos, files, setPhotos, setFiles, username, setModified, uplo
 
         //update photos
         let tempPhotos = photos;
-        tempPhotos.push(`${username}-${event.target.files[0].name}`)
+        tempPhotos.push(`${imgResponse.data.fileName}`)
         setPhotos(tempPhotos);
 
         
