@@ -8,13 +8,20 @@ function Photos({photos, files, setPhotos, setFiles, username, setModified, uplo
         console.log('PHOTOS',photos)
     },[count])
 
-    const handleImgChange = (event) => {
+    const handleImgChange = async(event) => {
         //update files
         let fileArray = files;
         fileArray.push(event.target.files[0])
         setFiles(fileArray);
 
-        uploadImage()
+
+        let formData = new FormData();
+        formData.append('file', event.target.files[0])
+        formData.append('username',user.username)
+        let imgResponse = await axios.post('/upload-img', formData)
+        console.log('IMAGE RESPONSE',imgResponse)
+
+       
 
         //update photos
         let tempPhotos = photos;
@@ -26,6 +33,7 @@ function Photos({photos, files, setPhotos, setFiles, username, setModified, uplo
         setModified(true)
         console.log('photos', photos)
         setCount(count + 1 )
+        
     }
 
     const deletePhoto = (itemID) => {
