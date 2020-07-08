@@ -126,7 +126,8 @@ router.post('/post/create-post', (req, res) => {
             location: req.body.location,
             date: req.body.date,
             username: req.body.username,
-            cook: req.body.cook
+            cook: req.body.cook,
+            price: req.body.price
         })
         .then(results => {
             console.log(`New POST: ${results}`);

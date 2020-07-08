@@ -14,6 +14,7 @@ function JobPosts({username}) {
     const [peopleAmount, setPeopleAmount] = useState('');
     const [location, setLocation] = useState('');
     const [summary, setSummary] = useState('');
+    const [pricePerPerson, setPricePerPerson] = useState(0)
 
 
     useEffect(() => {
@@ -39,7 +40,8 @@ function JobPosts({username}) {
             location: location,
             peopleAmount: peopleAmount,
             date: date,
-            username: username
+            username: username,
+            price: pricePerPerson
         }
 
         axios.post('/post/create-post', post)
@@ -71,10 +73,10 @@ function JobPosts({username}) {
                 <h3><span className="post-num">{myPosts.length}</span> posted Jobs.</h3>
             </div>
             <div className="profile-job-posts">
-                {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook}/>) : <></>}
+                {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook} pricePerPerson={element.price} peopleAmount={element.peopleAmount}/>) : <></>}
             </div>
             <Button variant="primary" onClick={() => setVisibility(true)} block>Create a Post</Button>
-            {visible ? <JobForm handleSubmit={handleSubmit} cancelPost={cancelPost} setDate={setDate} setDescription ={setDescription} setSummary={setSummary} setLocation={setLocation} setPeopleAmount={setPeopleAmount}/> : <></>}
+            {visible ? <JobForm handleSubmit={handleSubmit} cancelPost={cancelPost} setDate={setDate} setDescription ={setDescription} setSummary={setSummary} setLocation={setLocation} setPeopleAmount={setPeopleAmount} setPricePerPerson={setPricePerPerson}/> : <></>}
         </div>
     )
 }

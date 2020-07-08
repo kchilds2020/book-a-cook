@@ -21,6 +21,7 @@ function JobPostings() {
     const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
     const [peopleAmount, setPeopleAmount] = useState('');
+    const [pricePerPerson, setPricePerPerson] = useState(0)
     const [visibility, setVisibility] = useState('hidden');
 
     useEffect(() => {
@@ -63,7 +64,8 @@ function JobPostings() {
             location: location,
             peopleAmount: peopleAmount,
             date: date,
-            username: user.username
+            username: user.username,
+            price: pricePerPerson
         }
 
         axios.post('/post/create-post', post)
@@ -89,6 +91,7 @@ function JobPostings() {
         setDate('')
         setPeopleAmount('')
         setLocation('')
+        setPricePerPerson(0)
         toggleForm()
     }
 
@@ -96,11 +99,11 @@ function JobPostings() {
             <div>
                 <div className = "jp-container">
                     <div className = "posts-container">
-                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} cancelPost = {cancelPost}/>)}
+                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} cancelPost = {cancelPost} pricePerPerson={element.price}/>)}
                         {err ? err : null}        
                     </div>
                     <div id = "job-post-form">
-                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
+                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
                     </div>
                 </div>
 

@@ -44,7 +44,7 @@ router.get('/api/get/active-orders/:username', async (req,res) => {
 
     orderItems.map( async(element) => {
         console.log(element.deliveredDate - element.createdDate)
-        if((element.deliveredDate - element.createdDate) > 3600000){
+        if((Date.now() - element.deliveredDate) > 3600000){
             let updateItem = await Orders.updateOne({_id: element._id},{
                 $set:{
                     pending: false,
@@ -53,9 +53,9 @@ router.get('/api/get/active-orders/:username', async (req,res) => {
         }
     })
     
-    let filteredItems = orderItems.filter(element =>  (element.deliveredDate - element.createdDate) < 3600000)
+   /*  let filteredItems = orderItems.filter(element =>  (element.deliveredDate - element.createdDate) < 3600000) */
 
-    res.json(filteredItems)
+    res.json(orderItems)
 
     
 })
@@ -162,6 +162,19 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
     console.log('ITEM RESPONSE', item.price)
     const intent = await stripe.paymentIntents.create({
         amount: ((item.price * 100) + 500 + ((item.price * 100) * .08)) * req.params.qty,
+        currency: 'usd',
+        // Verify your integration in this guide by including this parameter
+        metadata: {integration_check: 'accept_a_payment'},
+    });
+    console.log(intent.client_secret)
+    res.json({client_secret: intent.client_secret});
+  });
+
+  router.get('/secret/book-chef/:id', async (req, res) => {
+    const item = await JobPost.findOne({_id: req.params.id})
+    console.log('ITEM RESPONSE', item.price)
+    const intent = await stripe.paymentIntents.create({
+        amount: ((item.price * 100) * item.peopleAmount)* 1.16,
         currency: 'usd',
         // Verify your integration in this guide by including this parameter
         metadata: {integration_check: 'accept_a_payment'},

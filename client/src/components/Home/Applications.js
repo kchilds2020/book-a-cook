@@ -4,10 +4,11 @@ import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Confirm from '../Confirm'
+import Book from '../Book'
 
-function Applications({cook, postID, listKey,hired}) {
+function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount, summary}) {
     const [fullname,setFullname] = useState('');
-    const [isHired,setHired] = useState(false);
+    const [isHired,setHired] = useState(hired);
     const [visibility,setVisibility] = useState(false);
 
     let history = useHistory()
@@ -19,33 +20,10 @@ function Applications({cook, postID, listKey,hired}) {
         return () => mounted = false;
     }, [cook])
 
-/*     useEffect(() => {
-        console.log(hired, cook)
-        if(hired === cook){
-            document.getElementById(`app-${listKey}`).style.backgroundColor="#d7eee1"
-            document.getElementById(`btn-${listKey}`).innerText="Hired!"
-            document.getElementById(`btn-${listKey}`).style.pointerEvents="none"
-        }
-    }, [hired, cook, listKey]) */
 
     const cancelItem = (event) => {
         event.preventDefault();
         setVisibility(false)
-    }
-
-    const bookItem = () => {
-
-        setVisibility(false)
-        const data = {
-            cook: cook,
-            postID: postID
-        }
-        axios.post('/api/post/confirm-cook', data)
-        .then(response => {
-            console.log(response.data)
-            setHired(true)
-        })
-        .catch(err => console.log(err))
     }
 
     const rejectCook = async () => {
@@ -66,10 +44,11 @@ function Applications({cook, postID, listKey,hired}) {
                 </Link>
                 </div>
                 <div style={{padding: '10px', width: '260px'}}>
-                { isHired ?
-                <Button variant="success" style={{marginLeft: '15px'}} disabled>
-                    Hired!
-                </Button> :
+                { hired === cook ?
+                <>
+                <Button variant="outline-info" style={{marginLeft: '5px'}} onClick={() => history.push(`/user/profile?user=${cook}`)}>
+                    Contact
+                </Button></>  :
                 <>
                     <Button variant="outline-primary" style={{marginLeft: '5px'}} onClick={() => setVisibility(true)}>
                         Book
@@ -84,7 +63,8 @@ function Applications({cook, postID, listKey,hired}) {
                 }
                 </div>
                 
-                {visibility === true ? <Confirm message={`Are you sure you want to book ${cook}?`} cancel={cancelItem} confirm={bookItem} /> : <></>}
+                {/* {visibility === true ? <Confirm message={`Are you sure you want to book ${cook}?`} cancel={cancelItem} confirm={bookItem} /> : <></>} */}
+                {visibility === true ? <Book eventID={postID} chef={cook} eventTitle={summary} peopleAmount={peopleAmount} pricePerPerson={pricePerPerson} cancel={cancelItem} setVisibility={setVisibility}/> : <></>}
             </li>
         </>
     )

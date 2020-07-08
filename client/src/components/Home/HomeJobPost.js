@@ -2,7 +2,7 @@ import React from 'react'
 import '../../styles/HomeJobPost.css'
 import Applications from './Applications';
 
-function HomeJobPost({summary, applications, postID, listID, cook}) {
+function HomeJobPost({summary, applications, postID, listID, cook, pricePerPerson, peopleAmount}) {
 
     const showCount = (event) => {
         let list = document.getElementById(`list-${event.target.id}`)
@@ -24,7 +24,7 @@ function HomeJobPost({summary, applications, postID, listID, cook}) {
                     </button>
                 </div>
                 <ul className="cook-list" id={`list-${listID}`}>
-                    {applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook}/>)}
+                    {applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook} pricePerPerson={pricePerPerson} peopleAmount={peopleAmount} summary={summary}/>)}
                 </ul>
             </div>
             

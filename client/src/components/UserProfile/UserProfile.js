@@ -29,6 +29,7 @@ function UserProfile() {
     const [description, setDescription] = useState('');
     const [location, setLocation] = useState('');
     const [date, setDate] = useState('');
+    const [pricePerPerson, setPricePerPerson] = useState(0)
     const [peopleAmount, setPeopleAmount] = useState('');
     const [photos,setPhotos] = useState('');
     const [reviews,setReviews] = useState('');
@@ -78,7 +79,8 @@ function UserProfile() {
             date: date,
             username:'',
             peopleAmount: peopleAmount,
-            cook: username
+            cook: username,
+            price: pricePerPerson
         }
         axios.post('/post/create-post', data)
         .then(response => console.log(response.data))
@@ -159,7 +161,7 @@ function UserProfile() {
                     {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
                 </div>
                 <div id="book-form">
-                    <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost}/>
+                    <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
                 </div></>
                 }
                 

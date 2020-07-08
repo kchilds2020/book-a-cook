@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 
-function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, applications}) {
+function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, applications, pricePerPerson}) {
 
 
     let {user, menu} = useContext(UserContext)
@@ -71,6 +71,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
                     <div className = "post-location">{location}</div>
                     <div className = "post-date">{month} {day}, {year}</div>
                 </div>
+                <div className = "post-description">{pricePerPerson}</div>
                 <div className = "post-description">{description}</div>
                 {applied ? <Button variant="success" id="jp-btn">Applied!</Button> : <Button variant="primary" onClick={apply} id="jp-btn">Apply!</Button>}
                 <div className = "post-username">Created by: {userPosted}</div>

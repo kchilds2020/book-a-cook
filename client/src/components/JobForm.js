@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/JobForm.css'
 import Button from 'react-bootstrap/Button'
 
-function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLocation, setSummary, cancelPost}) {
+function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLocation, setSummary, cancelPost, setPricePerPerson}) {
     return (
         <div>
             <form className = "form-job" onSubmit = {handleSubmit}>
@@ -12,6 +12,8 @@ function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLoc
                     <textarea type="text" name = "event-description" id = "event-description" className = "jp-inputs" onChange={event => setDescription(event.target.value)}/>
                     <label htmlFor = "people-amount">Amount of People</label>
                     <input type="text" name = "people-amount" id = "people-amount" className = "jp-inputs" onChange={event => setPeopleAmount(event.target.value)}/>
+                    <label htmlFor = "price-per-person">Price Per Person</label>
+                    <input type="number" name = "people-per-person" id = "people-per-person" className = "jp-inputs" onChange={event => setPricePerPerson(event.target.value)}/>
                     <label htmlFor = "event-location">Location of Event</label>
                     <input type="text" name = "event-location" id = "event-location" className = "jp-inputs" onChange={event => setLocation(event.target.value)}/>
                     <label htmlFor = "event-date">Date of Event</label>
