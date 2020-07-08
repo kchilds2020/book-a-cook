@@ -1,5 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react'
 import Photo from './Photo'
+import axios from 'axios'
+
 function Photos({photos, files, setPhotos, setFiles, username, setModified, uploadImage}) {
     const[count,setCount] = useState(0);
     const photoInput = useRef();
@@ -17,7 +19,7 @@ function Photos({photos, files, setPhotos, setFiles, username, setModified, uplo
 
         let formData = new FormData();
         formData.append('file', event.target.files[0])
-        formData.append('username',user.username)
+        formData.append('username',username)
         let imgResponse = await axios.post('/upload-img', formData)
         console.log('IMAGE RESPONSE',imgResponse)
 
