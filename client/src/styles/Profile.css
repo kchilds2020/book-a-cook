@@ -27,7 +27,11 @@
     border-radius: 8px 8px 0px 0px;
 }
 .profile-form{
-    width: 90%;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 4px #333;
+    width: 100%;
+    background-color: white;
 }
 
 .profile-form h2{
@@ -77,11 +81,10 @@
     
 }
 
-.cook-about{
+.cook-information{
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    width: 90%;
+    padding: 10px;
 }
 
 .cook-input, .user-input{
@@ -113,13 +116,16 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     width: 100%;
-    background-color: white;
-    box-shadow: 0px 0px 4px #333;
-    border-radius: 0px 0px 8px 8px;
 }
  
 .submitButton{
     width: 100%;
+}
+
+.profile-header{
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
 }
 
 .user-input{
@@ -265,19 +271,3 @@
 }
 
 /* styles for input component  */
-
-.InputContainer{
-    display: flex;
-    flex-direction: column;
-    padding: 5px 0px;
-}
-
-.InputLabel{
-    /* add styles here */
-}
-
-.InputTag{
-    padding: 5px;
-    font-size: 18px;
-    width: 100%;
-}

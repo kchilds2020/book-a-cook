@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react'
+import axios from 'axios'
 
-function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem, identification}) {
+function CreateMenuItem({username, createMenuItem, identification}) {
 
 
     const [menuDescription, setMenuDescription] = useState('');
@@ -11,18 +12,23 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem,
 
     const menuFileInput = useRef();
 
-    const handleMenuFileChange = (event) => {
+    const handleMenuFileChange = async (event) => {
         //store file and filename
-        let fileArray = files;
-        fileArray.push(event.target.files[0])
-        setMenuPicture(`${username}-${event.target.files[0].name}`);
-        setFiles(fileArray);
+        const file = event.target.files[0]
+        let formData = new FormData();
+        formData.append('file', file)
+        formData.append('username',username)
+
+        let imgResponse = await axios.post('/upload-img', formData)
+        console.log(imgResponse.data)
+
+        setMenuPicture(`${username}-${file.name}`);
 
         //display progile img
         const imgTag = document.getElementById('create-menu-photo');
         const reader = new FileReader();
         reader.addEventListener("load", () => imgTag.src = reader.result, false);
-        if(event.target.files[0]){reader.readAsDataURL(event.target.files[0]);}
+        reader.readAsDataURL(file);
     }
 
     const createItem = (event) =>  {
@@ -37,7 +43,6 @@ function CreateMenuItem({username, files, setFiles, uploadImage, createMenuItem,
 
         }
         console.log('CREATE MENU ITEM DATA', data)
-        uploadImage()
         createMenuItem(data)
 
         setMenuPicture('add-photo.png')

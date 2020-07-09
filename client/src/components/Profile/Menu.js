@@ -3,7 +3,7 @@ import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
-function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, files, setFiles, setTempMenuItems, tempMenuItems, uploadImage, setModified}) {
+function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, setTempMenuItems, tempMenuItems, uploadImage, setModified}) {
     const [count, setCount] = useState(0);
 
     const createMenuItem = (data) =>  {
@@ -36,9 +36,12 @@ function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDele
 
     return (
         <>
-            {menuItems.length > 0 ? menuItems.map((element,index) => <MenuItem key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} menuItems={menuItems} setMenuItems={setMenuItems} dbID={element._id} deleteMenuItem={deleteMenuItem}/>) : <>No Menu Items</>}
-            <CreateMenuItem identification={identification} username={username} files={files} setFiles = {setFiles} uploadImage={uploadImage} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted = {setItemsToBeDeleted} createMenuItem={createMenuItem}/>
-        </> 
+            <div className="profile-header">Menu Items</div>
+            <div className ="menu-container">
+                {menuItems.length > 0 ? menuItems.map((element,index) => <MenuItem key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} username={element.username} itemNum={index} menuItems={menuItems} setMenuItems={setMenuItems} dbID={element._id} deleteMenuItem={deleteMenuItem}/>) : <>No Menu Items</>}
+                <CreateMenuItem identification={identification} username={username} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted = {setItemsToBeDeleted} createMenuItem={createMenuItem}/>
+            </div>
+        </>
     )
 }
 
