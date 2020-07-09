@@ -48,12 +48,17 @@ function Profile() {
             setPhotos(user.photos)
             setIdentification(user._id) 
             setNumber(user.number)
+            setModified(false)
         }
 
         if(menu !== null){
             setMenuItems(menu)
         }
     },[user, menu])
+
+    useEffect(() => {
+        setModified(true)
+    },[firstName, lastName, username, email, number, cook, cookDescription, cookSpecialty, cookPrice, picture, identification])
 
 
 
@@ -134,11 +139,11 @@ function Profile() {
 
                                     </div> : <></>}
                             
-                            <Photos photos={photos}  setPhotos={setPhotos} username={user.username}/>
+                            <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>
                             {cook ? <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted} setModified={setModified}/>:<></>}
                             <div className="update-btn-container">
-{/*                                 {!modified ? <Button className="user-update-btn" id = "profile-update-btn" variant = 'secondary' block disabled>Update</Button> : <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>}
- */}                                <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>
+                                {!modified ? <Button className="user-update-btn" id = "profile-update-btn" variant = 'secondary' block disabled>Update</Button> : <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>}
+                                {/* <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button> */}
                             </div>
                             
                         </form>

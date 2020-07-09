@@ -3,16 +3,15 @@ import MenuItem from './MenuItem'
 import CreateMenuItem from './CreateMenuItem'
 
 
-function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, setTempMenuItems, tempMenuItems, uploadImage, setModified}) {
+function Menu({ identification, username, menuItems, setMenuItems, itemsToBeDeleted, setItemsToBeDeleted, setTempMenuItems, tempMenuItems, setModified}) {
     const [count, setCount] = useState(0);
 
     const createMenuItem = (data) =>  {
         
-        let tItems = tempMenuItems;
-        let mItems = menuItems;
+        let tItems = [...tempMenuItems];
+        let mItems = [...menuItems];
         tItems.push(data)
         mItems.push(data)
-        uploadImage()
         setMenuItems(mItems)
         setTempMenuItems(tItems)
         setCount(count + 1);

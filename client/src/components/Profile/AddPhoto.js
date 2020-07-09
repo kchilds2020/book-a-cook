@@ -2,9 +2,9 @@ import React, {useRef} from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
-function AddPhoto({itemNum, photos, setPhotos, username}) {
+function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
+    
     const photoInput = useRef();
-
 
     const addPhoto = async (event) => {
         //check size of image
@@ -18,10 +18,12 @@ function AddPhoto({itemNum, photos, setPhotos, username}) {
             console.log(imgResponse.data)
 
             //add photo name to photos array
-            let tempPhotos = photos;
+            let tempPhotos = [...photos];
             let idVal = `photo-${itemNum}`;
             tempPhotos[itemNum] = `${file.name}`
             setPhotos(tempPhotos);
+
+            setModified(true)
         }else{
             alert('Image size too large! please ensure photo is less than 1MB')
         }

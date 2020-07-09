@@ -1,11 +1,12 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
 import Confirm from '../Confirm'
 import Img from 'react-fix-image-orientation'
 import axios from 'axios'
 
-function Photo({itemNum, photo, photos, setPhotos, username, editable=false}) {
+function Photo({itemNum, photo, photos, setPhotos, username, editable=false, setModified}) {
+    
     const photoInput = useRef();
 
     const [visible, setVisibility] = useState(false);
@@ -33,6 +34,8 @@ function Photo({itemNum, photo, photos, setPhotos, username, editable=false}) {
             reader.addEventListener("load", function () { imgTag.src = reader.result }, false);
             reader.readAsDataURL(file)
 
+            setModified(true)
+
         }else{
             alert('Image size too large! please ensure photo is less than 1MB')
         }
@@ -49,10 +52,11 @@ function Photo({itemNum, photo, photos, setPhotos, username, editable=false}) {
     }
 
     const deleteItem = () => {
-        let tempPhotos = photos;
+        let tempPhotos = [...photos];
         tempPhotos.splice(itemNum, 1)
         setPhotos(tempPhotos);
         setVisibility(false)
+        setModified(true)
     }
     
 
