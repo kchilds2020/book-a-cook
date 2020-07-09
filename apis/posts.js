@@ -11,6 +11,7 @@ let fs = require('fs');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const nodemailer = require("nodemailer");
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 router.use(fileUpload());
@@ -256,6 +257,34 @@ router.post('/login-user', async (req,res) => {
     })
     .catch(err => console.log(err)) 
          
+})
+
+//create custom stripe account for user
+
+router.post('/api/post/create-stripe-account', async (req,res) => {
+
+    const data = req.body;
+    try{
+        var account = await stripe.accounts.create({
+            country: 'US',
+            type: 'custom',
+            requested_capabilities: ['card_payments', 'transfers'],
+        });
+
+        /* const accountLink = await stripe.accountLinks.create({
+            account: account.id,
+            success_url: '/home',
+            failure_url: '/',
+            type: 'custom_account_verification',
+            collect: 'eventually_due'
+        }); */
+
+        res.json(account)
+    }catch(error){
+        console.log(error)
+    }
+    
+
 })
 
 
