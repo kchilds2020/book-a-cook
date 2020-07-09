@@ -1,7 +1,20 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
-function CookToggle({cook, setCook}) {
+function CookToggle({cook, setCook, setModified}) {
+
+    const notCook = (e) => {
+        e.preventDefault()
+        setCook(false)
+        setModified(true)
+    }
+
+    const isCook = (e) => {
+        e.preventDefault()
+        setCook(true)
+        setModified(true)
+    }
+
     return (
         <div 
             style={{
@@ -16,7 +29,7 @@ function CookToggle({cook, setCook}) {
                 fontSize: '16px',
                 marginRight: '5px'
             }}>Are you a Cook?  </span>
-            {cook ? <Button variant="success" onClick={e => setCook(false)}>Yes</Button> : <Button variant="secondary" onClick={e => setCook(true)}>No</Button>}
+            {cook ? <Button variant="success" onClick={notCook}>Yes</Button> : <Button variant="secondary" onClick={isCook}>No</Button>}
         </div>
     )
 }

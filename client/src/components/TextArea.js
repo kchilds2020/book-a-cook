@@ -1,6 +1,13 @@
 import React from 'react'
 
-function TextArea({identifier, labelText, value, setValue}) {
+function TextArea({identifier, labelText, value, setValue, setModified}) {
+    
+    const handleChange = (e) => {
+        e.preventDefault()
+        setValue(e.target.value)
+        setModified(true)
+    }
+    
     return (
         <div style={{
             display: 'flex',
@@ -16,7 +23,7 @@ function TextArea({identifier, labelText, value, setValue}) {
                 type = "text" 
                 placeholder = {labelText} 
                 value = {value} 
-                onChange = {e => setValue(e.target.value)}
+                onChange = {handleChange}
                 style={{
                     padding: '5px',
                     fontSize: '18px',

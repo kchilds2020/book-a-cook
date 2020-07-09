@@ -56,10 +56,6 @@ function Profile() {
         }
     },[user, menu])
 
-    useEffect(() => {
-        setModified(true)
-    },[firstName, lastName, username, email, number, cook, cookDescription, cookSpecialty, cookPrice, picture, identification])
-
 
 
     const handleSubmit = async (event) =>{
@@ -123,19 +119,19 @@ function Profile() {
                             <div className = "user-description">
                                 <ProfileImage picture={picture} setPicture={setPicture} username={user.username}/>
                                 <div className = "profile-about">
-                                    <Input value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name"/>
-                                    <Input value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name"/>
-                                    <Input value = {username} setValue={setUsername} identifier='username' labelText="Username"/>
-                                    <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address"/>
-                                    <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number"/>
-                                    <CookToggle cook={cook} setCook={setCook}/>
+                                    <Input value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name" setModified={setModified}/>
+                                    <Input value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name" setModified={setModified}/>
+                                    <Input value = {username} setValue={setUsername} identifier='username' labelText="Username" setModified={setModified}/>
+                                    <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address" setModified={setModified}/>
+                                    <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
+                                    <CookToggle cook={cook} setCook={setCook} setModified={setModified}/>
                                 </div>
                             </div>
                             
                             {cook ? <div className = "cook-information" id="cook-info">
-                                        <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty"/>
-                                        <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description"/>
-                                        <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price"/>
+                                        <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
+                                        <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
+                                        <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
 
                                     </div> : <></>}
                             

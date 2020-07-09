@@ -1,7 +1,12 @@
 import React from 'react'
 
-function Input({value, setValue, identifier, labelText}) {
+function Input({value, setValue, identifier, labelText, setModified}) {
 
+    const handleChange = (e) => {
+        e.preventDefault()
+        setValue(e.target.value)
+        setModified(true)
+    }
 
     return (
         <div className="InputContainer" 
@@ -11,7 +16,7 @@ function Input({value, setValue, identifier, labelText}) {
                 padding: '5px 0px'
         }}>
             <label className="InputLabel" htmlFor={value}>{labelText}</label>
-            <input className="InputTag" name = {identifier} id = {identifier} type = "text" maxLength = '40' value = {value} onChange = {e => setValue(e.target.value)} required
+            <input className="InputTag" name = {identifier} id = {identifier} type = "text" maxLength = '40' value = {value} onChange = {handleChange} required
                 style={{
                     padding: '5px',
                     fontSize: '18px',
