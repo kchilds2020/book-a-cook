@@ -5,7 +5,6 @@ function TextArea({identifier, labelText, value, setValue}) {
         <div style={{
             display: 'flex',
             flexDirection: 'column',
-            padding: '5px'
         }}>
             <label 
                 htmlFor={identifier}>
@@ -19,7 +18,7 @@ function TextArea({identifier, labelText, value, setValue}) {
                 value = {value} 
                 onChange = {e => setValue(e.target.value)}
                 style={{
-                    padding: '5px 0px',
+                    padding: '5px',
                     fontSize: '18px',
                     width: '100%',
                     height: '150px'
