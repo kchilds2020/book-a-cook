@@ -271,14 +271,6 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
             requested_capabilities: ['card_payments', 'transfers'],
         });
 
-        /* const accountLink = await stripe.accountLinks.create({
-            account: account.id,
-            success_url: '/home',
-            failure_url: '/',
-            type: 'custom_account_verification',
-            collect: 'eventually_due'
-        }); */
-
         res.json(account)
     }catch(error){
         console.log(error)
@@ -289,3 +281,15 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
 
 
 module.exports = router;
+
+
+
+
+
+/* const accountLink = await stripe.accountLinks.create({
+            account: account.id,
+            success_url: '/home',
+            failure_url: '/',
+            type: 'custom_account_verification',
+            collect: 'eventually_due'
+        }); */
