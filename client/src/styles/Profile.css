@@ -80,8 +80,9 @@
 
 .cook-about{
     display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
+    flex-direction: column;
+    padding: 20px;
+    width: 90%;
 }
 
 .cook-input, .user-input{
@@ -262,4 +263,22 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+/* styles for input component  */
+
+.InputContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0px;
+}
+
+.InputLabel{
+    /* add styles here */
+}
+
+.InputTag{
+    padding: 5px;
+    font-size: 18px;
+    width: 100%;
 }

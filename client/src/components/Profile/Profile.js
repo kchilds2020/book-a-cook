@@ -6,6 +6,8 @@ import Photos from './Photos'
 import Menu from './Menu'
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
+import Input from '../Input'
+import TextArea from '../TextArea'
 
 function Profile() {
     let {user, menu} = useContext(UserContext)
@@ -161,16 +163,11 @@ function Profile() {
                                     <input ref={fileInput}type="file" onChange= {handleProfileChange} style={{display: 'none'}} id="profile-file"/>
                                 </div>
                                 <div className = "profile-about">
-                                    <label htmlFor="firstname">First Name</label>
-                                    <input name = "firstname" id = "firstName" type = "text" className = "user-input" maxLength = '40' defaultValue = {firstName} onChange = {e => setFirstname(e.target.value)} required/>
-                                    <label htmlFor="lastname">Last Name</label>
-                                    <input name = "lastname" id = "lastName" type = "text" className = "user-input" maxLength = '40' defaultValue = {lastName} onChange = {e => setLastname(e.target.value)} required/>
-                                    <label htmlFor="username">Username</label>
-                                    <input name = "username" id = "username" type = "text" className = "user-input" maxLength = '40' defaultValue = {username} onChange = {e => setUsername(e.target.value)} required/>
-                                    <label htmlFor="email">Email</label>
-                                    <input name = "email" id = "email" type = "text" className = "user-input" maxLength = '40' defaultValue = {email} onChange = {e => setEmail(e.target.value)} required/>
-                                    <label htmlFor="number">Phone Number</label>
-                                    <input name = "number" id = "number" type = "tel" className = "user-input" maxLength = '15' defaultValue = {number} onChange = {e => setNumber(e.target.value)} required/>  
+                                    <Input value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name"/>
+                                    <Input value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name"/>
+                                    <Input value = {username} setValue={setUsername} identifier='username' labelText="Username"/>
+                                    <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address"/>
+                                    <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number"/>
                                     <div className = "cook-toggle">
                                         <span className ="toggle-text">Are you a Cook?  </span>
                                         {cook ? <Button variant="success" onClick={e => setCook(false)}>Yes</Button> : <Button variant="secondary" onClick={e => setCook(true)}>No</Button>}
@@ -183,12 +180,9 @@ function Profile() {
                                     <div className="profile-header-title">Cook Information</div>
                                     <div className = "cook-information" id="cook-info">
                                         <div className = "cook-about">
-                                            <label htmlFor="specialty">Specialty</label>
-                                            <input name = "cookSpecialty" id = "cookSpecialty" type = "text" placeholder = "Specialty" className = "cook-input" maxLength = '40' defaultValue = {cookSpecialty} onChange = {e => setCookSpecialty(e.target.value)} /> 
-                                            <label htmlFor="description">Description</label>
-                                            <textarea name = "cookDescription" id = "cookDescription" type = "text" placeholder = "Description" className = "cook-input" defaultValue = {cookDescription} onChange = {e => setCookDescription(e.target.value)}/>
-                                            <label htmlFor="price">Price</label>
-                                            <input name = "cookPrice" id = "cookPrice" type = "text" placeholder = "Price" className = "cook-input" maxLength = '40' defaultValue = {cookPrice} onChange = {e => setCookPrice(e.target.value)} />
+                                            <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty"/>
+                                            <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description"/>
+                                            <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price"/>
                                         </div>
                                         
                                     </div>
