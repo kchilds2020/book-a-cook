@@ -11,7 +11,7 @@ function Account({user}) {
         try{
             let response = await axios.post('/api/post/create-stripe-account',{user: user})
             console.log(response)
-            window.open(response.data.url, '_blank')
+            window.location.href = response.data.url
         }catch(error){
             alert(error)
         }
