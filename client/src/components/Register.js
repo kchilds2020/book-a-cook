@@ -107,6 +107,7 @@ export const Register = () => {
                         console.log('FAILURE');
                     }else{
                         console.log(response);
+                        localStorage.setItem('user', response.data._id)
                         history.push('/home')
                     }
                 })
