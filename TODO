@@ -1,4 +1,5 @@
-set up stripe connect for paying users
-fix events lists for customers 
-add styling to landing page
+register takes you to login instead of home. (fix it)
+finish set up of Stripe Connect. How do customers add bank account?
+images are not showing up from iphone but is showing on desktop (fix it)
+switch all asynchronus calls to async await
 add icons
