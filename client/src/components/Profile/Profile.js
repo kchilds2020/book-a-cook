@@ -10,6 +10,7 @@ import Input from '../Input'
 import TextArea from '../TextArea'
 import ProfileImage from './ProfileImage'
 import CookToggle from './CookToggle'
+import BankAccountInfo from './BankAccountInfo'
 
 function Profile() {
     let {user, menu} = useContext(UserContext)
@@ -32,6 +33,9 @@ function Profile() {
     const [identification, setIdentification] = useState('')
     const [menuItems, setMenuItems] = useState([])
     const [number, setNumber] = useState('');
+    const [bankAccountID, setBankAccountID] = useState('');
+
+
     
 
     useEffect(() => {
@@ -48,7 +52,10 @@ function Profile() {
             setPhotos(user.photos)
             setIdentification(user._id) 
             setNumber(user.number)
+            setBankAccountID(user.bank_account_id)
+
             setModified(false)
+
         }
 
         if(menu !== null){
@@ -74,7 +81,8 @@ function Profile() {
                 cookPrice: cookPrice,
                 picture: picture,
                 photos: photos,
-                number: number
+                number: number,
+                bank_account_id: bankAccountID,
             }
 
             //update user info
@@ -124,7 +132,7 @@ function Profile() {
                                     <Input value = {username} setValue={setUsername} identifier='username' labelText="Username" setModified={setModified}/>
                                     <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address" setModified={setModified}/>
                                     <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
-                                    <CookToggle cook={cook} setCook={setCook} setModified={setModified}/>
+                                    {/* <CookToggle cook={cook} setCook={setCook} setModified={setModified}/> */}
                                 </div>
                             </div>
                             
@@ -132,7 +140,7 @@ function Profile() {
                                         <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
                                         <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
                                         <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
-
+                                        {bankAccountID ? <div>Bank Account Info Complete: {bankAccountID}</div> : <BankAccountInfo user={user} setBankAccountID={setBankAccountID} setModified={setModified}/>}
                                     </div> : <></>}
                             
                             <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>

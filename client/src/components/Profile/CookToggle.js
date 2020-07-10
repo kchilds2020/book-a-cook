@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
-function CookToggle({cook, setCook, setModified}) {
+function CookToggle({cook, setCook, setModified = (value) => null}) {
 
     const notCook = (e) => {
         e.preventDefault()

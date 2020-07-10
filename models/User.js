@@ -17,7 +17,8 @@ const User = new mongoose.Schema({
     totalEarned: {type: Number, default: 0},
     number: {type: String, default: 'Number Not Available'},
     reviews: {type: Array, default: []},
-    stripe_account_id: {type: String, trim: true, default: ''}
+    stripe_account_id: {type: String, trim: true, default: ''},
+    bank_account_id: {type: String, trim: true, default: ''}
 },
 {
     collection: 'users'

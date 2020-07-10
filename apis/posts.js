@@ -204,7 +204,8 @@ router.post('/update-user', (req, res) => {
             cookPrice: req.body.cookPrice,
             picture: req.body.picture,
             photos: req.body.photos,
-            number: req.body.number
+            number: req.body.number,
+            bank_account_id: req.body.bank_account_id
         }
     })
     .then(results =>{
@@ -213,25 +214,61 @@ router.post('/update-user', (req, res) => {
     })
 });
 
-router.post('/post/register', (req, res) => {
+router.post('/post/register', async (req, res) => {
 
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-        // Store hash in your password DB.
-        User.create({
+    try{
+
+        const account = await stripe.accounts.create({
+            country: 'US',
+            type: 'custom',
+            business_type: 'individual',
+            individual:{
+                first_name: req.body.firstname,
+                last_name: req.body.lastname,
+                email: req.body.email
+            },
+            requested_capabilities: ['card_payments', 'transfers'],
+        });
+
+        const hashedPassword = bcrypt.hashSync(req.body.password,saltRounds);
+        const user = await User.create({
             firstName: req.body.firstname,
             lastName: req.body.lastname,
             email: req.body.email,
             number: req.body.number,
             username: req.body.username,
-            password: hash
+            password: hashedPassword,
+            cook: req.body.cook,
+            stripe_account_id: account.id
         })
-        .then(results => {
-            console.log(`New ID: ${results}`);
-            req.session.userID = results._id;
-            res.json(results);
-        })
-        .catch(error => console.error(error))
-        })
+
+        req.session.userID = user._id;
+        
+        if(req.body.cook === true){
+
+            const accountLink = await stripe.accountLinks.create({
+                account: account.id,
+                success_url: 'http://localhost:3000/home?success',
+                failure_url: 'http://localhost:3000/home?failure',
+                type: 'custom_account_verification',
+                collect: 'eventually_due'
+            });
+
+            res.json({accountLink, user})
+            console.log(accountLink)
+        }else{
+            res.json({account,user})
+        }
+    }catch(error){
+        console.log(error)
+        res.send(error)
+    }
+
+
+    
+
+        
+    
 });
 
 router.post('/login-user', async (req,res) => {
@@ -299,6 +336,32 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
     }
     
 
+})
+
+router.post('/api/post/add-bank-account', async (req,res) => {
+    const user = req.body.user
+    const bankInfo = req.body.bank
+    try{
+        const response = await stripe.accounts.createExternalAccount(
+            `${user.stripe_account_id}`,
+            {
+                external_account: {
+                    object: 'bank_account',
+                    country: 'US',
+                    currency: 'usd',
+                    account_number: bankInfo.account_number,
+                    routing_number: bankInfo.routing_number
+
+                }
+            },
+        )
+        console.log(response)
+        res.json(response)
+    }
+    catch(err){
+        console.log(err)
+        res.json(err)
+    }
 })
 
 

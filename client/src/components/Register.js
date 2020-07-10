@@ -4,6 +4,7 @@ import "../styles/Register.css"
 import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Input from './Input'
+import CookToggle from './Profile/CookToggle'
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -12,6 +13,7 @@ export const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [number, setNumber] = useState("");
+    const [cook, setCook] = useState(false)
     let history = useHistory()
 
     const checkValidation = async (user) => {
@@ -94,7 +96,8 @@ export const Register = () => {
             email: email,
             username: username,
             password: password,
-            number: number
+            number: number,
+            cook: cook
 
         }
         
@@ -107,8 +110,8 @@ export const Register = () => {
                         console.log('FAILURE');
                     }else{
                         console.log(response);
-                        localStorage.setItem('user', response.data._id)
-                        history.push('/home')
+                        localStorage.setItem('user', response.data.user._id)
+                        window.location.href= cook === true ? response.data.accountLink.url : '/home'
                     }
                 })
                 .catch(function (error) {
@@ -116,6 +119,19 @@ export const Register = () => {
                 });
         }
     }
+
+    /* const createStripeAccount = async(e) => {
+        e.preventDefault()
+        try{
+            let response = await axios.post('/api/post/create-stripe-account',{user: user})
+            console.log(response)
+            window.location.href = response.data.url
+        }catch(error){
+            alert(error)
+        }
+
+        
+    } */
 
     return(
         <>
@@ -128,6 +144,7 @@ export const Register = () => {
                     <Input identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber} type="tel"/>
                     <Input identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
                     <Input identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
+                    <CookToggle cook={cook} setCook ={setCook}/>
                     {/* <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
                     <input name = "lastname" type = "text" placeholder = 'Last Name' className = "inputFields" maxLength = '40' value = {lastname} onChange={e => setLastname(e.target.value)} required/>
                     <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>

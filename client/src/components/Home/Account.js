@@ -29,14 +29,14 @@ function Account({user}) {
                 <tr>
                     <th>In Account</th>
                     {/* <th>Total Earned</th> */}
-                    <th>Link Account</th>
+                    <th>Send To Bank</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.account * 100) / 100).toFixed(2)}</h3></td>
                     {/* <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.totalEarned * 100) / 100).toFixed(2)}</h3></td> */}
-                    <td>{user.stripe_account_id ? <Button>Pay Me</Button> : <Button onClick={createStripeAccount}>Link Bank</Button>}</td>
+                    <td>{user.bank_account_id ? <Button>Pay Me</Button> : <Button onClick={() => window.location.href = '/profile'}>Link Bank</Button>}</td>
 
                 </tr>
             </tbody>     

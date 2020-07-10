@@ -1,5 +1,4 @@
-register takes you to login instead of home. (fix it)
-finish set up of Stripe Connect. How do customers add bank account?
-images are not showing up from iphone but is showing on desktop (fix it)
+create api call for payout for custom accounts on home page.
+Refine how adding bank account is set up
 switch all asynchronus calls to async await
 add icons
