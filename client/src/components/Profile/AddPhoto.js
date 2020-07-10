@@ -19,7 +19,6 @@ function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
 
             //add photo name to photos array
             let tempPhotos = [...photos];
-            let idVal = `photo-${itemNum}`;
             tempPhotos[itemNum] = `${file.name}`
             setPhotos(tempPhotos);
 

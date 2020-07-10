@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useContext} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import '../../styles/Profile.css'
 
 import axios from 'axios'

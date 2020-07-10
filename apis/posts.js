@@ -263,17 +263,39 @@ router.post('/login-user', async (req,res) => {
 
 router.post('/api/post/create-stripe-account', async (req,res) => {
 
-    const data = req.body;
+    const user = req.body.user;
     try{
-        var account = await stripe.accounts.create({
+        const account = await stripe.accounts.create({
             country: 'US',
             type: 'custom',
+            business_type: 'individual',
+            individual:{
+                first_name: user.firstName,
+                last_name: user.lastName,
+                email: user.email
+            },
             requested_capabilities: ['card_payments', 'transfers'],
         });
 
-        res.json(account)
+        let updateUser = await User.updateOne({_id: user._id}, {
+            $set: {
+                stripe_account_id: account.id
+            }
+        })
+
+        const accountLink = await stripe.accountLinks.create({
+            account: account.id,
+            success_url: 'http://localhost:3000/home',
+            failure_url: 'http://localhost:3000/',
+            type: 'custom_account_verification',
+            collect: 'eventually_due'
+        });
+
+        res.json(accountLink)
+        console.log(accountLink)
     }catch(error){
         console.log(error)
+        res.send(error)
     }
     
 
@@ -286,10 +308,4 @@ module.exports = router;
 
 
 
-/* const accountLink = await stripe.accountLinks.create({
-            account: account.id,
-            success_url: '/home',
-            failure_url: '/',
-            type: 'custom_account_verification',
-            collect: 'eventually_due'
-        }); */
+/*  */

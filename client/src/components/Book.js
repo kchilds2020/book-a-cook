@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import '../styles/Book.css'
-import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 import {
@@ -13,7 +12,6 @@ import axios from 'axios';
 function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, setVisibility}) {
     const [cardName, setCardName] = useState('');
 
-    let history = useHistory();
 
     const stripe = useStripe();
     const elements = useElements();

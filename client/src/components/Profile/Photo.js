@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react'
+import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
 import '../../styles/Photo.css'
 import Confirm from '../Confirm'

@@ -3,6 +3,7 @@ import axios from 'axios';
 import "../styles/Register.css"
 import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Input from './Input'
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -120,12 +121,18 @@ export const Register = () => {
             <div className = "container">
                 <form className = "form-container" onSubmit = {registerUser}>
                     <h2>Register</h2>
-                    <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
+                    <Input identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>
+                    <Input identifier='lastname' labelText = 'Last Name' value = {lastname} setValue = {setLastname}/>
+                    <Input identifier='email' labelText = 'Email Address' value = {email} setValue = {setEmail} type="email"/>
+                    <Input identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber} type="tel"/>
+                    <Input identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
+                    <Input identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
+                    {/* <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
                     <input name = "lastname" type = "text" placeholder = 'Last Name' className = "inputFields" maxLength = '40' value = {lastname} onChange={e => setLastname(e.target.value)} required/>
                     <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>
                     <input name = "number" type = "tel" placeholder = 'Phone Number' className = "inputFields" maxLength = '15' value = {number} onChange = {e => setNumber(e.target.value)} required/>            
                     <input name = "username" type = "text" placeholder = 'Username' className = "inputFields" maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)} required/>
-                    <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/>
+                    <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/> */}
                     <Button type="submit" variant="primary" block>Register</Button>
                 </form>
             </div>

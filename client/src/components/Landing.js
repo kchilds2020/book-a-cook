@@ -1,6 +1,4 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
-import SVG from '../images/SVG.svg';
 import '../styles/Landing.css'
 import {UserContext} from './UserContext'
 import Button from 'react-bootstrap/Button'

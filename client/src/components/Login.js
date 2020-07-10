@@ -3,6 +3,7 @@ import axios from 'axios'
 import '../styles/Login.css'
 import { useHistory, useLocation} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Input from './Input'
 
 
 export const Login = () => {
@@ -47,9 +48,9 @@ export const Login = () => {
         <>
             <div className = 'container'>
                 <form className = 'form-container' onSubmit = {loginUser}>
-                    <h2>LOGIN</h2>
-                    <input className = 'inputFields' name = "username" type = "text" placeholder = 'Username'  maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)}/>
-                    <input className = 'inputFields' name = "password" type = "password" placeholder = 'Password' value = {password} onChange={e => setPassword(e.target.value)}/>
+                    <h2 style={{textAlign: 'center'}}>LOGIN</h2>
+                    <Input identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
+                    <Input identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
                     <div style={{margin: '10px 0px'}}><a href="/register">Dont have an account? Register</a></div>
                     <Button type="submit" variant="primary" block>Login</Button>
                 </form>

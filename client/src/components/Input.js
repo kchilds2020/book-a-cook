@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Input({value, setValue, identifier, labelText, setModified}) {
+function Input({value, setValue, identifier, labelText, setModified = (x) => null, type='text'}) {
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -16,11 +16,11 @@ function Input({value, setValue, identifier, labelText, setModified}) {
                 padding: '5px 0px'
         }}>
             <label className="InputLabel" htmlFor={value}>{labelText}</label>
-            <input className="InputTag" name = {identifier} id = {identifier} type = "text" maxLength = '40' value = {value} onChange = {handleChange} required
+            <input className="InputTag" name = {identifier} id = {identifier} type = {type} maxLength = '40' value = {value} onChange = {handleChange} required
                 style={{
                     padding: '5px',
                     fontSize: '18px',
-                    width: '100%'
+                    width: '100%',
                 }}
             />
         </div>

@@ -17,7 +17,6 @@ import PrivateRoute from './components/PrivateRoute'
 import {CookiesProvider} from 'react-cookie'
 import { UserContext } from './components/UserContext';
 import axios from 'axios'
-import bgrdImg from './images/cook.jpg'
 
 const stripePromise = loadStripe('pk_test_51GwKF8JLaX7NQDflmvuMhiPwEGcACEsKPTtpUjg5hlGQz5NDu70UZFEgiecFEVYD5afBSEuXOYXpKuqkP1bEGQ0e00ETnJiqXP');
 
@@ -52,9 +51,6 @@ function App() {
           <UserContext.Provider value={{user, menu}}>
             <BootstrapNav/>
           </UserContext.Provider> 
-          <div className="bgrd-img">
-            <img src={bgrdImg} alt="cook"/>
-          </div>
             <Switch>
               
               

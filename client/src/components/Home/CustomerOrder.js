@@ -2,9 +2,8 @@ import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import '../../styles/Home.css'
-import {Link} from 'react-router-dom'
 
-function CustomerOrder({title, qty, pending, completed, orderID, writeReviewClicked, chef}) {
+function CustomerOrder({title, qty, pending, completed, orderID, chef}) {
     const [isPending, setPending] = useState(pending)
 
 

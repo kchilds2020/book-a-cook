@@ -3,12 +3,10 @@ import '../../styles/HomeJobPost.css'
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Confirm from '../Confirm'
 import Book from '../Book'
 
 function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount, summary}) {
     const [fullname,setFullname] = useState('');
-    const [isHired,setHired] = useState(hired);
     const [visibility,setVisibility] = useState(false);
 
     let history = useHistory()
