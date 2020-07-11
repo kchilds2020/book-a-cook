@@ -1,4 +1,2 @@
-create api call for payout for custom accounts on home page.
-Refine how adding bank account is set up
 switch all asynchronus calls to async await
 add icons

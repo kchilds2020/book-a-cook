@@ -140,7 +140,7 @@ function Profile() {
                                         <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
                                         <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
                                         <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
-                                        {bankAccountID ? <div>Bank Account Info Complete: {bankAccountID}</div> : <BankAccountInfo user={user} setBankAccountID={setBankAccountID} setModified={setModified}/>}
+                                        {/* {bankAccountID ? <div>Bank Account Info Complete: {bankAccountID}</div> : <BankAccountInfo user={user} setBankAccountID={setBankAccountID} setModified={setModified}/>} */}
                                     </div> : <></>}
                             
                             <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>

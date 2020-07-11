@@ -5,6 +5,7 @@ import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Input from './Input'
 import CookToggle from './Profile/CookToggle'
+import Spinner from 'react-bootstrap/Spinner'
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -14,6 +15,7 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [number, setNumber] = useState("");
     const [cook, setCook] = useState(false)
+    const [isLoading, setLoading] = useState(false)
     let history = useHistory()
 
     const checkValidation = async (user) => {
@@ -100,38 +102,18 @@ export const Register = () => {
             cook: cook
 
         }
-        
+        setLoading(true)
         let response = await checkValidation(user)
         if(response === true){
-            console.log('post started')
-            axios.post('/post/register', user)
-                .then(function (response) {
-                    if(response.status === '200'){
-                        console.log('FAILURE');
-                    }else{
-                        console.log(response);
-                        localStorage.setItem('user', response.data.user._id)
-                        window.location.href= cook === true ? '/payment-registration' : '/home'
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+            let regResponse = await axios.post('/post/register', user)
+            setLoading(false)
+
+            localStorage.setItem('user', regResponse.data._id)
+            window.location.href= cook === true ? '/payment-registration' : '/home'
+
         }
     }
 
-    /* const createStripeAccount = async(e) => {
-        e.preventDefault()
-        try{
-            let response = await axios.post('/api/post/create-stripe-account',{user: user})
-            console.log(response)
-            window.location.href = response.data.url
-        }catch(error){
-            alert(error)
-        }
-
-        
-    } */
 
     return(
         <>
@@ -153,6 +135,7 @@ export const Register = () => {
                     <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/> */}
                     <Button type="submit" variant="primary" block>Register</Button>
                 </form>
+                {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
             </div>
         </>
     );

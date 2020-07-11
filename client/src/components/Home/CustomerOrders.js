@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import Table from 'react-bootstrap/Table'
 import CustomerOrder from './CustomerOrder'
+import Button from 'react-bootstrap/Button'
 
 function CustomerOrders({username}) {
 
@@ -44,8 +45,8 @@ function CustomerOrders({username}) {
                         <CustomerOrder key = {index} pending={element.pending} completed = {element.completed} title={element.menuItemTitle} qty={element.qty} orderID = {element._id} chef={element.chefUsername}/>) : <></>} 
                     </tbody>     
                 </Table>
-                
             </div>
+            <Button onClick = {() => window.location.href = '/menu'} style ={{marginTop: '10px'}} block>Find Food Near Me</Button>
         </div>
     )
 }

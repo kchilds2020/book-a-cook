@@ -217,19 +217,6 @@ router.post('/update-user', (req, res) => {
 router.post('/post/register', async (req, res) => {
 
     try{
-
-        const account = await stripe.accounts.create({
-            country: 'US',
-            type: 'custom',
-            business_type: 'individual',
-            individual:{
-                first_name: req.body.firstname,
-                last_name: req.body.lastname,
-                email: req.body.email
-            },
-            requested_capabilities: ['card_payments', 'transfers'],
-        });
-
         const hashedPassword = bcrypt.hashSync(req.body.password,saltRounds);
         const user = await User.create({
             firstName: req.body.firstname,
@@ -239,26 +226,12 @@ router.post('/post/register', async (req, res) => {
             username: req.body.username,
             password: hashedPassword,
             cook: req.body.cook,
-            stripe_account_id: account.id
         })
 
         req.session.userID = user._id;
+
+        res.json(user)
         
-        if(req.body.cook === true){
-
-            const accountLink = await stripe.accountLinks.create({
-                account: account.id,
-                success_url: 'http://localhost:3000/home?success',
-                failure_url: 'http://localhost:3000/home?failure',
-                type: 'custom_account_verification',
-                collect: 'eventually_due'
-            });
-
-            res.json({accountLink, user})
-            console.log(accountLink)
-        }else{
-            res.json({account,user})
-        }
     }catch(error){
         console.log(error)
         res.send(error)
