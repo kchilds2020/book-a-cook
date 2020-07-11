@@ -16,6 +16,16 @@ function Account({user}) {
             alert(error)
         }
 
+    const payUser = async (e) => {
+        e.preventDefault()
+
+        try {
+            let response = await axios.post('/api/post/pay-user',{user,amount}) 
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
         
     }
     return (
@@ -36,7 +46,7 @@ function Account({user}) {
                 <tr>
                     <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.account * 100) / 100).toFixed(2)}</h3></td>
                     {/* <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.totalEarned * 100) / 100).toFixed(2)}</h3></td> */}
-                    <td>{user.bank_account_id ? <Button>Pay Me</Button> : <Button onClick={() => window.location.href = '/profile'}>Link Bank</Button>}</td>
+                    <td>{user.bank_account_id ? <Button onClick = {payUser}>Pay Me</Button> : <Button onClick={() => window.location.href = '/profile'}>Link Bank</Button>}</td>
 
                 </tr>
             </tbody>     
