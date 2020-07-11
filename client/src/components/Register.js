@@ -111,7 +111,7 @@ export const Register = () => {
                     }else{
                         console.log(response);
                         localStorage.setItem('user', response.data.user._id)
-                        window.location.href= cook === true ? response.data.accountLink.url : '/home'
+                        window.location.href= cook === true ? '/payment-registration' : '/home'
                     }
                 })
                 .catch(function (error) {

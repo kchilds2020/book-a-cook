@@ -364,6 +364,32 @@ router.post('/api/post/add-bank-account', async (req,res) => {
     }
 })
 
+/* router.post('/api/post/pay-user', async (req,res) => {
+    const user = req.body.user
+    const bankInfo = req.body.bank
+    try{
+        const response = await stripe.accounts.createExternalAccount(
+            `${user.stripe_account_id}`,
+            {
+                external_account: {
+                    object: 'bank_account',
+                    country: 'US',
+                    currency: 'usd',
+                    account_number: bankInfo.account_number,
+                    routing_number: bankInfo.routing_number
+
+                }
+            },
+        )
+        console.log(response)
+        res.json(response)
+    }
+    catch(err){
+        console.log(err)
+        res.json(err)
+    }
+}) */
+
 
 module.exports = router;
 

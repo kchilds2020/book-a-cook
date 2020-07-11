@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import JobPostings from './components/JobPosts/JobPostings';
 import Profile from './components/Profile/Profile';
+import PaymentRegistration from './components/PaymentRegistration/PaymentRegistration'
 import Cooks from './components/Cooks/Cooks'
 import UserProfile from './components/UserProfile/UserProfile'
 import Menu from './components/Menu/Menu'
@@ -62,6 +63,10 @@ function App() {
                 <Route render={(props) => <Profile />}/>
               </PrivateRoute>
 
+              {/* <PrivateRoute path="/payment-registration" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <PaymentRegistration />}/>
+              </PrivateRoute> */}
+
               <UserContext.Provider value={{user, menu}}>
                 <Route path="/" exact strict component={Landing}/>
                 <Route path="/cooks"  exact strict component={Cooks} />
@@ -69,7 +74,8 @@ function App() {
                 <Route path="/user/profile"  exact strict component={UserProfile} />
                 <Route path="/menu"  exact strict component={Menu} />
                 <Route path="/login"  exact strict component={Login} />
-                <Route path="/register"  exact strict component={Register} />     
+                <Route path="/register"  exact strict component={Register} />  
+                <Route path="/payment-registration"  exact strict component={PaymentRegistration} /> 
               </UserContext.Provider>       
             </Switch>
         </Router>

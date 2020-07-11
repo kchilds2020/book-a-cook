@@ -159,12 +159,19 @@ router.get('/logout', (req,res) => {
 
 router.get('/secret/item/:id/:qty', async (req, res) => {
     const item = await Menu.findOne({_id: req.params.id})
+    const chef = await User.findOne({username: item.username})
     console.log('ITEM RESPONSE', item.price)
+    const amount = item.price * 100 * req.params.qty
+    const fee = amount * .16
     const intent = await stripe.paymentIntents.create({
-        amount: ((item.price * 100) + 500 + ((item.price * 100) * .08)) * req.params.qty,
+        amount: amount,
         currency: 'usd',
         // Verify your integration in this guide by including this parameter
         metadata: {integration_check: 'accept_a_payment'},
+        application_fee_amount: fee,
+        transfer_data: {
+            destination: chef.stripe_account_id,
+        },
     });
     console.log(intent.client_secret)
     res.json({client_secret: intent.client_secret});
@@ -172,12 +179,19 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
 
   router.get('/secret/book-chef/:id', async (req, res) => {
     const item = await JobPost.findOne({_id: req.params.id})
+    const chef = await User.findOne({username: item.cook})
     console.log('ITEM RESPONSE', item.price)
+    const amount = item.price * 100 * item.peopleAmount
+    const fee = amount * .16
     const intent = await stripe.paymentIntents.create({
-        amount: ((item.price * 100) * item.peopleAmount)* 1.16,
+        amount: amount,
         currency: 'usd',
         // Verify your integration in this guide by including this parameter
         metadata: {integration_check: 'accept_a_payment'},
+        application_fee_amount: fee,
+        transfer_data: {
+            destination: chef.stripe_account_id,
+        },
     });
     console.log(intent.client_secret)
     res.json({client_secret: intent.client_secret});
