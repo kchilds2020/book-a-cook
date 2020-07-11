@@ -300,18 +300,39 @@ router.post('/login-user', async (req,res) => {
 
 router.post('/api/post/create-stripe-account', async (req,res) => {
 
-    const user = req.body.user;
+    const {data, user} =  req.body;
+
     try{
         const account = await stripe.accounts.create({
             country: 'US',
             type: 'custom',
             business_type: 'individual',
+            business_profile: {
+                product_description: 'freelance cook making delivered homemade food'
+            },
             individual:{
                 first_name: user.firstName,
                 last_name: user.lastName,
-                email: user.email
+                email: user.email,
+                dob:{
+                    day: data.day,
+                    month: data.month,
+                    year: data.year
+                },
+                ssn_last_4: data.ssn
             },
-            requested_capabilities: ['card_payments', 'transfers'],
+            external_account:{
+                object: 'bank_account',
+                country: "US",
+                currency: "usd",
+                account_number: data.accountNumber,
+                routing_number: data.routingNumber
+            },
+            tos_acceptance: {
+                date: Math.floor(Date.now() / 1000),
+                ip: req.connection.remoteAddress, // Assumes you're not using a proxy
+            },
+            requested_capabilities: ['transfers'],
         });
 
         let updateUser = await User.updateOne({_id: user._id}, {
@@ -320,16 +341,8 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
             }
         })
 
-        const accountLink = await stripe.accountLinks.create({
-            account: account.id,
-            success_url: 'http://localhost:3000/home',
-            failure_url: 'http://localhost:3000/',
-            type: 'custom_account_verification',
-            collect: 'eventually_due'
-        });
-
-        res.json(accountLink)
-        console.log(accountLink)
+        res.json(account)
+        console.log(account)
     }catch(error){
         console.log(error)
         res.send(error)

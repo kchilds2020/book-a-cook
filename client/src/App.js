@@ -63,9 +63,9 @@ function App() {
                 <Route render={(props) => <Profile />}/>
               </PrivateRoute>
 
-              {/* <PrivateRoute path="/payment-registration" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+              <PrivateRoute path="/payment-registration" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
                 <Route render={(props) => <PaymentRegistration />}/>
-              </PrivateRoute> */}
+              </PrivateRoute>
 
               <UserContext.Provider value={{user, menu}}>
                 <Route path="/" exact strict component={Landing}/>
@@ -75,7 +75,7 @@ function App() {
                 <Route path="/menu"  exact strict component={Menu} />
                 <Route path="/login"  exact strict component={Login} />
                 <Route path="/register"  exact strict component={Register} />  
-                <Route path="/payment-registration"  exact strict component={PaymentRegistration} /> 
+                {/* <Route path="/payment-registration"  exact strict component={PaymentRegistration} />  */}
               </UserContext.Provider>       
             </Switch>
         </Router>
