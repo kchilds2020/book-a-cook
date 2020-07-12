@@ -4,6 +4,7 @@ import '../../styles/Photo.css'
 import Confirm from '../Confirm'
 import Img from 'react-fix-image-orientation'
 import axios from 'axios'
+import Overlay from '../Overlay'
 
 function Photo({itemNum, photo, photos, setPhotos, username, editable=false, setModified}) {
     
@@ -69,7 +70,7 @@ function Photo({itemNum, photo, photos, setPhotos, username, editable=false, set
                     <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${itemNum}`}/>
                 </>
                 : <Img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
-            {visible === true ? <Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /> : <></>}
+            {visible === true ? <><Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /><Overlay onClick={() => setVisibility(false)}/></> : <></>}
         </div>
     )
 }

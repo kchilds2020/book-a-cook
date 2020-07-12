@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import PhotoEditor from '../PhotoEditor'
+import Overlay from '../Overlay'
 
 function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
 
@@ -37,7 +38,7 @@ function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
                 
                 
             </div>
-            {visibility ? <PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/> : <></>}
+            {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay /></> : <></>}
         </>
     )
 }

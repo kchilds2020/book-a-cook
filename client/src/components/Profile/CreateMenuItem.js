@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react'
 import axios from 'axios'
 import PhotoEditor from '../PhotoEditor'
+import Overlay from '../Overlay'
 
 function CreateMenuItem({username, createMenuItem, identification}) {
 
@@ -78,7 +79,7 @@ function CreateMenuItem({username, createMenuItem, identification}) {
                     <button className="menu-item-btn" onClick={createItem}>
                         Create Item    
                     </button>    
-                    {visibility ? <PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/> : <></>}                      
+                    {visibility ? <div><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay /></div> : <></>}                      
                 </div>
             </div>
         </>

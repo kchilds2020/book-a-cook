@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../../styles/MenuItem.css'
 import Confirm from '../Confirm'
+import Overlay from '../Overlay'
 
 function MenuItem({title, description, price, picture, itemNum, dbID, deleteMenuItem}) {
 
@@ -36,7 +37,7 @@ function MenuItem({title, description, price, picture, itemNum, dbID, deleteMenu
                 {/* <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div> */}
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>     
             </div>
-            {visible === true ? <Confirm message={`Are you sure you want to delete Menu Item "${title}"?`} confirm = {deleteItem} cancel={cancelItem}/> : <></>}
+            {visible === true ? <><Confirm message={`Are you sure you want to delete Menu Item "${title}"?`} confirm = {deleteItem} cancel={cancelItem}/><Overlay onClick={()=>setVisibility(false)}/></> : <></>}
         </div>
     )
 }

@@ -7,6 +7,7 @@ import Photo from './Photo';
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 import Review from './Review'
+import Overlay from '../Overlay'
 
 
 function UserProfile() {
@@ -34,6 +35,7 @@ function UserProfile() {
     const [photos,setPhotos] = useState('');
     const [reviews,setReviews] = useState('');
     const [reviewVisibility,setReviewVisibility] = useState(false);
+    const [bookVisibility, setBookVisibility] = useState(false)
     const [ratingValue, setRatingValue] = useState(5)
     const [ratingDescription, setRatingDescription] = useState('')
 
@@ -90,8 +92,7 @@ function UserProfile() {
         console.log('submitted')
     }
     const cancelPost = (event) => {
-        console.log('cancelled')
-        document.getElementById('book-form').style.visibility = 'hidden'
+        setBookVisibility(false)
     }
 
     const submitReview = async (event) => {
@@ -136,7 +137,7 @@ function UserProfile() {
                             <div className="phone">{number}</div>
                         </div>
                         { user && cook ? <div style={{width: '100%'}}>
-                                    <Button variant="primary" onClick={handleBook} block>Request to Hire</Button>
+                                    <Button variant="primary" onClick={()=> setBookVisibility(true)} block>Request to Hire</Button>
                                     <Button variant="info" onClick={() => setReviewVisibility(true)} block>Write a Review</Button>
                                     </div> : <></>}
                     </div>
@@ -160,9 +161,13 @@ function UserProfile() {
                 <div className="photo-gallery">
                     {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
                 </div>
-                <div id="book-form">
-                    <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
-                </div></>
+                { bookVisibility ? 
+                <>
+                    <div id="book-form">
+                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
+                    </div> 
+                    <Overlay />
+                </>: <></> }</>
                 }
                 
                 { reviews ?
@@ -172,6 +177,7 @@ function UserProfile() {
                 }
 
                 {reviewVisibility ? 
+                <>
                     <form className = "review-form">
                         <label htmlFor="star-rating">Rating</label>
                         <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
@@ -179,7 +185,9 @@ function UserProfile() {
                         <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description"></textarea>
                         <Button onClick={submitReview} style={{marginTop: '10px'}}>Submit</Button>
                         <Button onClick={cancelReview} className="cancel-review-btn">x</Button>
-                    </form> : <></> }
+                    </form> 
+                    <Overlay />
+                </>: <></> }
             </div> : <></>
     )
 }

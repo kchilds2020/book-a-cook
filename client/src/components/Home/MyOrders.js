@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table'
 import Account from './Account'
 import Button from 'react-bootstrap/Button'
 import CreateMenuItem from '../CreateMenuItem'
+import Overlay from '../Overlay'
 
 function MyOrders({username, user}) {
     const [loading, setLoading] = useState(true);
@@ -57,7 +58,10 @@ function MyOrders({username, user}) {
             </tbody>     
         </Table>}
         <Button onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
-        {visibility ? <CreateMenuItem user={user} /> : <></>}
+        {visibility ? <>
+                        <CreateMenuItem user={user} setOpen={setVisibility}/> 
+                        <Overlay />
+                    </>: <></>}
                 {err ? err : null}
         </div>
     )
