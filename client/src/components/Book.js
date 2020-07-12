@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import '../styles/Book.css'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 
 import {
   useStripe,
@@ -11,16 +12,18 @@ import axios from 'axios';
 
 function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, setVisibility}) {
     const [cardName, setCardName] = useState('');
+    const [isLoading, setLoading] = useState(false)
 
 
     const stripe = useStripe();
     const elements = useElements();
-    const total = ((parseInt(pricePerPerson) * peopleAmount)* 1.16).toFixed(2)
+    const total = (parseInt(pricePerPerson) * peopleAmount).toFixed(2)
 
     const bookChef = async (event) => {
         event.preventDefault()
         //get client secret for specific item
-        const clientSecretResponse = await axios.get(`/secret/book-chef/${eventID}`);
+        setLoading(true)
+        const clientSecretResponse = await axios.get(`/secret/book-chef/${eventID}/book/${chef}`);
         const clientSecret = clientSecretResponse.data.client_secret
         //charge card
         const paymentResponse = await stripe.confirmCardPayment(`${clientSecret}`,{
@@ -48,6 +51,7 @@ function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, 
                 console.log('paid!', paymentResponse, confirmCookRes)
                 alert('Order has been placed!')
                 setVisibility(false)
+                setLoading(false)
             }
             catch (error){
                 alert(`Try catch error: ${error}`)
@@ -75,9 +79,10 @@ function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, 
             
                 <div className="book-total" id="total-price">Total: ${total}</div>
                 <div className="book-btns">
-                    <Button type = "submit" disabled={!stripe} block>Book</Button>
+                    {isLoading ? <Button type = "submit" disabled={!stripe} block disabled>Book</Button> : <Button type = "submit" disabled={!stripe} block>Book</Button>}
                     <Button type = "button" variant="danger" className ="cancel-btn" onClick={cancel} disabled={!stripe}>x</Button>
                 </div>
+                {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
             </form>
         </div>
     )

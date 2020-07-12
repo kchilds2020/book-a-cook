@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react'
 import axios from 'axios'
+import PhotoEditor from '../PhotoEditor'
 
 function CreateMenuItem({username, createMenuItem, identification}) {
 
@@ -8,27 +9,30 @@ function CreateMenuItem({username, createMenuItem, identification}) {
     const [menuTitle, setMenuTitle] = useState(''); 
     const [menuPrice, setMenuPrice] = useState('');
     const [menuPicture, setMenuPicture] = useState('add-photo.png'); 
+    const [visibility, setVisibility] = useState(false)
+    const [file, setFile] = useState('false')
     
 
     const menuFileInput = useRef();
 
     const handleMenuFileChange = async (event) => {
         //store file and filename
-        const file = event.target.files[0]
-        let formData = new FormData();
-        formData.append('file', file)
-        formData.append('username',username)
+        setFile(event.target.files[0])
+        setVisibility(true)
+    }
 
-        let imgResponse = await axios.post('/upload-img', formData)
-        console.log(imgResponse.data)
-
-        setMenuPicture(`${username}-${file.name}`);
-
-        //display progile img
+    const afterUpload = (filename) => {
+        setMenuPicture(`${filename}`)
         const imgTag = document.getElementById('create-menu-photo');
         const reader = new FileReader();
-        reader.addEventListener("load", () => imgTag.src = reader.result, false);
+        reader.addEventListener("load", () => imgTag.src = `/api/get/image/${filename}`, false);
         reader.readAsDataURL(file);
+        setVisibility(false)
+    }
+
+    const cancelItem = (e) =>{
+        e.preventDefault()
+        setVisibility(false)
     }
 
     const createItem = (event) =>  {
@@ -73,7 +77,8 @@ function CreateMenuItem({username, createMenuItem, identification}) {
                     </div>
                     <button className="menu-item-btn" onClick={createItem}>
                         Create Item    
-                    </button>                            
+                    </button>    
+                    {visibility ? <PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/> : <></>}                      
                 </div>
             </div>
         </>

@@ -31,9 +31,9 @@ function MenuItem({title, description, price, picture, itemNum, dbID, deleteMenu
             </div>
             <div className = "menu-item-details">
                 <div className = "menu-item-title" id = {`menu-item-title-${itemNum}`}>{title}</div>
-                <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>{'5 stars'}</div>
+                {/* <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>{'5 stars'}</div> */}
                 <div className = "menu-item-description" id = {`menu-item-description-${itemNum}`}> {description} </div>
-                <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div>
+                {/* <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div> */}
                 <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>     
             </div>
             {visible === true ? <Confirm message={`Are you sure you want to delete Menu Item "${title}"?`} confirm = {deleteItem} cancel={cancelItem}/> : <></>}

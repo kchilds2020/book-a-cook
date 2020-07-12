@@ -5,25 +5,13 @@ import Spinner from 'react-bootstrap/Spinner'
 import PhotoEditor from '../PhotoEditor'
 
 function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
-    
-    const [isLoading, setLoading] = useState(false)
+
     const [visibility, setVisibility] = useState(false)
-    const [photoName, setPhotoName] = useState('')
+    const [file, setFile] = useState('')
     const photoInput = useRef();
 
     const editPhoto = async (event) => {
-        //check size of image
-        const file = event.target.files[0]
-            //add photo to backend
-            let formData = new FormData();
-            formData.append('file', file)
-            formData.append('username',username)
-            setLoading(true)
-            let imgResponse = await axios.post('/upload-img', formData)
-            console.log(imgResponse.data)
-
-            setPhotoName(`${username}-${file.name}`)
-            setLoading(false)
+            setFile(event.target.files[0])
             setVisibility(true)
     }
 
@@ -35,16 +23,21 @@ function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
         setVisibility(false)
     }
 
+    const cancelItem = (event) => {
+        event.preventDefault();
+        setVisibility(false)
+    }
+
     return (
         <>
             
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '250px', height: '100px', margin: 'auto 10px'}}>
                 <Button onClick={() => photoInput.current.click()} style ={{height: '50px', width: '50px', borderRadius: '40px', fontWeight: 'bold', boxShadow: '0px 0px 4px #333', fontSize: '18px'}}>+</Button>
                 <input ref = {photoInput} type="file" onChange= {editPhoto} style={{display: 'none'}} id = {`fi-${itemNum}`}/>
-                {isLoading ? <Spinner animation="border" variant='info'/> : <></>}
+                
                 
             </div>
-            {visibility ? <PhotoEditor sliderMin='1' sliderMax='1.5' sliderStep='.025' photoName={photoName} afterUpload={afterUpload} username={username}/> : <></>}
+            {visibility ? <PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/> : <></>}
         </>
     )
 }

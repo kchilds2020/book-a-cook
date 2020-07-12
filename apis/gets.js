@@ -177,10 +177,10 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
     res.json({client_secret: intent.client_secret});
   });
 
-  router.get('/secret/book-chef/:id', async (req, res) => {
+  router.get('/secret/book-chef/:id/book/:chef', async (req, res) => {
     const item = await JobPost.findOne({_id: req.params.id})
-    const chef = await User.findOne({username: item.cook})
-    console.log('ITEM RESPONSE', item.price)
+    const chef = await User.findOne({username: req.params.chef})
+    console.log('ITEM RESPONSE', item, 'CHEF RESPONSE', chef)
     const amount = item.price * 100 * item.peopleAmount
     const fee = amount * .16
     const intent = await stripe.paymentIntents.create({
@@ -196,6 +196,19 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
     console.log(intent.client_secret)
     res.json({client_secret: intent.client_secret});
   });
+
+
+  router.get('/api/get/account-balance/:id', async (req, res) => {
+    const user = await User.findOne({_id: req.params.id})
+    
+    const balance = await stripe.balance.retrieve({
+        stripe_account: `${user.stripe_account_id}`
+      });
+
+    console.log(balance)
+    res.json(balance);
+  });
+  
 
 
 

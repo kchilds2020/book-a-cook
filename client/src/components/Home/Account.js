@@ -1,9 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../../styles/Account.css'
 import Table from 'react-bootstrap/Table'
+import axios from 'axios'
+import Spinner from 'react-bootstrap/Spinner'
 
 
 function Account({user}) {
+
+    const [accountBalance, setAccountBalance] = useState(0)
+    const [pendingBalance, setPendingBalance] = useState(0)
+    const [isLoading, setLoading] = useState(true)
+
+    const getAccountInfo = async () => {
+        try{
+            let response = await axios.get(`/api/get/account-balance/${user._id}`)
+            console.log('ACCOUNT RESPONSE', response)
+            setAccountBalance(response.data.available[0].amount)
+            setPendingBalance(response.data.pending[0].amount)
+            setLoading(false)
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getAccountInfo()
+    },[])
 
     return (
 
@@ -15,14 +37,14 @@ function Account({user}) {
             <thead>
                 <tr>
                     <th>In Account</th>
-                    <th>Total Earned</th>
+                    <th>Pending Amount</th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.account * 100) / 100).toFixed(2)}</h3></td>
-                    <td><h3><span style ={{color: 'green'}}>$</span>{(Math.round(user.totalEarned * 100) / 100).toFixed(2)}</h3></td>
+                    <td>{isLoading ? <Spinner animation="border" variant="info" /> : <h3><span style ={{color: 'green'}}>$</span>{parseFloat(accountBalance / 100).toFixed(2)}</h3>}</td>
+                    <td>{isLoading ? <Spinner animation="border" variant="info" /> : <h3><span style ={{color: 'green'}}>$</span>{parseFloat(pendingBalance / 100).toFixed(2)}</h3>}</td>
                     {/* <td>{user.bank_account_id ? <Button onClick = {payUser}>Pay Me</Button> : <Button onClick={() => window.location.href = '/profile'}>Link Bank</Button>}</td> */}
 
                 </tr>
