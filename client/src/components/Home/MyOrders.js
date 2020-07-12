@@ -6,11 +6,13 @@ import MyOrderItem from './MyOrderItem'
 import Table from 'react-bootstrap/Table'
 import Account from './Account'
 import Button from 'react-bootstrap/Button'
+import CreateMenuItem from '../CreateMenuItem'
 
 function MyOrders({username, user}) {
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
     const [orders,setOrders] = useState([])
+    const [visibility,setVisibility] = useState(false)
 
     useEffect(() => {
         let mounted = true;
@@ -54,7 +56,8 @@ function MyOrders({username, user}) {
                 {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
             </tbody>     
         </Table>}
-        <Button onClick = {() => window.location.href = '/profile'} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
+        <Button onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
+        {visibility ? <CreateMenuItem user={user} /> : <></>}
                 {err ? err : null}
         </div>
     )
