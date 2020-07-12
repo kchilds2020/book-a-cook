@@ -247,8 +247,8 @@
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      border-radius: 8px;
-      box-shadow: #aaa 0px 0px 8px;
+      /* border-radius: 8px;
+      box-shadow: #aaa 0px 0px 8px; */
       cursor: pointer;
   }
 
@@ -261,6 +261,8 @@
     width: 250px;
     height: 250px;
     object-fit: contain;
+    border-radius: 8px;
+    box-shadow: #333 0px 0px 4px;
   }
 
 .menu-container{
@@ -286,4 +288,8 @@
       transform: translate(-50%,calc(-50% - .5px));
       box-shadow: 0px 0px 8px #333;
       border-radius: 8px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 }
