@@ -1,13 +1,14 @@
 import React from 'react'
 import StarRatings from 'react-star-ratings';
+import { ReviewDescription, ReviewContainer, ReviewCustomer } from './UserProfileStyles';
 
 function Review({rating, description, username}) {
     return (
-        <div className= "review-container">
-            <div className = "review-customer">{username}</div>
+        <ReviewContainer>
+            <ReviewCustomer>{username}</ReviewCustomer>
             <StarRatings rating={parseFloat(rating)} starDimension="20px" starRatedColor="gold" />
-            <div className = "review-description">{description}</div>
-        </div>
+            <ReviewDescription>{description}</ReviewDescription>
+        </ReviewContainer>
     )
 }
 

@@ -9,23 +9,29 @@ function Account({user}) {
 
     const [accountBalance, setAccountBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
-    const [isLoading, setLoading] = useState(true)
-
-    const getAccountInfo = async () => {
-        try{
-            let response = await axios.get(`/api/get/account-balance/${user._id}`)
-            console.log('ACCOUNT RESPONSE', response)
-            setAccountBalance(response.data.available[0].amount)
-            setPendingBalance(response.data.pending[0].amount)
-            setLoading(false)
-        }catch(error){
-            console.log(error)
-        }
-    }
+    const [isLoading, setLoading] = useState(true) 
 
     useEffect(() => {
-        getAccountInfo()
-    },[])
+
+        const getAccountInfo = async () => {
+            try{
+                let response = await axios.get(`/api/get/account-balance/${user._id}`)
+                console.log('ACCOUNT RESPONSE', response)
+                setAccountBalance(response.data.available[0].amount)
+                setPendingBalance(response.data.pending[0].amount)
+                setLoading(false)
+            }catch(error){
+                console.log(error)
+            }
+        }
+
+        let mounted = true
+        if(mounted){
+            getAccountInfo()
+        }
+
+        return () => mounted = false
+    },[user._id])
 
     return (
 

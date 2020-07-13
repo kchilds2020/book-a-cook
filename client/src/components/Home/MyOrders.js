@@ -8,6 +8,7 @@ import Account from './Account'
 import Button from 'react-bootstrap/Button'
 import CreateMenuItem from '../CreateMenuItem'
 import Overlay from '../Overlay'
+import {CenterSpinner} from '../GeneralStyles'
 
 function MyOrders({username, user}) {
     const [loading, setLoading] = useState(true);
@@ -44,7 +45,7 @@ function MyOrders({username, user}) {
             <div className="header">
                 <h3><span className="post-num">{orders.length}</span> Active Orders</h3>
             </div>
-    {loading ? <Spinner animation="border" variant="info" /> : 
+    {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : 
         <Table striped bordered hover>
             <thead>
                 <tr>

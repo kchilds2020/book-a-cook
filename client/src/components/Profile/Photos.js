@@ -1,7 +1,6 @@
 import React from 'react'
 import Photo from './Photo'
 import AddPhoto from './AddPhoto'
-import '../../styles/Profile.css'
 import {ImagesContainer} from '../GeneralStyles'
 
 

@@ -13,7 +13,7 @@ function Menu() {
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
-    const [shadow, setShadow] = useState(false);
+    
     useEffect(() => {
         let mounted = true;
         axios.get('api/get/menu')

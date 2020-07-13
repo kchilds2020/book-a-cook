@@ -12,7 +12,10 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
     const [isLoading, setLoading] = useState(false)
 
     const editorRef = useRef();
-    const displayPhoto = async() => {
+
+    useEffect(() => {
+
+        const displayPhoto = async() => {
             let formData = new FormData();
             formData.append('file', file)
             formData.append('username',username)
@@ -25,10 +28,9 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
             setLoading(false)
     }
 
-    useEffect(() => {
         displayPhoto()
         
-    }, [])
+    }, [file, username])
 
     const onClickSave = async () => {
         

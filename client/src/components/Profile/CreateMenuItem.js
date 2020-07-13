@@ -1,7 +1,6 @@
 import React, {useState, useRef} from 'react'
 import axios from 'axios'
 import PhotoEditor from '../PhotoEditor'
-import Overlay from '../Overlay'
 
 function CreateMenuItem({username, createMenuItem, identification}) {
 
@@ -63,7 +62,7 @@ function CreateMenuItem({username, createMenuItem, identification}) {
         <>
             <div className="create-menu-item-container">
                 <div className="create-menu-photo">
-                    <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`${menuPicture}`}/>
+                    <img src={`/api/get/image/${menuPicture}`} onClick={() => menuFileInput.current.click()} id="create-menu-photo" style={{cursor: 'pointer'}} alt={`${menuPicture} ${username}`}/>
                     <input ref={menuFileInput} onChange= {handleMenuFileChange} type="file" style={{display: 'none'}}/>
                 </div>
                 <div className = "menu-item-details">

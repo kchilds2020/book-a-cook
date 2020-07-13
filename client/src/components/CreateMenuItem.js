@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button'
 import Input from './Input'
 import PhotoEditor from './PhotoEditor'
 import axios from 'axios'
-import Overlay from './Overlay'
 
 function CreateMenuItem({user, setOpen}) {
     const [visibility, setVisibility] = useState(false)
@@ -63,7 +62,7 @@ function CreateMenuItem({user, setOpen}) {
             {visibility ? 
             <PhotoEditor file={file} username={user.username} afterUpload={afterUpload} cancel={cancel}/>
              : <form onSubmit = {handleSubmit} style = {{backgroundColor: 'white', padding: '20px', boxShadow: '0px 0px 4px #333', borderRadius: '4px', position: 'fixed', maxWidth: '300px', zIndex: '100', top: '50%', left: '50%', WebkitTransform: 'translate(-50%,calc(-50% - .5%))', msTransform: 'translate(-50%,calc(-50% - .5%))', OTransform: 'translate(-50%,calc(-50% - .5%))', transform: 'translate(-50%,calc(-50% - .5%))' }}>
-            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>{photoName ? <img src={`/api/get/image/${photoName}`} alt='photo' style ={{width: '250px', height: '250px', borderRadius: '8px', boxShadow: '0px 0px 4px #333'}} onClick={() => menuFileInput.current.click()}/> : <Button variant="outline-primary" onClick={() => menuFileInput.current.click()} block>Add Photo</Button>}</div>
+            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>{photoName ? <img src={`/api/get/image/${photoName}`} alt={`${photoName}`} style ={{width: '250px', height: '250px', borderRadius: '8px', boxShadow: '0px 0px 4px #333'}} onClick={() => menuFileInput.current.click()}/> : <Button variant="outline-primary" onClick={() => menuFileInput.current.click()} block>Add Photo</Button>}</div>
                 
                 <input  name = 'file' ref={menuFileInput} id='file' type="file" onChange={handleImageChange} style={{visibility: 'hidden'}}/>
                 {/* {file ? <img src={`${photoName}`} alt='photo'/> : <Button style={{width: '50px', height: '50px', borderRadius: '50px', boxShadow: '0px 0px 4px #333'}}>+</Button>} */}

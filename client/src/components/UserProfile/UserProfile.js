@@ -1,13 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import silhouette from '../../images/silhouette.png'
-import '../../styles/UserProfile.css'
 import JobForm from '../JobForm';
-import Photo from './Photo';
+import Photo from '../Profile/Photo';
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 import Review from './Review'
 import Overlay from '../Overlay'
+import {Container, ImagesContainer, UserPhoto, UserPhotoContainer, FixedCenter} from '../GeneralStyles'
+import {UserSectionContainer, CookDetails, CookDetail, UserDetails, UserDetail, UserName, ContactInfo, ProfileContainer, ContactButtons} from './UserProfileStyles'
+import ReviewForm from './ReviewForm'
+
 
 
 function UserProfile() {
@@ -36,8 +39,6 @@ function UserProfile() {
     const [reviews,setReviews] = useState('');
     const [reviewVisibility,setReviewVisibility] = useState(false);
     const [bookVisibility, setBookVisibility] = useState(false)
-    const [ratingValue, setRatingValue] = useState(5)
-    const [ratingDescription, setRatingDescription] = useState('')
 
     useEffect(() =>{
         //get user from url
@@ -67,11 +68,6 @@ function UserProfile() {
 
     },[username])
 
-    const handleBook = (event) => {
-        let form = document.getElementById('book-form')
-        form.style.visibility = form.style.visibility === 'visible' ? 'hidden' : 'visible'
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
@@ -95,100 +91,64 @@ function UserProfile() {
         setBookVisibility(false)
     }
 
-    const submitReview = async (event) => {
-        event.preventDefault()
-        const reviewData = {
-            chef: username,
-            ratingValue: ratingValue,
-            ratingDescription: ratingDescription,
-            username: user.username
-        }
-        try{
-            let writeReview = await axios.post('/api/post/add-review', reviewData)
-            console.log(writeReview)
-        }catch(error){
-            console.log(error)
-        }
-
-
-
-        setReviewVisibility(false)
-     }
-
-     const cancelReview = async(event) => {
-        event.preventDefault()
-        setRatingValue(5)
-        setRatingDescription('')
-        setReviewVisibility(false)
-    }
-
     return (
 
         username !== '' ?
-            <div className="user-profile-container">
-                <div className="user-information">
-                    <div className="user-picture">
-                        <img src={picture === '' ? silhouette : `/api/get/image/${picture}`} alt="cook"/>
-                    </div>
-                    <div className="user-details">
-                        <div className="full-name">{firstname} {lastname}</div>
-                        <div style={{marginBottom: '20px'}}>
-                            <div className="email">{email}</div>
-                            <div className="phone">{number}</div>
-                        </div>
-                        { user && cook ? <div style={{width: '100%'}}>
+            <Container>
+                <ProfileContainer>
+                <UserSectionContainer>
+                    <UserPhotoContainer>
+                        <UserPhoto src={picture === '' ? silhouette : `/api/get/image/${picture}`} alt="cook"/>
+                    </UserPhotoContainer>
+                    <UserDetails>
+                        <UserName>{firstname} {lastname}</UserName>
+                        <ContactInfo>
+                            <UserDetail className="email">{email}</UserDetail>
+                            <UserDetail className="phone">{number}</UserDetail>
+                        </ContactInfo>
+                        { user && cook ? <ContactButtons>
                                     <Button variant="primary" onClick={()=> setBookVisibility(true)} block>Request to Hire</Button>
                                     <Button variant="info" onClick={() => setReviewVisibility(true)} block>Write a Review</Button>
-                                    </div> : <></>}
-                    </div>
-                </div>
+                                    </ContactButtons> : <></>}
+                    </UserDetails>
+                </UserSectionContainer>
                 
                 {cook ? 
-                <>
-                    <div className="user-information">
-                                <div className="cook-details">
-                                    <div className="cook-specialty"><b>Specialization:</b> {cookSpecialty}</div>
-                                    <div className="cook-description"><b>Description:</b> {cookDescription}</div>
-                                    <div className="cook-price"><b>Price:</b> ${cookPrice}</div>
-                                </div> 
+                    <UserSectionContainer>
+                                <CookDetails>
+                                    <CookDetail><b>Specialization:</b> {cookSpecialty}</CookDetail>
+                                    <CookDetail><b>Description:</b> {cookDescription}</CookDetail>
+                                    <CookDetail><b>Price:</b> ${cookPrice}</CookDetail>
+                                </CookDetails> 
                         
-                    </div>
-                </>
+                    </UserSectionContainer>
                 : <></>} 
                 {!photos ?
                 <></> :
                 <>
-                <div className="photo-gallery">
+                <ImagesContainer>
                     {photos.map((element,index) => <Photo key={index} className="photo" id={`photo-${index}`} input={false} itemNum = {index} handleImgChange={()=>console.log('temp')} photo={element}/>)}
-                </div>
-                { bookVisibility ? 
-                <>
-                    <div id="book-form">
-                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
-                    </div> 
-                    <Overlay />
-                </>: <></> }</>
-                }
+                </ImagesContainer>
+                
                 
                 { reviews ?
-                    <div className = "reviews-container">
+                    <UserSectionContainer>
                         {reviews.map((element, index) => <Review key={index} rating = {element.rating} description = {element.description} username={element.username}/>)}
-                    </div> : <></>
+                    </UserSectionContainer> : <></>
                 }
 
-                {reviewVisibility ? 
-                <>
-                    <form className = "review-form">
-                        <label htmlFor="star-rating">Rating</label>
-                        <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
-                        <label htmlFor="rating-description" style={{marginTop: '10px'}}>Describe Experience</label>
-                        <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description"></textarea>
-                        <Button onClick={submitReview} style={{marginTop: '10px'}}>Submit</Button>
-                        <Button onClick={cancelReview} className="cancel-review-btn">x</Button>
-                    </form> 
-                    <Overlay />
-                </>: <></> }
-            </div> : <></>
+
+
+
+                { bookVisibility ? 
+                    <><FixedCenter>
+                        <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
+                    </FixedCenter> 
+                    <Overlay /></>: <></> }</>}
+
+                {reviewVisibility ? <ReviewForm setReviewVisibility={setReviewVisibility} chef={username} customer={user.username}/> : <></> }
+                </ProfileContainer>
+            </Container> : <></>
     )
 }
 

@@ -3,6 +3,7 @@ import Event from './Event'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
+import {CenterSpinner} from '../GeneralStyles'
 
 function Events({username}) {
     const [loading, setLoading] = useState(true);
@@ -36,7 +37,7 @@ function Events({username}) {
                 <h3><span className="post-num">{events.length}</span> Upcoming Events</h3>
             </div>
             
-            {loading ? <Spinner animation="border" variant="info" /> : events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date} username={element.username}/>) : <></>}
+            {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date} username={element.username}/>) : <></>}
                 {err ? err : null}
             <Button onClick ={() => window.location.href='/job-postings'} style={{marginTop: '10px'}} block>Apply for Events</Button>
         

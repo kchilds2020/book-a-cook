@@ -62,3 +62,9 @@ label{
   z-index: 50;
 }
 
+
+.centerSpinner{
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}

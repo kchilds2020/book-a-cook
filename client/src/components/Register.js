@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import "../styles/Register.css"
-import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Input from './Input'
 import CookToggle from './Profile/CookToggle'
@@ -16,7 +15,6 @@ export const Register = () => {
     const [number, setNumber] = useState("");
     const [cook, setCook] = useState(false)
     const [isLoading, setLoading] = useState(false)
-    let history = useHistory()
 
     const checkValidation = async (user) => {
 

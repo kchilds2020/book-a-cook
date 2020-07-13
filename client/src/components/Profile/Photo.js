@@ -1,8 +1,6 @@
 import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
-import '../../styles/Photo.css'
 import Confirm from '../Confirm'
-import Img from 'react-fix-image-orientation'
 import axios from 'axios'
 import Overlay from '../Overlay'
 import {UserPhoto, UserPhotoContainer} from '../GeneralStyles'

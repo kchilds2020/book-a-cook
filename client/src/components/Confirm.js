@@ -1,19 +1,16 @@
 import React from 'react'
-import '../styles/Confirm.css'
 import Button from 'react-bootstrap/Button'
-import Overlay from './Overlay'
+import {PopUp} from './PopUpStyles'
 
 function Confirm({message, confirm, cancel }) {
     return (
-        <>
-            <div className="confirm-container">
-                    <div className="confirm-message">{message}</div>
-                    <div className="confirm-btns">
+            <PopUp>
+                    <div style={{padding: '10px'}}>{message}</div>
+                    <div style={{display: 'flex', justifyContent: 'space-evenly', width: '100%'}}>
                         <Button variant="success" onClick={confirm}>Confirm</Button>
                         <Button variant="danger" onClick={cancel}>Cancel</Button>
                     </div>
-            </div>
-        </>
+            </PopUp>
     )
 }
 

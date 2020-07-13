@@ -1,6 +1,5 @@
 import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
-import axios from 'axios'
 import {ProfilePhoto} from './ProfileStyles'
 import PhotoEditor from '../PhotoEditor'
 import Overlay from '../Overlay'

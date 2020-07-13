@@ -1,7 +1,5 @@
 import React, {useRef, useState} from 'react'
 import Button from 'react-bootstrap/Button'
-import axios from 'axios'
-import Spinner from 'react-bootstrap/Spinner'
 import PhotoEditor from '../PhotoEditor'
 import Overlay from '../Overlay'
 

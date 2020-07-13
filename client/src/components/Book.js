@@ -79,7 +79,7 @@ function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, 
             
                 <div className="book-total" id="total-price">Total: ${total}</div>
                 <div className="book-btns">
-                    {isLoading ? <Button type = "submit" disabled={!stripe} block disabled>Book</Button> : <Button type = "submit" disabled={!stripe} block>Book</Button>}
+                    {isLoading ? <Button type = "submit" block disabled>Book</Button> : <Button type = "submit" disabled={!stripe} block>Book</Button>}
                     <Button type = "button" variant="danger" className ="cancel-btn" onClick={cancel} disabled={!stripe}>x</Button>
                 </div>
                 {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
