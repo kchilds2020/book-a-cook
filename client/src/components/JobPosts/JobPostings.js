@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useContext} from 'react'
-import '../../styles/JobPostings.css'
 import axios from 'axios'
 import JobPost from './JobPost'
 import JobForm from '../JobForm'
 import Spinner from 'react-bootstrap/Spinner';
 import {UserContext} from '../UserContext'
+import {Container, PageHeader} from '../GeneralStyles'
 
 function JobPostings() {
     let {user, menu} = useContext(UserContext)
@@ -96,18 +96,15 @@ function JobPostings() {
     }
 
     return (
-            <div>
-                <div className = "jp-container">
-                    <div className = "posts-container">
-                        {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} cancelPost = {cancelPost} pricePerPerson={element.price}/>)}
-                        {err ? err : null}        
-                    </div>
+            <Container>
+                <PageHeader>Jobs Posted</PageHeader>
+                {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} cancelPost = {cancelPost} pricePerPerson={element.price}/>)}
+                {err ? err : null}        
                     <div id = "job-post-form">
                         <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
                     </div>
-                </div>
 
-            </div>
+            </Container>
 
 
     )

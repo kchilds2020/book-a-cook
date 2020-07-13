@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import '../../styles/Order.css'
 import NumberInput from './NumberInput'
 import {useHistory} from 'react-router-dom'
 import {PopUp} from '../PopUpStyles'
-import {OrderTitleContainer, Span, OrderPrice, OrderHeader, OrderTitle, OrderTitleImg, OrderInput} from './OrderStyles'
+import {OrderTitleContainer, CardElementContainer, Span, OrderPrice, OrderHeader, OrderTitle, OrderTitleImg, OrderInput} from './OrderStyles'
 import Button from 'react-bootstrap/Button'
 
 import {
@@ -94,14 +93,12 @@ function Order({ price, title, picture, dbID, user, chefUsername}) {
                 <OrderHeader>Billing Information</OrderHeader>
                 {!user ? <OrderInput type="email" id="email-input" placeholder="Email for Notifications" onChange = {e => setEmail(e.target.value)} required/> : <></>}
                 <OrderInput type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
-                <div className="card-element-container" >
+                <CardElementContainer>
                     <CardElement />
-                </div>
+                </CardElementContainer>
             
                 <OrderPrice>Total: ${total}</OrderPrice>
-                <div className="order-btns">
-                    <Button type = "submit"  disabled={!stripe} block>Order</Button>
-                </div>
+                <Button type = "submit"  disabled={!stripe} block>Order</Button>
             </form>
         </PopUp>
     )

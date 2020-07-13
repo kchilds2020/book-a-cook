@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import '../../styles/MenuItem.css'
 import Confirm from '../Confirm'
 import Overlay from '../Overlay'
 

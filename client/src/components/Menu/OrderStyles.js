@@ -64,3 +64,11 @@ export const Span = styled.div`
     justify-content: space-between;
     margin: 5px 0px;
 `;
+
+export const CardElementContainer = styled.div`
+    border: #aaa 1px solid;
+    border-radius: 8px;
+    padding: 10px 5px; 
+    margin: 5px 0px;
+    font-size: 16px;
+`;

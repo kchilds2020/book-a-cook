@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import '../../styles/MenuItem.css'
 import Order from './Order';
 import Button from 'react-bootstrap/Button'
 import StarRatings from 'react-star-ratings';
 import axios from 'axios'
-import {MenuItemDescription, MenuItemPhoto, MenuItemDetails, MenuItemTitle, MenuItemPrice, MenuItemLocation, MenuItemSpan} from './MenuItemStyles'
-import {Container} from '../GeneralStyles'
+import {MenuItemContainer, MenuItemDescription, MenuItemPhoto, MenuItemDetails, MenuItemTitle, MenuItemPrice, MenuItemLocation, MenuItemSpan} from './MenuItemStyles'
 import Overlay from '../Overlay'
 
 
@@ -36,7 +34,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
     }
 
     return (
-        <Container >
+        <MenuItemContainer >
             <MenuItemPhoto src={`/api/get/image/${picture}`} alt =" "/>
             
             <MenuItemDetails>
@@ -63,7 +61,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
             </MenuItemDetails>
                
             {visible ? <div><Order price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/><Overlay setVisibility={setVisibility} /></div> : <></>}
-        </Container>
+        </MenuItemContainer>
     )
 }
 

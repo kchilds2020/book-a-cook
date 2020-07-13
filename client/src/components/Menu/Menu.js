@@ -1,9 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react'
 import MenuItem from './MenuItem'
 import axios from 'axios'
-import '../../styles/Menu.css'
 import Spinner from 'react-bootstrap/Spinner'
 import {UserContext} from '../UserContext'
+import {PageHeader, Container} from '../GeneralStyles'
 
 
 function Menu() {
@@ -36,10 +36,11 @@ function Menu() {
 
     return (
         <>
-            <div className="menu-page-container">
+            <Container>
+            <PageHeader>Menu</PageHeader>
                 {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} chefUsername={element.username} itemNum={index} dbID={element._id} user={user !== null ? user : ''}/>)}
                 {err ? err : null}
-            </div>
+            </Container>
         </>
     )
 }

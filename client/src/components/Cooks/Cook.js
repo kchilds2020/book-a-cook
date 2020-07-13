@@ -1,7 +1,7 @@
 import React/* , {useState} */ from 'react'
 import PIC from '../../images/silhouette.png';
-import '../../styles/CookSummary.css';
 import Button from 'react-bootstrap/Button'
+import {CookTitle, CookPrice, CookDescription, CookContainer, CookHeader, CookPhoto, CookName, CookDetails} from './CookStyles'
 /* import Geocode from "react-geocode" */
 //import keys from "./keys"
 
@@ -28,33 +28,18 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
      */
     return (
         <>
-            <div className="profile">
-                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                        <div className="pictureDiv">
-                            <img src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
-                        </div>
-                        <div className = "cookName">
-                            <h2>{firstname} {lastname}</h2>
-                        </div>
-                    </div>
-                    <div>
-                        <div className = "positionTitle">
-                            <h3>{specialty}</h3>
-                        </div>
-                    {/*    <div className = "positionTitle">
-                            <h3>{city}, {state}</h3>
-                        </div> */}
-                        <div className = "cookPrice">
-                            <h4>${price}</h4>
-                        </div>
-                        <div className = "cookDescription">
-                            <p>{description}</p>
-                        </div>
-                        <div style={{padding: '10px 0px'}}>
-                        <Button variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`} block>Contact</Button>
-                        </div>
-                    </div>
-            </div>
+            <CookContainer>
+                    <CookHeader>    
+                        <CookPhoto src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
+                        <CookName>{firstname} {lastname}</CookName>
+                    </CookHeader>
+                    <CookDetails>
+                        <CookTitle>{specialty}</CookTitle>
+                        <CookPrice>${price}</CookPrice>
+                        <CookDescription>{description}</CookDescription>
+                        <Button style={{margin: '10px 0px'}} variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`} block>Contact</Button>
+                    </CookDetails>
+            </CookContainer>
         </>
     )
 }

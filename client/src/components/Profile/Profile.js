@@ -144,7 +144,7 @@ function Profile() {
                                     </div> : <></>}
                             
                             <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>
-                            {cook ? <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted} setModified={setModified}/>:<></>}
+                            {/* {cook ? <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted} setModified={setModified}/>:<></>} */}
                             <div className="update-btn-container">
                                 {!modified ? <Button className="user-update-btn" id = "profile-update-btn" variant = 'secondary' block disabled>Update</Button> : <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>}
                                 {/* <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button> */}

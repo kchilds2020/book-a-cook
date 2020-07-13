@@ -1,11 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
-import '../../styles/CookSummary.css'
 import Cook from './Cook'
 import axios from 'axios';
-import Filter from './Filter';
-import '../../styles/Cooks.css'
 import Spinner from 'react-bootstrap/Spinner';
 import {UserContext} from '../UserContext'
+import {Container, PageHeader} from '../GeneralStyles'
 
 
 function Cooks() {
@@ -37,13 +35,11 @@ function Cooks() {
     },[])
     
     return (
-        <>
-            <div className="cooks-container">
-                <Filter />  
+        <Container>
+        <PageHeader>Cooks Near You</PageHeader>
                 {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : cooksArray.map((element,index) => <Cook  key = {index} firstname={element.firstName} lastname={element.lastName} specialty={element.cookSpecialty} price={element.cookPrice} description={element.cookDescription} latitude={element.latitude} longitude={element.longitude} username={element.username} picture={element.picture}/>)}
                 {err ? err : null}
-            </div>
-        </>
+        </Container>
     )
 }
 

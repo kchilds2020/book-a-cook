@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react'
- import '../../styles/JobPost.css' 
+import React, {useState, useEffect, useContext} from 'react' 
 import axios from 'axios';
 import {useHistory} from 'react-router-dom'
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
+import {PostContainer, SubText, Bold, SameLine, Title, Description} from './JobPostStyles'
 
 function JobPost({summary, description, peopleAmount, location, eventDate, userPosted, uniqueID, applications, pricePerPerson}) {
 
@@ -64,18 +64,19 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
     
 
     return (
-            <div className = "post-card">
-                <div className = "post-summary">{summary}</div>
-                <div className = "inline-info">
-                    <div className = "post-people">{peopleAmount} People</div>
-                    <div className = "post-location">{location}</div>
-                    <div className = "post-date">{month} {day}, {year}</div>
-                </div>
-                <div className = "post-description">{pricePerPerson}</div>
-                <div className = "post-description">{description}</div>
-                {applied ? <Button variant="success" id="jp-btn">Applied!</Button> : <Button variant="primary" onClick={apply} id="jp-btn">Apply!</Button>}
-                <div className = "post-username">Created by: {userPosted}</div>
-            </div>
+            <PostContainer>
+                <Title>{summary}</Title>
+                <Description>{description}</Description>
+                <SameLine>
+                <SubText><Bold>Event Date:</Bold> {month} {day}, {year}</SubText>
+                <SubText><Bold>Location:</Bold> {location}</SubText>
+                </SameLine>
+                <SameLine>
+                <SubText><Bold>Amount of People:</Bold> {peopleAmount}</SubText>
+                <SubText><Bold>Price Per Person:</Bold> ${pricePerPerson}</SubText>
+                </SameLine>
+                {applied ? <Button style={{marginTop: '10px'}} variant="success" id="jp-btn" block>Applied!</Button> : <Button style={{marginTop: '10px'}} variant="primary" onClick={apply} id="jp-btn" block>Apply!</Button>}
+            </PostContainer>
     )
 }
 
