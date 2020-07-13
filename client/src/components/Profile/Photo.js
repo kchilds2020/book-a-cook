@@ -5,6 +5,8 @@ import Confirm from '../Confirm'
 import Img from 'react-fix-image-orientation'
 import axios from 'axios'
 import Overlay from '../Overlay'
+import {UserPhoto, UserPhotoContainer} from '../GeneralStyles'
+import {DeleteButton} from '../PopUpStyles'
 
 function Photo({itemNum, photo, photos, setPhotos, username, editable=false, setModified}) {
     
@@ -62,16 +64,16 @@ function Photo({itemNum, photo, photos, setPhotos, username, editable=false, set
     
 
     return (
-        <div className = "photo">
+        <UserPhotoContainer>
             {editable === true ? 
                 <>
-                    <button className="delete-mi-btn" onClick={confirmDeletion}>x</button> 
-                    <Img src = {!photo ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/>
+                    <DeleteButton onClick={confirmDeletion}>x</DeleteButton> 
+                    <UserPhoto src = {!photo ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} onClick={() => photoInput.current.click()}/>
                     <input ref = {photoInput} type="file" onChange= {handleImgChange} style={{display: 'none'}} id = {`fi-${itemNum}`}/>
                 </>
-                : <Img src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
-            {visible === true ? <><Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /><Overlay onClick={() => setVisibility(false)}/></> : <></>}
-        </div>
+                : <UserPhoto src = {photo === '' ? silhouette : `/api/get/image/${photo}`} alt="profile-img" id={`photo-${itemNum}`} style = {{cursor: "auto"}}/>}
+            {visible === true ? <><Confirm message={`Are you sure you want to delete photo ${itemNum+1}?`} cancel={cancelItem} confirm={deleteItem} /><Overlay setVisibility={setVisibility}/></> : <></>}
+        </UserPhotoContainer>
     )
 }
 

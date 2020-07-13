@@ -1,24 +1,19 @@
 import React, {useEffect, useState, useContext} from 'react'
-import '../../styles/Profile.css'
 
 import axios from 'axios'
 import Photos from './Photos'
-import Menu from './Menu'
 import {UserContext} from '../UserContext'
-import Button from 'react-bootstrap/Button'
 import Input from '../Input'
 import TextArea from '../TextArea'
 import ProfileImage from './ProfileImage'
-import CookToggle from './CookToggle'
-import BankAccountInfo from './BankAccountInfo'
+import {Container, PageHeader} from '../GeneralStyles'
+import {ProfileForm, BasicInfo, BasicDetails, ProfileHeader, UpdateButton} from './ProfileStyles'
 
 function Profile() {
     let {user, menu} = useContext(UserContext)
     console.log('PROFILE USER CONTEXT', user, menu)
 
-    const [modified, setModified] = useState(false);
-    const [tempMenuItems, setTempMenuItems] = useState([])
-    const [itemsToBeDeleted, setItemsToBeDeleted] = useState([])
+    const [modified, setModified] = useState(false)
 
     const [firstName, setFirstname] = useState('')
     const [lastName, setLastname] = useState('')
@@ -30,8 +25,6 @@ function Profile() {
     const [cookPrice, setCookPrice] = useState('')
     const [picture, setPicture] = useState('')
     const [photos, setPhotos] = useState([])
-    const [identification, setIdentification] = useState('')
-    const [menuItems, setMenuItems] = useState([])
     const [number, setNumber] = useState('');
     const [bankAccountID, setBankAccountID] = useState('');
 
@@ -50,16 +43,11 @@ function Profile() {
             setCookPrice(user.cookPrice)
             setPicture(user.picture)
             setPhotos(user.photos)
-            setIdentification(user._id) 
             setNumber(user.number)
             setBankAccountID(user.bank_account_id)
 
             setModified(false)
 
-        }
-
-        if(menu !== null){
-            setMenuItems(menu)
         }
     },[user, menu])
 
@@ -89,12 +77,6 @@ function Profile() {
             axios.post('/update-user', userData)
             .catch(err => console.log(err))
 
-            //update menu item info
-            axios.post('/post/add-menu-items', tempMenuItems)
-
-            //delete items if needed
-            if(itemsToBeDeleted.length > 0 ){itemsToBeDeleted.map(element => axios.post(`/api/post/remove-item/${element}`))}
-
             
             alert('Profile Updated')
             setModified(false)
@@ -119,42 +101,35 @@ function Profile() {
     };
 
     return (
-        user ?
-        <div>
-            <div className = "profile-container">
-                <div className = "user-info">
-                        <form  className = "profile-form" onSubmit={handleSubmit} formEncType="multipart/form-data">
-                            <div className = "user-description">
-                                <ProfileImage picture={picture} setPicture={setPicture} username={user.username}/>
-                                <div className = "profile-about">
+        user ? <Container>
+                <PageHeader>Profile</PageHeader>
+                        <ProfileForm onSubmit={handleSubmit} formEncType="multipart/form-data">
+                            <ProfileHeader>{firstName}'s Details</ProfileHeader>
+                            <BasicInfo>      
+                                <ProfileImage picture={picture} setPicture={setPicture} username={user.username} setModified={setModified}/>
+                                <BasicDetails>
                                     <Input value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name" setModified={setModified}/>
                                     <Input value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name" setModified={setModified}/>
                                     <Input value = {username} setValue={setUsername} identifier='username' labelText="Username" setModified={setModified}/>
                                     <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address" setModified={setModified}/>
                                     <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
-                                    {/* <CookToggle cook={cook} setCook={setCook} setModified={setModified}/> */}
-                                </div>
-                            </div>
-                            
-                            {cook ? <div className = "cook-information" id="cook-info">
+                                </BasicDetails>  
+                            </BasicInfo>
+
+                            {cook ? <div style={{padding: '20px'}}>
+                                    <ProfileHeader>Cook Details</ProfileHeader>
                                         <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
                                         <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
                                         <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
-                                        {/* {bankAccountID ? <div>Bank Account Info Complete: {bankAccountID}</div> : <BankAccountInfo user={user} setBankAccountID={setBankAccountID} setModified={setModified}/>} */}
                                     </div> : <></>}
                             
+                            <ProfileHeader>Photos</ProfileHeader>
                             <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>
-                            {/* {cook ? <Menu identification = {identification} username={user.username} menuItems={menuItems} setMenuItems = {setMenuItems} editable={true} setTempMenuItems={setTempMenuItems} tempMenuItems={tempMenuItems} itemsToBeDeleted={itemsToBeDeleted} setItemsToBeDeleted={setItemsToBeDeleted} setModified={setModified}/>:<></>} */}
-                            <div className="update-btn-container">
-                                {!modified ? <Button className="user-update-btn" id = "profile-update-btn" variant = 'secondary' block disabled>Update</Button> : <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button>}
-                                {/* <Button type="submit" className="user-update-btn" id = "profile-update-btn" variant = 'primary' block>Update</Button> */}
-                            </div>
+                            {!modified ? <UpdateButton id = "profile-update-btn" variant = 'secondary' block disabled>Update</UpdateButton> : <UpdateButton type="submit" id = "profile-update-btn" variant = 'primary' block>Update</UpdateButton>}
                             
-                        </form>
+                        </ProfileForm>
                     
-                </div>
-            </div>
-        </div> :
+            </Container> :
         <></>
     )
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const PopUp = styled.div`
-    background-color: white;
+    background-color: #f4f4f4;
     padding: 20px;
     position: fixed;
     width: 100%;
@@ -22,3 +22,18 @@ export const PopUp = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
 `;
+export const DeleteButton = styled.button`
+    z-index: 300;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 20;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    box-shadow: #333 2px 2px 4px;
+    background-color: rgb(212, 35, 35);
+    color: white;
+    cursor: pointer;
+`

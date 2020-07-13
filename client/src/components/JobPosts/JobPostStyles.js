@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 export const PostContainer = styled.div`
-    background-color: white;
+    background-color: #f4f4f4;
     width: 95%;
     padding: 20px;
     margin: 10px auto;
