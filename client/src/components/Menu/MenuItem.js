@@ -4,6 +4,14 @@ import Order from './Order';
 import Button from 'react-bootstrap/Button'
 import StarRatings from 'react-star-ratings';
 import axios from 'axios'
+import MenuItemContainer from './MenuItemContainer'
+import MenuItemPhoto from './MenuItemPhoto'
+import MenuItemDetails from './MenuItemDetails'
+import MenuItemTitle from './MenuItemTitle'
+import MenuItemPrice from './MenuItemPrice'
+import MenuItemDescription from './MenuItemDescription'
+import MenuItemLocation from './MenuItemLocation'
+import MenuItemSpan from './MenuItemSpan'
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, user}) {
 
@@ -38,28 +46,34 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
     }
 
     return (
-        <div className="menu-item-container">
-            <div className="menu-photo">
-                <img src={`/api/get/image/${picture}`} alt =" " />
-            </div>
-            <div className = "menu-item-title" id = {`menu-item-title-${itemNum}`}>{title}</div>
-            <div className = "menu-item-details">
-                
-                <div className = "menu-item-rating" id = {`menu-item-title-${itemNum}`}>
-                <StarRatings
-                    rating={reviewAvg}
-                    starDimension="20px"
-                    starRatedColor="gold"
-                />
+        <MenuItemContainer >
+            <MenuItemPhoto src={`/api/get/image/${picture}`} alt =" "/>
+            
+            <MenuItemDetails>
+                <div>
+                <MenuItemSpan>
+                    <MenuItemTitle id = {`menu-item-title-${itemNum}`}>{title}</MenuItemTitle>
+                    <MenuItemPrice id = {`menu-item-price-${itemNum}`}>${price}</MenuItemPrice>
+                </MenuItemSpan>
+                    <StarRatings
+                        rating={reviewAvg}
+                        starDimension="25px"
+                        starRatedColor="gold"
+                    />
+                    <MenuItemDescription id = {`menu-item-description-${itemNum}`}>{description}</MenuItemDescription>
                 </div>
-                <div className = "menu-item-description" id = {`menu-item-description-${itemNum}`}> {description} </div>
-                <div className = "menu-item-location" id = {`menu-item-location-${itemNum}`} >{'Mansfield, Texas'} </div>
-                <div className = "menu-item-price" id = {`menu-item-price-${itemNum}`}>${price}</div>
-                <Button style={{margin: '10px'}} onClick={orderItem}>Order!</Button>
-            </div>
+                <div> 
+                    <MenuItemSpan>
+                        <MenuItemLocation id = {`menu-item-location-${itemNum}`}>{'Mansfield, Texas'}</MenuItemLocation>
+                        
+                    </MenuItemSpan>
+                    <Button onClick={orderItem} block>Order!</Button>
+                </div>
+                
+            </MenuItemDetails>
                
-                {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/> : <></>}
-        </div>
+            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/> : <></>}
+        </MenuItemContainer>
     )
 }
 
