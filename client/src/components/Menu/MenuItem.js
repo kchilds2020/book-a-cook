@@ -4,16 +4,12 @@ import Order from './Order';
 import Button from 'react-bootstrap/Button'
 import StarRatings from 'react-star-ratings';
 import axios from 'axios'
-import MenuItemContainer from './MenuItemContainer'
-import MenuItemPhoto from './MenuItemPhoto'
-import MenuItemDetails from './MenuItemDetails'
-import MenuItemTitle from './MenuItemTitle'
-import MenuItemPrice from './MenuItemPrice'
-import MenuItemDescription from './MenuItemDescription'
-import MenuItemLocation from './MenuItemLocation'
-import MenuItemSpan from './MenuItemSpan'
+import {MenuItemDescription, MenuItemPhoto, MenuItemDetails, MenuItemTitle, MenuItemPrice, MenuItemLocation, MenuItemSpan} from './MenuItemStyles'
+import {Container} from '../GeneralStyles'
+import Overlay from '../Overlay'
 
-function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, shadow, setShadow, user}) {
+
+function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, user}) {
 
     const [visible, setVisibility] = useState(false);
     const [reviewAvg, setReviewAvg] = useState(0)
@@ -37,34 +33,28 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
         event.preventDefault();
         console.log('order!')
         setVisibility(true);
-        setShadow(true)
-    }
-    const cancelItem = (event) => {
-        event.preventDefault();
-        setVisibility(false)
-        setShadow(false)
     }
 
     return (
-        <MenuItemContainer >
+        <Container >
             <MenuItemPhoto src={`/api/get/image/${picture}`} alt =" "/>
             
             <MenuItemDetails>
                 <div>
-                <MenuItemSpan>
-                    <MenuItemTitle id = {`menu-item-title-${itemNum}`}>{title}</MenuItemTitle>
-                    <MenuItemPrice id = {`menu-item-price-${itemNum}`}>${price}</MenuItemPrice>
-                </MenuItemSpan>
-                    <StarRatings
-                        rating={reviewAvg}
-                        starDimension="25px"
-                        starRatedColor="gold"
-                    />
-                    <MenuItemDescription id = {`menu-item-description-${itemNum}`}>{description}</MenuItemDescription>
+                    <MenuItemSpan>
+                        <MenuItemTitle >{title}</MenuItemTitle>
+                        <MenuItemPrice >${price}</MenuItemPrice>
+                    </MenuItemSpan>
+                        <StarRatings
+                            rating={reviewAvg}
+                            starDimension="25px"
+                            starRatedColor="gold"
+                        />
+                        <MenuItemDescription >{description}</MenuItemDescription>
                 </div>
                 <div> 
                     <MenuItemSpan>
-                        <MenuItemLocation id = {`menu-item-location-${itemNum}`}>{'Mansfield, Texas'}</MenuItemLocation>
+                        <MenuItemLocation >{'Mansfield, Texas'}</MenuItemLocation>
                         
                     </MenuItemSpan>
                     <Button onClick={orderItem} block>Order!</Button>
@@ -72,8 +62,8 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 
             </MenuItemDetails>
                
-            {visible ? <Order cancel={cancelItem} price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/> : <></>}
-        </MenuItemContainer>
+            {visible ? <div><Order price={price} title={title} picture={picture} dbID = {dbID} chefUsername={chefUsername} user={user}/><Overlay setVisibility={setVisibility} /></div> : <></>}
+        </Container>
     )
 }
 

@@ -22,7 +22,7 @@
 }
 
 .card-element-container, .order-container input, .card-element-exp, .card-element-cvc{
-  border: #ddd 1px solid;
+  border: #aaa 1px solid;
   border-radius: 8px;
   padding: 5px;
   margin: 5px 0px;
@@ -84,18 +84,19 @@
 
 .order-photo{
   width: 100%;
-  height: 150px;
+  height: 100px;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   align-self: center;
   border-radius: 8px;
+  position: relative;
 }
 
 .order-photo img{
   width: 100%;
-  height: 150px;
+  height: 100px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -117,14 +118,10 @@
   border-bottom: #ddd 1px solid;
   padding: 5px;
   margin: 10px 0px;
+  margin: 0px;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .small-input{
   width: 80px;
-}
-
-#total-price{
-  margin-bottom: 30px;
 }

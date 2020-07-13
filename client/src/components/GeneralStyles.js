@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const MenuItemContainer = styled.div`
+export const Container = styled.div`
     position: relative;
     background-color: white;
     margin: 10px;
@@ -19,5 +19,3 @@ const MenuItemContainer = styled.div`
         max-height: none;
     }
 `;
-
-export default MenuItemContainer

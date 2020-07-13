@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Overlay() {
+function Overlay({setVisibility = (value) => console.log(value)}) {
     return (
-        <div className='overlay'></div>
+        <div onClick={() => setVisibility(false)} className='overlay'></div>
     )
 }
 

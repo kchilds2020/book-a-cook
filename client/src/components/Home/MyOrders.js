@@ -44,7 +44,7 @@ function MyOrders({username, user}) {
             <div className="header">
                 <h3><span className="post-num">{orders.length}</span> Active Orders</h3>
             </div>
-    {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : 
+    {loading ? <Spinner animation="border" variant="info" /> : 
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -60,7 +60,7 @@ function MyOrders({username, user}) {
         <Button onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
         {visibility ? <>
                         <CreateMenuItem user={user} setOpen={setVisibility}/> 
-                        <Overlay />
+                        <Overlay setVisibility ={setVisibility}/>
                     </>: <></>}
                 {err ? err : null}
         </div>

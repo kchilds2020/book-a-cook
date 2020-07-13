@@ -44,7 +44,7 @@ router.get('/api/get/active-orders/:username', async (req,res) => {
 
     orderItems.map( async(element) => {
         console.log(element.deliveredDate - element.createdDate)
-        if((Date.now() - element.deliveredDate) > 3600000){
+        if(((Date.now() - element.deliveredDate) > 3600000) && element.completed === true){
             let updateItem = await Orders.updateOne({_id: element._id},{
                 $set:{
                     pending: false,
