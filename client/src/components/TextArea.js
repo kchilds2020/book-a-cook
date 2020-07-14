@@ -1,6 +1,7 @@
 import React from 'react'
+import {TextArea} from './GeneralStyles'
 
-function TextArea({identifier, labelText, value, setValue, setModified}) {
+function TextAreaWithLabel({identifier, labelText, value, setValue, setModified}) {
     
     const handleChange = (e) => {
         e.preventDefault()
@@ -17,7 +18,7 @@ function TextArea({identifier, labelText, value, setValue, setModified}) {
                 htmlFor={identifier}>
                     {labelText}
             </label>
-            <textarea 
+            <TextArea 
                 name = {identifier} 
                 id = {identifier} 
                 type = "text" 
@@ -35,4 +36,4 @@ function TextArea({identifier, labelText, value, setValue, setModified}) {
     )
 }
 
-export default TextArea
+export default TextAreaWithLabel

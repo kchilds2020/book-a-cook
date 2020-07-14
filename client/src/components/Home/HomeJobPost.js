@@ -1,33 +1,27 @@
-import React from 'react'
-import '../../styles/HomeJobPost.css'
+import React, {useState} from 'react'
 import Applications from './Applications';
+import {JobPostContainer, NumColorLight, JobPostTitle} from './HomeStyles'
 
 function HomeJobPost({summary, applications, postID, listID, cook, pricePerPerson, peopleAmount}) {
 
-    const showCount = (event) => {
-        let list = document.getElementById(`list-${event.target.id}`)
-        if(list !== null){
-            list.style.visibility = list.style.visibility === 'visible' ? 'hidden' : 'visible'
-            list.style.height = list.style.visibility === 'visible' ? 'auto' : '0px'
-        }
-     }
+    const [visibility, setVisibility] = useState(false)
+
+    const toggleApplicants = (e) => {
+        e.preventDefault()
+
+        visibility ? setVisibility(false) : setVisibility(true)
+    }
 
     return (
         <>
-            <div className="sum-container" onClick={showCount} id={`${listID}`}>
-                <div className ="summary">
-                    {summary}
-                </div>
-                <div className ="applications">
-                    <button className ="count-applied" onClick={showCount} id={`${listID}`}>
-                        {cook === 'pending' ? <><span className="num-applied">{applications.length}</span> applied</> : <><span className="num-applied">{cook}</span> Hired!</> }
-                    </button>
-                </div>
-                <ul className="cook-list" id={`list-${listID}`}>
-                    {applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook} pricePerPerson={pricePerPerson} peopleAmount={peopleAmount} summary={summary}/>)}
-                </ul>
-            </div>
-            
+            <JobPostContainer onClick={toggleApplicants}>
+                <JobPostTitle>{summary}</JobPostTitle>
+                    <div style={{backgroundColor: 'transparent', border: 'none', cursor: 'pointer', marginRight: '10px'}} onClick={toggleApplicants}>
+                        {cook === 'pending' ? <><NumColorLight>{applications.length}</NumColorLight> applied</> : <><NumColorLight>{cook}</NumColorLight> Hired!</> }
+                    </div>
+                
+            </JobPostContainer>
+            {visibility ? applications.map((user,index) => <Applications key = {index} cook={user} postID={postID} listKey={index} hired={cook} pricePerPerson={pricePerPerson} peopleAmount={peopleAmount} summary={summary}/>) : <></>}
         </>
     )
 }

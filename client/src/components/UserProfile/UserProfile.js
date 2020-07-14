@@ -7,7 +7,7 @@ import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 import Review from './Review'
 import Overlay from '../Overlay'
-import {Container, ImagesContainer, UserPhoto, UserPhotoContainer, FixedCenter} from '../GeneralStyles'
+import {Container, ImagesContainer, UserPhoto, UserPhotoContainer} from '../GeneralStyles'
 import {UserSectionContainer, CookDetails, CookDetail, UserDetails, UserDetail, UserName, ContactInfo, ProfileContainer, ContactButtons} from './UserProfileStyles'
 import ReviewForm from './ReviewForm'
 
@@ -140,11 +140,9 @@ function UserProfile() {
 
 
 
-                { bookVisibility ? 
-                    <><FixedCenter>
+                { bookVisibility ? <>
                         <JobForm setSummary={setSummary} setPeopleAmount = {setPeopleAmount} setDescription = {setDescription} setLocation = {setLocation} setDate = {setDate} handleSubmit={handleSubmit} cancelPost={cancelPost} setPricePerPerson={setPricePerPerson}/>
-                    </FixedCenter> 
-                    <Overlay /></>: <></> }</>}
+                        <Overlay setVisibility={setBookVisibility}/></>: <></> }</>}
 
                 {reviewVisibility ? <ReviewForm setReviewVisibility={setReviewVisibility} chef={username} customer={user.username}/> : <></> }
                 </ProfileContainer>

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import '../../styles/Account.css'
 import Table from 'react-bootstrap/Table'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
+import {HomeHeader} from './HomeStyles'
 
 
 function Account({user}) {
@@ -36,10 +36,8 @@ function Account({user}) {
     return (
 
     <>
-           <div className="header">
-                <h3>Account Amount</h3>
-            </div>
-        <Table striped bordered hover>
+        <HomeHeader>Account Amount</HomeHeader>
+        <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
             <thead>
                 <tr>
                     <th>In Account</th>

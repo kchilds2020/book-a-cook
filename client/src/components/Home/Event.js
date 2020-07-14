@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import '../../styles/Event.css'
 import event from '../../images/event.svg';
 import Button from 'react-bootstrap/Button'
+import {EventContainer, EventDetails, EventInfo, EventSummary, EventImg} from './HomeStyles'
+
 function Event({summary, description, location, date, username}) {
     const [month, setMonth] = useState();
     const [day, setDay] = useState();
@@ -20,18 +21,16 @@ function Event({summary, description, location, date, username}) {
     }, [date])
 
     return (
-        <div className="event-container">
-            <div style={{ padding: '10px'}}>
-                <img className = "landing-sectionIMG" src={event} alt="landing" style={{width: "200px", height: "200px"}}/>
-            </div>
-            <div className= "event-details">
-                <div className="event-summary">{summary}</div>
-                <div className="event-location"><b>Location:</b> {location}</div>
-                <div className="event-date"><b>When:</b> {month} {day}, {year}</div>
-                <div className="event-description"><b>About:</b> {description}</div>
+        <EventContainer>
+            <EventImg  src={event} alt="landing" style={{width: "200px", height: "200px"}}/>
+            <EventDetails>
+                <EventSummary>{summary}</EventSummary>
+                <EventInfo><b>Location:</b> {location}</EventInfo>
+                <EventInfo><b>When:</b> {month} {day}, {year}</EventInfo>
+                <EventInfo><b>About:</b> {description}</EventInfo>
                 <Button variant='info' onClick={ () => window.location.href=`/user/profile?user=${username}`} style={{margin: "10px"}}>Contact Event Creator</Button>
-            </div>
-        </div>
+            </EventDetails>
+        </EventContainer>
     )
 }
 

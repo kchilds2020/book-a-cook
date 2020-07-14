@@ -3,6 +3,7 @@ import axios from 'axios'
 import Table from 'react-bootstrap/Table'
 import CustomerOrder from './CustomerOrder'
 import Button from 'react-bootstrap/Button'
+import {UpcomingJobContainer, HomeHeader, NumColorDark, HomeSectionContainer} from './HomeStyles'
 
 function CustomerOrders({username}) {
 
@@ -26,12 +27,10 @@ function CustomerOrders({username}) {
 
 
     return (
-        <div className = "home-sec-container" >
-            <div className="header">
-                <h3><span className="post-num">{orders.length}</span> Open Orders.</h3>
-            </div>
-            <div className="profile-job-posts">
-                <Table striped bordered hover>
+        <HomeSectionContainer>
+            <HomeHeader><NumColorDark>{orders.length}</NumColorDark> Open Orders</HomeHeader>
+            <UpcomingJobContainer>
+                <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -45,9 +44,9 @@ function CustomerOrders({username}) {
                         <CustomerOrder key = {index} pending={element.pending} completed = {element.completed} title={element.menuItemTitle} qty={element.qty} orderID = {element._id} chef={element.chefUsername}/>) : <></>} 
                     </tbody>     
                 </Table>
-            </div>
+            </UpcomingJobContainer>
             <Button onClick = {() => window.location.href = '/menu'} style ={{marginTop: '10px'}} block>Find Food Near Me</Button>
-        </div>
+        </HomeSectionContainer>
     )
 }
 

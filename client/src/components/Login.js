@@ -1,10 +1,24 @@
 import React, {useState} from 'react';
 import axios from 'axios'
-import '../styles/Login.css'
 import { useHistory, useLocation} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Input from './Input'
+import {Input, Container} from './GeneralStyles'
+import styled from 'styled-components'
 
+
+export const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    box-shadow: 0px 0px 4px #333;
+`;
 
 export const Login = () => {
 
@@ -21,6 +35,8 @@ export const Login = () => {
             password: password
 
         }
+
+        
 
         axios.post('/login-user', user)
             .then(function (response) {
@@ -46,15 +62,15 @@ export const Login = () => {
 
     return(
         <>
-            <div className = 'container'>
-                <form className = 'form-container' onSubmit = {loginUser}>
-                    <h2 style={{textAlign: 'center'}}>LOGIN</h2>
-                    <Input identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
-                    <Input identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
+            <Container>
+                <FormContainer onSubmit = {loginUser}>
+                    <h2>Login</h2>
+                    <Input identifier='username' labelText = 'Username' value = {username} onChange = {(e) => setUsername(e.target.value)}/>
+                    <Input identifier='password' labelText = 'Password' value = {password} onChange = {(e) => setPassword(e.target.value)} type="password"/>
                     <div style={{margin: '10px 0px'}}><a href="/register">Dont have an account? Register</a></div>
                     <Button type="submit" variant="primary" block>Login</Button>
-                </form>
-            </div>
+                </FormContainer>
+            </Container>
         </>
     );
 };

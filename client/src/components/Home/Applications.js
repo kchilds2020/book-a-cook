@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import '../../styles/HomeJobPost.css'
 import axios from 'axios'
-import {Link, useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Book from '../Book'
+import {ApplicationContainer, LinkToProfile} from './HomeStyles'
+import Spinner from 'react-bootstrap/Spinner'
+import Overlay from '../Overlay'
 
 function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount, summary}) {
     const [fullname,setFullname] = useState('');
@@ -35,18 +37,11 @@ function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount
 
     return (
         <>
-            <li className="cook-name" id = {`app-${listKey}`}>
-            <div>
-                <Link to ={`/user/profile?user=${cook}`} className="links" >
-                    {fullname === '' ? cook : fullname}
-                </Link>
-                </div>
-                <div style={{padding: '10px', width: '260px'}}>
-                { hired === cook ?
-                <>
-                <Button variant="outline-info" style={{marginLeft: '5px'}} onClick={() => history.push(`/user/profile?user=${cook}`)}>
-                    Contact
-                </Button></>  :
+            <ApplicationContainer id = {`app-${listKey}`}>
+                <LinkToProfile href ={`/user/profile?user=${cook}`}>{fullname === '' ? <Spinner animation="border" variant='info'/> : fullname}</LinkToProfile>
+
+            <div style={{padding: '10px', width: '260px'}}>
+                { hired === cook ? <Button variant="outline-info" style={{marginLeft: '5px', float: 'right'}} onClick={() => history.push(`/user/profile?user=${cook}`)}> Contact </Button>  :
                 <>
                     <Button variant="outline-primary" style={{marginLeft: '5px'}} onClick={() => setVisibility(true)}>
                         Book
@@ -59,11 +54,11 @@ function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount
                     </Button> 
                 </>
                 }
-                </div>
+            </div>
                 
                 {/* {visibility === true ? <Confirm message={`Are you sure you want to book ${cook}?`} cancel={cancelItem} confirm={bookItem} /> : <></>} */}
-                {visibility === true ? <Book eventID={postID} chef={cook} eventTitle={summary} peopleAmount={peopleAmount} pricePerPerson={pricePerPerson} cancel={cancelItem} setVisibility={setVisibility}/> : <></>}
-            </li>
+                {visibility === true ? <><Book eventID={postID} chef={cook} eventTitle={summary} peopleAmount={peopleAmount} pricePerPerson={pricePerPerson} cancel={cancelItem} setVisibility={setVisibility}/><Overlay setVisibility={setVisibility}/></> : <></>}
+            </ApplicationContainer>
         </>
     )
 }

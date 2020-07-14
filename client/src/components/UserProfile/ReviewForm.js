@@ -32,12 +32,12 @@ function ReviewForm({chef, customer, setReviewVisibility}) {
     return (
         <div>
             <PopUp>
-                <form style={{display: 'flex', flexDirection: 'column'}}>
+                <form onSubmit={submitReview} style={{display: 'flex', flexDirection: 'column'}}>
                     <label htmlFor="star-rating">Rating</label>
                     <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
                     <label htmlFor="rating-description" style={{marginTop: '10px'}}>Describe Experience</label>
-                    <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description"></textarea>
-                    <Button onClick={submitReview} style={{marginTop: '10px'}}>Submit</Button>
+                    <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description" required></textarea>
+                    <Button type='submit' style={{marginTop: '10px'}}>Submit</Button>
                 </form>
             </PopUp>
             <Overlay setVisibility={setReviewVisibility}/>

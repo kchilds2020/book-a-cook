@@ -1,0 +1,89 @@
+import styled from 'styled-components'
+import img from '../../images/landing.jpg'
+
+export const LandingBody = styled.div`
+    height: 95vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-image: url(${img});
+    background-size: fill;
+    background-position: top left;
+    z-index: -1;
+
+    @media only screen and (max-width: 1260px) {
+        background-position-y: bottom;
+    }
+`;
+
+export const LandingContainer = styled.div`
+    width: 100%;
+    height: 95vh;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media only screen and (max-width: 1260px) {
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+`;
+
+export const LandingDescription = styled.div`
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    width: 600px;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0px 0px 4px #333;
+
+    @media only screen and (max-width: 1260px) {
+        padding: 10px;
+        margin-top: 40px;
+        width: 95%;
+        max-width: 600px;
+        text-align: center;
+    }
+`;
+export const LandingTitle = styled.h1`
+    letter-spacing: 4px;
+    font-size: 64px;
+    font-weight: bold;
+
+    @media only screen and (max-width: 1260px) {
+        font-size: 40px;
+        letter-spacing: 0px;
+    }
+`;
+export const LandingTagline = styled.h2`
+    font-style: italic;
+    text-align: center;
+
+    @media only screen and (max-width: 1260px) {
+        font-size: 24px;
+    }
+`;
+
+export const LandingSection = styled.div`
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+
+    @media only screen and (max-width: 1260px) {
+        width: 95%;
+        max-width: 600px;
+        text-align: center;
+    }
+`;

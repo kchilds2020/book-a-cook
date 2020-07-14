@@ -3,7 +3,7 @@ import MenuItem from './MenuItem'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import {UserContext} from '../UserContext'
-import {PageHeader, Container} from '../GeneralStyles'
+import {PageHeader, Container, CenterSpinner} from '../GeneralStyles'
 
 
 function Menu() {
@@ -38,7 +38,7 @@ function Menu() {
         <>
             <Container>
             <PageHeader>Menu</PageHeader>
-                {loading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} chefUsername={element.username} itemNum={index} dbID={element._id} user={user !== null ? user : ''}/>)}
+                {loading ? <CenterSpinner><Spinner animation="border" variant="info" /> </CenterSpinner> : menuArray.map((element,index) => <MenuItem  key={index} title={element.title} description={element.description} price={element.price} picture={element.picture} chefUsername={element.username} itemNum={index} dbID={element._id} user={user !== null ? user : ''}/>)}
                 {err ? err : null}
             </Container>
         </>

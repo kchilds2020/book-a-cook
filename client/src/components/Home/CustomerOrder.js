@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
-import '../../styles/Home.css'
 
 function CustomerOrder({title, qty, pending, completed, orderID, chef}) {
     const [isPending, setPending] = useState(pending)

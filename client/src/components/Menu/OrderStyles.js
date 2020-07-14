@@ -71,4 +71,5 @@ export const CardElementContainer = styled.div`
     padding: 10px 5px; 
     margin: 5px 0px;
     font-size: 16px;
+    background-color: white;
 `;

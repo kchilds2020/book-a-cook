@@ -1,10 +1,26 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import "../styles/Register.css"
 import Button from 'react-bootstrap/Button'
-import Input from './Input'
+import InputWithLabels from './Input'
 import CookToggle from './Profile/CookToggle'
 import Spinner from 'react-bootstrap/Spinner'
+import {Container} from './GeneralStyles'
+import styled from 'styled-components'
+
+
+export const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+    max-width: 500px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    box-shadow: 0px 0px 4px #333;
+`;
 
 export const Register = () => {
     const [firstname, setFirstname] = useState("");
@@ -115,26 +131,20 @@ export const Register = () => {
 
     return(
         <>
-            <div className = "container">
-                <form className = "form-container" onSubmit = {registerUser}>
+            <Container>
+                <FormContainer onSubmit = {registerUser}>
                     <h2>Register</h2>
-                    <Input identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>
-                    <Input identifier='lastname' labelText = 'Last Name' value = {lastname} setValue = {setLastname}/>
-                    <Input identifier='email' labelText = 'Email Address' value = {email} setValue = {setEmail} type="email"/>
-                    <Input identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber} type="tel"/>
-                    <Input identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
-                    <Input identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
+                    <InputWithLabels identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>
+                    <InputWithLabels identifier='lastname' labelText = 'Last Name' value = {lastname} setValue = {setLastname}/>
+                    <InputWithLabels identifier='email' labelText = 'Email Address' value = {email} setValue = {setEmail} type="email"/>
+                    <InputWithLabels identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber} type="tel"/>
+                    <InputWithLabels identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
+                    <InputWithLabels identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
                     <CookToggle cook={cook} setCook ={setCook}/>
-                    {/* <input name = "firstname" type = "text" placeholder = 'First Name' className = "inputFields" maxLength = '40' value = {firstname} onChange={e => setFirstname(e.target.value)} required/>
-                    <input name = "lastname" type = "text" placeholder = 'Last Name' className = "inputFields" maxLength = '40' value = {lastname} onChange={e => setLastname(e.target.value)} required/>
-                    <input name = "email" type = "email" placeholder = 'Email' className = "inputFields" maxLength = '40' value = {email} onChange={e => setEmail(e.target.value)} required/>
-                    <input name = "number" type = "tel" placeholder = 'Phone Number' className = "inputFields" maxLength = '15' value = {number} onChange = {e => setNumber(e.target.value)} required/>            
-                    <input name = "username" type = "text" placeholder = 'Username' className = "inputFields" maxLength = '20' value = {username} onChange={e => setUsername(e.target.value)} required/>
-                    <input name = "password" type = "password" placeholder = 'Password' className = "inputFields" value = {password} onChange={e => setPassword(e.target.value)} required/> */}
                     <Button type="submit" variant="primary" block>Register</Button>
-                </form>
+                </FormContainer>
                 {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
-            </div>
+            </Container>
         </>
     );
 };

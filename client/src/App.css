@@ -14,57 +14,6 @@ html, body{
   
 }
 
-.bgrd-img{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: .3;
-  z-index: -1;
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-}
-
-.landing{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.section{
-  width: 400px;
-  background-color: #f4f4f4;
-}
-
-.section img{
-  width: 100%;
-}
-
-
-.container{
-  width: 80%;
-  margin: auto;
-}
-
 label{
   margin-bottom:0
-}
-
-.overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
-  opacity: .7;
-  z-index: 50;
-}
-
-
-.centerSpinner{
-  display: flex;
-  justify-content: center;
-  padding: 10px;
 }

@@ -19,7 +19,8 @@ function CookToggle({cook, setCook, setModified = (value) => null}) {
         <div 
             style={{
                 display: 'flex', 
-                justifyContent: 'flex-end'
+                justifyContent: 'flex-end',
+                margin: '10px'
             }}
         >
             <span style={{

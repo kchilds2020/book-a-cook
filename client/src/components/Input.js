@@ -1,6 +1,7 @@
 import React from 'react'
+import {Input} from './GeneralStyles'
 
-function Input({value, setValue, identifier, labelText, setModified = (x) => null, type='text', maxLength='40'}) {
+function InputWithLabel({value, setValue, identifier, labelText, setModified = (x) => null, type='text', maxLength='40'}) {
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -13,10 +14,9 @@ function Input({value, setValue, identifier, labelText, setModified = (x) => nul
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '5px 0px'
         }}>
-            <label className="InputLabel" htmlFor={value}>{labelText}</label>
-            <input className="InputTag" name = {identifier} id = {identifier} type = {type} maxLength = {maxLength} value = {value} onChange = {handleChange} required
+            <label htmlFor={value}>{labelText}</label>
+            <Input name = {identifier} id = {identifier} type = {type} maxLength = {maxLength} value = {value} onChange = {handleChange} required
                 style={{
                     padding: '5px',
                     fontSize: '18px',
@@ -27,4 +27,4 @@ function Input({value, setValue, identifier, labelText, setModified = (x) => nul
     )
 }
 
-export default Input
+export default InputWithLabel

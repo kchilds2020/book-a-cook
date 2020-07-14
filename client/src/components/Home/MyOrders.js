@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react'
-import '../../styles/MyOrders.css'
 import axios from 'axios'
 import Spinner from 'react-bootstrap/Spinner'
 import MyOrderItem from './MyOrderItem'
@@ -9,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 import CreateMenuItem from '../CreateMenuItem'
 import Overlay from '../Overlay'
 import {CenterSpinner} from '../GeneralStyles'
+import {HomeHeader, HomeSectionContainer, NumColorDark} from './HomeStyles'
 
 function MyOrders({username, user}) {
     const [loading, setLoading] = useState(true);
@@ -40,31 +40,29 @@ function MyOrders({username, user}) {
      },[username])
 
     return (
-        <div className = "home-sec-container">
+        <HomeSectionContainer>
             <Account user={user}/>
-            <div className="header">
-                <h3><span className="post-num">{orders.length}</span> Active Orders</h3>
-            </div>
-    {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : 
-        <Table striped bordered hover>
-            <thead>
-                <tr>
-                <th>Item</th>
-                <th>Address</th>
-                <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
-            </tbody>     
-        </Table>}
+            <HomeHeader><NumColorDark>{orders.length}</NumColorDark> Active Orders</HomeHeader>
+            {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : 
+                <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
+                    <thead>
+                        <tr>
+                        <th>Item</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
+                    </tbody>     
+                </Table>}
         <Button onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
         {visibility ? <>
                         <CreateMenuItem user={user} setOpen={setVisibility}/> 
                         <Overlay setVisibility ={setVisibility}/>
                     </>: <></>}
                 {err ? err : null}
-        </div>
+        </HomeSectionContainer>
     )
 }
  

@@ -81,5 +81,32 @@ font-size: 32px;
 `;
 
 
+export const NumberInputContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+`;
 
+export const NumInput = styled.input`
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+    margin: 0px 5px;
+    border: none;
+    background-color: transparent;
+`;
 
+export const NumberInputButtons = styled.button`
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 0px 8px #ddd;
+    background-color: rgb(156, 212, 238)
+`;

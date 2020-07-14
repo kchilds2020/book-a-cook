@@ -36,7 +36,7 @@ function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
                 
                 
             </div>
-            {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay /></> : <></>}
+            {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </>
     )
 }

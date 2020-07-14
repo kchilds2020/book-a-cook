@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import '../styles/Book.css'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
+import {PopUp} from './PopUpStyles'
+import { CardElementContainer, OrderPrice, OrderHeader} from './Menu/OrderStyles'
+import {Input} from './GeneralStyles'
 
 import {
   useStripe,
@@ -60,10 +62,9 @@ function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, 
     }
 
     return (
-        
-        <div className="book-container">
+        <PopUp>
 
-            <div className="billing-header">{eventTitle}</div>
+            <OrderHeader>{eventTitle}</OrderHeader>
             <div style={{textAlign: 'left', fontSize: '12px'}}>
                 <div>Chef: {chef}</div>
                 <div>Catering {peopleAmount} People</div>
@@ -71,20 +72,17 @@ function Book({eventTitle, pricePerPerson, peopleAmount, eventID, chef, cancel, 
             </div>
             
             <form onSubmit={bookChef}>
-                <div className="billing-header">Billing Info</div>
-                <input type="text" className="input-container" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
-                <div className="card-element-container" >
+                <OrderHeader>Billing Info</OrderHeader>
+                <Input type="text" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
+                <CardElementContainer>
                     <CardElement />
-                </div>
+                </CardElementContainer>
             
-                <div className="book-total" id="total-price">Total: ${total}</div>
-                <div className="book-btns">
-                    {isLoading ? <Button type = "submit" block disabled>Book</Button> : <Button type = "submit" disabled={!stripe} block>Book</Button>}
-                    <Button type = "button" variant="danger" className ="cancel-btn" onClick={cancel} disabled={!stripe}>x</Button>
-                </div>
+                <OrderPrice>Total: ${total}</OrderPrice>
+                {isLoading ? <Button type = "submit" block disabled>Book</Button> : <Button type = "submit" disabled={!stripe} block>Book</Button>}
                 {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
             </form>
-        </div>
+        </PopUp>
     )
 }
 

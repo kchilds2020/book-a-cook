@@ -61,3 +61,52 @@ export const CenterSpinner = styled.div`
     justify-content: center;
     padding: 10px;
 `;
+
+export const Input = styled.input`
+    padding: 5px;
+    fontSize: 18px;
+    width: 100%;
+    margin: 5px 0px;
+    border: #aaa 1px solid;
+    border-radius: 4px;
+    background-color: white;
+
+    :focus{
+        outline: none;
+    }
+`;
+
+export const TextArea = styled.textarea`
+    padding: 5px;
+    fontSize: 18px;
+    width: 100%;
+    margin: 5px 0px;
+    border: #aaa 1px solid;
+    border-radius: 4px;
+    background-color: white;
+
+    :focus{
+        outline: none;
+    }
+`;
+
+export const FlexDirectionColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const FlexDirectionRow = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: space-evenly;
+`;
+
+export const NavBarOverlay = styled.div`
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    background: linear-gradient(0.25turn, #a63f3f, #72cf72, #3ca2f6);
+    height: 65px;
+    box-shadow: 0px 1px 6px #333;
+`;

@@ -4,9 +4,9 @@ import Button from 'react-bootstrap/Button'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import silhouette from '../images/silhouette.png'
-import '../styles/NavBar.css'
 import axios from 'axios'
 import {UserContext} from './UserContext'
+import {NavBarOverlay} from './GeneralStyles'
 
 function BootstrapNav() {
 
@@ -27,7 +27,7 @@ function BootstrapNav() {
         window.location.href = '/login'
     }
     return (
-        <div className = 'nav-bar-overlay'>
+        <NavBarOverlay>
             <Navbar collapseOnSelect bg="dark" variant="dark" expand="xl">
                 <Navbar.Brand href="/">Look for Cooks</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -59,7 +59,7 @@ function BootstrapNav() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-        </div>
+        </NavBarOverlay>
     )
 }
 

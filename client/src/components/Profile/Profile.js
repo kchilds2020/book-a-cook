@@ -3,8 +3,8 @@ import React, {useEffect, useState, useContext} from 'react'
 import axios from 'axios'
 import Photos from './Photos'
 import {UserContext} from '../UserContext'
-import Input from '../Input'
-import TextArea from '../TextArea'
+import InputWithLabel from '../Input'
+import TextAreaWithLabel from '../TextArea'
 import ProfileImage from './ProfileImage'
 import {Container, PageHeader} from '../GeneralStyles'
 import {ProfileForm, BasicInfo, BasicDetails, ProfileHeader, UpdateButton} from './ProfileStyles'
@@ -108,19 +108,19 @@ function Profile() {
                             <BasicInfo>      
                                 <ProfileImage picture={picture} setPicture={setPicture} username={user.username} setModified={setModified}/>
                                 <BasicDetails>
-                                    <Input value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name" setModified={setModified}/>
-                                    <Input value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name" setModified={setModified}/>
-                                    <Input value = {username} setValue={setUsername} identifier='username' labelText="Username" setModified={setModified}/>
-                                    <Input value = {email} setValue={setEmail} identifier='email' labelText="Email Address" setModified={setModified}/>
-                                    <Input value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
+                                    <InputWithLabel value = {firstName} setValue={setFirstname} identifier='firstname' labelText="First Name" setModified={setModified}/>
+                                    <InputWithLabel value = {lastName} setValue={setLastname} identifier='lastname' labelText="Last Name" setModified={setModified}/>
+                                    <InputWithLabel value = {username} setValue={setUsername} identifier='username' labelText="Username" setModified={setModified}/>
+                                    <InputWithLabel value = {email} setValue={setEmail} identifier='email' labelText="Email Address" setModified={setModified}/>
+                                    <InputWithLabel value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
                                 </BasicDetails>  
                             </BasicInfo>
 
                             {cook ? <div style={{padding: '20px'}}>
                                     <ProfileHeader>Cook Details</ProfileHeader>
-                                        <Input value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
-                                        <TextArea value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
-                                        <Input value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
+                                        <InputWithLabel value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>
+                                        <TextAreaWithLabel value = {cookDescription} setValue={setCookDescription} identifier='cookDescription' labelText="Cook Description" setModified={setModified}/>
+                                        <InputWithLabel value = {cookPrice} setValue={setCookPrice} identifier='cookPrice' labelText="Cook Price" setModified={setModified}/>
                                     </div> : <></>}
                             
                             <ProfileHeader>Photos</ProfileHeader>
