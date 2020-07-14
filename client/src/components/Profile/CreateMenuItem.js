@@ -1,5 +1,4 @@
 import React, {useState, useRef} from 'react'
-import axios from 'axios'
 import PhotoEditor from '../PhotoEditor'
 
 function CreateMenuItem({username, createMenuItem, identification}) {

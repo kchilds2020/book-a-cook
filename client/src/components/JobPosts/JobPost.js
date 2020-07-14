@@ -39,7 +39,7 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
 
     }, [eventDate, user, applications])
 
-    const apply = (event) => {
+    const apply = async (event) => {
         if(user === null){
             alert('You must login to apply for jobs')
             history.push('/login')
@@ -48,15 +48,11 @@ function JobPost({summary, description, peopleAmount, location, eventDate, userP
                 username: user.username,
                 uniqueID: uniqueID
             }
-            let btn = event.target
-            axios.post(`api/post/apply/job-post`, data)
-            .then(response => {
-                console.log(response)
-                btn.innerText = "Applied!"
-                btn.style.backgroundColor="green"
-                btn.style.pointerEvents="none"
-            })
-            .catch(err => console.log(err))
+            try{
+                const response = await axios.post(`api/post/apply/job-post`, data)
+                alert(response.data)
+                setApplied(true)
+            }catch(error){console.log(error)}
         }   
 
         

@@ -10,18 +10,13 @@ function CustomerOrders({username}) {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-        let mounted = true
-        if(username !== ''){
-             //get all posts
-             axios.get(`/api/get/customer-orders/${username}`)
-             .then(response => {
-                 if(mounted){
-                    console.log('CUSTOMER ORDERS',response.data)
-                    setOrders(response.data);
-                }
-             })
-             return () => mounted = false
-         }
+        const getCustomerOrders = async () => {
+            try{
+            let response = await axios.get(`/api/get/customer-orders/${username}`)
+            setOrders(response.data)
+            }catch(error){console.log(error)}
+        }
+        getCustomerOrders()
      },[username])
 
 

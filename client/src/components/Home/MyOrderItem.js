@@ -10,6 +10,7 @@ function MyOrderItem({orderNum, title, quantity, address, completed, orderID}) {
     const state = addressTokenized[2]
     const street = addressTokenized[0]
     const streetFormatted = street.replace(" ", "+")
+    
     const handleClick = async (event) => {
         event.preventDefault();
         try{
@@ -20,7 +21,7 @@ function MyOrderItem({orderNum, title, quantity, address, completed, orderID}) {
             delivered ? setDelivered(false) : setDelivered(true)
             console.log(delivered, response.data)
         }catch(error){
-            alert(`try catch error: ${error}`)
+            alert(`Error: ${error}`)
         }
         
     }

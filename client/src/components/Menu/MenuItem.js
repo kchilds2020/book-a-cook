@@ -13,20 +13,24 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
     const [reviewAvg, setReviewAvg] = useState(0)
 
     useEffect(() => {
-        axios.get(`/api/get/username/${chefUsername}`)
-        .then(response => {
-            let reviewArray = response.data.reviews
-            console.log(response.data.reviews)
-            let sum = 0;
-            for(let i = 0; i < reviewArray.length; i++){
-                sum += parseFloat(reviewArray[i].rating)
+        const getChef = async () =>{
+            try {
+                let response = await axios.get(`/api/get/username/${chefUsername}`)
+                let reviewArray = response.data.reviews
+                console.log(response.data.reviews)
+                let sum = 0;
+                for(let i = 0; i < reviewArray.length; i++){
+                    sum += parseFloat(reviewArray[i].rating)
+                }
+                console.log('REVIEW AVG: ', sum/reviewArray.length)
+                setReviewAvg(sum/reviewArray.length)
+            } catch (error) {
+                console.log(error)
             }
-            console.log('REVIEW AVG: ', sum/reviewArray.length)
-            setReviewAvg(sum/reviewArray.length)
-        })
+        }
+        getChef()
     }, [chefUsername])
 
-    console.log('USERNAME',user)
     const orderItem = (event) =>{
         event.preventDefault();
         console.log('order!')

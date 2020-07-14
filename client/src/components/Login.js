@@ -28,7 +28,7 @@ export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const loginUser = (evt) => {
+    const loginUser = async (evt) => {
         evt.preventDefault();
         const user = {
             username: username,
@@ -36,28 +36,26 @@ export const Login = () => {
 
         }
 
-        
+        try {
+            const response = await axios.post('/login-user', user)
 
-        axios.post('/login-user', user)
-            .then(function (response) {
-                if(response.data === "invalid username"){
-                    setUsername('');
-                    setPassword('');
-                    alert('That username does not exist in our system')
-                    
-                }else if(response.data === "invalid password"){
-                    setPassword('');
-                    alert('Invalid password')
-                    
-                }else{
-                    localStorage.setItem('user', response.data._id)
-                    //go to home
-                    history.replace(from)
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            if(response.data === "invalid username"){
+                setUsername('');
+                setPassword('');
+                alert('That username does not exist in our system')
+                
+            }else if(response.data === "invalid password"){
+                setPassword('');
+                alert('Invalid password')
+                
+            }else{
+                localStorage.setItem('user', response.data._id)
+                //go to home
+                history.replace(from)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return(

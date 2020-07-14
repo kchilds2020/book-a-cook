@@ -74,12 +74,14 @@ function Profile() {
             }
 
             //update user info
-            axios.post('/update-user', userData)
-            .catch(err => console.log(err))
+            try{
+                axios.post('/update-user', userData)
+                alert('Profile Updated')
+                setModified(false)
+            }catch(error){ console.log(error)}
 
             
-            alert('Profile Updated')
-            setModified(false)
+            
         }
     }
 

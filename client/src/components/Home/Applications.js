@@ -14,10 +14,14 @@ function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount
     let history = useHistory()
 
     useEffect(() => {
-        let mounted = true;
-        axios.get(`/api/get/username/${cook}`)
-        .then(response => mounted ? setFullname(`${response.data.firstName} ${response.data.lastName}`) : console.log('not mounted'))
-        return () => mounted = false;
+        const getCook = async () => {
+            try{
+            let response = await axios.get(`/api/get/username/${cook}`)
+            setFullname(`${response.data.firstName} ${response.data.lastName}`)
+            }catch(error){console.log(error)}
+        }
+        getCook()
+
     }, [cook])
 
 
@@ -28,8 +32,10 @@ function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount
 
     const rejectCook = async () => {
         try{
+            console.log('rejecting cook')
             let res = await axios.post('/api/post/reject-cook', {username: cook, postID: postID})
-            console.log(res.data)
+            alert(res.data)
+            window.location.href = '/home'
         }catch(error){
             console.log(error)
         }

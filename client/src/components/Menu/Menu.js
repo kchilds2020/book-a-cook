@@ -15,22 +15,19 @@ function Menu() {
     const [err, setError] = useState('');
     
     useEffect(() => {
-        let mounted = true;
-        axios.get('api/get/menu')
-        .then(response => {
-            if(mounted){
+        const getMenu = async () => {
+            try{
+                let response = await axios.get('api/get/menu')
                 setLoading(false)
                 setMenuArray(response.data)
                 setError('');
+            }catch(error){
+                setLoading(false)
+                setMenuArray([])
+                setError('Something went wrong!');
             }
-        })
-        .catch(error => {
-            setLoading(false)
-            setMenuArray([])
-            setError('Something went wrong!');
-        })
-        return () => mounted = false;
-  
+        }
+        getMenu()
     },[])
 
 

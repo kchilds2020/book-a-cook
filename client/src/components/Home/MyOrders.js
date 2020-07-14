@@ -17,25 +17,23 @@ function MyOrders({username, user}) {
     const [visibility,setVisibility] = useState(false)
 
     useEffect(() => {
-        let mounted = true;
+        const getActiveOrders = async () => {
+            try {
+                let response = await axios.get(`/api/get/active-orders/${username}`)
+                setLoading(false)
+                let sorted = response.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
+                setOrders(sorted);
+                setError('');
+            } catch (error) {
+                console.log(error);
+                setLoading(false)
+                setOrders([])
+                setError('Something went wrong!');
+            }
+        }
+
         if(username !== ''){
-                axios.get(`/api/get/active-orders/${username}`)
-                .then(response => {
-                    if(mounted){
-                    console.log('ACTIVE ORDERS',response.data)
-                    setLoading(false)
-                    let sorted = response.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
-                    setOrders(sorted);
-                    setError('');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                    setLoading(false)
-                    setOrders([])
-                    setError('Something went wrong!');
-                })
-            return () => mounted = false        
+                getActiveOrders()   
          }
      },[username])
 

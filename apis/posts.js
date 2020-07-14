@@ -135,7 +135,7 @@ router.post('/post/create-post', (req, res) => {
         })
         .then(results => {
             console.log(`New POST: ${results}`);
-            res.json(results);
+            res.send(`${req.body.summary} has been created`);
         })
         .catch(error => console.error(error))
 });
@@ -150,7 +150,7 @@ router.post('/api/post/apply/job-post', (req, res) => {
     })
     .then(results => {
         console.log(`New Application: ${results}`);
-        res.json(results);
+        res.send('You have been added to the application list');
     })
     .catch(error => console.error(error)) 
 });
@@ -183,7 +183,7 @@ router.post('/api/post/reject-cook', async (req, res) => {
             applications: temp
         }
     })
-
+    res.send(`${req.body.username} has been rejected and removed from the list`)
     console.log(update)
 });
 

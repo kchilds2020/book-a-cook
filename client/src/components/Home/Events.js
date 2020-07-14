@@ -12,24 +12,24 @@ function Events({username}) {
     const [events, setEvents] = useState('');
 
     useEffect(() => {
-        if(username !== ''){
-             //get working events
-             axios.get(`/api/get/working-events/${username}`)
-             .then(response => {
-                 console.log('WORKING EVENTS',response.data)
-                 setLoading(false)
-                 let sorted = response.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
-                 setEvents(sorted);
-                 setError('');
-             })
-             .catch(err => {
-                console.log(err);
+        const getWorkingEvents = async () => {
+            try{
+                let response = await axios.get(`/api/get/working-events/${username}`)
+                setLoading(false)
+                let sorted = response.data.slice().sort((a, b) => new Date(a.date) - new Date(b.date))
+                setEvents(sorted);
+                setError('');
+            }catch(error){
+                console.log(error)
                 setLoading(false)
                 setEvents([])
                 setError('Something went wrong!');
-             })
-             
-         }
+            }
+        }
+
+        if(username !== ''){
+             getWorkingEvents()
+        }
      },[username])
 
     return (

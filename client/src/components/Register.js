@@ -57,7 +57,8 @@ export const Register = () => {
         }
         
         //check if username or email exists
-        let response = await axios.get(`/api/get/username/${user.username}`);
+        try{
+            let response = await axios.get(`/api/get/username/${user.username}`);
             console.log(response.data !== null);
             if(response.data !== null){
                 alert('Username already exists in the system. Please choose another username');
@@ -71,8 +72,8 @@ export const Register = () => {
                 alert('Email already exists in the system. Please choose another email');
                 return false;
             }
-        console.log(user.password.length < 8);
-        //check if Password has upper character/special character/ > 7
+        }catch(error) {console.log(error)}
+
         if(user.password.length < 8){
             alert('Password must be atleast 8 characters');
             return false;
@@ -119,11 +120,13 @@ export const Register = () => {
         setLoading(true)
         let response = await checkValidation(user)
         if(response === true){
-            let regResponse = await axios.post('/post/register', user)
-            setLoading(false)
+            try{
+                let regResponse = await axios.post('/post/register', user)
+                setLoading(false)
 
-            localStorage.setItem('user', regResponse.data._id)
-            window.location.href= cook === true ? '/payment-registration' : '/home'
+                localStorage.setItem('user', regResponse.data._id)
+                window.location.href= cook === true ? '/payment-registration' : '/home'
+            }catch(error){console.log(error)}
 
         }
     }

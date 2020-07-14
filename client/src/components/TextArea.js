@@ -1,7 +1,7 @@
 import React from 'react'
 import {TextArea} from './GeneralStyles'
 
-function TextAreaWithLabel({identifier, labelText, value, setValue, setModified}) {
+function TextAreaWithLabel({identifier, labelText, value, setValue, setModified = (value) => console.log('')}) {
     
     const handleChange = (e) => {
         e.preventDefault()

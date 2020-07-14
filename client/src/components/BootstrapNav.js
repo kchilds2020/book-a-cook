@@ -17,9 +17,14 @@ function BootstrapNav() {
 
     const logout = e => {
         e.preventDefault()
-        localStorage.removeItem('user')
-        axios.get('/logout')
-        window.location.href = '/'
+
+        try{      
+            axios.get('/logout')
+            localStorage.removeItem('user')
+            window.location.href = '/'
+        }catch(error){
+            alert(error)
+        }
     }
 
     const login = e => {

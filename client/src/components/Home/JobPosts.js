@@ -20,21 +20,20 @@ function JobPosts({username}) {
 
 
     useEffect(() => {
-        let mounted = true
+        const getMyJobs = async () => {
+            try {
+                let response = await axios.get(`/api/get/my-jobs/${username}`)
+                setMyPosts(response.data);
+            } catch (error) {console.log(error)}
+            
+        }
+
         if(username !== ''){
-             //get all posts
-             axios.get(`/api/get/my-jobs/${username}`)
-             .then(response => {
-                 if(mounted){
-                    console.log('MY POSTS',response.data)
-                    setMyPosts(response.data);
-                }
-             })
-             return () => mounted = false
-         }
+             getMyJobs()
+        }
      },[username, visible])
 
-     const handleSubmit = (e) => {
+     const handleSubmit = async (e) => {
         e.preventDefault()
         const post = {
             summary: summary,
@@ -45,18 +44,18 @@ function JobPosts({username}) {
             username: username,
             price: pricePerPerson
         }
+        try{
+            const response = await axios.post('/post/create-post', post)
+            alert(response.data)
+            setVisibility(false)
+            setSummary('')
+            setDescription('')
+            setDate('')
+            setPeopleAmount('')
+            setLocation('')
+        }catch(error){console.log(error)}
 
-        axios.post('/post/create-post', post)
-        .then(() => alert('Event has been created'))
-        .catch(err => console.log(err))
-
-        //add to state
-        setVisibility(false)
-        setSummary('')
-        setDescription('')
-        setDate('')
-        setPeopleAmount('')
-        setLocation('')
+        
      }
 
      const cancelPost = (e) => {
@@ -75,7 +74,7 @@ function JobPosts({username}) {
             <UpcomingJobContainer>
                 {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook} pricePerPerson={element.price} peopleAmount={element.peopleAmount}/>) : <></>}
             </UpcomingJobContainer>
-            <Button variant="primary" onClick={() => setVisibility(true)} block>Create a Post</Button>
+            <Button variant="primary" onClick={() => setVisibility(true)}style ={{marginTop: '5px'}} block>Create a Post</Button>
             {visible ? <><JobForm handleSubmit={handleSubmit} cancelPost={cancelPost} setDate={setDate} setDescription ={setDescription} setSummary={setSummary} setLocation={setLocation} setPeopleAmount={setPeopleAmount} setPricePerPerson={setPricePerPerson}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </HomeSectionContainer>
     )

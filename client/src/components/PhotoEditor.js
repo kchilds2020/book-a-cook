@@ -23,11 +23,12 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
             formData.append('username',username)
 
             setLoading(true)
-            let imgResponse = await axios.post('/upload-img', formData)
-            console.log(imgResponse.data)
-
-            setPhotoName(`${imgResponse.data.fileName}`)
-            setLoading(false)
+            try{
+                let imgResponse = await axios.post('/upload-img', formData)
+                console.log(imgResponse.data)
+                setPhotoName(`${imgResponse.data.fileName}`)
+                setLoading(false)
+            }catch(error){console.log(error)}
     }
 
         displayPhoto()

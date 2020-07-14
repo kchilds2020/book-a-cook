@@ -41,51 +41,49 @@ function UserProfile() {
     const [bookVisibility, setBookVisibility] = useState(false)
 
     useEffect(() =>{
+        const getUserInfo = async () => {
+            try{
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                setUsername(urlParams.get('user'));
+
+                let response = await axios.get(`/api/get/username/${username}`)
+                console.log(response.data)
+                setEmail(response.data.email)
+                setFirstname(response.data.firstName)
+                setLastname(response.data.lastName)
+                setCookSpecialty(response.data.cookSpecialty)
+                setCookDescription(response.data.cookDescription)
+                setCookPrice(response.data.cookPrice)
+                setCook(response.data.cook)
+                setPicture(response.data.picture)
+                setPhotos(response.data.photos)
+                setNumber(response.data.number)
+                setReviews(response.data.reviews)
+
+            }catch(error){console.log(error)}
+        }
         //get user from url
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        setUsername(urlParams.get('user'));
-
-        //get info of user
-        axios.get(`/api/get/username/${username}`)
-        .then(response => {
-            console.log(response.data)
-            setEmail(response.data.email)
-            setFirstname(response.data.firstName)
-            setLastname(response.data.lastName)
-            setCookSpecialty(response.data.cookSpecialty)
-            setCookDescription(response.data.cookDescription)
-            setCookPrice(response.data.cookPrice)
-            setCook(response.data.cook)
-            setPicture(response.data.picture)
-            setPhotos(response.data.photos)
-            setNumber(response.data.number)
-            setReviews(response.data.reviews)
-            console.log('REVIEWS: ', response.data.reviews)
-
-        })
-        .catch(err => console.log(err))
-
+        getUserInfo()
     },[username])
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
             summary: summary,
             description: description,
             location: location,
             date: date,
-            username:'',
+            username: user.username,
             peopleAmount: peopleAmount,
             cook: username,
             price: pricePerPerson
         }
-        axios.post('/post/create-post', data)
-        .then(response => console.log(response.data))
-        .catch(err => console.log(err))
-
-        document.getElementById('book-form').style.visibility = 'hidden'
-        console.log('submitted')
+        try{
+            let response = await axios.post('/post/create-post', data)
+            console.log(response.data)
+            console.log('submitted')
+        }catch(error){console.log(error)}
     }
     const cancelPost = (event) => {
         setBookVisibility(false)
