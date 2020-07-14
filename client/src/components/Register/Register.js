@@ -6,6 +6,7 @@ import CookToggle from '../Profile/CookToggle'
 import Spinner from 'react-bootstrap/Spinner'
 import {Container} from '../GeneralStyles'
 import styled from 'styled-components'
+import {CenterSpinner} from '../GeneralStyles'
 
 
 export const FormContainer = styled.form`
@@ -146,7 +147,7 @@ export const Register = () => {
                     <CookToggle cook={cook} setCook ={setCook}/>
                     <Button type="submit" variant="primary" block>Register</Button>
                 </FormContainer>
-                {isLoading ? <div className="home-spinner"><Spinner animation="border" variant="info" /> </div> : <></>}
+                {isLoading ? <CenterSpinner><Spinner animation="border" variant="info" /> </CenterSpinner> : <></>}
             </Container>
         </>
     );

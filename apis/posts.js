@@ -188,6 +188,21 @@ router.post('/api/post/reject-cook', async (req, res) => {
 });
 
 
+router.post('/complete-cook-registration', async (req, res) => {
+    const data = req.body
+    try{
+        const response = await User.updateOne({username: data.username}, {
+            $set: {
+                cookSpecialty: data.cookSpecialty,
+                cookDescription: data.cookDescription,
+                cookPrice: data.cookPrice,
+                picture: data.picture
+            }
+        })
+        console.log(response)
+        res.send('Account Has Been Created. Thank you for signing up!')
+    }catch(error){res.send(error)}
+});
 
 
 router.post('/update-user', (req, res) => {
@@ -314,8 +329,7 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
             }
         })
 
-        res.json(account)
-        console.log(account)
+        res.send(`${account.external_accounts.data[0].bank_name} has been connected to your profile`)
     }catch(error){
         console.log(error)
         res.send(error)

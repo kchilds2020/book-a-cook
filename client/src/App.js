@@ -7,7 +7,8 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import JobPostings from './components/JobPosts/JobPostings';
 import Profile from './components/Profile/Profile';
-import PaymentRegistration from './components/PaymentRegistration/PaymentRegistration'
+import PaymentRegistration from './components/CookRegistration/PaymentRegistration'
+import CookRegistration from './components/CookRegistration/CookRegistration'
 import Cooks from './components/Cooks/Cooks'
 import UserProfile from './components/UserProfile/UserProfile'
 import Menu from './components/Menu/Menu'
@@ -67,6 +68,12 @@ function App() {
                 <Route render={(props) => <PaymentRegistration />}/>
               </PrivateRoute>
 
+              <PrivateRoute path="/cook-registration" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <CookRegistration />}/>
+              </PrivateRoute>
+
+              
+
               <UserContext.Provider value={{user, menu}}>
                 <Route path="/" exact strict component={Landing}/>
                 <Route path="/cooks"  exact strict component={Cooks} />
@@ -74,7 +81,8 @@ function App() {
                 <Route path="/user/profile"  exact strict component={UserProfile} />
                 <Route path="/menu"  exact strict component={Menu} />
                 <Route path="/login"  exact strict component={Login} />
-                <Route path="/register"  exact strict component={Register} />  
+                <Route path="/register"  exact strict component={Register} />
+                {/* <Route path="/cook-registration"  exact strict component={CookRegistration} />   */}  
                 {/* <Route path="/payment-registration"  exact strict component={PaymentRegistration} />  */}
               </UserContext.Provider>       
             </Switch>

@@ -4,7 +4,7 @@ import {ProfilePhoto} from './ProfileStyles'
 import PhotoEditor from '../PopUps/PhotoEditor'
 import Overlay from '../PopUps/Overlay'
 
-function ProfileImage({picture, setPicture, username, setModified}) {
+function ProfileImage({picture, setPicture, username, setModified=(value)=>console.log('')}) {
 
     const [visibility, setVisibility] = useState(false)
     const [file, setFile] = useState('')

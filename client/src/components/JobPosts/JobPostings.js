@@ -3,7 +3,7 @@ import axios from 'axios'
 import JobPost from './JobPost'
 import Spinner from 'react-bootstrap/Spinner';
 import {UserContext} from '../UserContext'
-import {Container, PageHeader} from '../GeneralStyles'
+import {Container, PageHeader, CenterSpinner} from '../GeneralStyles'
 
 function JobPostings() {
     let {user, menu} = useContext(UserContext)
@@ -39,7 +39,7 @@ function JobPostings() {
     return (
             <Container>
                 <PageHeader>Jobs Posted</PageHeader>
-                {loading ? <div className="job-post-spinner"><Spinner animation="border" variant="info" /> </div> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} pricePerPerson={element.price}/>)}
+                {loading ? <CenterSpinner><Spinner animation="border" variant="info" /> </CenterSpinner> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} pricePerPerson={element.price}/>)}
                 {err ? err : null}        
 
             </Container>
