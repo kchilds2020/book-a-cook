@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import Book from '../Book'
+import Book from '../PopUps/Book'
 import {ApplicationContainer, LinkToProfile} from './HomeStyles'
 import Spinner from 'react-bootstrap/Spinner'
-import Overlay from '../Overlay'
+import Overlay from '../PopUps/Overlay'
 
 function Applications({cook, postID, listKey,hired, pricePerPerson, peopleAmount, summary}) {
     const [fullname,setFullname] = useState('');

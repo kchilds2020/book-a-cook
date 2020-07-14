@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react'
 import Button from 'react-bootstrap/Button'
-import {Input} from './GeneralStyles'
-import InputWithLabel from './Input'
+import {Input} from '../GeneralStyles'
+import InputWithLabel from '../InputComponents/Input'
 import PhotoEditor from './PhotoEditor'
 import axios from 'axios'
 

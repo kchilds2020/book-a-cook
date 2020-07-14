@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios'
 import { useHistory, useLocation} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import {Input, Container} from './GeneralStyles'
+import {Input, Container} from '../GeneralStyles'
 import styled from 'styled-components'
 
 

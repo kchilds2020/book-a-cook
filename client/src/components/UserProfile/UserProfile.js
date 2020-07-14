@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import silhouette from '../../images/silhouette.png'
-import JobForm from '../JobForm';
+import JobForm from '../PopUps/JobForm';
 import Photo from '../Profile/Photo';
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
 import Review from './Review'
-import Overlay from '../Overlay'
+import Overlay from '../PopUps/Overlay'
 import {Container, ImagesContainer, UserPhoto, UserPhotoContainer} from '../GeneralStyles'
 import {UserSectionContainer, CookDetails, CookDetail, UserDetails, UserDetail, UserName, ContactInfo, ProfileContainer, ContactButtons} from './UserProfileStyles'
 import ReviewForm from './ReviewForm'

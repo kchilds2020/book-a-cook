@@ -1,10 +1,10 @@
 import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
-import Confirm from '../Confirm'
-import Overlay from '../Overlay'
+import Confirm from '../PopUps/Confirm'
+import Overlay from '../PopUps/Overlay'
 import {UserPhoto, UserPhotoContainer} from '../GeneralStyles'
-import {DeleteButton} from '../PopUpStyles'
-import PhotoEditor from '../PhotoEditor'
+import {DeleteButton} from '../PopUps/PopUpStyles'
+import PhotoEditor from '../PopUps/PhotoEditor'
 
 function Photo({itemNum, photo, photos, setPhotos, username, editable=false, setModified}) {
     

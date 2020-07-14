@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import NumberInput from './NumberInput'
 import {useHistory} from 'react-router-dom'
-import {PopUp} from '../PopUpStyles'
+import {PopUp} from '../PopUps/PopUpStyles'
 import {OrderTitleContainer, CardElementContainer, Span, OrderPrice, OrderHeader, OrderTitle, OrderTitleImg, OrderInput} from './OrderStyles'
 import Button from 'react-bootstrap/Button'
 

@@ -19,15 +19,20 @@ export const HomeSectionContainer = styled.div`
 `;
 
 export const HomeGreeting = styled.div`
-    width: 95%;
+    width: 100%;
     max-width: 1160px;
     padding: 10px;
     text-align: center;
     background-color: #fff;
     box-shadow: 0px 0px 4px #212529;
-    margin: auto;
     margin-top:20px;
     border-radius: 4px;
+
+
+    @media only screen and (max-width: 1218px) {
+        max-width: 560px;
+    }
+    
 `;
 
 

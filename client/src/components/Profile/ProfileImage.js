@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react'
 import silhouette from '../../images/silhouette.png'
 import {ProfilePhoto} from './ProfileStyles'
-import PhotoEditor from '../PhotoEditor'
-import Overlay from '../Overlay'
+import PhotoEditor from '../PopUps/PhotoEditor'
+import Overlay from '../PopUps/Overlay'
 
 function ProfileImage({picture, setPicture, username, setModified}) {
 

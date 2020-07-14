@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import Confirm from '../Confirm'
-import Overlay from '../Overlay'
+import Confirm from '../PopUps/Confirm'
+import Overlay from '../PopUps/Overlay'
 
 function MenuItem({title, description, price, picture, itemNum, dbID, deleteMenuItem}) {
 

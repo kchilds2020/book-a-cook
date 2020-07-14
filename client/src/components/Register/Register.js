@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button'
-import InputWithLabels from './Input'
-import CookToggle from './Profile/CookToggle'
+import InputWithLabels from '../InputComponents/Input'
+import CookToggle from '../Profile/CookToggle'
 import Spinner from 'react-bootstrap/Spinner'
-import {Container} from './GeneralStyles'
+import {Container} from '../GeneralStyles'
 import styled from 'styled-components'
 
 

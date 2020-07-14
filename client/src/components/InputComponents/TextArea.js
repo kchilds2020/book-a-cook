@@ -1,5 +1,5 @@
 import React from 'react'
-import {TextArea} from './GeneralStyles'
+import {TextArea} from '../GeneralStyles'
 
 function TextAreaWithLabel({identifier, labelText, value, setValue, setModified = (value) => console.log('')}) {
     

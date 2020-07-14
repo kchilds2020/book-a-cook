@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {PopUp} from '../PopUpStyles'
-import Overlay from '../Overlay'
+import {PopUp} from '../PopUps/PopUpStyles'
+import Overlay from '../PopUps/Overlay'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 

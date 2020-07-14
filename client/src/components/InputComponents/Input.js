@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input} from './GeneralStyles'
+import {Input} from '../GeneralStyles'
 
 function InputWithLabel({value, setValue, identifier, labelText, setModified = (x) => null, type='text', maxLength='40'}) {
 

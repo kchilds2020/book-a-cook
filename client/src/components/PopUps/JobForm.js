@@ -1,8 +1,8 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import {PopUp} from './PopUpStyles'
-import InputWithLabel from './Input'
-import TextAreaWithLabel from './TextArea'
+import InputWithLabel from '../InputComponents/Input'
+import TextAreaWithLabel from '../InputComponents/TextArea'
 
 function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLocation, setSummary, cancelPost, setPricePerPerson}) {
     return (

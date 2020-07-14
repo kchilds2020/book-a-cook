@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import Input from '../Input'
+import Input from '../InputComponents/Input'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 import {UserContext} from '../UserContext'

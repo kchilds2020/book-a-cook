@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Landing from './components/Landing';
+import Landing from './components/Landing/Landing';
 import Home from './components/Home/Home';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import JobPostings from './components/JobPosts/JobPostings';
 import Profile from './components/Profile/Profile';
 import PaymentRegistration from './components/PaymentRegistration/PaymentRegistration'

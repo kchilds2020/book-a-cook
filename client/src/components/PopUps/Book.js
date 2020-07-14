@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import {PopUp} from './PopUpStyles'
-import { CardElementContainer, OrderPrice, OrderHeader} from './Menu/OrderStyles'
-import {Input} from './GeneralStyles'
+import { CardElementContainer, OrderPrice, OrderHeader} from '../Menu/OrderStyles'
+import {Input} from '../GeneralStyles'
 
 import {
   useStripe,

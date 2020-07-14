@@ -4,7 +4,7 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import {PopUp} from './PopUpStyles'
-import {FlexDirectionColumn, FlexDirectionRow} from './GeneralStyles'
+import {FlexDirectionColumn, FlexDirectionRow} from '../GeneralStyles'
 
 function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, username, file}) {
 

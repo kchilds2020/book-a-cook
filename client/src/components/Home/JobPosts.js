@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react'
 import HomeJobPost from './HomeJobPost'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
-import JobForm from '../JobForm'
+import JobForm from '../PopUps/JobForm'
 import {HomeHeader, HomeSectionContainer, UpcomingJobContainer} from './HomeStyles'
-import Overlay from '../Overlay'
+import Overlay from '../PopUps/Overlay'
 
 function JobPosts({username}) {
 

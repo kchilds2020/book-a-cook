@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 import StarRatings from 'react-star-ratings';
 import axios from 'axios'
 import {MenuItemContainer, MenuItemDescription, MenuItemPhoto, MenuItemDetails, MenuItemTitle, MenuItemPrice, MenuItemLocation, MenuItemSpan} from './MenuItemStyles'
-import Overlay from '../Overlay'
+import Overlay from '../PopUps/Overlay'
 
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, user}) {

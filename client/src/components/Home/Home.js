@@ -5,6 +5,7 @@ import MyOrders from './MyOrders'
 import {UserContext} from '../UserContext'
 import CustomerOrders from './CustomerOrders'
 import {HomeGreeting, HomeContainer} from './HomeStyles'
+import {FlexDirectionRow} from '../GeneralStyles'
 
 
 
@@ -15,15 +16,18 @@ const Home = () => {
 
     return(
         user ?
+            <>
+            <FlexDirectionRow style={{padding: '0px 20px'}}>
+                <HomeGreeting><h2>Hello {user.firstName}!</h2></HomeGreeting>
+            </FlexDirectionRow>
             <HomeContainer>
-            <HomeGreeting><h2>Hello {user.firstName}!</h2></HomeGreeting>
                 <>
                 {user.cook ? <MyOrders username={user.username} user={user}/> : <></>}
                 </>
                 {user.cook ? <></> : <CustomerOrders username={user.username}/>}
                 {user.cook ? <></> : <JobPosts username={user.username}/>}
                 {user.cook ? <Events username={user.username}/> : <></>}
-            </HomeContainer> : <></>
+            </HomeContainer></> : <></>
     );
 };
 

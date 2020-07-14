@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import {UserContext} from './UserContext'
+import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
-import {LandingBody, LandingContainer, LandingDescription, LandingTitle, LandingTagline, LandingSection} from './Landing/LandingStyles'
+import {LandingBody, LandingContainer, LandingDescription, LandingTitle, LandingTagline, LandingSection} from './LandingStyles'
 
 const Landing = () => {
 

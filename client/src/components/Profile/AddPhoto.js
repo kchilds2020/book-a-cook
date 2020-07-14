@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react'
 import Button from 'react-bootstrap/Button'
-import PhotoEditor from '../PhotoEditor'
-import Overlay from '../Overlay'
+import PhotoEditor from '../PopUps/PhotoEditor'
+import Overlay from '../PopUps/Overlay'
 
 function AddPhoto({itemNum, photos, setPhotos, username, setModified}) {
 
