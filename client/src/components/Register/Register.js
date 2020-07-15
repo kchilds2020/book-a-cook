@@ -2,11 +2,15 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button'
 import InputWithLabels from '../InputComponents/Input'
+import TextAreaWithLabels from '../InputComponents/TextArea'
 import CookToggle from '../Profile/CookToggle'
 import Spinner from 'react-bootstrap/Spinner'
 import {Container} from '../GeneralStyles'
 import styled from 'styled-components'
-import {CenterSpinner} from '../GeneralStyles'
+import {CenterSpinner, FlexDirectionRow} from '../GeneralStyles'
+import ProfileImage from '../Profile/ProfileImage'
+import checkValidation from './checkValidation'
+
 
 
 export const FormContainer = styled.form`
@@ -17,7 +21,7 @@ export const FormContainer = styled.form`
     max-width: 500px;
     padding: 20px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 20px;
     background-color: #f4f4f4;
     border-radius: 6px;
     box-shadow: 0px 0px 4px #333;
@@ -32,78 +36,15 @@ export const Register = () => {
     const [number, setNumber] = useState("");
     const [cook, setCook] = useState(false)
     const [isLoading, setLoading] = useState(false)
-
-    const checkValidation = async (user) => {
-
-    
-        // check for non letters in firstname and last name
-
-        console.log(!user.firstname.match(/^[0-9a-zA-Z]+$/));
-        if(!user.firstname.match(/^[0-9a-zA-Z]+$/)){
-            alert('First Name must only have alphanumeric characters');
-            setFirstname('');
-            return false;
-        }
-        console.log(!user.lastname.match(/^[0-9a-zA-Z]+$/));
-        if(!user.lastname.match(/^[0-9a-zA-Z]+$/)){
-            alert('Last Name must only have alphanumeric characters');
-            setLastname('');
-            return false;
-        }
-        console.log(!user.username.match(/^[0-9a-zA-Z]+$/));
-        if(!user.username.match(/^[0-9a-zA-Z]+$/)){
-            alert('Username must only have alphanumeric characters');
-            setUsername('');
-            return false;
-        }
-        
-        //check if username or email exists
-        try{
-            let response = await axios.get(`/api/get/username/${user.username}`);
-            console.log(response.data !== null);
-            if(response.data !== null){
-                alert('Username already exists in the system. Please choose another username');
-                return false;
-            }
-
-            
-            response = await axios.get(`/api/get/email/${user.email}`);
-            console.log(response.data !== null);
-            if(response.data !== null){
-                alert('Email already exists in the system. Please choose another email');
-                return false;
-            }
-        }catch(error) {console.log(error)}
-
-        if(user.password.length < 8){
-            alert('Password must be atleast 8 characters');
-            return false;
-        }
-
-        let checks = formatPhoneNumber(number)
-        if(checks !== true){
-            return false;
-        }
-
-        return true;
-    }
-
-    let formatPhoneNumber = (str) => {
-        //Filter only numbers from the input
-        let cleaned = ('' + str).replace(/\D/g, '');
-        
-        //Check if the input is of correct length
-        let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-      
-        if (match) {
-          setNumber('(' + match[1] + ') ' + match[2] + '-' + match[3])
-          return true
-        }
-        else{
-            alert('Invalid Phone Number')
-            return false
-        }
-    };
+    const [step, setStep] = useState(1)
+    const [cookSpecialty, setCookSpecialty] = useState('')
+    const [cookDescription, setCookDescription] = useState('')
+    const [cookPrice, setCookPrice] = useState('')
+    const [dob, setDob] = useState('')
+    const [ssn, setSSN] = useState('')
+    const [accountNumber, setAccountNumber] = useState('')
+    const [routingNumber, setRoutingNumber] = useState('')
+    const [picture, setPicture] = useState('')
 
     const registerUser = async (evt) =>{
         evt.preventDefault();
@@ -126,17 +67,67 @@ export const Register = () => {
                 setLoading(false)
 
                 localStorage.setItem('user', regResponse.data._id)
-                window.location.href= cook === true ? '/payment-registration' : '/home'
+                window.location.href=  '/home'
             }catch(error){console.log(error)}
 
         }
+    }
+
+    const registerCook = async (evt) =>{
+        evt.preventDefault();
+        console.log('register cook');
+        const year = dob.slice(0,4)
+        const month = dob.slice(5,7)
+        const day = dob.slice(8)
+
+        const data = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            username: username,
+            password: password,
+            number: number,
+            day: day,
+            month: month, 
+            year: year,
+            cook: cook,
+            cookDescription: cookDescription,
+            cookSpecialty: cookSpecialty,
+            cookPrice: cookPrice,
+            ssn: ssn,
+            accountNumber: accountNumber,
+            routingNumber: routingNumber,
+            picture: picture
+        }
+        setLoading(true)
+        let response = await checkValidation(data)
+        if(response === true){
+            try{
+                let regResponse = await axios.post('/api/register-cook', data)
+                setLoading(false)
+
+                localStorage.setItem('user', regResponse.data._id)
+                window.location.href= '/home'
+            }catch(error){
+                console.log(error)
+                setLoading(false)
+            }
+
+        }else{setLoading(false)}
+    }
+
+    const nextStep = (e) => {
+        e.preventDefault()
+        console.log(cook)
+        cook === true ? setStep(step + 1) : registerUser(e)
     }
 
 
     return(
         <>
             <Container>
-                <FormContainer onSubmit = {registerUser}>
+
+                {step === 1 ? (<FormContainer onSubmit={nextStep}>
                     <h2>Register</h2>
                     <InputWithLabels identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>
                     <InputWithLabels identifier='lastname' labelText = 'Last Name' value = {lastname} setValue = {setLastname}/>
@@ -145,8 +136,35 @@ export const Register = () => {
                     <InputWithLabels identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
                     <InputWithLabels identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
                     <CookToggle cook={cook} setCook ={setCook}/>
-                    <Button type="submit" variant="primary" block>Register</Button>
+                    {cook === true ? <Button type="submit" variant="primary" >Next</Button> : <Button type="submit" variant="success" >Register!</Button>}
+                </FormContainer>) :
+                step === 2 ? (
+                <FormContainer onSubmit={nextStep}>
+                    <h2>Cook information</h2>
+                    <FlexDirectionRow>
+                        <ProfileImage picture={picture} setPicture={setPicture} username={username}/>
+                    </FlexDirectionRow>
+                    <InputWithLabels identifier='cook-specialty' labelText = 'Cook Specialty' value = {cookSpecialty} setValue = {setCookSpecialty}/>
+                    <TextAreaWithLabels identifier='cook-description' labelText = 'Cook Description' value = {cookDescription} setValue = {setCookDescription}/>
+                    <InputWithLabels identifier='cook-price' labelText = 'Catering Price Per Person' value = {cookPrice} setValue = {setCookPrice} type = 'number'/>
+                    <FlexDirectionRow>
+                    <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
+                    <Button type="submit" variant="primary" style ={{marginLeft: '10px', marginTop: '10px'}} block>Next</Button>
+                    </FlexDirectionRow>
+                </FormContainer> ) :
+                step === 3 ? (
+                <FormContainer onSubmit={registerCook}>
+                    <h2>Connect your bank account</h2>
+                    <InputWithLabels value={dob} setValue={setDob} identifier='dob' labelText='Date of Birth' type="date"/>
+                    <InputWithLabels value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits)' maxLength='4'/>
+                    <InputWithLabels value={accountNumber} setValue={setAccountNumber} identifier='account-number' labelText='Account Number' maxLength='12'/>
+                    <InputWithLabels value={routingNumber} setValue={setRoutingNumber} identifier='routing-number' labelText='Routing Number' maxLength='9' />
+                    <FlexDirectionRow>
+                    <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
+                    <Button type="submit" variant="success" style ={{marginLeft: '10px', marginTop: '10px'}} block>Register!</Button>
+                    </FlexDirectionRow>
                 </FormContainer>
+                ) : <></>}
                 {isLoading ? <CenterSpinner><Spinner animation="border" variant="info" /> </CenterSpinner> : <></>}
             </Container>
         </>

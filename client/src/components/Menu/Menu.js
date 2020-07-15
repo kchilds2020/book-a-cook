@@ -29,7 +29,7 @@ function Menu() {
                     })
                 }
                 setLoading(false)
-                setMenuArray(response.data)
+                setMenuArray(response.data.slice(0,10))
                 setError('');
             }catch(error){
                 setLoading(false)

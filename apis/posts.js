@@ -302,9 +302,11 @@ router.post('/login-user', async (req,res) => {
 
 //create custom stripe account for user
 
-router.post('/api/post/create-stripe-account', async (req,res) => {
+router.post('/api/register-cook', async (req,res) => {
 
-    const {data, user} =  req.body;
+    const data =  req.body;
+
+    console.log('REQ.BODY',data)
 
     try{
         const account = await stripe.accounts.create({
@@ -315,9 +317,9 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
                 product_description: 'freelance cook making delivered homemade food'
             },
             individual:{
-                first_name: user.firstName,
-                last_name: user.lastName,
-                email: user.email,
+                first_name: data.firstname,
+                last_name: data.lastname,
+                email: data.email,
                 dob:{
                     day: data.day,
                     month: data.month,
@@ -339,13 +341,27 @@ router.post('/api/post/create-stripe-account', async (req,res) => {
             requested_capabilities: ['transfers'],
         });
 
-        let updateUser = await User.updateOne({_id: user._id}, {
-            $set: {
-                stripe_account_id: account.id
-            }
-        })
+        console.log('ACCOUNT',account)
 
-        res.send(`${account.external_accounts.data[0].bank_name} has been connected to your profile`)
+        const hashedPassword = bcrypt.hashSync(req.body.password,saltRounds);
+        const user = await User.create({
+            firstName: data.firstname,
+            lastName: data.lastname,
+            email: data.email,
+            number: data.number,
+            username: data.username,
+            cookDescription: data.cookDescription,
+            cookSpecialty: data.cookSpecialty,
+            cookPrice: data.cookPrice,
+            password: hashedPassword,
+            stripe_account_id: account.id,
+            cook: data.cook,
+            picture: data.picture
+        })
+        console.log(user._id)
+        req.session.userID = user._id;
+
+        res.send(`Account has been created`)
     }catch(error){
         console.log(error)
         res.send(error)

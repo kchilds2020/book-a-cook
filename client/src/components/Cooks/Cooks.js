@@ -31,8 +31,8 @@ function Cooks() {
                     })
                 }
                 setLoading(false)
-
-                setCooksArray(response.data)
+                
+                setCooksArray(response.data.slice(0,10))
                 setError('');
             } catch (error) {
                 setLoading(false)
