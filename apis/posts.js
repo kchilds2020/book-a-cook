@@ -276,7 +276,7 @@ router.post('/post/register', async (req, res) => {
 });
 
 router.post('/login-user', async (req,res) => {
-    const {username, password, latitude, longitude} = req.body;
+    const {username, password} = req.body;
     console.log(username, password);
 
     try{
@@ -284,17 +284,6 @@ router.post('/login-user', async (req,res) => {
         if(user !== null){
             bcrypt.compare(password, user.password, function(err, isMatch) {
                 if(isMatch === true){
-
-                    User.updateOne( {username: username},{
-                        $set: {
-                            latitude: latitude,
-                            longitude: longitude
-                        }
-                    })
-                    .then(response => {
-                        console.log(response)
-                    })
-
                     req.session.userID = user._id
                     res.json(user)
                 }else{

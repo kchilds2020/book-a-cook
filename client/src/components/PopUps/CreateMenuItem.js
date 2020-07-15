@@ -26,6 +26,8 @@ function CreateMenuItem({user, setOpen}) {
                 description: description,
                 price: price,
                 picture: photoName,
+                longitude: user.longitude,
+                latitude: user.latitude
     
             }
 

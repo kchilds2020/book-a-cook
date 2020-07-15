@@ -50,6 +50,11 @@ export const CookTitle = styled.h3`
 export const CookPrice = styled.h4`
     color: green;
 `;
+
+export const CookLocation = styled.div`
+    font-size: 18px;
+    color: rgb(25, 66, 94);
+`;
 export const CookDescription = styled.p`
     
 `;
