@@ -12,7 +12,6 @@ export const HomeContainer = styled.div`
 export const HomeSectionContainer = styled.div`
     width: 100%;
     max-width: 600px;
-    margin-top: 20px;
     border-radius: 8px;  
     padding: 20px;
     min-height: 300px;
@@ -24,7 +23,6 @@ export const HomeGreeting = styled.div`
     padding: 10px;
     text-align: center;
     background-color: #fff;
-    box-shadow: 0px 0px 4px #212529;
     margin-top:20px;
     border-radius: 4px;
 
@@ -39,16 +37,14 @@ export const HomeGreeting = styled.div`
 export const HomeHeader = styled.h3`
         width: 100%;
         text-align: center;
-        background-color: #37404b;
-        color: white;
+        background-color: white;
         border-radius: 4px;
         margin-top: 10px;
         padding: 10px;
-        box-shadow: 0px 0px 4px #212529;
 `;
 
 export const NumColorDark = styled.span`
-    color: rgb(53, 255, 53);
+    color: green;
 `;
 
 export const NumColorLight = styled.span`
@@ -59,7 +55,6 @@ export const NumColorLight = styled.span`
 export const UpcomingJobContainer = styled.span`
     border-radius: 4px;
     margin: 10px 0px;
-    box-shadow: 0px 0px 4px #212529;
 `;
 
 export const JobPostContainer = styled.div`
@@ -116,7 +111,6 @@ export const EventContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    box-shadow: 0px 0px 4px #212529;
 `;
 export const EventImg = styled.img`
     width: 80%;

@@ -36,8 +36,7 @@ function Account({user}) {
     return (
 
     <>
-        <HomeHeader>Account Amount</HomeHeader>
-        <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
+        <Table borderless style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', borderRadius: '8px'}}>
             <thead>
                 <tr>
                     <th>In Account</th>

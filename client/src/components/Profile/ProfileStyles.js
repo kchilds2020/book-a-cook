@@ -5,9 +5,8 @@ export const ProfileForm = styled.form`
     margin-top: 20px;
     margin-bottom: 100px;
     border-radius: 8px;
-    box-shadow: 0px 0px 4px #333;
     width: 95%;
-    background-color: #f4f4f4;
+    background-color: white;
 `;
 
 export const ProfilePhoto = styled.img`

@@ -9,7 +9,6 @@ export const MenuItemContainer = styled.div`
     margin: 10px auto;;
     max-height: 340px;
     max-width: 900px;
-    box-shadow: 0px 0px 4px #333;
     display: flex;
     justify-content: space-between;
     border-radius: 8px;

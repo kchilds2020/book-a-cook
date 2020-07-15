@@ -40,9 +40,9 @@ function MyOrders({username, user}) {
     return (
         <HomeSectionContainer>
             <Account user={user}/>
-            <HomeHeader><NumColorDark>{orders.length}</NumColorDark> Active Orders</HomeHeader>
+            <HomeHeader style={{marginBottom: '0px', borderRadius: '8px 8px 0px 0px'}}><NumColorDark>{orders.length}</NumColorDark> Active Orders</HomeHeader>
             {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : 
-                <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
+                <Table borderless hover style={{ backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
                     <thead>
                         <tr>
                         <th>Item</th>

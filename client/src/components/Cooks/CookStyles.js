@@ -8,7 +8,6 @@ export const CookContainer = styled.div`
     max-width: 1000px;
     margin: 10px auto;
     padding: 20px;
-    box-shadow: 0px 0px 4px #333;
 
     @media only screen and (max-width: 750px) {
         flex-direction: column;

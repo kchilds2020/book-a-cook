@@ -9,13 +9,11 @@ export const Container = styled.div`
 export const PageHeader = styled.h2`
     background-color: white;
     padding: 10px;
-    box-shadow: 0px 0px 4px #333;
     width: 95%;
     margin: auto;
     margin-top: 10px;
     border-radius: 8px;
-    background-color: #333;
-    color:white;
+    background-color: white;
 `;
 
 export const ImagesContainer = styled.div`
@@ -67,9 +65,9 @@ export const Input = styled.input`
     fontSize: 18px;
     width: 100%;
     margin: 5px 0px;
-    border: #aaa 1px solid;
+    border: none;
     border-radius: 4px;
-    background-color: white;
+    background-color: rgb(232, 240, 254);
 
     :focus{
         outline: none;
@@ -81,9 +79,9 @@ export const TextArea = styled.textarea`
     fontSize: 18px;
     width: 100%;
     margin: 5px 0px;
-    border: #aaa 1px solid;
     border-radius: 4px;
-    background-color: white;
+    background-color: rgb(232, 240, 254);
+    border: none;
 
     :focus{
         outline: none;
@@ -106,7 +104,7 @@ export const NavBarOverlay = styled.div`
     position: sticky;
     z-index: 100;
     top: 0;
-    background: linear-gradient(0.25turn, #a63f3f, #72cf72, #3ca2f6);
+    background: linear-gradient(0.25turn, #964bb9, #7278cf, #3ca2f6);
     height: 65px;
     box-shadow: 0px 1px 6px #333;
 `;

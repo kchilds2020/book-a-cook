@@ -127,9 +127,11 @@ function Profile() {
                             
                             <ProfileHeader>Photos</ProfileHeader>
                             <Photos photos={photos}  setPhotos={setPhotos} username={user.username} setModified={setModified}/>
-                            {!modified ? <UpdateButton id = "profile-update-btn" variant = 'secondary' block disabled>Update</UpdateButton> : <UpdateButton type="submit" id = "profile-update-btn" variant = 'primary' block>Update</UpdateButton>}
+                            
                             
                         </ProfileForm>
+
+                        {!modified ? <UpdateButton id = "profile-update-btn" variant = 'secondary' block disabled>Update</UpdateButton> : <UpdateButton type="submit" id = "profile-update-btn" variant = 'primary' block>Update</UpdateButton>}
                     
             </Container> :
         <></>

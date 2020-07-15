@@ -15,9 +15,8 @@ export const FormContainer = styled.form`
     padding: 20px;
     margin: auto;
     margin-top: 150px;
-    background-color: #f4f4f4;
+    background-color: white;
     border-radius: 6px;
-    box-shadow: 0px 0px 4px #333;
 `;
 
 export const Login = () => {

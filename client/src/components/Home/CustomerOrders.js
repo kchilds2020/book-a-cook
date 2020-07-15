@@ -23,9 +23,9 @@ function CustomerOrders({username}) {
 
     return (
         <HomeSectionContainer>
-            <HomeHeader><NumColorDark>{orders.length}</NumColorDark> Open Orders</HomeHeader>
+            <HomeHeader style={{marginBottom: '0px', borderRadius: '8px 8px 0px 0px'}}><NumColorDark>{orders.length}</NumColorDark> Open Orders</HomeHeader>
             <UpcomingJobContainer>
-                <Table striped bordered hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', boxShadow: '0px 0px 4px #212529'}}>
+                <Table borderless hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
                     <thead>
                         <tr>
                             <th>Item</th>
