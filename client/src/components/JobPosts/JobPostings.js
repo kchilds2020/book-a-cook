@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import JobPost from './JobPost'
 import Spinner from 'react-bootstrap/Spinner';
+import Alert from 'react-bootstrap/Alert'
 import {UserContext} from '../UserContext'
 import {Container, PageHeader, CenterSpinner} from '../GeneralStyles'
 
@@ -40,6 +41,7 @@ function JobPostings() {
             <Container>
                 <PageHeader>Jobs Posted</PageHeader>
                 {loading ? <CenterSpinner><Spinner animation="border" variant="info" /> </CenterSpinner> : postsArray.map((element,index) => <JobPost  key = {index} uniqueID = {element._id} summary={element.summary} description={element.description} peopleAmount={element.peopleAmount} location={element.location} eventDate={element.date} userPosted={element.username} applications={element.applications} pricePerPerson={element.price}/>)}
+                {postsArray.length === 0 && !loading ? <Alert style={{margin: '10px'}} variant='warning'>No job posts available :(</Alert> : <></>}
                 {err ? err : null}        
 
             </Container>

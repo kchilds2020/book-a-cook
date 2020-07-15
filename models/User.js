@@ -7,6 +7,8 @@ const User = new mongoose.Schema({
     email: {type: String, trim: true, default: ''},
     username: {type: String, trim: true, default: ''},
     password: {type: String, trim: true, default: ''},
+    latitude: {type: Number, default: 0},
+    longitude: {type: Number, default: 0},
     cook: {type: Boolean, default: false}, 
     cookDescription: {type: String, trim: true, default: ''},
     cookSpecialty: {type: String, trim: true, default: ''},

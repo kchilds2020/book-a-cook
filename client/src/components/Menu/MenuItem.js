@@ -14,16 +14,21 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
 
     useEffect(() => {
         const getChef = async () =>{
+
             try {
                 let response = await axios.get(`/api/get/username/${chefUsername}`)
                 let reviewArray = response.data.reviews
                 console.log(response.data.reviews)
-                let sum = 0;
-                for(let i = 0; i < reviewArray.length; i++){
-                    sum += parseFloat(reviewArray[i].rating)
+                if(response.data.reviews > 0){
+                    let sum = 0;
+                    for(let i = 0; i < reviewArray.length; i++){
+                        sum += parseFloat(reviewArray[i].rating)
+                    }
+                    console.log('REVIEW AVG: ', sum/reviewArray.length)
+                    setReviewAvg(sum/reviewArray.length)
+                }else{
+                    setReviewAvg(0)
                 }
-                console.log('REVIEW AVG: ', sum/reviewArray.length)
-                setReviewAvg(sum/reviewArray.length)
             } catch (error) {
                 console.log(error)
             }

@@ -260,15 +260,27 @@ router.post('/post/register', async (req, res) => {
 });
 
 router.post('/login-user', async (req,res) => {
-    const {username, password} = req.body;
+    const {username, password, latitude, longitude} = req.body;
     console.log(username, password);
-    User.findOne( {username: username} )
-    .then(results => {
-        if(results !== null){
-            bcrypt.compare(password, results.password, function(err, isMatch) {
+
+    try{
+        let user = await User.findOne( {username: username} )
+        if(user !== null){
+            bcrypt.compare(password, user.password, function(err, isMatch) {
                 if(isMatch === true){
-                    req.session.userID = results._id
-                    res.json(results)
+
+                    User.updateOne( {username: username},{
+                        $set: {
+                            latitude: latitude,
+                            longitude: longitude
+                        }
+                    })
+                    .then(response => {
+                        console.log(response)
+                    })
+
+                    req.session.userID = user._id
+                    res.json(user)
                 }else{
                     console.log('invalid password');
                     res.send('invalid password');
@@ -278,9 +290,8 @@ router.post('/login-user', async (req,res) => {
             console.log('invalid username');
             res.send('invalid username');
         }
-
-    })
-    .catch(err => console.log(err)) 
+    }catch(error){console.log(error)}
+    
          
 })
 

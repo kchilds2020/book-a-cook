@@ -30,32 +30,45 @@ export const Login = () => {
 
     const loginUser = async (evt) => {
         evt.preventDefault();
-        const user = {
-            username: username,
-            password: password
 
-        }
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log('Latitude',position.coords.latitude,'Longitude',position.coords.longitude)
+        
+            const postRequest = async() => {
+                const user = {
+                    username: username,
+                    password: password,
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude
+        
+                }
 
-        try {
-            const response = await axios.post('/login-user', user)
-
-            if(response.data === "invalid username"){
-                setUsername('');
-                setPassword('');
-                alert('That username does not exist in our system')
-                
-            }else if(response.data === "invalid password"){
-                setPassword('');
-                alert('Invalid password')
-                
-            }else{
-                localStorage.setItem('user', response.data._id)
-                //go to home
-                history.replace(from)
+                try {
+                    const response = await axios.post('/login-user', user)
+        
+                    if(response.data === "invalid username"){
+                        setUsername('');
+                        setPassword('');
+                        alert('That username does not exist in our system')
+                        
+                    }else if(response.data === "invalid password"){
+                        setPassword('');
+                        alert('Invalid password')
+                        
+                    }else{
+                        localStorage.setItem('user', response.data._id)
+                        //go to home
+                        history.replace(from)
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
             }
-        } catch (error) {
-            console.log(error)
-        }
+            postRequest()
+            
+        
+        });
+        
     }
 
     return(
