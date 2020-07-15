@@ -4,7 +4,7 @@ import {ProfilePhoto} from './ProfileStyles'
 import PhotoEditor from '../PopUps/PhotoEditor'
 import Overlay from '../PopUps/Overlay'
 
-function ProfileImage({picture, setPicture, username, setModified=(value)=>console.log('')}) {
+function ProfileImage({picture, setPicture, username, setModified=(value)=>console.log(''), style=''}) {
 
     const [visibility, setVisibility] = useState(false)
     const [file, setFile] = useState('')
@@ -36,7 +36,7 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
 
     return (
         <>
-            <ProfilePhoto src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
+            <ProfilePhoto style = {style} src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
             <input ref={fileInput}type="file" onChange= {editPhoto} style={{display: 'none'}} id="profile-file"/>
             {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </>

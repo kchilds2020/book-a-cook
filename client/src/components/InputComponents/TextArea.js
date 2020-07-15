@@ -1,7 +1,7 @@
 import React from 'react'
 import {TextArea} from '../GeneralStyles'
 
-function TextAreaWithLabel({identifier, labelText, value, setValue, setModified = (value) => console.log('')}) {
+function TextAreaWithLabel({identifier, labelText, value, setValue, setModified = (value) => console.log(''), height='150px'}) {
     
     const handleChange = (e) => {
         e.preventDefault()
@@ -29,7 +29,7 @@ function TextAreaWithLabel({identifier, labelText, value, setValue, setModified 
                     padding: '5px',
                     fontSize: '18px',
                     width: '100%',
-                    height: '150px'
+                    height: height
                 }}
                 />
         </div>

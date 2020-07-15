@@ -12,18 +12,19 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
             <CookContainer>
                     <CookHeader>    
                         <CookPhoto src={picture === '' ? PIC : `/api/get/image/${picture}`} className = "picture" alt='profile pic'/>
-                        <CookName>{firstname} {lastname}</CookName>
+                        
                     </CookHeader>
                     <CookDetails>
+                    <CookName>{firstname} {lastname}</CookName>
                         <CookTitle>{specialty}</CookTitle>
                         <CookPrice>${price}</CookPrice>
                         {user && user.latitude !== 0 ? 
                         
                         <CookLocation>{distanceBetween(latitude, longitude, user.latitude, user.longitude).toFixed(0)} miles</CookLocation> 
                         : 
-                        <div>Location not verified</div>}
+                        <CookLocation>Location not verified</CookLocation>}
                         <CookDescription>{description}</CookDescription>
-                        <Button style={{margin: '10px 0px'}} variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`} block>Contact</Button>
+                        <Button  variant='info' onClick = {() => window.location.href=`/user/profile?user=${username}`} block>Contact</Button>
                     </CookDetails>
             </CookContainer>
         </>

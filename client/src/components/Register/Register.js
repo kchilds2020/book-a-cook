@@ -20,8 +20,7 @@ export const FormContainer = styled.form`
     width: 95%;
     max-width: 500px;
     padding: 20px;
-    margin: auto;
-    margin-top: 20px;
+    margin: 40px auto;
     background-color: #f4f4f4;
     border-radius: 6px;
     box-shadow: 0px 0px 4px #333;
@@ -120,8 +119,8 @@ export const Register = () => {
         e.preventDefault()
         console.log(cook)
         cook === true ? setStep(step + 1) : registerUser(e)
+        window.scrollTo(0, 0)
     }
-
 
     return(
         <>
@@ -139,13 +138,11 @@ export const Register = () => {
                     {cook === true ? <Button type="submit" variant="primary" >Next</Button> : <Button type="submit" variant="success" >Register!</Button>}
                 </FormContainer>) :
                 step === 2 ? (
-                <FormContainer onSubmit={nextStep}>
+                <FormContainer onSubmit={nextStep} id='cook-info'>
                     <h2>Cook information</h2>
-                    <FlexDirectionRow>
-                        <ProfileImage picture={picture} setPicture={setPicture} username={username}/>
-                    </FlexDirectionRow>
+                    <ProfileImage picture={picture} setPicture={setPicture} username={username} style={{width: '150px', height: '150px', margin: '0px'}}/>
                     <InputWithLabels identifier='cook-specialty' labelText = 'Cook Specialty' value = {cookSpecialty} setValue = {setCookSpecialty}/>
-                    <TextAreaWithLabels identifier='cook-description' labelText = 'Cook Description' value = {cookDescription} setValue = {setCookDescription}/>
+                    <TextAreaWithLabels identifier='cook-description' labelText = 'Cook Description' value = {cookDescription} setValue = {setCookDescription} height='100px'/>
                     <InputWithLabels identifier='cook-price' labelText = 'Catering Price Per Person' value = {cookPrice} setValue = {setCookPrice} type = 'number'/>
                     <FlexDirectionRow>
                     <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
@@ -153,7 +150,7 @@ export const Register = () => {
                     </FlexDirectionRow>
                 </FormContainer> ) :
                 step === 3 ? (
-                <FormContainer onSubmit={registerCook}>
+                <FormContainer onSubmit={registerCook} id='bank-info'>
                     <h2>Connect your bank account</h2>
                     <InputWithLabels value={dob} setValue={setDob} identifier='dob' labelText='Date of Birth' type="date"/>
                     <InputWithLabels value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits)' maxLength='4'/>

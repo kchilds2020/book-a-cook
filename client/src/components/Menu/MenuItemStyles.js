@@ -48,6 +48,7 @@ export const MenuItemPrice = styled.div`
 
 export const MenuItemLocation = styled.div`
 font-size: 24px;
+color: #17a2b8;
 `;
 
 export const MenuItemPhoto = styled.img`

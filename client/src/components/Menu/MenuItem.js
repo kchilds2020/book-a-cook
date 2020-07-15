@@ -79,7 +79,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                     {user && user.latitude !== 0 ?
                         <MenuItemLocation >{distance} Miles</MenuItemLocation>
                         :
-                        <div>Location not verified</div>
+                        <MenuItemLocation >Location not verified</MenuItemLocation >
                     }
                     </MenuItemSpan>
                     <Button onClick={orderItem} block>Order!</Button>
