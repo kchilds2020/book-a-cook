@@ -229,6 +229,22 @@ router.post('/update-user', (req, res) => {
     })
 });
 
+router.post('/send-location', async (req, res) => {
+    const data = req.body
+
+    try{
+        const response = await User.updateOne({username: req.body.username}, {
+            $set: {
+                latitude: data.latitude,
+                longitude: data.longitude
+            }
+        })
+
+        res.json(response)
+    }catch(error){console.log(error)}
+
+});
+
 router.post('/post/register', async (req, res) => {
 
     try{
