@@ -36,6 +36,28 @@ router.post('/upload-img', async(req,res) => {
     }); 
 });
 
+
+router.post('/modify-img', async(req,res) => {    
+
+    if(req.files === null){
+        return res.status(400).json({msg: 'no file uploaded'});
+    }
+
+
+    console.log('MODIFIED req.files.file',req.files.file);
+     const file = req.files.file;
+
+
+    file.mv(`${__dirname}/uploads/${file.name}`, err=> {
+        if(err){
+            console.log(err);
+            return res.status(500).send(err);
+        }
+
+        res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
+    }); 
+});
+
 //update order pending
 router.post('/api/post/update-pending-order', async (req,res) => {
     let updateOrder = await Orders.updateOne({_id: req.body.orderID}, {

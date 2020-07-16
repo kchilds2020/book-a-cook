@@ -18,13 +18,16 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
     useEffect(() => {
 
         const displayPhoto = async() => {
+            var blob = file.slice(0, file.size, 'image/jpeg'); 
+            let newFile = new File([blob], `${username}-${file.name}`, {type: 'image/jpeg'});
+
             let formData = new FormData();
-            formData.append('file', file)
+            formData.append('file', newFile)
             formData.append('username',username)
 
             setLoading(true)
             try{
-                let imgResponse = await axios.post('/upload-img', formData)
+                let imgResponse = await axios.post('/modify-img', formData)
                 console.log(imgResponse.data)
                 setPhotoName(`${imgResponse.data.fileName}`)
                 setLoading(false)
@@ -48,7 +51,7 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
         formData.append('file', file)
         formData.append('username',username)
         setLoading(true)
-        let imgResponse = await axios.post('/upload-img', formData)
+        let imgResponse = await axios.post('/modify-img', formData)
         setLoading(false)
 
         afterUpload(imgResponse.data.fileName)
