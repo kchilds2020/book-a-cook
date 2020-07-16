@@ -16,8 +16,6 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 router.use(fileUpload());
 router.post('/upload-img', async(req,res) => {    
-    console.log("USERNAME",req.body.username);
-    console.log(req.files);
 
     if(req.files === null){
         return res.status(400).json({msg: 'no file uploaded'});

@@ -103,9 +103,13 @@ export const Register = () => {
             try{
                 let regResponse = await axios.post('/api/register-cook', data)
                 setLoading(false)
-
-                localStorage.setItem('user', regResponse.data._id)
-                window.location.href= '/home'
+                console.log(regResponse)
+                if(regResponse.data.type === 'StripeInvalidRequestError'){
+                    alert(regResponse.data.code)
+                }else{
+                    localStorage.setItem('user', regResponse.data._id)
+                    window.location.href= '/home'
+                }
             }catch(error){
                 console.log(error)
                 setLoading(false)

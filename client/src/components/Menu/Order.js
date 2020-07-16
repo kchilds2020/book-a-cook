@@ -26,7 +26,7 @@ function Order({ price, title, picture, dbID, user, chefUsername}) {
 
     const stripe = useStripe();
     const elements = useElements();
-    const total = ((parseInt(price) + (parseInt(price) * .08)) * qty ).toFixed(2)
+    const total = (parseInt(price) * qty ).toFixed(2)
 
     const payItem = async (event) => {
         event.preventDefault()

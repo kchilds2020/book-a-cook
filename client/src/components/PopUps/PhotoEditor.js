@@ -38,7 +38,7 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
     const onClickSave = async () => {
         
         //convert canvas to file
-        const canvas = editorRef.current.getImage().toDataURL();
+        const canvas = editorRef.current.getImage().toDataURL("image/jpeg",0.8);
         let res = await fetch(canvas)
         let blob = await res.blob()
         let file = await new File([blob], photoName);

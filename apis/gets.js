@@ -162,7 +162,7 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
     const chef = await User.findOne({username: item.username})
     console.log('ITEM RESPONSE', item.price)
     const amount = item.price * 100 * req.params.qty
-    const fee = amount * .16
+    const fee = amount * .1
     const intent = await stripe.paymentIntents.create({
         amount: amount,
         currency: 'usd',
@@ -182,7 +182,7 @@ router.get('/secret/item/:id/:qty', async (req, res) => {
     const chef = await User.findOne({username: req.params.chef})
     console.log('ITEM RESPONSE', item, 'CHEF RESPONSE', chef)
     const amount = item.price * 100 * item.peopleAmount
-    const fee = amount * .16
+    const fee = amount * .1
     const intent = await stripe.paymentIntents.create({
         amount: amount,
         currency: 'usd',
