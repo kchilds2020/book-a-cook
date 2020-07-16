@@ -18,11 +18,11 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
     useEffect(() => {
 
         const displayPhoto = async() => {
-            var blob = file.slice(0, file.size, 'image/jpeg'); 
-            let newFile = new File([blob], `${username}-${file.name}`, {type: 'image/jpeg'});
+            /* var blob = file.slice(0, file.size, 'image/jpeg'); 
+            let newFile = new File([blob], `${username}-${file.name}`, {type: 'image/jpeg'}); */
 
             let formData = new FormData();
-            formData.append('file', newFile)
+            formData.append('file', file)
             formData.append('username',username)
 
             setLoading(true)

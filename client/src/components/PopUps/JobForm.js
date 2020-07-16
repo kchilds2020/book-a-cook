@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import {PopUp} from './PopUpStyles'
 import {Input, FlexDirectionRow} from '../GeneralStyles'
 import {TextArea} from '../GeneralStyles'
+import NumberInput from '../InputComponents/NumberInput'
 
 function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLocation, setSummary, cancelPost, setPricePerPerson}) {
     return (
@@ -11,8 +12,10 @@ function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLoc
                         <FlexDirectionRow><h3>Create Job</h3></FlexDirectionRow>
                         <Input type="text" placeholder='Event Summary' id = "event-summary" onChange={(e) => setSummary(e.target.value)} style={{marginBottom: '10px'}}/>
                         <TextArea type="text" placeholder='Event Description' id = "event-description" onChange={(e) => setDescription(e.target.value)} height= '100px'/>
-                        <Input type="text" placeholder='Amount of People' id = "people-amount" onChange={(e) => setPeopleAmount(e.target.value)}/>
-                        <Input type="number" placeholder='Price Per Person' id = "people-per-person"  onChange={(e) => setPricePerPerson(e.target.value)} style={{margin: '5px 0px'}}/>
+                        <label>Amount of People</label>
+                        <NumberInput type="number" placeholder='Amount of People' id = "people-amount" onChange={(e) => setPeopleAmount(e.target.value)} pattern='\d*'/>
+                        <label>Price Per Person</label>
+                        <NumberInput type="number" placeholder='Price Per Person' id = "people-per-person"  onChange={(e) => setPricePerPerson(e.target.value)} style={{margin: '5px 0px'}}  pattern='\d*'/>
                         <Input type="text" placeholder='Location of Event' id = "event-location"  onChange={(e) => setLocation(e.target.value)} style={{margin: '5px 0px'}}/>
                         <FlexDirectionRow style={{alignItems: 'center'}}>
                         <label style={{marginRight: '5px'}}>Date: </label>

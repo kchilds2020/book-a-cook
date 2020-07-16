@@ -1,9 +1,10 @@
 import React, {useState, useRef} from 'react'
 import Button from 'react-bootstrap/Button'
 import {Input, FlexDirectionRow} from '../GeneralStyles'
-import InputWithLabel from '../InputComponents/Input'
+import NumberInput from '../InputComponents/NumberInput'
 import PhotoEditor from './PhotoEditor'
 import axios from 'axios'
+
 
 function CreateMenuItem({user, setOpen}) {
     const [visibility, setVisibility] = useState(false)
@@ -72,8 +73,10 @@ function CreateMenuItem({user, setOpen}) {
                 <input  name = 'file' ref={menuFileInput} id='file' type="file" onChange={handleImageChange} style={{visibility: 'hidden', height: '0px'}}/>
                 <Input id='title' placeholder='Title of Food' value = {title} onChange = {(e) => setTitle(e.target.value)}/>
                 <Input id='description' placeholder='Description' value = {description} onChange = {(e) => setDescription(e.target.value)}/>  
-                <Input id='serving-number' placeholder='Number of Servings' onChange={(e) => setServingNum(e.target.value)} type='number'/>
-                <Input id='price' placeholder='Price of Servings' onChange={(e) => setPrice(e.target.value)} type='number'/>
+                <label>Number of Servings</label>
+                <NumberInput id='serving-number' placeholder='Number of Servings' onChange={(e) => setServingNum(e.target.value)} type='number' pattern='\d*'/>
+                <label>Price Per Serving</label>
+                <NumberInput id='price' placeholder='Price of Servings' onChange={(e) => setPrice(e.target.value)} type='number' pattern='\d*'/>
                 <Button type='submit' style={{marginTop: '5px'}} block>Submit</Button>
 
             </form>}

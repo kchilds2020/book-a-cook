@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import {CenterSpinner, FlexDirectionRow} from '../GeneralStyles'
 import ProfileImage from '../Profile/ProfileImage'
 import checkValidation from './checkValidation'
+import NumberInput from '../InputComponents/NumberInput'
 
 
 
@@ -134,7 +135,7 @@ export const Register = () => {
                     <InputWithLabels identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>
                     <InputWithLabels identifier='lastname' labelText = 'Last Name' value = {lastname} setValue = {setLastname}/>
                     <InputWithLabels identifier='email' labelText = 'Email Address' value = {email} setValue = {setEmail} type="email"/>
-                    <InputWithLabels identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber} type="tel"/>
+                    <NumberInput identifier='number' labelText = 'Phone Number' value = {number} setValue = {setNumber}/>
                     <InputWithLabels identifier='username' labelText = 'Username' value = {username} setValue = {setUsername}/>
                     <InputWithLabels identifier='password' labelText = 'Password' value = {password} setValue = {setPassword} type="password"/>
                     <CookToggle cook={cook} setCook ={setCook}/>
@@ -146,7 +147,7 @@ export const Register = () => {
                     <FlexDirectionRow><ProfileImage picture={picture} setPicture={setPicture} username={username} height='100px' width='100px'/></FlexDirectionRow>
                     <InputWithLabels identifier='cook-specialty' labelText = 'Cook Specialty' value = {cookSpecialty} setValue = {setCookSpecialty}/>
                     <TextAreaWithLabels identifier='cook-description' labelText = 'Cook Description' value = {cookDescription} setValue = {setCookDescription} height='100px'/>
-                    <InputWithLabels identifier='cook-price' labelText = 'Catering Price Per Person' value = {cookPrice} setValue = {setCookPrice} type = 'number'/>
+                    <NumberInput identifier='cook-price' labelText = 'Catering Price Per Person' value = {cookPrice} setValue = {setCookPrice}/>
                     <FlexDirectionRow>
                     <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
                     <Button type="submit" variant="primary" style ={{marginLeft: '10px', marginTop: '10px'}} block>Next</Button>
@@ -156,9 +157,9 @@ export const Register = () => {
                 <FormContainer onSubmit={registerCook} id='bank-info'>
                     <h2>Connect your bank account</h2>
                     <InputWithLabels value={dob} setValue={setDob} identifier='dob' labelText='Date of Birth' type="date"/>
-                    <InputWithLabels value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits)' maxLength='4'/>
-                    <InputWithLabels value={accountNumber} setValue={setAccountNumber} identifier='account-number' labelText='Account Number' maxLength='12'/>
-                    <InputWithLabels value={routingNumber} setValue={setRoutingNumber} identifier='routing-number' labelText='Routing Number' maxLength='9' />
+                    <NumberInput value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits)' maxLength='4'/>
+                    <NumberInput value={accountNumber} setValue={setAccountNumber} identifier='account-number' labelText='Account Number' maxLength='12'/>
+                    <NumberInput value={routingNumber} setValue={setRoutingNumber} identifier='routing-number' labelText='Routing Number' maxLength='9' />
                     <FlexDirectionRow>
                     <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
                     <Button type="submit" variant="success" style ={{marginLeft: '10px', marginTop: '10px'}} block>Register!</Button>
