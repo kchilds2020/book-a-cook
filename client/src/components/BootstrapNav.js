@@ -7,6 +7,7 @@ import silhouette from '../images/silhouette.png'
 import axios from 'axios'
 import {UserContext} from './UserContext'
 import {NavBarOverlay} from './GeneralStyles'
+import brand from '../images/hat.png'
 
 function BootstrapNav() {
 
@@ -33,8 +34,8 @@ function BootstrapNav() {
     }
     return (
         <NavBarOverlay>
-            <Navbar collapseOnSelect bg="light" variant="light" expand="xl">
-                <Navbar.Brand href="/">Look for Cooks</Navbar.Brand>
+            <Navbar collapseOnSelect bg="white" variant="light" expand="xl">
+                <Navbar.Brand href="/home"><img style={{width: '30px', height: '30px'}} src={brand} alt='chefhat'/></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                     <Nav className="justify-content-end">
@@ -44,12 +45,12 @@ function BootstrapNav() {
                                 <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>
                                 <Nav.Link className={active === '/menu' ? "active" : ""} href = "/menu">Menu</Nav.Link>
                                 {/* <Nav.Link className={active === '/login' ? "active" : ""} href ="/login">Login</Nav.Link> */}
-                                <Button variant="outline-primary" onClick={login} style={{margin: "0px 20px"}}>Login</Button>
+                                <Button variant="primary" onClick={login} style={{margin: "0px 20px"}}>Login</Button>
                             </> :
                             <>
                                 <Nav.Link className={active === '/profile' ? "active" : ""} href ="/profile">
-                                    {user.firstName} {user.lastName}
-                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '10px', margin: '0px 0px 0px 16px', objectFit: 'cover'}} alt = "profile img" />
+                                    Profile
+                                    <img src={user.picture === '' ? `${silhouette}` : `/api/get/image/${user.picture}`} style={{width: '25px', height: '25px', borderRadius: '50px', margin: '0px 0px 0px 16px', objectFit: 'cover'}} alt = "profile img" />
                                     
                                 </Nav.Link>
                                 <Nav.Link className={active === '/home' ? "active" : ""} href ="/home">Home</Nav.Link>
@@ -57,7 +58,7 @@ function BootstrapNav() {
                                 {user.cook ? <Nav.Link className={active === '/job-postings' ? "active" : ""} href ="/job-postings">Apply for Jobs</Nav.Link> : <></>}
                                 <Nav.Link className={active === '/menu' ? "active" : ""} href="/menu">Menu</Nav.Link>
                                 <NavDropdown.Divider />
-                                <Button variant="outline-danger" onClick={logout} style={{margin: "0px 20px"}}>Logout</Button>
+                                <Button variant="danger" onClick={logout} style={{margin: "0px 20px"}}>Logout</Button>
                             </>
                             }
                     

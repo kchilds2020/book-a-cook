@@ -3,6 +3,7 @@ import NumberInput from './NumberInput'
 import {useHistory} from 'react-router-dom'
 import {PopUp} from '../PopUps/PopUpStyles'
 import {OrderTitleContainer, CardElementContainer, Span, OrderPrice, OrderHeader, OrderTitle, OrderTitleImg, OrderInput} from './OrderStyles'
+import {Input} from '../GeneralStyles'
 import Button from 'react-bootstrap/Button'
 
 import {
@@ -86,17 +87,17 @@ function Order({ price, title, picture, dbID, user, chefUsername}) {
             <form onSubmit={payItem}>
                 <NumberInput qty={qty} setQty={setQty}/>
                 <OrderHeader>Drop Off Address</OrderHeader>
-                <OrderInput type="text" id="street-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
+                <Input type="text" id="street-input" placeholder="Street" onChange = {e => setStreet(e.target.value)} required/>
                 <Span>
-                    <OrderInput style ={{width: '30%'}} type="text" id="fity-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
-                    <OrderInput  style ={{width: '30%'}}  type="text" id="state-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
-                    <OrderInput style ={{width: '30%'}}  type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
+                    <Input style ={{width: '30%'}} type="text" id="fity-input" placeholder="City" onChange = {e => setCity(e.target.value)} required/>
+                    <Input  style ={{width: '30%'}}  type="text" id="state-input" placeholder="State" onChange = {e => setState(e.target.value)} required/>
+                    <Input style ={{width: '30%'}}  type="text" id="zip-input" placeholder="Zip" onChange = {e => setZip(e.target.value)} required/>
                 </Span>
                 <OrderHeader>Billing Information</OrderHeader>
-                {!user ? <OrderInput type="email" id="email-input" placeholder="Email for Notifications" onChange = {e => setEmail(e.target.value)} required/> : <></>}
-                <OrderInput type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
+                {!user ? <Input type="email" id="email-input" placeholder="Email for Notifications" onChange = {e => setEmail(e.target.value)} required/> : <></>}
+                <Input type="text" id="card-name-input" placeholder="Name on Card" value={cardName} onChange={e => setCardName(e.target.value)} required/>
                 <CardElementContainer>
-                    <CardElement />
+                    <CardElement/>
                 </CardElementContainer>
             
                 <OrderPrice>Total: ${total}</OrderPrice>

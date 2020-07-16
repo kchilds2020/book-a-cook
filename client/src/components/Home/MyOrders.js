@@ -54,7 +54,7 @@ function MyOrders({username, user}) {
                         {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
                     </tbody>     
                 </Table>}
-        <Button onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
+        <Button variant='info' onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
         {visibility ? <>
                         <CreateMenuItem user={user} setOpen={setVisibility}/> 
                         <Overlay setVisibility ={setVisibility}/>

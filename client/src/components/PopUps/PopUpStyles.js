@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const PopUp = styled.div`
-    background-color: #f4f4f4;
+    background-color: white;
     padding: 20px;
     position: fixed;
     width: 300px;

@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 export const PostContainer = styled.div`
-    background-color: #f4f4f4;
+    background-color: white;
     width: 95%;
     padding: 20px;
     margin: 10px auto;
-    box-shadow: 0px 0px 4px #333;
     border-radius: 8px;
 `;
 

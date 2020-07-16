@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react'
 import Button from 'react-bootstrap/Button'
-import {Input} from '../GeneralStyles'
+import {Input, FlexDirectionRow} from '../GeneralStyles'
 import InputWithLabel from '../InputComponents/Input'
 import PhotoEditor from './PhotoEditor'
 import axios from 'axios'
@@ -64,17 +64,16 @@ function CreateMenuItem({user, setOpen}) {
         <>
             {visibility ? 
             <PhotoEditor file={file} username={user.username} afterUpload={afterUpload} cancel={cancel}/>
-             : <form onSubmit = {handleSubmit} style = {{backgroundColor: '#f4f4f4', padding: '20px', boxShadow: '0px 0px 4px #333', borderRadius: '4px', position: 'fixed', maxWidth: '300px', zIndex: '100', top: '50%', left: '50%', WebkitTransform: 'translate(-50%,calc(-50% - .5%))', msTransform: 'translate(-50%,calc(-50% - .5%))', OTransform: 'translate(-50%,calc(-50% - .5%))', transform: 'translate(-50%,calc(-50% - .5%))' }}>
-            <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>{photoName ? <img src={`/api/get/image/${photoName}`} alt={`${photoName}`} style ={{width: '250px', height: '250px', borderRadius: '8px', boxShadow: '0px 0px 4px #333'}} onClick={() => menuFileInput.current.click()}/> : <Button variant="outline-primary" onClick={() => menuFileInput.current.click()} block>Add Photo</Button>}</div>
+             : <form onSubmit = {handleSubmit} style = {{backgroundColor: 'white', padding: '20px', borderRadius: '8px', position: 'fixed', maxWidth: '300px', zIndex: '100', top: '50%', left: '50%', WebkitTransform: 'translate(-50%,calc(-50% - .5%))', msTransform: 'translate(-50%,calc(-50% - .5%))', OTransform: 'translate(-50%,calc(-50% - .5%))', transform: 'translate(-50%,calc(-50% - .5%))' }}>
+             <FlexDirectionRow><h3>Create menu item</h3></FlexDirectionRow>
+            <FlexDirectionRow>{photoName ? <img src={`/api/get/image/${photoName}`} alt={`${photoName}`} style ={{width: '150px', height: '150px', borderRadius: '8px'}} onClick={() => menuFileInput.current.click()}/> : <Button variant="info" onClick={() => menuFileInput.current.click()} style={{borderRadius:'40px', width: '50px', height: '50px', fontWeight: 'bold', fontSize: '18px'}}>+</Button>}</FlexDirectionRow>
                 
-                <input  name = 'file' ref={menuFileInput} id='file' type="file" onChange={handleImageChange} style={{visibility: 'hidden'}}/>
-                {/* {file ? <img src={`${photoName}`} alt='photo'/> : <Button style={{width: '50px', height: '50px', borderRadius: '50px', boxShadow: '0px 0px 4px #333'}}>+</Button>} */}
-                
+                <input  name = 'file' ref={menuFileInput} id='file' type="file" onChange={handleImageChange} style={{visibility: 'hidden', height: '0px'}}/>
                 <Input id='title' placeholder='Title of Food' value = {title} onChange = {(e) => setTitle(e.target.value)}/>
-                <Input id='description' placeholder='Description' value = {description} onChange = {(e) => setDescription(e.target.value)}/>
-                <InputWithLabel identifier='serving-number' labelText='Number of Servings' value = {servingNum} setValue = {setServingNum} type='number'/>
-                <InputWithLabel identifier='price' labelText='Price of Servings' value = {price} setValue = {setPrice} type='number'/>
-                <Button type='submit' block>Submit</Button>
+                <Input id='description' placeholder='Description' value = {description} onChange = {(e) => setDescription(e.target.value)}/>  
+                <Input id='serving-number' placeholder='Number of Servings' onChange={(e) => setServingNum(e.target.value)} type='number'/>
+                <Input id='price' placeholder='Price of Servings' onChange={(e) => setPrice(e.target.value)} type='number'/>
+                <Button type='submit' style={{marginTop: '5px'}} block>Submit</Button>
 
             </form>}
         </>

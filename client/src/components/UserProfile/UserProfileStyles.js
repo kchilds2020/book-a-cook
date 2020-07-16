@@ -18,9 +18,8 @@ export const UserDetails = styled.div`
 export const ProfileContainer = styled.div`
     width: 95%;
     margin: 20px auto;
-    background-color: #f4f4f4;
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0px 0px 4px #333;
     padding: 20px;
 `;
 

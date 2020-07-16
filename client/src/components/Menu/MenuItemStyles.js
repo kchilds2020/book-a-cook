@@ -108,5 +108,6 @@ export const NumberInputButtons = styled.button`
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0px 0px 8px #ddd;
-    background-color: rgb(156, 212, 238)
+    background-color: #17a2b8;
+    color: #333;
 `;

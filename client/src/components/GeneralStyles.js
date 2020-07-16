@@ -38,7 +38,6 @@ export const UserPhoto = styled.img`
     height: 250px;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0px 0px 4px #333;
 `;
 
 export const FixedCenter = styled.div`
@@ -64,7 +63,8 @@ export const Input = styled.input`
     padding: 5px;
     fontSize: 18px;
     width: 100%;
-    margin: 5px 0px;
+    margin: 0px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 4px;
     background-color: rgb(232, 240, 254);
@@ -78,7 +78,8 @@ export const TextArea = styled.textarea`
     padding: 5px;
     fontSize: 18px;
     width: 100%;
-    margin: 5px 0px;
+    margin: 0px;
+    margin-bottom: 5px;
     border-radius: 4px;
     background-color: rgb(232, 240, 254);
     border: none;

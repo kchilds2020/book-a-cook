@@ -66,10 +66,10 @@ export const Span = styled.div`
 `;
 
 export const CardElementContainer = styled.div`
-    border: #aaa 1px solid;
-    border-radius: 8px;
+    border: none;
+    border-radius: 4px;
     padding: 10px 5px; 
     margin: 5px 0px;
-    font-size: 16px;
-    background-color: white;
+    font-size: 18px;
+    background-color: rgb(232, 240, 254);
 `;

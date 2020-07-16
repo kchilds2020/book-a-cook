@@ -3,6 +3,7 @@ import {PopUp} from '../PopUps/PopUpStyles'
 import Overlay from '../PopUps/Overlay'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
+import {FlexDirectionRow, Input, TextArea} from '../GeneralStyles'
 
 function ReviewForm({chef, customer, setReviewVisibility}) {
 
@@ -33,10 +34,11 @@ function ReviewForm({chef, customer, setReviewVisibility}) {
         <div>
             <PopUp>
                 <form onSubmit={submitReview} style={{display: 'flex', flexDirection: 'column'}}>
+                    <FlexDirectionRow><h2>Write a Review</h2></FlexDirectionRow>
                     <label htmlFor="star-rating">Rating</label>
-                    <input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
+                    <Input type="number" id="star-rating" min="1" max="5" step=".1" value = {ratingValue} onChange = {(e) => setRatingValue(e.target.value)} required/>
                     <label htmlFor="rating-description" style={{marginTop: '10px'}}>Describe Experience</label>
-                    <textarea onChange = {e => setRatingDescription(e.target.value)} id="rating-description" required></textarea>
+                    <TextArea onChange = {e => setRatingDescription(e.target.value)} id="rating-description" required></TextArea>
                     <Button type='submit' style={{marginTop: '10px'}}>Submit</Button>
                 </form>
             </PopUp>
