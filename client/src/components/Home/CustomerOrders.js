@@ -20,12 +20,12 @@ function CustomerOrders({username}) {
      },[username])
 
 
-
+ 
     return (
         <HomeSectionContainer>
             <HomeHeader style={{marginBottom: '0px', borderRadius: '8px 8px 0px 0px'}}><NumColorDark>{orders.length}</NumColorDark> Open Orders</HomeHeader>
             <UpcomingJobContainer>
-                <Table borderless hover style={{marginTop: '10px', backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
+                <Table borderless hover style={{ backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -40,7 +40,7 @@ function CustomerOrders({username}) {
                     </tbody>     
                 </Table>
             </UpcomingJobContainer>
-            <Button onClick = {() => window.location.href = '/menu'} style ={{marginTop: '10px'}} block>Find Food Near Me</Button>
+            <Button variant = 'info' onClick = {() => window.location.href = '/menu'} style ={{marginTop: '10px'}} block>Find Food Near Me</Button>
         </HomeSectionContainer>
     )
 }

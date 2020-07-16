@@ -20,7 +20,9 @@ export const ImagesContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    background-color: #f4f4f4;
+    background-color: white;
+    padding-bottom: 100px;
+    border-radius: 0px 0px 8px 8px
 `;
 
 

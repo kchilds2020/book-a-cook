@@ -3,7 +3,7 @@ import HomeJobPost from './HomeJobPost'
 import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 import JobForm from '../PopUps/JobForm'
-import {HomeHeader, HomeSectionContainer, UpcomingJobContainer} from './HomeStyles'
+import {HomeHeader, HomeSectionContainer, UpcomingJobContainer, NumColorDark} from './HomeStyles'
 import Overlay from '../PopUps/Overlay'
 
 function JobPosts({username}) {
@@ -70,11 +70,11 @@ function JobPosts({username}) {
 
     return (
         <HomeSectionContainer>
-            <HomeHeader><span className="post-num">{myPosts.length}</span> Posted Jobs</HomeHeader>
+            <HomeHeader><NumColorDark>{myPosts.length}</NumColorDark> Posted Jobs</HomeHeader>
             <UpcomingJobContainer>
                 {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook} pricePerPerson={element.price} peopleAmount={element.peopleAmount}/>) : <></>}
             </UpcomingJobContainer>
-            <Button variant="primary" onClick={() => setVisibility(true)}style ={{marginTop: '5px'}} block>Create a Post</Button>
+            <Button variant="info" onClick={() => setVisibility(true)}style ={{marginTop: '5px'}} block>Create a Post</Button>
             {visible ? <><JobForm handleSubmit={handleSubmit} cancelPost={cancelPost} setDate={setDate} setDescription ={setDescription} setSummary={setSummary} setLocation={setLocation} setPeopleAmount={setPeopleAmount} setPricePerPerson={setPricePerPerson}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </HomeSectionContainer>
     )

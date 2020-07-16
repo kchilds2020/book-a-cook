@@ -139,7 +139,7 @@ export const Register = () => {
                 step === 2 ? (
                 <FormContainer onSubmit={nextStep} id='cook-info'>
                     <h2>Cook information</h2>
-                    <ProfileImage picture={picture} setPicture={setPicture} username={username} style={{width: '150px', height: '150px', margin: '0px'}}/>
+                    <FlexDirectionRow><ProfileImage picture={picture} setPicture={setPicture} username={username} height='100px' width='100px'/></FlexDirectionRow>
                     <InputWithLabels identifier='cook-specialty' labelText = 'Cook Specialty' value = {cookSpecialty} setValue = {setCookSpecialty}/>
                     <TextAreaWithLabels identifier='cook-description' labelText = 'Cook Description' value = {cookDescription} setValue = {setCookDescription} height='100px'/>
                     <InputWithLabels identifier='cook-price' labelText = 'Catering Price Per Person' value = {cookPrice} setValue = {setCookPrice} type = 'number'/>

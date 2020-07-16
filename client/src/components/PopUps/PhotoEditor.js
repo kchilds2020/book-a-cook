@@ -4,7 +4,7 @@ import axios from 'axios'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import {PopUp} from './PopUpStyles'
-import {FlexDirectionColumn, FlexDirectionRow} from '../GeneralStyles'
+import {FlexDirectionColumn, FlexDirectionRow, FixedCenter} from '../GeneralStyles'
 
 function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, username, file}) {
 
@@ -47,8 +47,9 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
         let formData = new FormData();
         formData.append('file', file)
         formData.append('username',username)
-
+        setLoading(true)
         let imgResponse = await axios.post('/upload-img', formData)
+        setLoading(false)
 
         afterUpload(imgResponse.data.fileName)
 
@@ -64,7 +65,7 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
     return (
         <PopUp>
             <FlexDirectionColumn style={{alignItems: 'center'}}>
-                {isLoading ? <Spinner animation="border" variant='info'/> : <></>}
+                {isLoading ? <FixedCenter><Spinner animation="border" variant='info'/></FixedCenter> : <></>}
                 <AvatarEditor
                         ref={editorRef}
                         image={`/api/get/image/${photoName}`}

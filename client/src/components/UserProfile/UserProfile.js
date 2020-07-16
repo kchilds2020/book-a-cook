@@ -105,7 +105,7 @@ function UserProfile() {
                             <UserDetail className="phone">{number}</UserDetail>
                         </ContactInfo>
                         { user && cook ? <ContactButtons>
-                                    <Button variant="primary" onClick={()=> setBookVisibility(true)} block>Request to Hire</Button>
+                                    {/* <Button variant="primary" onClick={()=> setBookVisibility(true)} block>Request to Hire</Button> */}
                                     <Button variant="info" onClick={() => setReviewVisibility(true)} block>Write a Review</Button>
                                     </ContactButtons> : <></>}
                     </UserDetails>

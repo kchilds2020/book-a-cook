@@ -6,6 +6,7 @@ import axios from 'axios'
 import {MenuItemContainer, MenuItemDescription, MenuItemPhoto, MenuItemDetails, MenuItemTitle, MenuItemPrice, MenuItemLocation, MenuItemSpan} from './MenuItemStyles'
 import Overlay from '../PopUps/Overlay'
 import distanceBetween from '../utilities/distanceBetween'
+import hat from '../../images/hat.png'
 
 
 function MenuItem({title, description, price, chefUsername, picture, itemNum, dbID, user, longitude, latitude}) {
@@ -23,7 +24,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 let response = await axios.get(`/api/get/username/${chefUsername}`)
                 let reviewArray = response.data.reviews
                 console.log(response.data.reviews)
-                if(response.data.reviews > 0){
+                if(response.data.reviews.length > 0){
                     let sum = 0;
                     for(let i = 0; i < reviewArray.length; i++){
                         sum += parseFloat(reviewArray[i].rating)
@@ -36,7 +37,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
 
                 //get distance
                 if(user.longitude !== 0 && user.latitude !== 0){
-                    let dist = distanceBetween(user.longitude, user.latitude, response.data.longitude, response.data.latitude)
+                    let dist = distanceBetween(user.longitude, user.latitude, response.data.longitude, response.data.latitude).toFixed(0)
                     setDistance(dist)
                 }
             } catch (error) {
@@ -77,7 +78,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 <div> 
                     <MenuItemSpan>
                     {user && user.latitude !== 0 ?
-                        <MenuItemLocation >{distance} Miles</MenuItemLocation>
+                        <MenuItemLocation >{parseInt(distance + 1)} {parseInt(distance + 1) === 1 ? 'Mile' : 'Miles'}</MenuItemLocation>
                         :
                         <MenuItemLocation >Location not verified</MenuItemLocation >
                     }

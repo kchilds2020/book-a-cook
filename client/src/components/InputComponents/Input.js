@@ -14,6 +14,7 @@ function InputWithLabel({value, setValue, identifier, labelText, setModified = (
             style={{
                 display: 'flex',
                 flexDirection: 'column',
+                width: '100%'
         }}>
             <label htmlFor={value}>{labelText}</label>
             <Input name = {identifier} id = {identifier} type = {type} maxLength = {maxLength} value = {value} onChange = {handleChange} required

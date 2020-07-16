@@ -40,6 +40,7 @@ function CreateMenuItem({user, setOpen}) {
             }
 
             alert('item has been created')
+            setOpen(false)
         
         }else{alert('Please add an image')}
     }

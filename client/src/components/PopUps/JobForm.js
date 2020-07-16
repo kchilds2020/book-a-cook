@@ -14,7 +14,10 @@ function JobForm({handleSubmit, setDate, setDescription, setPeopleAmount, setLoc
                         <Input type="text" placeholder='Amount of People' id = "people-amount" onChange={(e) => setPeopleAmount(e.target.value)}/>
                         <Input type="number" placeholder='Price Per Person' id = "people-per-person"  onChange={(e) => setPricePerPerson(e.target.value)} style={{margin: '5px 0px'}}/>
                         <Input type="text" placeholder='Location of Event' id = "event-location"  onChange={(e) => setLocation(e.target.value)} style={{margin: '5px 0px'}}/>
+                        <FlexDirectionRow style={{alignItems: 'center'}}>
+                        <label style={{marginRight: '5px'}}>Date: </label>
                         <Input type="date" placeholder='Date of Event' id = "event-date"  onChange={(e) => setDate(e.target.value)} style={{margin: '5px 0px'}}/>
+                        </FlexDirectionRow>
                         <Button type="submit" variant="primary" style={{marginTop: '10px'}} block>Create Job</Button>
                     </form>
             </PopUp>
