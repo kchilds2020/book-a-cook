@@ -51,7 +51,7 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
         formData.append('file', file)
         formData.append('username',username)
         setLoading(true)
-        let imgResponse = await axios.post('/modify-img', formData)
+        let imgResponse = await axios.post('/upload-img', formData)
         setLoading(false)
 
         afterUpload(imgResponse.data.fileName)

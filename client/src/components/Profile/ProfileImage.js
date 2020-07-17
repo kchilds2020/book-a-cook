@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import silhouette from '../../images/silhouette.png'
 import {ProfilePhoto} from './ProfileStyles'
 import PhotoEditor from '../PopUps/PhotoEditor'
@@ -11,7 +11,14 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
 
     const fileInput = useRef();
 
+    useEffect(() => {
+        console.log('change')
+    },[picture])
+
     const editPhoto = async (event) => {
+/*         let tempFile = (event.target.files[0])
+        let blob = tempFile.slice(0, tempFile.size, 'image/jpeg'); 
+        let newFile = new File([blob], `${tempFile.name}`, {type: 'image/jpeg'}); */
         setFile(event.target.files[0])
         setVisibility(true)
     }
@@ -19,11 +26,6 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
     const afterUpload = (filename) => {
         setPicture(`${filename}`)
 
-        //display progile img
-        const imgTag = document.getElementById('profile-img');
-        const reader = new FileReader();
-        reader.addEventListener("load", () => imgTag.src = `/api/get/image/${filename}`, false);
-        reader.readAsDataURL(file);
 
         setVisibility(false)
         setModified(true)
