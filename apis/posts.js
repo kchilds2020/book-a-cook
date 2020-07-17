@@ -18,14 +18,14 @@ router.use(fileUpload());
 
 //upload photo and rename
 router.post('/upload-img', async(req,res) => {    
-
-    if( req.files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
-    console.log('UPLOAD FILE',req.files.file);
-    req.files.file.mv(`${__dirname}/uploads/${req.body.username}-${req.files.file.name}`, err=> {
-        if(err){ 
-            console.log('UPLOAD IMAGE ERROR:', err)
-            res.status(500).send(err)
-        }
+    if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
+    if (!fs.existsSync(`${__dirname}/uploads`)){
+        fs.mkdirSync(`${__dirname}/uploads`);
+    }
+    
+    console.log('FILE',req.files.file);
+    file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
+        if(err){ res.status(500).send(err)}
         
         res.json({fileName: `${req.body.username}-${req.files.file.name}`, filePath: `/../public/uploads/${req.body.username}-${req.files.file.name}`});   
     }); 
@@ -36,13 +36,13 @@ router.post('/modify-img', async(req,res) => {
     if( req.files === null ){
         return res.status(400).json({msg: 'no file uploaded'});
     }
-    console.log('MODIFY FILE',req.files.file);
 
-    req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`, err=> {
-        if(err){ 
-            console.log('MODIFY IMAGE ERROR:', err)
-            return res.status(500).send(err)
-        }
+    console.log('FILE',req.files.file);
+    if (!fs.existsSync(`${__dirname}/uploads`)){
+        fs.mkdirSync(`${__dirname}/uploads`);
+    }
+    file.mv(`${__dirname}/uploads/${file.name}`, err=> {
+        if(err){ res.status(500).send(err)}
         
         res.json({fileName: `${req.files.file.name}`, filePath: `/../public/uploads/${req.files.file.name}`});
     }); 
