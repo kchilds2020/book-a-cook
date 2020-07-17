@@ -24,7 +24,7 @@ router.post('/upload-img', async(req,res) => {
     }
     
     console.log('FILE',req.files.file);
-    file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
+    req.files.file.mv(`${__dirname}/uploads/${req.body.username}-${req.files.file.name}`, err=> {
         if(err){ res.status(500).send(err)}
         
         res.json({fileName: `${req.body.username}-${req.files.file.name}`, filePath: `/../public/uploads/${req.body.username}-${req.files.file.name}`});   
@@ -41,7 +41,7 @@ router.post('/modify-img', async(req,res) => {
     if (!fs.existsSync(`${__dirname}/uploads`)){
         fs.mkdirSync(`${__dirname}/uploads`);
     }
-    file.mv(`${__dirname}/uploads/${file.name}`, err=> {
+    req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`, err=> {
         if(err){ res.status(500).send(err)}
         
         res.json({fileName: `${req.files.file.name}`, filePath: `/../public/uploads/${req.files.file.name}`});
