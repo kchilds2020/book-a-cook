@@ -55,6 +55,7 @@ function Profile() {
 
     const handleSubmit = async (event) =>{
         event.preventDefault();
+        console.log('test')
         let checks = formatPhoneNumber(number)
         if(checks === true){
             console.log(photos);
@@ -105,7 +106,7 @@ function Profile() {
     return (
         user ? <Container>
                 <PageHeader>Profile</PageHeader>
-                        <ProfileForm onSubmit={handleSubmit} formEncType="multipart/form-data">
+                        <ProfileForm formEncType="multipart/form-data">
                             <ProfileHeader>{firstName}'s Details</ProfileHeader>
                             <BasicInfo>      
                                 <ProfileImage picture={picture} setPicture={setPicture} username={user.username} setModified={setModified}/>
@@ -131,7 +132,7 @@ function Profile() {
                             
                         </ProfileForm>
 
-                        {!modified ? <UpdateButton id = "profile-update-btn" variant = 'secondary' block disabled>Update</UpdateButton> : <UpdateButton type="submit" id = "profile-update-btn" variant = 'primary' block>Update</UpdateButton>}
+                        {!modified ? <UpdateButton id = "profile-update-btn" variant = 'secondary' block disabled>Update</UpdateButton> : <UpdateButton onClick={handleSubmit} id = "profile-update-btn" variant = 'primary' block>Update</UpdateButton>}
                     
             </Container> :
         <></>

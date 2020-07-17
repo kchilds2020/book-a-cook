@@ -74,9 +74,9 @@ function CreateMenuItem({user, setOpen}) {
                 <Input id='title' placeholder='Title of Food' value = {title} onChange = {(e) => setTitle(e.target.value)}/>
                 <Input id='description' placeholder='Description' value = {description} onChange = {(e) => setDescription(e.target.value)}/>  
                 <label>Number of Servings</label>
-                <NumberInput id='serving-number' placeholder='Number of Servings' onChange={(e) => setServingNum(e.target.value)} type='number' pattern='\d*'/>
+                <Input id='serving-number' placeholder='Number of Servings' onChange={(e) => setServingNum(e.target.value)} type='number' pattern='\d*'/>
                 <label>Price Per Serving</label>
-                <NumberInput id='price' placeholder='Price of Servings' onChange={(e) => setPrice(e.target.value)} type='number' pattern='\d*'/>
+                <Input id='price' placeholder='Price of Servings' onChange={(e) => setPrice(e.target.value)} type='number' pattern='\d*'/>
                 <Button type='submit' style={{marginTop: '5px'}} block>Submit</Button>
 
             </form>}

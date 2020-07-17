@@ -15,70 +15,57 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 router.use(fileUpload());
+
+//upload photo and rename
 router.post('/upload-img', async(req,res) => {    
+    const {files} = req
+    const {file} = files
 
-    if(req.files === null){
-        return res.status(400).json({msg: 'no file uploaded'});
-    }
-
-
-    console.log('req.files.file',req.files.file);
-     const file = req.files.file;
-
-
+    if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
+    console.log('FILE',req.files.file);
     file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-
-        res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});
+        return err ? res.status(500).send(err) : res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});   
     }); 
 });
 
-
+//upload photo and keep name
 router.post('/modify-img', async(req,res) => {    
-
-    if(req.files === null){
+    const {files} = req
+    const {file} = files
+    if( files === null ){
         return res.status(400).json({msg: 'no file uploaded'});
     }
-
-
-    console.log('MODIFIED req.files.file',req.files.file);
-     const file = req.files.file;
-
+    console.log('FILE',req.files.file);
 
     file.mv(`${__dirname}/uploads/${file.name}`, err=> {
-        if(err){
-            console.log(err);
-            return res.status(500).send(err);
-        }
-
-        res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
+        return err ? res.status(500).send(err) : res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
     }); 
 });
 
 //update order pending
 router.post('/api/post/update-pending-order', async (req,res) => {
-    let updateOrder = await Orders.updateOne({_id: req.body.orderID}, {
-        $set: {
-            pending: false
-        }
-    })
 
-    let orderItem = await Orders.findOne({_id: req.body.orderID})
-    console.log('AMOUNT: ', orderItem.price)
-    const cookRes = await User.updateOne({username: orderItem.chefUsername},{
-        $inc: {
-            account: orderItem.price,
-            totalEarned: orderItem.price
-        }
-    })
+    try{
+        let updateOrder = await Orders.updateOne({_id: req.body.orderID}, {
+            $set: {
+                pending: false
+            }
+        })
 
-    res.json({updateOrder, cookRes})
+        let orderItem = await Orders.findOne({_id: req.body.orderID})
+        console.log('AMOUNT: ', orderItem.price)
+        const cookRes = await User.updateOne({username: orderItem.chefUsername},{
+            $inc: {
+                account: orderItem.price,
+                totalEarned: orderItem.price
+            }
+        })
+        res.json({updateOrder, cookRes})
+    }catch(error) { console.log(error) }
 
 })
 
+//create review of cook
 router.post('/api/post/add-review', async (req,res) => {
 
     let updateReviews = await User.updateOne({username: req.body.chef}, {
@@ -95,55 +82,48 @@ router.post('/api/post/add-review', async (req,res) => {
 
 })
 
-router.post('/api/post/remove-item/:id', (req,res) => {
-    Menu.deleteOne({_id: req.params.id})
-    .then(response => {
+router.post('/api/post/remove-item/:id', async (req,res) => {
+    try{
+        let response = await Menu.deleteOne({_id: req.params.id})
         console.log('REMOVE ITEM RESPONSE', response)
         res.json(response)
-    })
-    .catch(error => console.error(error))
+    }catch(error){
+        console.log(error)
+    }
 })
 
 
-router.post('/api/post/remove-photo', (req, res) => {
+router.post('/api/post/remove-photo', async (req, res) => {
     console.log('UPDATE PHOTOS',req.body.username, req.body.photos)
-    User.updateOne({username: req.body.username},{
-        $set: {
-            photos: req.body.photos,
-        }
-        
-    })
-    .then(results => {
-        console.log(`application updated: ${results}`);
-        res.json(results);
-    })
-    .catch(error => console.error(error)) 
+    try {
+        let response = await User.updateOne( { username: req.body.username },{ $set: { photos: req.body.photos } } )
+        res.json( response )
+    } catch ( error ) { console.log( error ) }
 });
 
+//create menu item for 
 router.post('/post/add-menu-items', (req, res) => {
-
-    req.body.map(element =>{
-        Menu.create({
-            title: element.title,
-            rating: element.rating,
-            longitude: element.longitude,
-            latitude: element.latitude,
-            username: element.username,
-            userID: element.userID,
-            description: element.description,
-            price: element.price,
-            picture: element.picture
-        })
-        .then(results => {
-            console.log(`New MENU ITEM: ${results}`);
-            res.json(results);
-        })
-        .catch(error => console.error(error))
+    req.body.map( async (element) =>{
+        try{
+            const menuItem = await Menu.create({
+                title: element.title,
+                rating: element.rating,
+                longitude: element.longitude,
+                latitude: element.latitude,
+                username: element.username,
+                userID: element.userID,
+                description: element.description,
+                price: element.price,
+                picture: element.picture
+            })
+            res.json(menuItem)
+        }catch(error) { console.log(error) }
     })
 });
 
-router.post('/post/create-post', (req, res) => {
-        JobPost.create({
+router.post('/post/create-post', async (req, res) => {
+    try{
+        let jobpost = await JobPost.create({
             summary: req.body.summary,
             description: req.body.description,
             peopleAmount: req.body.peopleAmount,
@@ -153,58 +133,50 @@ router.post('/post/create-post', (req, res) => {
             cook: req.body.cook,
             price: req.body.price
         })
-        .then(results => {
-            console.log(`New POST: ${results}`);
-            res.send(`${req.body.summary} has been created`);
+
+        res.send(`${req.body.summary} has been created`);
+
+    }catch(error){ console.log(error) }
+});
+
+//cook applies for job posted
+router.post('/api/post/apply/job-post', async (req, res) => {
+    try{
+        const response = await JobPost.updateOne({_id: req.body.uniqueID},{
+            $push: {
+                applications: req.body.username,
+            }
+            
         })
-        .catch(error => console.error(error))
-});
-
-router.post('/api/post/apply/job-post', (req, res) => {
-    console.log(req.body.username, req.body.uniqueID)
-    JobPost.updateOne({_id: req.body.uniqueID},{
-        $push: {
-            applications: req.body.username,
-        }
-        
-    })
-    .then(results => {
-        console.log(`New Application: ${results}`);
         res.send('You have been added to the application list');
-    })
-    .catch(error => console.error(error)) 
+    }catch(error){console.log(error)}
 });
 
-router.post('/api/post/confirm-cook', (req, res) => {
-    console.log(req.body.cook, req.body.postID)
-    JobPost.updateOne({_id: req.body.postID},{
-        $set: {
-            cook: req.body.cook,
-        }
-        
-    })
-    .then(results => {
-        console.log(`application updated: ${results}`);
+
+router.post('/api/post/confirm-cook', async (req, res) => {
+    try{
+        const response = await JobPost.updateOne({_id: req.body.postID},{
+            $set: {
+                cook: req.body.cook,
+            }
+        })
         res.json(results);
-    })
-    .catch(error => console.error(error)) 
+    }catch(error){ console.log(error) } 
 });
 
 router.post('/api/post/reject-cook', async (req, res) => {
-    console.log(req.body.username, req.body.postID)
-    let response = await JobPost.findOne({_id: req.body.postID})
-    console.log(response)
-    const index = response.applications.indexOf(`${req.body.username}`)
-    let temp = response.applications
-    temp.splice(index, 1)
-
-    let update = await JobPost.updateOne({_id: req.body.postID},{
-        $set: {
-            applications: temp
-        }
-    })
-    res.send(`${req.body.username} has been rejected and removed from the list`)
-    console.log(update)
+    try{
+        let response = await JobPost.findOne({_id: req.body.postID})
+        const index = response.applications.indexOf(`${req.body.username}`)
+        let temp = response.applications
+        temp.splice(index, 1)
+        let update = await JobPost.updateOne({_id: req.body.postID},{
+            $set: {
+                applications: temp
+            }
+        })
+        res.send(`${req.body.username} has been rejected and removed from the list`)
+    }catch(error){console.log(error)}
 });
 
 
@@ -225,28 +197,27 @@ router.post('/complete-cook-registration', async (req, res) => {
 });
 
 
-router.post('/update-user', (req, res) => {
+router.post('/update-user', async (req, res) => {
     console.log('BODY',req.body);
-    User.updateOne({username: req.body.username}, {
-        $set: {
-            firstName: req.body.firstname,
-            lastName: req.body.lastname,
-            username: req.body.username,
-            email: req.body.email,
-            cook: req.body.cook,
-            cookSpecialty: req.body.cookSpecialty,
-            cookDescription: req.body.cookDescription,
-            cookPrice: req.body.cookPrice,
-            picture: req.body.picture,
-            photos: req.body.photos,
-            number: req.body.number,
-            bank_account_id: req.body.bank_account_id
-        }
-    })
-    .then(results =>{
-        console.log(results);
+    try{
+        const response = await User.updateOne({username: req.body.username}, {
+            $set: {
+                firstName: req.body.firstname,
+                lastName: req.body.lastname,
+                username: req.body.username,
+                email: req.body.email,
+                cook: req.body.cook,
+                cookSpecialty: req.body.cookSpecialty,
+                cookDescription: req.body.cookDescription,
+                cookPrice: req.body.cookPrice,
+                picture: req.body.picture,
+                photos: req.body.photos,
+                number: req.body.number,
+                bank_account_id: req.body.bank_account_id
+            }
+        })
         res.json(results)
-    })
+    }catch(error){console.log(error)}
 });
 
 router.post('/send-location', async (req, res) => {
