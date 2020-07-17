@@ -18,7 +18,7 @@ router.use(fileUpload());
 
 //upload photo and rename
 router.post('/upload-img', async(req,res) => {    
-    if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
+    if( req.files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
     if (!fs.existsSync(`${__dirname}/uploads`)){
         fs.mkdirSync(`${__dirname}/uploads`);
     }
