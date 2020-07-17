@@ -22,6 +22,10 @@ router.post('/upload-img', async(req,res) => {
     const {file} = files
 
     if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
+    if (!fs.existsSync(`${__dirname}/uploads`)){
+        fs.mkdirSync(`${__dirname}/uploads`);
+    }
+    
     console.log('FILE',req.files.file);
     file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
         if(err){ res.status(500).send(err)}
@@ -38,7 +42,9 @@ router.post('/modify-img', async(req,res) => {
         res.status(400).json({msg: 'no file uploaded'});
     }
     console.log('FILE',req.files.file);
-
+    if (!fs.existsSync(`${__dirname}/uploads`)){
+        fs.mkdirSync(`${__dirname}/uploads`);
+    }
     file.mv(`${__dirname}/uploads/${file.name}`, err=> {
         if(err){ res.status(500).send(err)}
         
