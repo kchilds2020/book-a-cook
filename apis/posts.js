@@ -24,7 +24,9 @@ router.post('/upload-img', async(req,res) => {
     if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
     console.log('FILE',req.files.file);
     file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
-        return err ? res.status(500).send(err) : res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});   
+        if(err){ res.status(500).send(err)}
+        
+        res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});   
     }); 
 });
 
@@ -33,12 +35,14 @@ router.post('/modify-img', async(req,res) => {
     const {files} = req
     const {file} = files
     if( files === null ){
-        return res.status(400).json({msg: 'no file uploaded'});
+        res.status(400).json({msg: 'no file uploaded'});
     }
     console.log('FILE',req.files.file);
 
     file.mv(`${__dirname}/uploads/${file.name}`, err=> {
-        return err ? res.status(500).send(err) : res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
+        if(err){ res.status(500).send(err)}
+        
+        res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
     }); 
 });
 

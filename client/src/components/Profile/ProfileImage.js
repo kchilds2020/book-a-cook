@@ -3,6 +3,7 @@ import silhouette from '../../images/silhouette.png'
 import {ProfilePhoto} from './ProfileStyles'
 import PhotoEditor from '../PopUps/PhotoEditor'
 import Overlay from '../PopUps/Overlay'
+import axios from 'axios'
 
 function ProfileImage({picture, setPicture, username, setModified=(value)=>console.log(''), height = '200px', width= '200px'}) {
 
@@ -11,9 +12,6 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
 
     const fileInput = useRef();
 
-    useEffect(() => {
-        console.log('change')
-    },[picture])
 
     const editPhoto = async (event) => {
 /*         let tempFile = (event.target.files[0])
@@ -23,12 +21,13 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
         setVisibility(true)
     }
 
-    const afterUpload = (filename) => {
+    const afterUpload = async (filename) => {
         setPicture(`${filename}`)
 
 
         setVisibility(false)
         setModified(true)
+        
     }
 
     const cancelItem = (event) => {
@@ -38,7 +37,7 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
 
     return (
         <>
-            <ProfilePhoto style = {{height: height, width: width}} src = {picture === '' ? silhouette : `/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
+            <ProfilePhoto style = {{height: height, width: width}} src = {`/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
             <input ref={fileInput}type="file" onChange= {editPhoto} style={{display: 'none'}} id="profile-file"/>
             {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </>

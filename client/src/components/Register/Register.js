@@ -129,7 +129,7 @@ export const Register = () => {
     return(
         <>
             <Container>
-
+ 
                 {step === 1 ? (<FormContainer onSubmit={nextStep}>
                     <h2>Register</h2>
                     <InputWithLabels identifier='firstname' labelText = 'First Name' value = {firstname} setValue = {setFirstname}/>

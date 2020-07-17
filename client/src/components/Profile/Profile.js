@@ -118,7 +118,7 @@ function Profile() {
                                     <InputWithLabel value = {number} setValue={setNumber} identifier='number' labelText="Phone Number" setModified={setModified}/>
                                 </BasicDetails>  
                             </BasicInfo>
-
+ 
                             {cook ? <div style={{padding: '20px'}}>
                                     <ProfileHeader>Cook Details</ProfileHeader>
                                         <InputWithLabel value = {cookSpecialty} setValue={setCookSpecialty} identifier='cookSpecialty' labelText="Cook Specialty" setModified={setModified}/>

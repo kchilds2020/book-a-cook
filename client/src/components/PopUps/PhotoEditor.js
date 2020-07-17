@@ -76,7 +76,7 @@ function PhotoEditor({sliderMin=1, sliderMax=1.5, sliderStep=.025, afterUpload, 
                         image={`/api/get/image/${photoName}`}
                         width={250}
                         height={250}
-                        border={0}
+                        border={10}
                         color={[0, 0, 0, 0.6]} // RGBA
                         scale={parseFloat(scale)}
                         rotate={rotate}
