@@ -18,31 +18,29 @@ router.use(fileUpload());
 
 //upload photo and rename
 router.post('/upload-img', async(req,res) => {    
-    const {files} = req
-    const {file} = files
 
-    if( files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
+    if( req.files === null ){ return res.status(400).json({msg: 'no file uploaded'}) }
     console.log('FILE',req.files.file);
-    file.mv(`${__dirname}/uploads/${req.body.username}-${file.name}`, err=> {
+    req.files.file.mv(`${__dirname}/uploads/${req.body.username}-${req.files.file.name}`, err=> {
         if(err){ res.status(500).send(err)}
         
-        res.json({fileName: `${req.body.username}-${file.name}`, filePath: `/../public/uploads/${req.body.username}-${file.name}`});   
+        res.json({fileName: `${req.body.username}-${req.files.file.name}`, filePath: `/../public/uploads/${req.body.username}-${req.files.file.name}`});   
     }); 
 });
 
 //upload photo and keep name
 router.post('/modify-img', async(req,res) => {    
-    const {files} = req
-    const {file} = files
-    if( files === null ){
-        res.status(400).json({msg: 'no file uploaded'});
+    if( req.files === null ){
+        return res.status(400).json({msg: 'no file uploaded'});
     }
     console.log('FILE',req.files.file);
 
-    file.mv(`${__dirname}/uploads/${file.name}`, err=> {
-        if(err){ res.status(500).send(err)}
+    req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`, err=> {
+        if(err){ 
+            return res.status(500).send(err)
+        }
         
-        res.json({fileName: `${file.name}`, filePath: `/../public/uploads/${file.name}`});
+        res.json({fileName: `${req.files.file.name}`, filePath: `/../public/uploads/${req.files.file.name}`});
     }); 
 });
 
