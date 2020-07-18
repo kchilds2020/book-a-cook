@@ -61,8 +61,8 @@ if(process.env.NODE_ENV === 'production'){
       key: fs.readFileSync('./certs/server-key.pem'),
       cert: fs.readFileSync('./certs/server-cert.pem'),
   };
-  var server = https.createServer(options, app).listen(port, function(){
-    console.log("Express server listening on port " + port);
+  var server = https.createServer(options, app).listen(PORT, function(){
+    console.log("Express server listening on port " + PORT);
   });
 }else{
   app.listen(PORT, () => {console.log(`**SERVER STARTED**  PORT: ${PORT}`);})
