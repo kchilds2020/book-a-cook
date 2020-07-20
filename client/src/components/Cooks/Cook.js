@@ -28,7 +28,7 @@ function Cook({firstname, lastname, specialty, price, description, latitude, lon
                     </CookDetails>
             </CookContainer>
         </>
-    )
+    ) 
 }
 
 export default Cook

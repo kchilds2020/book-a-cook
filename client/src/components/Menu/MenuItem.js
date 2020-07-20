@@ -23,7 +23,7 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
             try {
                 let response = await axios.get(`/api/get/username/${chefUsername}`)
                 let reviewArray = response.data.reviews
-                console.log(response.data.reviews)
+                console.log('RESPOSNE', response)
                 if(response.data.reviews.length > 0){
                     let sum = 0;
                     for(let i = 0; i < reviewArray.length; i++){
@@ -36,8 +36,8 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
                 }
 
                 //get distance
-                if(user.longitude !== 0 && user.latitude !== 0){
-                    let dist = distanceBetween(user.longitude, user.latitude, response.data.longitude, response.data.latitude).toFixed(0)
+                if(user && user.latitude !== 0){
+                    let dist = distanceBetween(user.latitude, user.longitude, response.data.latitude , response.data.longitude)
                     setDistance(dist)
                 }
             } catch (error) {
@@ -92,5 +92,5 @@ function MenuItem({title, description, price, chefUsername, picture, itemNum, db
         </MenuItemContainer>
     )
 }
-
+ 
 export default MenuItem

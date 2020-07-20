@@ -15,7 +15,7 @@ function Menu() {
     const [menuArray, setMenuArray] = useState([]);
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
-    
+     
     useEffect(() => {
         const getMenu = async () => {
             try{
@@ -23,8 +23,8 @@ function Menu() {
                 console.log('RESPNSE', response)
                 if(user && user.latitude !== 0 && user.longitude !==0){
                     response.data.sort((a,b)=>{
-                        let aDistance = distanceBetween(a.latitude,a.longitude,user.latitude,user.longitude)
-                        let bDistance = distanceBetween(b.latitude,b.longitude,user.latitude,user.longitude)
+                        let aDistance = distanceBetween(parseFloat(a.latitude),parseFloat(a.longitude),user.latitude,user.longitude)
+                        let bDistance = distanceBetween(parseFloat(b.latitude),parseFloat(b.longitude),user.latitude,user.longitude)
                         return aDistance - bDistance
                     })
                 }

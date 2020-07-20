@@ -122,7 +122,7 @@ router.get('/api/get/cooks', (req,res) => {
 
 //find all acttive menu items
 router.get('/api/get/menu', (req,res) => {
-    Menu.find()
+    Menu.find({available: true})
     .then(food => res.json(food))
     .catch(err => console.log(err))
 })
