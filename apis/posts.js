@@ -145,6 +145,19 @@ router.post('/post/create-post', async (req, res) => {
     }catch(error){ console.log(error) }
 });
 
+
+router.post('/api/post/deactivate-menu-items', async (req,res) => {  
+    try {
+
+        const items = await Menu.updateOne({_id: req.body.id}, {
+            available: false
+        })
+
+        res.json(items)
+        
+    } catch (error) {console.log(error)}
+})
+
 //cook applies for job posted
 router.post('/api/post/apply/job-post', async (req, res) => {
     try{

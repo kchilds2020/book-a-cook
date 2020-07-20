@@ -38,6 +38,28 @@ router.get('/api/get/menu-items/:username', (req,res) => {
     .catch(err => console.log(err))
 })
 
+//find active menu items
+router.get('/api/get/active-menu-items/:username', async (req,res) => {  
+    try {
+
+        const items = await Menu.find({username: req.params.username, available: true})
+        const filteredItems = items.filter(element => ((Date.now() - element.createdDate) < (3600000 * 8)))
+
+        items.map(async element => {
+            if((Date.now() - element.createdDate) > (3600000 * 8)){
+                let updateItem = await Menu.updateOne({_id: element._id},{
+                    $set:{
+                        available: false,
+                    }
+                })
+            }
+        })
+
+        console.log(filteredItems)
+        res.json(filteredItems)
+    } catch (error) {console.log(error)}
+})
+
 //find orders that you need to be completed
 router.get('/api/get/active-orders/:username', async (req,res) => {
     let orderItems = await Orders.find({chefUsername: req.params.username, pending: true})

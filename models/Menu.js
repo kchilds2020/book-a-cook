@@ -10,7 +10,8 @@ const Menu = new mongoose.Schema({
     description: {type: String, trim: true, default: ''},
     price: {type: String, trim: true, default: ''},
     picture: {type: String, default: ''},
-    available: {type: Boolean, default: false},
+    createdDate: {type:Date, default: Date.now()},
+    available: {type: Boolean, default: true},
     orders: {type: Array, default: []}
 },
 {

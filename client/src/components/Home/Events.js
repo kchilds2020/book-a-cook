@@ -5,8 +5,9 @@ import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
 import {CenterSpinner} from '../GeneralStyles'
 import {HomeHeader, HomeSectionContainer, NumColorDark} from './HomeStyles'
+import ActiveMenu from './ActiveMenu'
 
-function Events({username}) {
+function Events({username, user}) {
     const [loading, setLoading] = useState(true);
     const [err, setError] = useState('');
     const [events, setEvents] = useState('');
@@ -34,6 +35,7 @@ function Events({username}) {
 
     return (
         <HomeSectionContainer>
+            <ActiveMenu user={user}/>
             <HomeHeader><NumColorDark>{events.length}</NumColorDark> Upcoming Events</HomeHeader>          
             {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : events.length > 0 ? events.map((element, index) => <Event key={index} summary={element.summary} description={element.description} location={element.location} date={element.date} username={element.username}/>) : <></>}
                 {err ? err : null}

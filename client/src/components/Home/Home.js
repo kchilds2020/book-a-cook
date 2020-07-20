@@ -7,6 +7,7 @@ import CustomerOrders from './CustomerOrders'
 import {HomeGreeting, HomeContainer} from './HomeStyles'
 import {FlexDirectionRow} from '../GeneralStyles'
 import axios from 'axios'
+import ActiveMenu from './ActiveMenu'
 
 
 
@@ -52,7 +53,8 @@ const Home = () => {
                 </>
                 {user.cook ? <></> : <CustomerOrders username={user.username}/>}
                 {user.cook ? <></> : <JobPosts username={user.username}/>}
-                {user.cook ? <Events username={user.username}/> : <></>}
+                {user.cook ? <Events username={user.username} user={user}/> : <></>}
+                {/* {user.cook ? <ActiveMenu username={user.username}/> : <></>} */}
             </HomeContainer></> : <></>
     );
 }
