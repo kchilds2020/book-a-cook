@@ -1,15 +1,16 @@
 import React, {useContext} from 'react';
 import {UserContext} from '../UserContext'
 import Button from 'react-bootstrap/Button'
-import {LandingBody, LandingContainer, LandingDescription, LandingTitle, LandingTagline, LandingSection} from './LandingStyles'
+import {LandingBody, LandingContainer, LandingDescription, LandingTitle, LandingTagline, LandingSection, LandingOverlay} from './LandingStyles'
 
 const Landing = () => {
 
     const value = useContext(UserContext)
     console.log('USER CONTEXT: ', value)
     return(
-        <>
+        
             <LandingBody>
+                <LandingOverlay>
                 <LandingContainer>
                     <LandingDescription>
                         <LandingTitle>Look for Cooks</LandingTitle>
@@ -20,8 +21,8 @@ const Landing = () => {
                         {/* <img className = "landing-sectionIMG" src={SVG} alt="landing" /> */}
                     </LandingSection>
                 </LandingContainer>
+                </LandingOverlay>
             </LandingBody>
-        </>
     );
 };
 
