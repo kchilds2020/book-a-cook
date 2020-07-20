@@ -22,7 +22,7 @@ function CustomerOrders({username}) {
 
  
     return (
-        <HomeSectionContainer>
+        <>
             <HomeHeader style={{marginBottom: '0px', borderRadius: '8px 8px 0px 0px'}}><NumColorDark>{orders.length}</NumColorDark> Open Orders</HomeHeader>
             <UpcomingJobContainer>
                 <Table borderless hover style={{ backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
@@ -41,7 +41,7 @@ function CustomerOrders({username}) {
                 </Table>
             </UpcomingJobContainer>
             <Button variant = 'info' onClick = {() => window.location.href = '/menu'} style ={{marginTop: '10px'}} block>Find Food Near Me</Button>
-        </HomeSectionContainer>
+        </>
     )
 }
 

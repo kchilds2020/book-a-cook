@@ -69,14 +69,14 @@ function JobPosts({username}) {
      }
 
     return (
-        <HomeSectionContainer>
+        <>
             <HomeHeader><NumColorDark>{myPosts.length}</NumColorDark> Posted Jobs</HomeHeader>
             <UpcomingJobContainer>
                 {myPosts.length > 0 ? myPosts.map((element,index) => <HomeJobPost key ={index} summary={element.summary} applications={element.applications} listID = {index} postID = {element._id} cook={element.cook} pricePerPerson={element.price} peopleAmount={element.peopleAmount}/>) : <></>}
             </UpcomingJobContainer>
             <Button variant="info" onClick={() => setVisibility(true)}style ={{marginTop: '5px'}} block>Create a Post</Button>
             {visible ? <><JobForm handleSubmit={handleSubmit} cancelPost={cancelPost} setDate={setDate} setDescription ={setDescription} setSummary={setSummary} setLocation={setLocation} setPeopleAmount={setPeopleAmount} setPricePerPerson={setPricePerPerson}/><Overlay setVisibility={setVisibility}/></> : <></>}
-        </HomeSectionContainer>
+        </>
     )
 }
 
