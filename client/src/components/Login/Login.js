@@ -64,8 +64,8 @@ export const Login = () => {
             <Container>
                 <FormContainer onSubmit = {loginUser}>
                     <h2>Login</h2>
-                    <Input identifier='username' labelText = 'Username' value = {username} onChange = {(e) => setUsername(e.target.value)}/>
-                    <Input identifier='password' labelText = 'Password' value = {password} onChange = {(e) => setPassword(e.target.value)} type="password"/>
+                    <Input id='username' placeholder = 'Username' value = {username} onChange = {(e) => setUsername(e.target.value)}/>
+                    <Input id='password' placeholder = 'Password' value = {password} onChange = {(e) => setPassword(e.target.value)} type="password"/>
                     <div style={{margin: '10px 0px'}}><a href="/register">Dont have an account? Register</a></div>
                     <Button type="submit" variant="primary" block>Login</Button>
                 </FormContainer>

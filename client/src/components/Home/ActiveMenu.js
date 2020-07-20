@@ -48,7 +48,7 @@ function ActiveMenu({user}) {
                     </tbody>
                 </Table>
             {isLoading ? <Spinner /> : <></>}
-            <Button variant='info' onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Item</Button>
+            <Button variant='info' onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
             {visibility ? <>
                         <CreateMenuItem user={user} setOpen={setVisibility}/> 
                         <Overlay setVisibility ={setVisibility}/>

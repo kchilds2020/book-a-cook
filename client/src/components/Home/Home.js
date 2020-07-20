@@ -4,10 +4,11 @@ import Events from './Events'
 import MyOrders from './MyOrders'
 import {UserContext} from '../UserContext'
 import CustomerOrders from './CustomerOrders'
-import {HomeGreeting, HomeContainer} from './HomeStyles'
+import {HomeGreeting, HomeContainer, HomeSectionContainer} from './HomeStyles'
 import {FlexDirectionRow} from '../GeneralStyles'
 import axios from 'axios'
 import ActiveMenu from './ActiveMenu'
+import Account from './Account'
 
 
 
@@ -48,13 +49,32 @@ const Home = () => {
                 <HomeGreeting><h2>Hello {user.firstName}!</h2></HomeGreeting>
             </FlexDirectionRow>
             <HomeContainer>
-                <>
-                {user.cook ? <MyOrders username={user.username} user={user}/> : <></>}
-                </>
-                {user.cook ? <></> : <CustomerOrders username={user.username}/>}
-                {user.cook ? <></> : <JobPosts username={user.username}/>}
-                {user.cook ? <Events username={user.username} user={user}/> : <></>}
-                {/* {user.cook ? <ActiveMenu username={user.username}/> : <></>} */}
+                {/* left */}
+                <HomeSectionContainer>
+                    {user.cook ? <>
+                                    <Account user={user}/> 
+                                    <Events username={user.username} user={user}/>
+                                </> : 
+                                
+                                <>
+                                    <CustomerOrders username={user.username}/>
+                                </> 
+                                    }
+                </HomeSectionContainer>
+                {/* right */}
+                <HomeSectionContainer>
+                    {user.cook ? <>
+                                    <MyOrders username={user.username} user={user}/>
+                                    <ActiveMenu user={user}/>
+                                    
+                                </> : 
+                                
+                                <>
+                                    <JobPosts username={user.username}/>
+                                </> 
+                                    }
+                </HomeSectionContainer>
+
             </HomeContainer></> : <></>
     );
 }

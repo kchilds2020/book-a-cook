@@ -5,6 +5,7 @@ import PhotoEditor from '../PopUps/PhotoEditor'
 import Overlay from '../PopUps/Overlay'
 import axios from 'axios'
 
+
 function ProfileImage({picture, setPicture, username, setModified=(value)=>console.log(''), height = '200px', width= '200px'}) {
 
     const [visibility, setVisibility] = useState(false)
@@ -34,10 +35,10 @@ function ProfileImage({picture, setPicture, username, setModified=(value)=>conso
         event.preventDefault();
         setVisibility(false)
     }
-
+ 
     return (
         <>
-            <ProfilePhoto style = {{height: height, width: width}} src = {`/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
+            <ProfilePhoto style = {{height: height, width: width}} src = {picture === '' ? `${silhouette}` : `/api/get/image/${picture}`} alt="profile-img" id="profile-img" onClick={() => fileInput.current.click()}/>
             <input ref={fileInput}type="file" onChange= {editPhoto} style={{display: 'none'}} id="profile-file"/>
             {visibility ? <><PhotoEditor username={username} file={file} cancel={cancelItem} afterUpload={afterUpload}/><Overlay setVisibility={setVisibility}/></> : <></>}
         </>

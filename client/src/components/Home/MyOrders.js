@@ -38,8 +38,7 @@ function MyOrders({username, user}) {
      },[username])
 
     return (
-        <HomeSectionContainer>
-            <Account user={user}/>
+        <>
             <HomeHeader style={{marginBottom: '0px', borderRadius: '8px 8px 0px 0px'}}><NumColorDark>{orders.length}</NumColorDark> Active Orders</HomeHeader>
             {loading ? <CenterSpinner><Spinner animation="border" variant="info" /></CenterSpinner> : 
                 <Table borderless hover style={{ backgroundColor: 'white', textAlign: 'center', borderRadius: '0px 0px 8px 8px'}}>
@@ -54,13 +53,13 @@ function MyOrders({username, user}) {
                         {orders.length > 0 ? orders.map((element, index) => <MyOrderItem key={index} orderNum={index}  title={element.menuItemTitle} quantity={element.qty} address={element.address} orderID={element._id} completed={element.completed} pending={element.pending}/>) : <></>} 
                     </tbody>     
                 </Table>}
-        <Button variant='info' onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button>
+        {/* <Button variant='info' onClick = {() => setVisibility(true)} style ={{marginTop: '10px'}} block>Create Menu Items and Get Paid!</Button> */}
         {visibility ? <>
                         <CreateMenuItem user={user} setOpen={setVisibility}/> 
                         <Overlay setVisibility ={setVisibility}/>
                     </>: <></>}
                 {err ? err : null}
-        </HomeSectionContainer>
+        </>
     )
 }
  
