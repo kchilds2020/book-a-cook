@@ -14,8 +14,8 @@ const Landing = () => {
                 <LandingContainer>
                     <LandingDescription>
                         <LandingTitle>Look for Cooks</LandingTitle>
-                        <LandingTagline>Chef made food delivered to your door!</LandingTagline>   
-                        <Button style={{padding: '10px', marginTop: '20px'}} onClick = {() => window.location.href="/login"} block>Login</Button>
+                        <LandingTagline>Homemade made food delivered to your door!</LandingTagline>   
+                        <Button style={{padding: '10px', marginTop: '20px', borderRadius: '100px'}} onClick = {() => window.location.href="/login"} block>Login</Button>
                     </LandingDescription>
                     <LandingSection>
                         {/* <img className = "landing-sectionIMG" src={SVG} alt="landing" /> */}
