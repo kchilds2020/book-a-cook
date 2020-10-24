@@ -42,8 +42,8 @@ function BootstrapNav() {
                         {!user ? 
                             <>
                                 
-                                <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>
-                                <Nav.Link className={active === '/menu' ? "active" : ""} href = "/menu">Menu</Nav.Link>
+                                {/* <Nav.Link className={active === '/cooks' ? "active" : ""} href ="/cooks">Hire a Cook</Nav.Link>
+                                <Nav.Link className={active === '/menu' ? "active" : ""} href = "/menu">Menu</Nav.Link> */}
                                 {/* <Nav.Link className={active === '/login' ? "active" : ""} href ="/login">Login</Nav.Link> */}
                                 <Button variant="primary" onClick={login} style={{margin: "0px 20px"}}>Login</Button>
                             </> :
