@@ -71,19 +71,28 @@ function App() {
               <PrivateRoute path="/cook-registration" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
                 <Route render={(props) => <CookRegistration />}/>
               </PrivateRoute>
+              
+              <PrivateRoute path="/cooks" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <Cooks />}/>
+              </PrivateRoute>
+              
+              <PrivateRoute path="/menu" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <Menu />}/>
+              </PrivateRoute>
 
+              <PrivateRoute path="/job-postings" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <JobPostings />}/>
+              </PrivateRoute>
+              
+              <PrivateRoute path="/user/profile" user={user} setUser={setUser} menu={menu} setMenu={setMenu}>
+                <Route render={(props) => <UserProfile />}/>
+              </PrivateRoute>
               
 
               <UserContext.Provider value={{user, menu}}>
                 <Route path="/" exact strict component={Landing}/>
-                <Route path="/cooks"  exact strict component={Cooks} />
-                <Route path="/job-postings"  exact strict component={JobPostings} />
-                <Route path="/user/profile"  exact strict component={UserProfile} />
-                <Route path="/menu"  exact strict component={Menu} />
                 <Route path="/login"  exact strict component={Login} />
                 <Route path="/register"  exact strict component={Register} />
-                {/* <Route path="/cook-registration"  exact strict component={CookRegistration} />   */}  
-                {/* <Route path="/payment-registration"  exact strict component={PaymentRegistration} />  */}
               </UserContext.Provider>       
             </Switch>
         </Router>

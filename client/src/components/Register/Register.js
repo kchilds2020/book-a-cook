@@ -156,10 +156,10 @@ export const Register = () => {
                 step === 3 ? (
                 <FormContainer onSubmit={registerCook} id='bank-info'>
                     <h2>Connect your bank account</h2>
-                    <InputWithLabels value={dob} setValue={setDob} identifier='dob' labelText='Date of Birth' type="date"/>
-                    <NumberInput value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits)' maxLength='4'/>
-                    <NumberInput value={accountNumber} setValue={setAccountNumber} identifier='account-number' labelText='Account Number' maxLength='12'/>
-                    <NumberInput value={routingNumber} setValue={setRoutingNumber} identifier='routing-number' labelText='Routing Number' maxLength='9' />
+                    <InputWithLabels value={dob} setValue={setDob} identifier='dob' labelText='Date of Birth - For Development: 01-01-2000' type="date"/>
+                    <NumberInput value={ssn} setValue={setSSN} identifier='ssn' labelText='Social Security Number (Last Four Digits) - For Developement: 123-45-6789' maxLength='4'/>
+                    <NumberInput value={accountNumber} setValue={setAccountNumber} identifier='account-number' labelText='Account Number - For Development: 000123456789' maxLength='12'/>
+                    <NumberInput value={routingNumber} setValue={setRoutingNumber} identifier='routing-number' labelText='Routing Number - For Development: 110000000' maxLength='9' />
                     <FlexDirectionRow>
                     <Button onClick = {() => setStep(step - 1)} variant="secondary" style ={{marginRight: '10px', marginTop: '10px'}} block>Back</Button>
                     <Button type="submit" variant="success" style ={{marginLeft: '10px', marginTop: '10px'}} block>Register!</Button>
